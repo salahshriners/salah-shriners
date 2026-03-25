@@ -1,0 +1,3083 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="images/inline/inline_01.png">
+  <link rel="apple-touch-icon" href="images/inline/inline_02.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Salah Shriners SC — Fraternidade, Filantropia e Diversão. Uma fraternidade formada por homens comprometidos com amizade, solidariedade e serviço ao próximo.">
+  <title>Salah Shriners SC — Fraternidade, Filantropia e Diversão</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+
+/* ================================================
+   RESET & BASE
+   ================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  color: var(--text);
+  background: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+
+/* ================================================
+   DESIGN TOKENS
+   ================================================ */
+:root {
+  --crimson:       #841515;
+  --crimson-dark:  #5c0f0f;
+  --crimson-900:   #3d0a0a;
+  --crimson-light: #a01c1c;
+  --gold:          #e2a412;
+  --gold-light:    #f0bc2a;
+  --cream:         #f9f8f5;
+  --cream-dark:    #edeae1;
+  --text:          #1e1818;
+  --text-muted:    #786d6d;
+  --white:         #ffffff;
+  --border:        rgba(132, 21, 21, 0.1);
+  --border-light:  rgba(0, 0, 0, 0.08);
+  --radius-xs:     4px;
+  --radius-sm:     8px;
+  --radius:        14px;
+  --radius-lg:     22px;
+  --radius-xl:     32px;
+  --shadow-sm:     0 2px 8px rgba(0,0,0,0.07);
+  --shadow:        0 4px 24px rgba(0,0,0,0.10);
+  --shadow-lg:     0 12px 50px rgba(0,0,0,0.16);
+  --shadow-xl:     0 24px 80px rgba(0,0,0,0.22);
+  --nav-h:         74px;
+  --ease:          cubic-bezier(0.4, 0, 0.2, 1);
+  --t:             all 0.3s var(--ease);
+}
+
+/* ================================================
+   TYPOGRAPHY
+   ================================================ */
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.2;
+  color: var(--text);
+}
+h1 { font-size: clamp(2.4rem, 5vw, 4.8rem); font-weight: 900; }
+h2 { font-size: clamp(1.9rem, 3vw, 2.9rem); font-weight: 700; }
+h3 { font-size: clamp(1.15rem, 1.8vw, 1.5rem); font-weight: 600; }
+p  { line-height: 1.78; color: var(--text-muted); }
+
+/* ================================================
+   LAYOUT UTILITIES
+   ================================================ */
+.container     { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+.section       { padding: 110px 0; }
+.section-sm    { padding: 70px 0; }
+.tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.divider {
+  width: 52px; height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-bottom: 18px;
+}
+.divider.center { margin-left: auto; margin-right: auto; }
+.text-center { text-align: center; }
+.text-crimson { color: var(--crimson); }
+.text-gold    { color: var(--gold); }
+
+/* ================================================
+   BUTTONS
+   ================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 30px;
+  border-radius: var(--radius-sm);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.94rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: var(--t);
+  border: none;
+  white-space: nowrap;
+}
+.btn-primary      { background: var(--crimson); color: #fff; }
+.btn-primary:hover{ background: var(--crimson-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(92,15,15,0.35); }
+.btn-gold         { background: var(--gold); color: var(--text); border: 2px solid rgba(255,255,255,0.65); }
+.btn-gold:hover   { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(226,164,18,0.4); }
+.btn-outline-w    { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.65); }
+.btn-outline-w:hover  { background: rgba(255,255,255,0.14); border-color: #fff; }
+.btn-conecte      { background: var(--gold); color: var(--text); border: 2px solid rgba(255,255,255,0.65); }
+.btn-conecte:hover{ background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(226,164,18,0.4); }
+.btn-outline-c    { background: transparent; color: var(--crimson); border: 2px solid var(--crimson); }
+.btn-outline-c:hover  { background: var(--crimson); color: #fff; }
+.btn-outline-g    { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+.btn-outline-g:hover  { background: var(--gold); color: var(--text); }
+
+/* ================================================
+   NAVIGATION
+   ================================================ */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: var(--nav-h);
+  padding: 0 2.5rem;
+  display: flex;
+  align-items: center;
+  transition: background 0.45s ease, box-shadow 0.45s ease;
+}
+#nav.scrolled {
+  background: var(--crimson-dark);
+  box-shadow: 0 4px 28px rgba(0,0,0,0.28);
+}
+.nav-inner {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+.nav-logo-svg { flex-shrink: 0; }
+.nav-logo-text { line-height: 1.25; }
+.nav-logo-text strong { display: block; font-size: 1rem; font-weight: 900; letter-spacing: 0.3px; }
+.nav-logo-text span   { display: block; font-size: 0.62rem; font-weight: 400; letter-spacing: 2.5px; text-transform: uppercase; opacity: 0.75; }
+.nav-links {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  gap: 1.2rem;
+  list-style: none;
+  margin-left: 3rem;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.88);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  position: relative;
+  transition: color 0.2s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 1px;
+  transform: scaleX(0);
+  transition: transform 0.28s var(--ease);
+}
+.nav-links a:hover,
+.nav-links a.active { color: #fff; }
+.nav-links a:hover::after,
+.nav-links a.active::after { transform: scaleX(1); }
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: #fff;
+  border-radius: 1px;
+  transition: var(--t);
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile nav */
+#mobile-nav {
+  display: none;
+  position: fixed;
+  top: var(--nav-h); left: 0; right: 0;
+  background: var(--crimson-900);
+  padding: 1.5rem 2rem 2rem;
+  z-index: 999;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+#mobile-nav.open { display: block; }
+#mobile-nav a:not(.btn) {
+  display: block;
+  color: rgba(255,255,255,0.85);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: color 0.2s;
+}
+#mobile-nav a:not(.btn):hover { color: var(--gold); }
+.mob-nav-btns {
+  display: flex;
+  gap: 10px;
+  margin-top: 1.4rem;
+}
+.mob-nav-btns .btn {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 0.88rem;
+  padding: 11px 10px;
+}
+
+/* ================================================
+   HERO
+   ================================================ */
+#hero {
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 5.5rem;
+  overflow: hidden;
+}
+.hero-track {
+  position: absolute;
+  inset: 0;
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+.hero-slide.active { opacity: 1; }
+.hero-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(40, 7, 7, 0.88) 0%,
+    rgba(100, 15, 15, 0.70) 45%,
+    rgba(40, 7, 7, 0.55) 100%
+  );
+}
+.hero-body {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  max-width: none;
+  padding: 0;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 50px;
+  padding: 6px 18px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 1.8rem;
+}
+.hero-dot-live {
+  width: 7px; height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: live-pulse 2s infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.6); opacity: 0.5; }
+}
+.hero-title {
+  color: #fff;
+  margin-bottom: 1.6rem;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.25);
+  line-height: 1.15;
+}
+.hero-title em {
+  font-style: normal;
+  color: var(--gold-light);
+}
+/* ---- Hero slides: texto pareado (estilo SI) ---- */
+
+/* Cada bloco de texto vinculado a um slide */
+.slide-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 7.5rem;
+  opacity: 0;
+  transition: opacity 0.75s ease;
+  pointer-events: none;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+.slide-content.sc-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Todos os modificadores de posição usam o mesmo alinhamento base */
+.slide-content.sc-bottom,
+.slide-content.sc-center,
+.slide-content.sc-top,
+.slide-content.sc-reverse {
+  justify-content: flex-end;
+  padding-bottom: 7.5rem;
+}
+
+/* Slides 3-5: linha entra branca e fica dourada */
+.slide-content.sc-reverse .sc-line2 {
+  color: #fff;   /* começa branca */
+}
+.slide-content.sc-reverse.sc-active .sc-line2 {
+  color: #f0bc2a;   /* termina dourada */
+  transform: translateY(0);
+  transition: transform 1.1s cubic-bezier(0.77, 0, 0.18, 1) 0.25s,
+              color 1.0s ease 0.45s;
+}
+
+/* Linha decorativa */
+.sc-rule {
+  width: 44px;
+  height: 2px;
+  background: rgba(255,255,255,0.55);
+  margin: 0 auto 0.75em;
+  border-radius: 2px;
+}
+
+/* Container tipográfico — mesmo tamanho para as 3 linhas */
+.sc-hl {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.55rem, 2.7vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+}
+
+/* Linha 1: levemente esmaecida */
+.sc-line1 {
+  display: block;
+  color: rgba(255,255,255,0.70);
+  margin-bottom: 0.06em;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.35);
+  letter-spacing: 0.02em;
+}
+
+/* Container-cortina: clip exato de 2 linhas */
+.sc-slot {
+  display: block;
+  overflow: hidden;
+  height: 2.6em;   /* 2 × line-height(1.3) — comporta 1 ou 2 linhas */
+  margin-bottom: 0.06em;
+}
+
+/* Linha 2 animada: sobe de baixo com cor dourada → branca */
+.sc-line2 {
+  display: block;
+  text-shadow: 0 2px 28px rgba(0,0,0,0.4);
+  /* estado padrão: oculto abaixo da cortina */
+  transform: translateY(105%);
+  color: #f0bc2a;   /* dourado — var(--gold-light) */
+  /* saída rápida */
+  transition: transform 0.55s ease,
+              color 0.3s ease;
+}
+/* ENTRADA: slide de baixo para cima + dourado → branco */
+.sc-active .sc-line2 {
+  transform: translateY(0);
+  color: #fff;
+  transition: transform 1.1s cubic-bezier(0.77, 0, 0.18, 1) 0.25s,
+              color 1.0s ease 0.45s;
+}
+
+/* Linha 3: dourada, menor */
+.sc-line3 {
+  display: block;
+  color: #f0bc2a;
+  font-size: 0.68em;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.25);
+  margin-top: 0.15em;
+}
+
+/* Slide 1: estilo parágrafo (Fraternidade/Filantropia) */
+.sc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+  line-height: 1.25;
+  margin-bottom: 0.55em;
+  text-align: center;
+  width: 100%;
+}
+.sc-subtitle {
+  font-size: clamp(0.92rem, 1.35vw, 1.1rem);
+  color: rgba(255,255,255,0.80);
+  line-height: 1.75;
+  max-width: 560px;
+  text-align: center;
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: rgba(255,255,255,0.82);
+  max-width: 600px;
+  margin: 0 auto 1rem;
+  line-height: 1.75;
+}
+.hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.hero-btns .btn { font-size: 1rem; padding: 16px 34px; }
+.hero-indicators {
+  position: absolute;
+  bottom: 4.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+}
+.hi {
+  width: 28px; height: 3px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.3s, width 0.3s;
+}
+.hi.active { background: var(--gold); width: 44px; }
+.hero-arrow {
+  position: absolute;
+  bottom: 1.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: bob 2s ease-in-out infinite;
+  color: rgba(255,255,255,0.5);
+}
+@keyframes bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(9px); }
+}
+
+/* ================================================
+   STATS BAND
+   ================================================ */
+#stats {
+  background: var(--crimson);
+  padding: 28px 0;
+}
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  divide-color: rgba(255,255,255,0.15);
+}
+.stat-cell {
+  text-align: center;
+  padding: 0 2rem;
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+.stat-cell:last-child { border-right: none; }
+.stat-n {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 4vw, 3.5rem);
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-l {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ================================================
+   PILARES
+   ================================================ */
+#pilares { background: var(--cream); }
+.section-head { margin-bottom: 64px; }
+.section-head h2 { margin-bottom: 14px; }
+.section-head p  { font-size: 1.05rem; max-width: 580px; }
+.section-head.center { text-align: center; }
+.section-head.center p { margin: 0 auto; }
+
+/* Pilares — estilo SI: painéis fotográficos */
+.pilares-panels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  min-height: 540px;
+}
+.pilar-panel {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.pilar-panel-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.7s ease;
+}
+.pilar-panel:hover .pilar-panel-bg,
+.pilar-panel.pp-active .pilar-panel-bg { transform: scale(1.06); }
+.pilar-panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(0,0,0,0.80) 0%,
+    rgba(0,0,0,0.30) 55%,
+    rgba(0,0,0,0.15) 100%);
+  transition: background 0.45s ease;
+}
+.pilar-panel.pp-active .pilar-panel-overlay {
+  background: rgba(0,0,0,0.68);
+}
+.pilar-panel-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2rem 2rem 2.5rem;
+  color: #fff;
+}
+.pilar-rule {
+  display: block;
+  width: 28px; height: 2px;
+  background: rgba(255,255,255,0.8);
+  margin-bottom: 0.85rem;
+}
+.pilar-panel h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(0.92rem, 1.4vw, 1.15rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.3;
+  color: var(--gold);
+}
+.pp-arrow {
+  display: inline-block;
+  font-style: normal;
+  font-size: 1.1em;
+  transition: transform 0.35s ease;
+  opacity: 0.9;
+}
+.pilar-panel:hover .pp-arrow,
+.pilar-panel.pp-active .pp-arrow { transform: rotate(90deg); }
+.pilar-panel-text {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1),
+              opacity 0.45s ease 0.05s;
+  opacity: 0;
+}
+.pilar-panel:hover .pilar-panel-text,
+.pilar-panel.pp-active .pilar-panel-text {
+  max-height: 220px;
+  opacity: 1;
+}
+.pilar-panel-text p {
+  font-size: clamp(0.88rem, 1.1vw, 0.98rem);
+  line-height: 1.75;
+  color: rgba(255,255,255,0.90);
+  margin-top: 1rem;
+}
+@media (max-width: 768px) {
+  .pilares-panels { grid-template-columns: 1fr; }
+  .pilar-panel { min-height: 320px; }
+}
+
+/* ================================================
+   SOBRE
+   ================================================ */
+/* ================================================
+   SOBRE NÓS — NOVO LAYOUT (IMAGEM COMPLETA + LOGOS)
+   ================================================ */
+#sobre { background: #fff; padding: 70px 0; overflow: visible; }
+
+.sobre-nova-wrap {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* Coluna esquerda */
+.sobre-esq h2 { margin-bottom: 1.6rem; }
+.sobre-esq > p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-light);
+  margin-bottom: 1.4rem;
+}
+.sobre-celebrating-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Coluna direita */
+.sobre-dir {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+/* Fileira de logos */
+.sobre-logos-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 1.4rem;
+  margin-bottom: 1.8rem;
+  border-bottom: 1px solid rgba(0,0,0,0.09);
+}
+.sl-brasao,
+.sl-hospital,
+.sl-si {
+  height: 72px;
+  width: auto;
+  max-width: 130px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Check items */
+.sobre-checks { flex: 1; display: flex; flex-direction: column; gap: 1.3rem; }
+.check-item  { display: flex; align-items: flex-start; gap: 13px; }
+.check-ico {
+  width: 34px; height: 34px;
+  background: rgba(132,21,21,0.08);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.check-ico svg { width: 16px; height: 16px; color: var(--crimson); }
+.check-item h4 { font-size: 0.98rem; font-family: 'Source Sans 3', sans-serif; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.check-item p  { font-size: 0.9rem; }
+
+/* Checks + cartoon lado a lado */
+.sobre-checks-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+.sobre-cartoon-col {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+}
+.sobre-cartoon {
+  height: 420px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.15));
+}
+
+.sobre-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ================================================
+   MISSÃO (CHILDREN'S)
+   ================================================ */
+#missao {
+  position: relative;
+  overflow: hidden;
+  min-height: 580px;
+  display: flex;
+  align-items: center;
+}
+.missao-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://salahshriners.lovable.app/assets/causes-hero-DiAyclVX.jpg');
+  background-size: cover;
+  background-position: center 35%;
+  background-attachment: fixed;
+}
+.missao-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(100deg, rgba(35,6,6,0.96) 0%, rgba(80,12,12,0.88) 50%, rgba(40,8,8,0.65) 100%);
+}
+.missao-inner {
+  position: relative;
+  z-index: 1;
+  padding: 90px 0;
+  max-width: 640px;
+}
+.missao-inner .tag  { color: var(--gold); }
+.missao-inner h2    { color: #fff; margin-bottom: 1.4rem; }
+.missao-inner h2 em { font-style: normal; color: var(--gold-light); }
+.missao-inner > p   { color: rgba(255,255,255,0.8); font-size: 1.05rem; margin-bottom: 2rem; }
+.missao-kpis {
+  display: flex;
+  gap: 0;
+  margin: 2.5rem 0;
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.mkpi {
+  flex: 1;
+  text-align: center;
+  padding: 1.8rem 1rem;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.mkpi:last-child { border-right: none; }
+.mkpi strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.mkpi span {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+.missao-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ================================================
+   NOTICIAS
+   ================================================ */
+#noticias { background: var(--cream); }
+.noticias-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.noticias-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.noticia {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: var(--t);
+  display: flex;
+  flex-direction: column;
+}
+.noticia:hover { transform: translateY(-7px); box-shadow: var(--shadow-lg); }
+.noticia-thumb {
+  display: block;
+  height: 210px;
+  overflow: hidden;
+}
+.noticia-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+.noticia:hover .noticia-thumb img { transform: scale(1.07); }
+.noticia-body { padding: 1.6rem; flex: 1; display: flex; flex-direction: column; }
+.noticia-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.n-cat {
+  background: rgba(132,21,21,0.08);
+  color: var(--crimson);
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.n-date { font-size: 0.8rem; color: var(--text-muted); }
+.noticia h3 { font-size: 1.05rem; color: var(--text); margin-bottom: 9px; line-height: 1.45; }
+.noticia p  { font-size: 0.88rem; flex: 1; margin-bottom: 1.2rem; }
+.n-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--crimson);
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: gap 0.25s;
+  margin-top: auto;
+}
+.n-link:hover { gap: 11px; }
+.n-link svg { width: 15px; height: 15px; }
+
+/* ================================================
+   SALA DE IMPRENSA – PÁGINA INTERNA OVERLAY
+   ================================================ */
+.news-page-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--cream);
+  overflow-y: auto;
+  z-index: 3000;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.news-page-overlay.show { opacity: 1; }
+.news-page-nav {
+  background: var(--crimson);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+.news-page-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.news-page-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #fff;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.35);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+}
+.news-page-back:hover { background: rgba(255,255,255,0.28); }
+.news-page-nav-title {
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.news-page-body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 5rem;
+}
+.news-page-heading { margin-bottom: 2.5rem; }
+.news-page-count {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+@media (max-width: 900px) {
+  .news-page-nav-inner { padding: 0 1rem; }
+  .news-page-body { padding: 2rem 1rem 4rem; }
+}
+@media (max-width: 640px) {
+  .news-page-nav-title { font-size: 1rem; }
+}
+
+/* ================================================
+   QUOTE SECTION
+   ================================================ */
+#quote {
+  background: var(--crimson-dark);
+  padding: 28px 0;
+}
+.quote-wrap { max-width: 780px; margin: 0 auto; text-align: center; }
+.quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 7rem;
+  font-weight: 900;
+  color: var(--gold);
+  opacity: 0.25;
+  line-height: 0.4;
+  display: block;
+  margin-bottom: 2rem;
+}
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  font-style: italic;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.65;
+  margin-bottom: 1.8rem;
+}
+.quote-attr {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ================================================
+   FAQ
+   ================================================ */
+#faq { background: #fff; }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #fff;
+}
+.faq-q {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 1.4rem 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.faq-q:hover { background: rgba(132,21,21,0.028); }
+.faq-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--gold);
+  min-width: 30px;
+  flex-shrink: 0;
+}
+.faq-qt { flex: 1; font-size: 0.97rem; font-weight: 600; color: var(--text); line-height: 1.45; }
+.faq-tog {
+  width: 28px; height: 28px;
+  background: rgba(132,21,21,0.08);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: var(--t);
+}
+.faq-item.open .faq-tog { background: var(--crimson); transform: rotate(45deg); }
+.faq-tog svg { width: 13px; height: 13px; color: var(--crimson); transition: color 0.2s; }
+.faq-item.open .faq-tog svg { color: #fff; }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.38s var(--ease), padding 0.3s;
+  padding: 0 1.5rem 0 calc(1.5rem + 30px + 13px);
+}
+.faq-item.open .faq-a {
+  max-height: 400px;
+  padding-bottom: 1.4rem;
+}
+.faq-a p  { font-size: 0.92rem; }
+.faq-a a  { color: var(--crimson); font-weight: 600; }
+
+/* ================================================
+   DOAÇÃO
+   ================================================ */
+#doacao { background: var(--cream-dark); }
+.doacao-wrap { max-width: 900px; margin: 0 auto; }
+.doacao-top {
+  background: var(--crimson);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 2rem 3rem 1.8rem;
+  text-align: center;
+  color: #fff;
+}
+.doacao-top h2 { color: #fff; margin-bottom: 0.8rem; }
+.doacao-top p  { color: rgba(255,255,255,0.8); font-size: 1.05rem; }
+.doacao-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #fff;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+}
+.d-card { padding: 1.2rem 2rem; text-align: center; }
+.d-card + .d-card { border-left: 1px solid var(--border-light); }
+.d-ico {
+  width: 52px; height: 52px;
+  background: rgba(132,21,21,0.08);
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 0.9rem auto;
+}
+.d-ico svg { width: 26px; height: 26px; color: var(--crimson); }
+.d-card h3 { color: var(--text); margin-bottom: 0.4rem; font-size: 1.3rem; }
+.d-card > p { font-size: 0.94rem; margin-bottom: 0.9rem; }
+.pix-box {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.5rem;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+.pix-lbl { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+.pix-val-row { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.pix-copy-btn {
+  background: var(--gold); border: none; border-radius: 5px;
+  color: #2a1a00; cursor: pointer; padding: 0;
+  width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s; flex-shrink: 0;
+}
+.pix-copy-btn:hover { background: #b8790a; color: #fff; }
+.pix-copy-btn.copied { background: var(--gold); color: #2a6e2a; }
+.pix-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--crimson);
+  letter-spacing: 0.5px;
+}
+.bank-box { background: var(--cream); border-radius: var(--radius-sm); overflow: hidden; }
+.bank-head {
+  background: var(--crimson);
+  color: #fff;
+  padding: 11px 1.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+.bank-body { padding: 1.2rem 1.4rem; }
+.b-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; }
+.b-row + .b-row { border-top: 1px solid var(--border); }
+.b-row dt { font-size: 0.77rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
+.b-row dd { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+.d-note { font-size: 0.85rem !important; margin-top: 1.4rem; }
+.doacao-cta {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1.5rem 2rem;
+  background: rgba(132,21,21,0.05);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+.doacao-cta p { margin: 0; font-size: 1.08rem; text-align: center; }
+.doacao-cta a { color: var(--crimson); font-weight: 700; }
+
+/* ================================================
+   CONTATO
+   ================================================ */
+#contato { background: #fff; }
+.contato-wrap {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 5.5rem;
+  align-items: start;
+}
+.form-g { margin-bottom: 1.2rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+label {
+  display: block;
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+}
+input, textarea, select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: #fff;
+  outline: none;
+  transition: border-color 0.22s;
+  -webkit-appearance: none;
+}
+input:focus, textarea:focus, select:focus { border-color: var(--crimson); }
+textarea { resize: vertical; min-height: 128px; }
+.submit-btn { width: 100%; justify-content: center; font-size: 1rem; padding: 15px; margin-top: 4px; }
+
+.ci-list { display: flex; flex-direction: column; }
+.ci {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border);
+}
+.ci:last-of-type { border-bottom: none; }
+.ci-ico {
+  width: 42px; height: 42px;
+  background: rgba(132,21,21,0.08);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.ci-ico svg { width: 19px; height: 19px; color: var(--crimson); }
+.ci dt { font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 2px; }
+.ci dd { font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+.ci dd a { color: var(--crimson); }
+.dept-title { font-size: 1rem; font-family: 'Playfair Display', serif; font-weight: 700; color: var(--text); margin: 2rem 0 0.9rem; }
+.dept-list { display: flex; flex-direction: column; gap: 8px; }
+.dept-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 13px;
+  background: var(--cream);
+  border-radius: var(--radius-xs);
+  gap: 8px;
+}
+.dept-row dt { font-size: 0.8rem; font-weight: 700; color: var(--text); white-space: nowrap; }
+.dept-row dd a { font-size: 0.78rem; color: var(--crimson); }
+
+
+
+/* ================================================
+   NAV DROPDOWN
+   ================================================ */
+.nav-links li { position: relative; }
+.nav-dropdown > a { display: flex; align-items: center; gap: 5px; }
+.nav-dropdown > a::after { display: none !important; }
+.drop-arrow {
+  width: 9px; height: 9px;
+  border-right: 2px solid rgba(255,255,255,0.75);
+  border-bottom: 2px solid rgba(255,255,255,0.75);
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.nav-dropdown:hover .drop-arrow { transform: rotate(-135deg) translateY(2px); }
+.nav-submenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  background: var(--crimson-dark);
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+  min-width: 0;
+  width: max-content;
+  padding: 14px 0 6px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 200;
+  list-style: none;
+}
+.nav-dropdown:hover .nav-submenu {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0s;
+  transform: translateX(-50%) translateY(0);
+}
+/* Ponte invisível */
+.nav-submenu::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -20px; right: -20px;
+  height: 16px;
+  background: transparent;
+}
+.nav-submenu::before {
+  content: '';
+  position: absolute;
+  top: -6px; left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-bottom-color: var(--crimson-dark);
+  border-top: none;
+}
+.nav-submenu li a {
+  display: block;
+  padding: 9px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.88) !important;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-submenu li a:hover { background: rgba(255,255,255,0.1); color: #fff !important; }
+.nav-submenu li a::after { display: none !important; }
+
+/* ================================================
+   DIRETORIA EXECUTIVA
+   ================================================ */
+#diretoria { background: var(--cream); padding-top: 60px; padding-bottom: 60px; }
+.diretoria-row {
+  display: grid;
+  gap: 20px;
+  margin-top: 20px;
+}
+.diretoria-row-top  { grid-template-columns: repeat(4, 1fr); }
+.diretoria-row-bottom {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.dir-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 16px 22px;
+  text-align: center;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+  transition: transform 0.22s, box-shadow 0.22s;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.dir-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--crimson), var(--gold));
+}
+.dir-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(132,21,21,0.13); }
+.dir-avatar {
+  width: 155px; height: 155px;
+  border-radius: 50%;
+  background: #f5ede0;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #2a1a00;
+  letter-spacing: -1px;
+  overflow: hidden;
+  border: 4px solid #f0e6d3;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.10);
+}
+.dir-cargo {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 7px;
+}
+.dir-nome {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+.dir-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+@media(max-width:900px){
+  .diretoria-row-top    { grid-template-columns: repeat(2, 1fr); }
+  .diretoria-row-bottom { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+}
+@media(max-width:500px){
+  .diretoria-row-top    { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .diretoria-row-bottom { grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 100%; }
+}
+
+/* ================================================
+   PARCEIROS
+   ================================================ */
+.parceiros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  margin-top: 44px;
+}
+.parceiro-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px 18px 20px;
+  min-height: 130px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+.parceiro-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 34px rgba(132,21,21,0.14);
+}
+.parceiro-card img {
+  max-width: 160px;
+  max-height: 80px;
+  object-fit: contain;
+  display: block;
+}
+.parceiro-nome {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--crimson);
+  text-align: center;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  display: none;
+}
+@media(max-width:600px){
+  .parceiros-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+}
+
+/* ================================================
+   FOOTER
+   ================================================ */
+footer {
+  background: var(--crimson-900);
+  padding: 80px 0 0;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1.3fr 1fr;
+  gap: 3.5rem;
+  padding-bottom: 56px;
+}
+.f-brand {}
+.f-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.f-brand > p { font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.6); max-width: 250px; }
+.f-socials { display: flex; gap: 9px; margin-top: 1.5rem; justify-content: flex-start; }
+.f-social {
+  width: 38px; height: 38px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--t);
+}
+.f-social:hover { background: var(--gold); }
+.f-social svg { width: 16px; height: 16px; color: #fff; }
+.f-col h5 {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.4px;
+  margin-bottom: 1.3rem;
+}
+.f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.f-links a { font-size: 0.88rem; color: rgba(255,255,255,0.65); transition: color 0.2s; }
+.f-links a:hover { color: #fff; }
+.f-contact { display: flex; flex-direction: column; gap: 12px; }
+.f-ci { display: flex; align-items: flex-start; gap: 10px; }
+.f-ci svg { width: 15px; height: 15px; color: var(--gold); flex-shrink: 0; margin-top: 3px; }
+.f-ci span { font-size: 0.86rem; color: rgba(255,255,255,0.65); line-height: 1.55; }
+.f-ci a { color: rgba(255,255,255,0.65); }
+.f-partner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 9px 20px;
+  background: #fff;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  min-height: 42px;
+  box-sizing: border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+.f-partner:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+.f-partner img { display: block; width: auto; max-width: 100%; max-height: 26px; object-fit: contain; }
+.f-bottom {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 22px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+.f-bottom p { font-size: 0.81rem; color: rgba(255,255,255,0.35); }
+.f-bottom a { color: var(--gold); }
+
+/* ================================================
+   SCROLL ANIMATIONS
+   ================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+}
+.reveal.from-left  { transform: translateX(-35px); }
+.reveal.from-right { transform: translateX(35px); }
+.reveal.visible { opacity: 1; transform: translate(0); }
+.d1 { transition-delay: 0.10s; }
+.d2 { transition-delay: 0.22s; }
+.d3 { transition-delay: 0.34s; }
+.d4 { transition-delay: 0.46s; }
+
+/* ================================================
+   SCROLL-TO-TOP
+   ================================================ */
+#stt {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  z-index: 990;
+  width: 46px; height: 46px;
+  background: var(--crimson);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--t);
+}
+#stt.show { opacity: 1; pointer-events: all; }
+#stt:hover { background: var(--crimson-dark); transform: translateY(-3px); }
+#stt svg { width: 20px; height: 20px; }
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+@media (max-width: 1060px) {
+  .stats-row         { grid-template-columns: repeat(2, 1fr); gap: 1px; }
+  .stat-cell         { padding: 1.5rem 1rem; }
+  .stats-row .stat-cell:nth-child(2) { border-right: none; }
+  .stats-row .stat-cell:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.15); }
+  .pilares-grid      { grid-template-columns: repeat(2, 1fr); }
+  .noticias-grid     { grid-template-columns: repeat(2, 1fr); }
+  .faq-grid          { grid-template-columns: 1fr; }
+  .footer-grid       { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+}
+@media (max-width: 768px) {
+  :root { --nav-h: 64px; }
+  #nav          { padding: 0 1.5rem; }
+  .nav-links          { display: none; }
+  .hamburger          { display: flex; }
+  /* Esconde TODOS os botões do nav em mobile (inline styles têm priority,
+     por isso usamos !important para sobrepor o display:inline-flex inline) */
+  .nav-actions .btn   { display: none !important; }
+  .section      { padding: 75px 0; }
+  .sobre-nova-wrap { grid-template-columns: 1fr; gap: 2rem; }
+  .sobre-checks-row { flex-direction: column; }
+  .sobre-cartoon-col { display: none; }
+  .sobre-badge  { right: 0; }
+  .contato-wrap { grid-template-columns: 1fr; gap: 3rem; }
+  .doacao-cards { grid-template-columns: 1fr; }
+  .d-card + .d-card { border-left: none; border-top: 1px solid var(--border-light); }
+  .noticias-grid { grid-template-columns: 1fr; }
+  .hero-btns     { flex-direction: column; align-items: center; }
+  .form-row      { grid-template-columns: 1fr; }
+  .footer-grid   { grid-template-columns: 1fr; gap: 2rem; }
+  .missao-kpis   { flex-direction: column; gap: 0; }
+  .mkpi { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .mkpi:last-child { border-bottom: none; }
+  .noticias-header { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .container    { padding: 0 1.25rem; }
+  .sobre-badge  { position: static; margin-top: 1.2rem; }
+  .doacao-top   { padding: 2.5rem 1.5rem 2rem; }
+  .d-card       { padding: 2rem 1.5rem; }
+
+  /* Quote mark menor para não causar overflow */
+  .quote-mark   { font-size: 3.5rem; }
+
+  /* Avatares da diretoria menores — evita overflow nos cards de 2 colunas */
+  .dir-avatar   { width: 110px; height: 110px; font-size: 1.25rem; }
+
+  /* Slide do hero com menos espaço inferior em telas baixas */
+  .slide-content,
+  .slide-content.sc-bottom,
+  .slide-content.sc-center,
+  .slide-content.sc-top,
+  .slide-content.sc-reverse { padding-bottom: 5rem; }
+
+  /* KPIs da missão */
+  .mkpi strong  { font-size: 1.6rem; }
+
+  /* Chave PIX — CNPJ longo cabe melhor em font menor */
+  .pix-val      { font-size: 1.15rem; letter-spacing: 0; }
+
+  /* Padding de seções levemente reduzido */
+  .section      { padding: 58px 0; }
+}
+
+/* Smartphones muito pequenos (≤ 360px) */
+@media (max-width: 360px) {
+  /* Diretoria vira 1 coluna para não comprimir os cards */
+  .diretoria-row-top    { grid-template-columns: 1fr; }
+  .diretoria-row-bottom { grid-template-columns: 1fr; max-width: 100%; }
+  .dir-avatar           { width: 130px; height: 130px; }
+
+  /* Botões do hero em coluna com padding reduzido */
+  .hero-btns .btn { padding: 12px 20px; font-size: 0.9rem; }
+
+  /* Seções com menos espaço */
+  .section { padding: 48px 0; }
+  #sobre   { padding: 48px 0; }
+}
+
+  
+/* ================================================
+   ARTICLE READER OVERLAY
+   ================================================ */
+.article-overlay {
+  position: fixed; inset: 0;
+  background: #fff;
+  overflow-y: auto;
+  z-index: 4000;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.article-overlay.show { opacity: 1; }
+.article-top-nav {
+  background: var(--crimson);
+  position: sticky; top: 0; z-index: 10;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+.article-top-nav-inner {
+  max-width: 960px; margin: 0 auto;
+  padding: 0 2rem; height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.article-back-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: #fff; background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.35);
+  padding: 8px 20px; border-radius: 50px;
+  font-size: 0.88rem; font-weight: 600; cursor: pointer;
+  transition: background 0.2s; font-family: inherit;
+}
+.article-back-btn:hover { background: rgba(255,255,255,0.28); }
+.article-breadcrumb { color: rgba(255,255,255,0.85); font-size: 0.85rem; }
+.article-hero-wrap { width: 100%; max-height: 480px; overflow: hidden; }
+.article-hero-img { width:100%; max-height:480px; height:auto; object-fit:contain; background:#111; display:block; }
+.article-content-wrap {
+  max-width: 760px; margin: 0 auto; padding: 3rem 2rem 5rem;
+}
+.article-meta-row {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 1.2rem;
+}
+.article-main-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; color: var(--text);
+  line-height: 1.35; margin-bottom: 2rem;
+  border-bottom: 2px solid var(--gold); padding-bottom: 1.5rem;
+}
+.article-body-text p {
+  font-size: 1rem; line-height: 1.85;
+  color: #333; margin-bottom: 1.5rem;
+}
+.article-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem; margin-top: 2.5rem;
+}
+.article-gallery img {
+  width: 100%; border-radius: var(--radius);
+  object-fit: cover; aspect-ratio: 16/10;
+}
+@media (max-width: 640px) {
+  .article-main-title { font-size: 1.4rem; }
+  .article-content-wrap { padding: 1.5rem 1rem 3rem; }
+  .article-hero-img { height: 240px; }
+  .article-breadcrumb { display: none; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVIGATION ===================== -->
+<nav id="nav">
+  <div class="nav-inner">
+    <!-- Logo -->
+    <a href="#hero" class="nav-logo">
+      <img src="https://salahshriners.lovable.app/assets/salah-logo-DBV0u6Ri.png" alt="Brasão Salah Shriners" class="nav-logo-svg" style="height:48px;width:48px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));">
+      <div class="nav-logo-text">
+        <strong>Salah Shriners</strong>
+      </div>
+    </a>
+
+    <!-- Links -->
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#sobre">Sobre Nós</a></li>
+      <li><a href="#diretoria">Diretoria</a></li>
+      <li><a href="#parceiros">Parceiros</a></li>
+      <li><a href="#noticias" onclick="if(event.target.closest('a')) hideNewsPage()">Notícias</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+
+    <!-- Actions -->
+    <div class="nav-actions">
+      <a href="#doacao" class="btn btn-outline-w" style="padding:7px 16px; font-size:0.8rem; min-width:110px; display:inline-flex; align-items:center; justify-content:center;">Doe Agora</a>
+      <a href="https://salahshriners.com" target="_blank" class="btn btn-conecte" style="padding:7px 16px; font-size:0.8rem; min-width:110px; display:inline-flex; align-items:center; justify-content:center; gap:6px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="7" r="4"/>
+          <path d="M4 21v-1a8 7 0 0 1 16 0v1"/>
+          <circle cx="17.5" cy="18.5" r="3.5" fill="currentColor" stroke="none"/>
+          <path d="M16.2 18.5l1 1 2-2" stroke="#fff" stroke-width="1.5" fill="none"/>
+        </svg>
+        Conecte-se
+      </a>
+      <button class="hamburger" id="hbg" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div id="mobile-nav">
+  <a href="#hero"      onclick="closeNav()">Home</a>
+  <a href="#sobre"     onclick="closeNav()">Sobre Nós</a>
+  <a href="#diretoria" onclick="closeNav()">Diretoria</a>
+  <a href="#parceiros" onclick="closeNav()">Parceiros</a>
+  <a href="#noticias"  onclick="closeNav()">Notícias</a>
+  <a href="#contato"   onclick="closeNav()">Contato</a>
+  <div class="mob-nav-btns">
+    <a href="#doacao" onclick="closeNav()" class="btn btn-outline-w">Doe Agora</a>
+    <a href="https://salahshriners.com" target="_blank" class="btn btn-conecte" style="display:inline-flex;align-items:center;gap:6px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="7" r="4"/><path d="M4 21v-1a8 7 0 0 1 16 0v1"/>
+        <circle cx="17.5" cy="18.5" r="3.5" fill="currentColor" stroke="none"/>
+        <path d="M16.2 18.5l1 1 2-2" stroke="#fff" stroke-width="1.5" fill="none"/>
+      </svg>
+      Conecte-se
+    </a>
+  </div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <div class="hero-track">
+        <div class="hero-slide active" style="background-image:url('https://salahshriners.lovable.app/assets/hero-slide-1-B6wMkjx-.avif')"></div>
+    <div class="hero-slide"        style="background-image:url('https://salahshriners.lovable.app/assets/hero-slide-2-R8-ObJQ6.avif')"></div>
+    <div class="hero-slide"        style="background-image:url('images/inline/inline_17.jpg')"></div>
+    <div class="hero-slide"        style="background-image:url('images/inline/inline_18.jpg')"></div>
+    <div class="hero-slide"        style="background-image:url('images/inline/inline_19.jpg')"></div>
+  </div>
+
+  <div class="hero-body" style="position:absolute; inset:0; z-index:2;">
+
+    <!-- Slide 1: Fraternidade / Filantropia / Diversão -->
+    <div class="slide-content sc-active sc-bottom">
+      <div class="sc-rule"></div>
+      <p class="sc-title">Fraternidade. Filantropia. Família.</p>
+      <p class="sc-subtitle">Uma fraternidade formada por homens comprometidos com valores de amizade, solidariedade e serviço ao próximo, viabilizando tratamento especializado para crianças que mais precisam.</p>
+    </div>
+
+    <!-- Slide 2: Irmãos segurando o FEZ -->
+    <div class="slide-content sc-reverse">
+      <div class="sc-rule"></div>
+      <div class="sc-hl">
+        <span class="sc-line1">Shriners, 150 Anos de Companheirismo</span>
+        <span class="sc-slot"><span class="sc-line2">Formando Homens de Bom Caráter</span></span>
+      </div>
+    </div>
+
+    <!-- Slide 3: Nobres no palco com crianças -->
+    <div class="slide-content sc-reverse">
+      <div class="sc-rule"></div>
+      <div class="sc-hl">
+        <span class="sc-line1">Shriners, 150 Anos de Companheirismo</span>
+        <span class="sc-slot"><span class="sc-line2">Focado na família</span></span>
+      </div>
+    </div>
+
+    <!-- Slide 4: Grande público, salão enorme -->
+    <div class="slide-content sc-reverse">
+      <div class="sc-rule"></div>
+      <div class="sc-hl">
+        <span class="sc-line1">Shriners, 150 Anos de Companheirismo</span>
+        <span class="sc-slot"><span class="sc-line2">Servindo nossas comunidades</span></span>
+      </div>
+    </div>
+
+    <!-- Slide 5: Diversão -->
+    <div class="slide-content sc-reverse">
+      <div class="sc-rule"></div>
+      <div class="sc-hl">
+        <span class="sc-line1">Shriners, 150 Anos de Companheirismo</span>
+        <span class="sc-slot"><span class="sc-line2">E muita diversão</span></span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="hero-indicators">
+    <div class="hi active" onclick="goSlide(0)"></div>
+    <div class="hi"        onclick="goSlide(1)"></div>
+    <div class="hi"        onclick="goSlide(2)"></div>
+    <div class="hi"        onclick="goSlide(3)"></div>
+    <div class="hi"        onclick="goSlide(4)"></div>
+  </div>
+
+  <div class="hero-arrow">
+    <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat-cell reveal d1">
+        <span class="stat-n" data-target="22" data-suffix="">0</span>
+        <span class="stat-l">Hospitais Infantis</span>
+      </div>
+      <div class="stat-cell reveal d2">
+        <span class="stat-n" data-target="40" data-suffix="+">0</span>
+        <span class="stat-l">Países</span>
+      </div>
+      <div class="stat-cell reveal d3">
+        <span class="stat-n" data-target="200" data-suffix="+">0</span>
+        <span class="stat-l">Instituições Shriners</span>
+      </div>
+      <div class="stat-cell reveal d4">
+        <span class="stat-n" data-target="195" data-suffix="+">0</span>
+        <span class="stat-l">Membros no Mundo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PILARES ===================== -->
+<section id="pilares">
+  <div class="pilares-panels">
+
+    <!-- Painel 1: Diversão e Confraternização -->
+    <div class="pilar-panel" onclick="activatePilar(this)">
+      <div class="pilar-panel-bg" style="background-image:url('images/pilares/Fraternidade.jpg')"></div>
+      <div class="pilar-panel-overlay"></div>
+      <div class="pilar-panel-content">
+        <span class="pilar-rule"></span>
+        <h3>Fraternidade</h3>
+        <div class="pilar-panel-text">
+          <p>Ser Shriner também é celebrar a vida. Com mais de 7.000 clubes e unidades em todo o mundo, os Shriners oferecem inúmeras oportunidades de companheirismo, diversão e participação em atividades que fortalecem nossos laços de amizade.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Painel 2: Filantropia -->
+    <div class="pilar-panel" onclick="activatePilar(this)">
+      <div class="pilar-panel-bg" style="background-image:url('images/pilares/Filantropia.jpg')"></div>
+      <div class="pilar-panel-overlay"></div>
+      <div class="pilar-panel-content">
+        <span class="pilar-rule"></span>
+        <h3>Filantropia <span class="pp-arrow">›</span></h3>
+        <div class="pilar-panel-text">
+          <p>Os Hospitais Shriners oferecem cuidados pediátricos especializados, viabilizando tratamento de excelência para crianças independentemente da capacidade financeira das famílias.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Painel 3: Família -->
+    <div class="pilar-panel" onclick="activatePilar(this)">
+      <div class="pilar-panel-bg" style="background-image:url('images/pilares/Familia.jpg')"></div>
+      <div class="pilar-panel-overlay"></div>
+      <div class="pilar-panel-content">
+        <span class="pilar-rule"></span>
+        <h3>Família <span class="pp-arrow">›</span></h3>
+        <div class="pilar-panel-text">
+          <p>Somos uma grande família, e nosso amor fraternal manifesta-se em nossos eventos, programas e no cuidado dedicado a cada membro e a seus entes queridos.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== SOBRE ===================== -->
+<section id="sobre" class="section" style="background:#fff">
+  <div class="container">
+    <div class="sobre-nova-wrap">
+
+      <!-- COLUNA ESQUERDA: texto + imagem celebrating completa -->
+      <div class="sobre-esq reveal from-left">
+        <span class="tag">Sobre Nós</span>
+        <div class="divider"></div>
+        <h2><span class="text-crimson">Salah Shriners</span></h2>
+        <p>Uma fraternidade formada por homens comprometidos com valores como amizade, solidariedade e serviço ao próximo. Somos uma entidade autônoma, sem fins lucrativos, de caráter filantrópico, assistencial, recreativo e cultural.</p>
+        <img src="images/conteudo/celebrating-100-years.jpg"
+             alt="Celebrating 100 Years — Shriners Children's"
+             class="sobre-celebrating-img" loading="lazy">
+      </div>
+
+      <!-- COLUNA DIREITA: logos + checks + cartoon -->
+      <div class="sobre-dir reveal from-right">
+
+        <!-- Fileira de logos -->
+        <div class="sobre-logos-row">
+          <img src="images/logo/brasao-vetorizado-transp.png"         alt="Salah Shriners"           class="sl-brasao">
+          <img src="images/logo/Logo Shriners Hospital-transp.png"    alt="Shriners Hospitals"       class="sl-hospital">
+          <img src="images/logo/Shriners International-transp.png"    alt="Shriners International"   class="sl-si">
+        </div>
+
+        <!-- Checks + cartoon lado a lado -->
+        <div class="sobre-checks-row">
+          <div class="sobre-checks">
+            <div class="check-item">
+              <div class="check-ico">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <div>
+                <h4>Missão Clara</h4>
+                <p>Viabilizar meios para que crianças e adolescentes de até 18 anos recebam tratamento médico especializado com agilidade, segurança e qualidade, independentemente de sua condição financeira.</p>
+              </div>
+            </div>
+            <div class="check-item">
+              <div class="check-ico">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <div>
+                <h4>Presença Global</h4>
+                <p>Estamos presentes em mais de 40 países, com cerca de 200 templos e milhares de clubes ao redor do mundo, unidos pelos princípios de fraternidade, filantropia e serviço à humanidade.</p>
+              </div>
+            </div>
+            <div class="check-item">
+              <div class="check-ico">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <div>
+                <h4>Sem Fins Lucrativos</h4>
+                <p>Toda a nossa atuação é orientada pela causa filantrópica, sem qualquer interesse comercial. Cada contribuição recebida é destinada diretamente ao cuidado e ao tratamento das crianças atendidas.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cartoon decorativo -->
+          <div class="sobre-cartoon-col">
+            <img src="images/logo/menina-no-colo.png" alt="Shriner" class="sobre-cartoon" loading="lazy">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- FAQ integrado -->
+    <div id="faq" style="margin-top:1.5rem; padding-top:2rem; border-top:1px solid rgba(0,0,0,0.08);">
+      <div class="section-head center reveal" style="margin-bottom:2rem">
+        <span class="tag">Dúvidas Frequentes</span>
+        <div class="divider center"></div>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item reveal d1">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-num">01</span>
+            <span class="faq-qt">Quem são os Shriners?</span>
+            <div class="faq-tog"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></div>
+          </div>
+          <div class="faq-a"><p>O Salah Shriners é uma fraternidade formada por homens comprometidos com valores como amizade, solidariedade e serviço ao próximo. É uma entidade autônoma, sem fins lucrativos, de caráter filantrópico. Estamos presentes em mais de 40 países, com cerca de 200 templos e milhares de clubes ao redor do mundo.</p></div>
+        </div>
+        <div class="faq-item reveal d2">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-num">02</span>
+            <span class="faq-qt">Como encaminhar um caso para atendimento?</span>
+            <div class="faq-tog"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></div>
+          </div>
+          <div class="faq-a"><p>Para encaminhar algum caso, entre em contato através do <a href="#contato" style="color:var(--crimson);font-weight:700;text-decoration:underline;">formulário</a> ou pelo e-mail <a href="mailto:secretario@salahshriners.org">secretario@salahshriners.org</a>.</p></div>
+        </div>
+        <div class="faq-item reveal d1">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-num">03</span>
+            <span class="faq-qt">O que são os Shriners Hospitals for Children?</span>
+            <div class="faq-tog"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></div>
+          </div>
+          <div class="faq-a"><p>Criado em 1922, o Shriners Children's é um sistema de saúde pediátrica de referência mundial, com unidades permanentes em três países, clínicas de extensão e telessaúde. Atende crianças de até 18 anos que necessitam de tratamento especializado, sem custo para as famílias.</p></div>
+        </div>
+        <div class="faq-item reveal d2">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-num">04</span>
+            <span class="faq-qt">Como posso me tornar um Shriner?</span>
+            <div class="faq-tog"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></div>
+          </div>
+          <div class="faq-a"><p>Para se tornar um Shriner, acesse <a href="https://salahshriners.com/inscricao/" target="_blank" style="color:var(--crimson);font-weight:700;text-decoration:underline;">Seja um Shriner</a> ou envie um e-mail para <a href="mailto:secretario@salahshriners.org">secretario@salahshriners.org</a>.</p></div>
+        </div>
+        <div class="faq-item reveal d1">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-num">05</span>
+            <span class="faq-qt">Como posso fazer uma doação?</span>
+            <div class="faq-tog"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></div>
+          </div>
+          <div class="faq-a"><p>Você pode fazer uma doação via PIX (Chave CNPJ: <strong>33.658.326/0001-60</strong>) ou depósito em conta no Banco Ailos (085), Ag. 0107-4, Conta 5986-2, em nome de SHRINERS CLUB INTERNATIONAL DE SANTA CATARINA. Toda contribuição é bem-vinda!</p></div>
+        </div>
+        <div class="faq-item reveal d2">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-num">06</span>
+            <span class="faq-qt">O Salah Shriners atua apenas em Santa Catarina?</span>
+            <div class="faq-tog"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></div>
+          </div>
+          <div class="faq-a"><p>O Salah Shriners tem sede e jurisdição em Santa Catarina, porém sua atuação filantrópica transcende fronteiras, pois integra uma fraternidade global presente em diversos países, com foco no encaminhamento de crianças para atendimento nos Hospitais Infantis Shriners.</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== QUOTE ===================== -->
+<section id="quote">
+  <div class="container">
+    <div class="quote-wrap reveal">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">Somos homens compartilhando o melhor da vida. A diversão é a base que nos une, e a filantropia fortalece nosso companheirismo. Fraternidade, família, alegria, compaixão e serviço ao próximo são os pilares da nossa jornada.</p>
+      <span class="quote-attr">Salah Shriners</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DIRETORIA ===================== -->
+<section id="diretoria" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">Gestão 2026</span>
+      <h2>Diretoria <em>Executiva</em></h2>
+    </div>
+    <!-- Linha 1: 4 cards -->
+    <div class="diretoria-row diretoria-row-top">
+      <div class="dir-card reveal">
+        <div class="dir-avatar"><img src="images/conteudo/dir_mario.jpg" alt="Mário Henrique Gonçalves Corrêa" loading="lazy"></div>
+        <p class="dir-cargo">Potentado</p>
+        <h3 class="dir-nome">Mário Henrique G. Corrêa</h3>
+      </div>
+      <div class="dir-card reveal">
+        <div class="dir-avatar"><img src="images/conteudo/dir_leopoldo.jpg" alt="Leopoldo Homrich" loading="lazy"></div>
+        <p class="dir-cargo">Chefe Raban</p>
+        <h3 class="dir-nome">Leopoldo Homrich</h3>
+      </div>
+      <div class="dir-card reveal">
+        <div class="dir-avatar"><img src="images/conteudo/dir_buch.jpg" alt="Rodrigo Buch" loading="lazy"></div>
+        <p class="dir-cargo">Raban Assistente</p>
+        <h3 class="dir-nome">Rodrigo Buch</h3>
+      </div>
+      <div class="dir-card reveal">
+        <div class="dir-avatar"><img src="images/conteudo/dir_marcelo_web.jpg" alt="Marcelo S. de Espíndola" loading="lazy"></div>
+        <p class="dir-cargo">Sumo Sacerdote e Profeta</p>
+        <h3 class="dir-nome">Marcelo S. de Espíndola</h3>
+      </div>
+    </div>
+    <!-- Linha 2: 3 cards centralizados -->
+    <div class="diretoria-row diretoria-row-bottom">
+      <div class="dir-card reveal">
+        <div class="dir-avatar"><img src="images/conteudo/dir_delcio_web.jpg" alt="Delcio Luiz Castagnaro Filho" loading="lazy"></div>
+        <p class="dir-cargo">Guia Oriental</p>
+        <h3 class="dir-nome">Delcio L. Castagnaro Filho</h3>
+      </div>
+      <div class="dir-card reveal">
+        <div class="dir-avatar"><img src="images/conteudo/dir_bressan_web.jpg" alt="Raphael Chiummo Bressan" loading="lazy"></div>
+        <p class="dir-cargo">Tesoureiro</p>
+        <h3 class="dir-nome">Raphael C. Bressan</h3>
+      </div>
+      <div class="dir-card reveal">
+        <div class="dir-avatar"><img src="images/conteudo/dir_allan_web.jpg" alt="Allan Soares" loading="lazy"></div>
+        <p class="dir-cargo">Secretário</p>
+        <h3 class="dir-nome">Allan Soares</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DOAÇÃO ===================== -->
+
+<!-- ===================== PARCEIROS ===================== -->
+<section id="parceiros" class="section" style="background:var(--cream); padding-top:60px; padding-bottom:60px;">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="tag">Rede de Apoio</span>
+      <h2>Nossos <em>Parceiros</em></h2>
+      <p>Organizações e instituições que compartilham nossa missão de transformar vidas.</p>
+    </div>
+    <div class="parceiros-grid reveal">
+
+      <a class="parceiro-card" href="https://www.shrinersinternational.org" target="_blank" rel="noopener" title="Shriners International">
+        <img src="images/inline/inline_03.png" alt="Shriners International">
+        <span class="parceiro-nome">Shriners International</span>
+      </a>
+      <a class="parceiro-card" href="https://www.shrinerschildrens.org" target="_blank" rel="noopener" title="Shriners Hospitals for Children">
+        <img src="images/inline/inline_04.png" alt="Shriners Hospitals for Children">
+        <span class="parceiro-nome">Shriners Hospitals for Children</span>
+      </a>
+      <a class="parceiro-card" href="https://www.costao.com.br" target="_blank" rel="noopener" title="Costão do Santinho">
+        <img src="images/inline/inline_05.png" alt="Costão do Santinho">
+        <span class="parceiro-nome">Costão do Santinho</span>
+      </a>
+      <a class="parceiro-card" href="https://www.saude.sc.gov.br/index.php/pt/ses-sc/unidades-de-saude/hospital-infantil-joana-de-gusmao" target="_blank" rel="noopener" title="Hospital Infantil Joana de Gusmão">
+        <img src="images/inline/inline_06.png" alt="Hospital Infantil Joana de Gusmão">
+        <span class="parceiro-nome">Hospital Infantil Joana de Gusmão</span>
+      </a>
+      <a class="parceiro-card" href="https://renalvida.org.br" target="_blank" rel="noopener" title="Renal Vida">
+        <img src="images/inline/inline_07.png" alt="Renal Vida">
+        <span class="parceiro-nome">Renal Vida</span>
+      </a>
+      <a class="parceiro-card" href="https://www.joinville.sc.gov.br/institucional/ses/das/use/centr/" target="_blank" rel="noopener" title="Centrinho Joinville">
+        <img src="images/inline/inline_08.png" alt="Centrinho Joinville">
+        <span class="parceiro-nome">Centrinho Joinville</span>
+      </a>
+      <a class="parceiro-card" href="https://profisjoinville.org.br" target="_blank" rel="noopener" title="Profis Joinville">
+        <img src="images/inline/inline_09.png" alt="Profis Joinville">
+        <span class="parceiro-nome">Profis Joinville</span>
+      </a>
+      <a class="parceiro-card" href="https://ja-sc.org.br" target="_blank" rel="noopener" title="Junior Achievement Brasil">
+        <img src="images/inline/inline_10.png" alt="Junior Achievement Brasil">
+        <span class="parceiro-nome">Junior Achievement Brasil</span>
+      </a>
+      <a class="parceiro-card" href="https://www.unochapeco.edu.br" target="_blank" rel="noopener" title="Unochapecó">
+        <img src="images/inline/inline_11.png" alt="Unochapecó">
+        <span class="parceiro-nome">Unochapecó</span>
+      </a>
+      <a class="parceiro-card" href="https://www.uniplaclages.edu.br" target="_blank" rel="noopener" title="Uniplac">
+        <img src="images/inline/inline_12.png" alt="Uniplac">
+        <span class="parceiro-nome">Uniplac</span>
+      </a>
+      <a class="parceiro-card" href="https://www.instagram.com/mcbda.sc/" target="_blank" rel="noopener" title="Bodes do Asfalto">
+        <img src="images/inline/inline_13.png" alt="Bodes do Asfalto">
+        <span class="parceiro-nome">Bodes do Asfalto</span>
+      </a>
+      <a class="parceiro-card" href="https://mrglsc.org.br" target="_blank" rel="noopener" title="Grande Loja de Santa Catarina">
+        <img src="images/inline/inline_14.png" alt="Grande Loja de Santa Catarina">
+        <span class="parceiro-nome">Grande Loja de Santa Catarina</span>
+      </a>
+      <a class="parceiro-card" href="https://gosc.org.br" target="_blank" rel="noopener" title="Grande Oriente de Santa Catarina">
+        <img src="images/inline/inline_15.png" alt="Grande Oriente de Santa Catarina">
+        <span class="parceiro-nome">Grande Oriente de Santa Catarina</span>
+      </a>
+      <a class="parceiro-card" href="https://gob-sc.org.br" target="_blank" rel="noopener" title="Grande Oriente do Brasil – SC">
+        <img src="images/inline/inline_16.png" alt="Grande Oriente do Brasil – SC">
+        <span class="parceiro-nome">Grande Oriente do Brasil – SC</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NOTÍCIAS ===================== -->
+<section id="noticias" class="section" style="padding-top:60px; padding-bottom:60px;">
+  <div class="container">
+    <div class="noticias-header reveal">
+      <div>
+        <span class="tag">Sala de Imprensa</span>
+        <div class="divider"></div>
+        <h2>Últimas <span class="text-crimson">Notícias</span></h2>
+      </div>
+      <button onclick="showNewsPage()" class="btn btn-outline-g">Ver todas →</button>
+    </div>
+    <div class="noticias-grid">
+
+      <article class="noticia reveal d1">
+        <a href="#" onclick="showArticle('art0'); return false;" class="noticia-thumb">
+          <img src="images/noticias/profis1.jpg" alt="Reforma PROFIS Joinville" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Filantropia</span><span class="n-date">22 Mar 2026</span></div>
+          <h3>Reforma do PROFIS em Joinville se aproxima com apoio do Salah Shriners</h3>
+          <p>Visita técnica avalia condições do Centro de Convivência e define próximos passos para reforma viabilizada com recursos do Paddle Solidário.</p>
+          <button onclick="showArticle('art0')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+      <article class="noticia reveal d2">
+        <a href="#" onclick="showArticle('art1'); return false;" class="noticia-thumb">
+          <img src="images/noticias/posse1.jpg" alt="Posse gestão 2026" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Institucional</span><span class="n-date">11 Mar 2026</span></div>
+          <h3>Salah Shriners empossa gestão 2026 e realiza seminário institucional</h3>
+          <p>Tarde de integração em Florianópolis reuniu cerca de 50 Nobres para seminários, formação e a cerimônia oficial de posse da gestão 2026.</p>
+          <button onclick="showArticle('art1')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+      <article class="noticia reveal d3">
+        <a href="#" onclick="showArticle('art2'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_0a28d37abca94573818cd1310ef9a071~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_0a28d37abca94573818cd1310ef9a071~mv2.jpg" alt="Parceria Bodes do Asfalto 2026" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Parceria</span><span class="n-date">02 Mar 2026</span></div>
+          <h3>Salah Shriners e Bodes do Asfalto firmam parceria para 2026</h3>
+          <p>Acordo celebrado em Itajaí prevê ações integradas em apoio às causas filantrópicas voltadas às crianças em Santa Catarina.</p>
+          <button onclick="showArticle('art2')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTATO ===================== -->
+<section id="contato" class="section" style="background:#fff; padding-top:60px; padding-bottom:60px;">
+  <div class="container">
+    <div class="contato-wrap">
+      <!-- Form -->
+      <div class="reveal from-left">
+        <span class="tag">Entre em Contato</span>
+        <div class="divider"></div>
+        <h2>Fale <span class="text-crimson">Conosco</span></h2>
+        <p style="margin-bottom:2rem">Tem alguma dúvida, deseja encaminhar um caso ou quer saber mais sobre os Shriners? Entre em contato.</p>
+        <form id="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-g">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" placeholder="Seu nome completo" required>
+          </div>
+          <div class="form-row">
+            <div class="form-g">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" placeholder="seu@email.com" required>
+            </div>
+            <div class="form-g">
+              <label for="tel">Telefone / WhatsApp</label>
+              <input type="tel" id="tel" placeholder="(48) 99999-9999">
+            </div>
+          </div>
+          <div class="form-g">
+            <label for="assunto">Assunto</label>
+            <select id="assunto">
+              <option value="">Selecione um assunto</option>
+              <option>Encaminhar Caso</option>
+              <option>Parceria Institucional</option>
+              <option>Imprensa</option>
+              <option>Outros Assuntos</option>
+            </select>
+          </div>
+          <div class="form-g">
+            <label for="msg">Mensagem</label>
+            <textarea id="msg" placeholder="Escreva sua mensagem..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary submit-btn" id="submit-btn">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+            </svg>
+            Enviar Mensagem
+          </button>
+        </form>
+      </div>
+      <!-- Info sidebar -->
+      <div class="reveal from-right">
+        <div style="text-align:center; margin-bottom:2rem;">
+          <img src="images/logo/brasao-vetorizado-transp.png" alt="Salah Shriners" style="height:200px; width:auto;">
+        </div>
+        <h3 style="margin-bottom:1.4rem; font-size:1.2rem">Informações de Contato</h3>
+        <dl class="ci-list">
+          <div class="ci">
+            <div class="ci-ico">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div>
+              <dt>E-mail</dt>
+              <dd><a href="mailto:secretario@salahshriners.org">secretario@salahshriners.org</a></dd>
+            </div>
+          </div>
+          <div class="ci">
+            <div class="ci-ico">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <dt>Endereço</dt>
+              <dd>Rua dos Ilhéus, 38, Ed. APLUB, 1º andar, Centro, Florianópolis - SC, CEP 88.010-560.</dd>
+            </div>
+          </div>
+        </dl>
+
+        <img src="images/logo/brasao-vetorizado-transp.png" alt="Salah Shriners" style="height:130px; width:auto; display:block; margin-top:1.5rem; filter:brightness(0) invert(1);">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="doacao" class="section" style="padding-top:60px; padding-bottom:60px;">
+  <div class="container">
+    <div class="doacao-wrap">
+      <div class="doacao-top reveal">
+        <span class="tag" style="color:var(--gold)">Apoie nossa nobre causa</span>
+        <h2>Sua doação transforma <em style="color:var(--gold-light)">vidas</em></h2>
+        <p>Cada contribuição vai diretamente para o atendimento de crianças que precisam de cuidados médicos especializados, sem custo para as famílias.</p>
+      </div>
+      <div class="doacao-cards reveal">
+        <!-- PIX -->
+        <div class="d-card">
+          <div class="d-ico">
+            <img src="images/logo/pix.png" alt="PIX" style="width:32px;height:32px;object-fit:contain;">
+          </div>
+          <h3>Depósito por PIX</h3>
+          <p>Faça sua doação via PIX:</p>
+          <div class="pix-box">
+            <div class="pix-lbl">Chave PIX — CNPJ</div>
+            <div class="pix-val-row">
+              <div class="pix-val">33.658.326/0001-60</div>
+              <button class="pix-copy-btn" id="pixCopyBtn" title="Copiar chave PIX" onclick="copyPixKey()">
+                <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke-width="2"/>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-width="2"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Conta Bancária -->
+        <div class="d-card">
+          <div class="d-ico">
+            <img src="images/logo/deposito_conta.png" alt="Depósito em Conta" style="width:32px;height:32px;object-fit:contain;">
+          </div>
+          <h3>Depósito em Conta</h3>
+          <p>As doações poderão ser depositadas na seguinte conta:</p>
+          <div class="bank-box">
+            <div class="bank-head">Shriners Club International de Santa Catarina</div>
+            <dl class="bank-body">
+              <div class="b-row"><dt>Banco</dt>  <dd>Ailos (085)</dd></div>
+              <div class="b-row"><dt>Agência</dt><dd>0107-4</dd></div>
+              <div class="b-row"><dt>Conta</dt>  <dd>5986-2</dd></div>
+              <div class="b-row"><dt>CNPJ</dt>   <dd>33.658.326/0001-60</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <div class="doacao-cta reveal">
+        <p><span style="color: var(--gold); font-weight: 700;">Dúvidas sobre doações?</span>&nbsp;
+          <a href="mailto:secretario@salahshriners.org">secretario@salahshriners.org</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="f-brand">
+        <div class="f-logo">
+          <img src="https://salahshriners.lovable.app/assets/salah-logo-DBV0u6Ri.png" alt="Brasão Salah Shriners" style="width:80px;height:80px;object-fit:contain;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.5));">
+          Salah Shriners
+        </div>
+        <p>Uma fraternidade formada por homens comprometidos com amizade, solidariedade e serviço ao próximo, transformando vidas em Santa Catarina e no mundo.</p>
+        <div class="f-socials">
+          <a href="https://www.facebook.com/SALAHSHRINERS" target="_blank" rel="noopener" class="f-social" aria-label="Facebook">
+            <svg fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/salah.shriners/" target="_blank" rel="noopener" class="f-social" aria-label="Instagram">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="2"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/company/salah-shriners" target="_blank" rel="noopener" class="f-social" aria-label="LinkedIn">
+            <svg fill="currentColor" viewBox="0 0 24 24">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <!-- Nav -->
+      <div class="f-col">
+        <h5>Navegação</h5>
+        <ul class="f-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="#diretoria">Diretoria</a></li>
+          <li><a href="#parceiros">Parceiros</a></li>
+          <li><a href="#noticias" onclick="if(event.target.closest('a')) hideNewsPage()">Notícias</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+      <!-- Contato -->
+      <div class="f-col">
+        <h5>Contato</h5>
+        <div class="f-contact">
+          <div class="f-ci">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <span><a href="mailto:secretario@salahshriners.org">secretario@salahshriners.org</a></span>
+          </div>
+          <div class="f-ci">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span>Rua dos Ilhéus, 38, Ed. APLUB, 1º andar, Centro, Florianópolis - SC, CEP 88.010-560.</span>
+          </div>
+        </div>
+      </div>
+      <!-- CTA Buttons -->
+      <div class="f-col">
+        <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:0.5rem;">
+          <a href="https://salahshriners.com/inscricao/" target="_blank" class="btn btn-gold" style="width:100%;justify-content:center;font-size:0.9rem;">
+            Seja um Shriner →
+          </a>
+          <a href="#doacao" class="btn btn-outline-w" style="width:100%;justify-content:center;font-size:0.9rem;display:inline-flex;align-items:center;">
+            Doe Agora
+          </a>
+          <a href="https://salahshriners.com" target="_blank" class="btn btn-conecte" style="width:100%;justify-content:center;font-size:0.9rem;display:inline-flex;align-items:center;gap:6px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="7" r="4"/><path d="M4 21v-1a8 7 0 0 1 16 0v1"/>
+              <circle cx="17.5" cy="18.5" r="3.5" fill="currentColor" stroke="none"/>
+              <path d="M16.2 18.5l1 1 2-2" stroke="#fff" stroke-width="1.5" fill="none"/>
+            </svg>
+            Conecte-se
+          </a>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <p>© 2026 Salah Shriners SC — Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll-to-top -->
+<button id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Voltar ao topo">
+  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+  </svg>
+</button>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+/* ---- NAV ---- */
+const nav = document.getElementById('nav');
+const stt = document.getElementById('stt');
+
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 70);
+  stt.classList.toggle('show', y > 450);
+  // Active link highlight
+  let cur = '';
+  document.querySelectorAll('section[id]').forEach(s => {
+    if (y >= s.offsetTop - 110) cur = s.id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+}, { passive: true });
+
+/* ---- MOBILE NAV ---- */
+const hbg = document.getElementById('hbg');
+const mob = document.getElementById('mobile-nav');
+hbg.addEventListener('click', () => {
+  hbg.classList.toggle('open');
+  mob.classList.toggle('open');
+});
+/* ---- PILARES — acordeão foto ---- */
+function activatePilar(el) {
+  const panels = document.querySelectorAll('.pilar-panel');
+  panels.forEach(p => p.classList.remove('pp-active'));
+  el.classList.add('pp-active');
+}
+
+function closeNav() {
+  hbg.classList.remove('open');
+  mob.classList.remove('open');
+}
+
+function copyPixKey() {
+  var btn = document.getElementById('pixCopyBtn');
+  var texto = '33658326000160';
+  var iconCopy = '<svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke-width="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-width="2"/></svg>';
+  var iconCheck = '<svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>';
+
+  function showOk() {
+    btn.innerHTML = iconCheck;
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.innerHTML = iconCopy;
+      btn.classList.remove('copied');
+    }, 2000);
+  }
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(texto).then(showOk).catch(function() {
+      fallbackCopy(texto);
+      showOk();
+    });
+  } else {
+    fallbackCopy(texto);
+    showOk();
+  }
+}
+
+function fallbackCopy(texto) {
+  var el = document.createElement('textarea');
+  el.value = texto;
+  el.style.position = 'fixed';
+  el.style.opacity = '0';
+  document.body.appendChild(el);
+  el.focus();
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+}
+document.querySelectorAll('#mobile-nav a').forEach(a => a.addEventListener('click', closeNav));
+
+/* ---- HERO CAROUSEL — slide + texto sincronizados ---- */
+const slides   = document.querySelectorAll('.hero-slide');
+const inds     = document.querySelectorAll('.hi');
+const contents = document.querySelectorAll('.slide-content');
+let cur = 0, timer;
+const INTERVAL      = 6500;  /* ms — slides 2-5 */
+const INTERVAL_S1   = 10000; /* ms — slide 1 (texto longo) */
+
+function goSlide(n) {
+  const prev = cur;
+
+  /* Remove estado ativo do slide e texto anterior */
+  slides[prev].classList.remove('active');
+  if (inds[prev])    inds[prev].classList.remove('active');
+  if (contents[prev]) contents[prev].classList.remove('sc-active');
+
+  cur = (n + slides.length) % slides.length;
+
+  /* Ativa novo slide */
+  slides[cur].classList.add('active');
+  if (inds[cur]) inds[cur].classList.add('active');
+
+  /* Ativa bloco de texto vinculado ao slide */
+  if (contents[cur]) contents[cur].classList.add('sc-active');
+
+  /* Slide 1 fica mais tempo para leitura completa */
+  const delay = cur === 0 ? INTERVAL_S1 : INTERVAL;
+  clearInterval(timer);
+  timer = setInterval(() => goSlide(cur + 1), delay);
+}
+/* Inicia com tempo estendido no slide 1 */
+timer = setInterval(() => goSlide(cur + 1), INTERVAL_S1);
+/* ---- FAQ ---- */
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+/* ---- SCROLL ANIMATIONS ---- */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ---- COUNTER ANIMATION ---- */
+function animateCount(el) {
+  const target = +el.dataset.target;
+  const suffix = el.dataset.suffix || '';
+  const dur    = target > 500 ? 3800 : 2800;
+  const start  = performance.now();
+  (function tick(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(eased * target).toLocaleString('pt-BR') + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = target.toLocaleString('pt-BR') + suffix;
+  })(start);
+}
+const statsObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('[data-target]').forEach(animateCount);
+      statsObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+statsObs.observe(document.getElementById('stats'));
+
+/* ---- FORM ---- */
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn  = document.getElementById('submit-btn');
+  const nome    = document.getElementById('nome').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const tel     = document.getElementById('tel').value.trim();
+  const assunto = document.getElementById('assunto').value || 'Contato pelo site';
+  const msg     = document.getElementById('msg').value.trim();
+
+  // ── Tenta enviar via Formspree (quando hospedado em servidor) ──────────────
+  const FORMSPREE = 'https://formspree.io/f/78869daa-bd8f-4e8c-94f6-2e653af1726b'; // endpoint Salah Shriners
+
+  const payload = { nome, email, tel, assunto, mensagem: msg,
+                    _replyto: email, _subject: 'Contato Salah Shriners: ' + assunto };
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+
+  fetch(FORMSPREE, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(r => {
+    if (r.ok) {
+      showSuccess(btn);
+    } else {
+      // Fallback: abre cliente de e-mail com dados preenchidos
+      sendMailto(nome, email, tel, assunto, msg);
+      showSuccess(btn);
+    }
+  })
+  .catch(() => {
+    // Sem conexão / CORS no file:// → abre cliente de e-mail
+    sendMailto(nome, email, tel, assunto, msg);
+    showSuccess(btn);
+  });
+}
+
+function sendMailto(nome, email, tel, assunto, msg) {
+  const dest  = 'secretario@salahshriners.org';
+  const subj  = encodeURIComponent('Contato Salah Shriners: ' + assunto);
+  const corpo = encodeURIComponent(
+    'Nome: ' + nome + '\n' +
+    'E-mail: ' + email + '\n' +
+    'Telefone: ' + (tel || 'não informado') + '\n' +
+    'Assunto: ' + assunto + '\n\n' +
+    'Mensagem:\n' + msg
+  );
+  window.location.href = 'mailto:' + dest + '?subject=' + subj + '&body=' + corpo;
+}
+
+const ARTICLES = [
+  {
+    "id": "art0",
+    "title": "Reforma do PROFIS em Joinville se aproxima com apoio do Salah Shriners",
+    "cat": "Filantropia",
+    "date": "22 Mar 2026",
+    "cover": "images/noticias/profis1.jpg",
+    "body": [
+      "A atuação do Salah Shriners em Joinville segue avançando com impacto direto na vida de crianças e suas famílias. Em visita técnica realizada recentemente, o Presidente do Salah Shriners, Mário Corrêa, acompanhado do Diretor Regional Norte, Wilson Pereira Junior \"Tiji\", esteve no Centro de Convivência do PROFIS — Associação de Promoção Social do Fissurado Lábio-Palatal e Deficientes Auditivos de Joinville.",
+      "A agenda teve como objetivo avaliar as condições atuais do espaço e alinhar o planejamento para o início da reforma, prevista para este semestre. A intervenção será viabilizada com recursos arrecadados no Paddle Solidário realizado em Joinville, além de novas captações e doações de parceiros locais que seguem sendo mobilizados para fortalecer o projeto.",
+      "A proposta é transformar o ambiente em um espaço mais digno, estruturado e acolhedor para famílias que acompanham crianças durante longas jornadas de atendimento. Durante a visita, realizada junto à equipe técnica e à empresa de engenharia envolvida no projeto, foram analisadas as necessidades prioritárias e definidos os próximos passos para o início das obras.",
+      "O centro de convivência desempenha papel essencial no acolhimento de famílias que vêm de diferentes cidades da região. Muitas chegam ainda nas primeiras horas do dia e permanecem no local enquanto as crianças passam por exames e procedimentos. Hoje, a estrutura disponível não atende plenamente essa demanda, o que reforça a importância da reforma."
+    ],
+    "photos": ["images/noticias/profis1.jpg", "images/noticias/profis2.jpg"]
+  },
+  {
+    "id": "art1",
+    "title": "Salah Shriners empossa gestão 2026 e realiza seminário institucional",
+    "cat": "Institucional",
+    "date": "11 Mar 2026",
+    "cover": "images/noticias/posse1.jpg",
+    "body": [
+      "O Salah Shriners realizou, no dia 7 de março, em Florianópolis, uma tarde de integração que reuniu seminários institucionais, momentos de formação e a cerimônia oficial de posse da gestão 2026. O encontro reuniu cerca de 50 Nobres da fraternidade, além de convidados e parceiros institucionais, em uma programação voltada ao fortalecimento da liderança, ao alinhamento das ações estratégicas e à ampliação das iniciativas filantrópicas da instituição em Santa Catarina.",
+      "A cerimônia marcou a posse do novo Potentado do Salah Shriners, Mário Corrêa, que assume a presidência da instituição para a gestão 2026. Durante o ato, foi destacada a nova fase do trabalho filantrópico desenvolvido pela fraternidade, com a ampliação das parcerias institucionais e o fortalecimento das ações voltadas ao apoio a crianças que necessitam de tratamento médico especializado, causa central da atuação do Shriners em todo o mundo.",
+      "Entre as iniciativas estruturadas nos primeiros meses do ano, três convênios institucionais já foram firmados: com o Moto Clube Bodes do Asfalto, com a Universidade do Planalto Catarinense (Uniplac) e com a Junior Achievement. A instituição também mantém cooperação com o Hospital Infantil Joana de Gusmão (HIJG), ampliando o apoio institucional às ações voltadas à saúde infantil e às atividades filantrópicas desenvolvidas pelo Salah Shriners.",
+      "O evento reforçou a importância das parcerias institucionais para ampliar o alcance das ações sociais da entidade, sempre alinhadas ao tripé de atuação da fraternidade — Filantropia, Diversão e Companheirismo. \"O nosso propósito central é identificar crianças elegíveis a tratamentos em nossas estruturas nos Estados Unidos, México e Canadá, que somam cerca de 22 hospitais e clínicas especializadas nas quatro áreas de atuação. Todas as parcerias visam facilitar e agilizar esse processo, além de cativar novos Nobres a se juntarem à nossa missão, sempre se divertindo enquanto realizamos esse trabalho\", explica o novo Presidente.",
+      "<strong>Diretorias executiva e regionais fortalecem presença no estado</strong>",
+      "Na sequência do evento, foram empossados os integrantes da Diretoria Executiva. A gestão passa a contar com Leopoldo Homrich (1V.P.) como Chefe Raban; Rodrigo Buch como Raban Assistente (2V.P.); Marcelo Silveira de Espíndola como Sumo Sacerdote e Profeta (3V.P.); Delcio Luiz Castagnaro Filho como Guia Oriental (4V.P.); Raphael Chiummo Bressan como Tesoureiro; e Allan Soares como Secretário.",
+      "Durante o encontro também foi apresentada a estrutura das Diretorias Regionais do Salah Shriners em Santa Catarina, responsáveis por ampliar a presença institucional da fraternidade em diferentes regiões do estado. Integram a diretoria regional: Luiz Carlos Paiva Jr. (Grande Florianópolis), Luciano Obaadj (Norte — Joinville), Jorge Minoru Yoneda (Planalto Norte — Canoinhas), Marcos Uliano Niehues (Sul — Tubarão), Evandro Crocetta (Extremo Sul — Orleans), Itamar Santos de Jesus (Planalto — Lages), Guilherme Omizzolo (Meio-Oeste — Joaçaba), Vinícius Travassos Souza (Oeste — Chapecó) e Paulo Roberto Bornhofen (Vale Europeu — Blumenau).",
+      "<strong>Admissão de novos Nobres</strong>",
+      "Outro momento importante foi a admissão de novos Nobres, cerimônia tradicional que simboliza o ingresso na instituição. Foram admitidos os Nobres Iago Silva de Mello, José Hipólito da Silva, Luiz Fernando Veronezi, Manoel Francisco de Carvalho Paes de Andrade Netto, Mario Motta, Pedro Corradi Neto, Rafael Meurer, Sadi Manoel Gomes e Valmor Silveira Neto.",
+      "<strong>O papel da liderança na missão do Salah Shriners</strong>",
+      "O seminário de liderança foi conduzido pelo Nobre Áureo dos Santos, que abordou a importância do compromisso institucional, da formação de novas lideranças e da atuação colaborativa dentro da fraternidade. A mensagem central reforçou que, no Salah, liderar é transformar alegria em missão e missão em transformação social.",
+      "<strong>Comunicação institucional e fortalecimento da causa</strong>",
+      "A programação incluiu ainda uma palestra sobre comunicação institucional, ministrada pela mentora Sonia Campos. Foram abordados temas como organização da mensagem, posicionamento institucional e o papel de cada Nobre como multiplicador da causa, fortalecendo o discurso institucional e ampliando a presença pública da fraternidade.",
+      "<strong>Palhaços da Alegria e votação dos personagens</strong>",
+      "O encontro contou com a apresentação do projeto Salah Shriners Palhaços e Artistas da Alegria, iniciativa voltada ao desenvolvimento de ações de humanização em hospitais e eventos sociais. Na ocasião, foi lançada a trilha \"Salah, Vamos Humanizar\", composta pelos Nobres Áureo dos Santos e Rodrigo Buch. Durante a apresentação também ocorreu a votação dos personagens que representarão a família Salah: Kamelito (o camelo), Salahzinho (o menino) e Salahzinha (a menina).",
+      "<strong>Encerramento e integração entre os Nobres</strong>",
+      "A programação foi encerrada com um momento de integração entre os Nobres e convidados, reafirmando o compromisso da nova gestão com o fortalecimento da fraternidade, a ampliação das parcerias institucionais e a continuidade do trabalho social desenvolvido em apoio às crianças e suas famílias."
+    ],
+    "photos": [
+      "images/noticias/posse1.jpg",
+      "images/noticias/posse2.jpg",
+      "images/noticias/posse3.jpg",
+      "images/noticias/posse4.jpg",
+      "images/noticias/posse5.jpg",
+      "images/noticias/posse6.jpg",
+      "images/noticias/posse7.jpg",
+      "images/noticias/posse8.jpg",
+      "images/noticias/posse9.jpg",
+      "images/noticias/posse10.jpg"
+    ]
+  },
+  {
+    "id": "art2",
+    "title": "Salah Shriners e Bodes do Asfalto firmam parceria para 2026 e ampliam atuação conjunta em Santa Catarina",
+    "cat": "Institucional",
+    "date": "02 Mar 2026",
+    "cover": "https://static.wixstatic.com/media/b93cef_0a28d37abca94573818cd1310ef9a071~mv2.jpg",
+    "body": [
+      "Acordo celebrado durante evento em Itajaí prevê ações integradas em apoio às causas filantrópicas voltadas às crianças. O Salah Shriners Santa Catarina e o Moto Clube Bodes do Asfalto SC formalizaram a parceria institucional que norteará as ações conjuntas ao longo de 2026. A iniciativa consolida a aproximação entre as duas entidades, que compartilham valores como fraternidade, solidariedade e compromisso com o serviço ao próximo.",
+      "A parceria foi celebrada no sábado, 1º de março, durante evento do Bodes do Asfalto, realizado em Itajaí. Participaram do encontro o coordenador estadual do MC Bodes do Asfalto SC, Fabrício Carvalho, o presidente do Salah Shriners, Mário Corrêa, e o diretor regional da Grande Florianópolis do Salah Shriners, Rodrigo Paiva. Na ocasião, Fabrício Roberto Tonietto Carvalho tomou posse como membro do Salah Shriners, reforçando simbolicamente a integração entre as instituições.",
+      "No mesmo ato, foi oficializado o acordo de cooperação para o ano. O compromisso firmado prevê o desenvolvimento de ações conjuntas ao longo de 2026, com participação recíproca em eventos, realização de palestras, mobilizações sociais e iniciativas voltadas ao fortalecimento institucional. A parceria também assegura espaço permanente para divulgação da causa do Salah Shriners nos encontros do Moto Clube em Santa Catarina.",
+      "Segundo o presidente do Salah Shriners, Mário Corrêa, a união amplia o alcance da missão da entidade no Estado. \"Passamos a integrar os encontros e eventos do Bodes do Asfalto em Santa Catarina, sempre com espaço para divulgar nossa causa e fortalecer a missão filantrópica que desenvolvemos em favor das crianças\", destacou. Com a formalização da parceria, as entidades consolidam um compromisso de cooperação ao longo de 2026, unindo forças para ampliar o impacto social e fortalecer a rede de apoio às crianças catarinenses."
+    ],
+    "photos": []
+  },
+  {
+    "id": "art3",
+    "title": "Salah Shriners firma parceria com a Uniplac para ampliar acesso de crianças da Serra a tratamento internacional gratuito",
+    "cat": "Filantropia",
+    "date": "21 Fev 2026",
+    "cover": "https://static.wixstatic.com/media/b93cef_4079d65e79ea4741b1afe3359422a642~mv2.jpg",
+    "body": [
+      "O Salah Shriners formalizou, na sexta-feira (20), a assinatura de um convênio com a Universidade do Planalto Catarinense, em cerimônia realizada na Reitoria da instituição, em Lages. A parceria fortalece a estratégia da entidade de ampliar o acesso de crianças da Serra Catarinense a tratamentos especializados e gratuitos no exterior, por meio da rede Shriners International. O ato contou com a presença do presidente do Salah Shriners, Mario Correa, do diretor regional do Planalto Lages, Itamar Santos de Jesus, do reitor da Uniplac, Kaio Henrique Coelho do Amarante, e do diretor executivo da Fundação Uniplac, Carlos Eduardo de Liz.",
+      "A cooperação estabelece atuação conjunta na identificação, triagem técnica, preparo pré-operatório e acompanhamento pós-operatório de crianças com potencial elegibilidade para tratamento nos hospitais internacionais da rede Shriners. O foco está nas quatro principais áreas de atendimento: queimaduras graves, ortopedia pediátrica, lesões e deformidades na coluna e fissura labiopalatina — condições que podem comprometer o crescimento, a mobilidade, a alimentação, a respiração e o desenvolvimento social das crianças. Com o convênio, o Salah Shriners amplia sua capilaridade regional ao contar com o apoio técnico da Uniplac e do Centro Especializado em Reabilitação (CER) da universidade na análise e no acompanhamento dos pacientes.",
+      "A articulação permitirá maior agilidade na identificação de casos e no suporte às famílias durante todas as etapas do processo. Durante a cerimônia, o presidente do Salah Shriners destacou que a parceria representa um avanço na missão institucional de encurtar distâncias e garantir que crianças catarinenses tenham acesso a tratamentos de alta complexidade, independentemente da condição financeira. A formalização do convênio marca mais um passo do Salah Shriners na consolidação de sua presença no Planalto Catarinense, reforçando o compromisso da entidade com a filantropia organizada, o suporte às famílias e a transformação de vidas por meio do acesso à saúde especializada."
+    ],
+    "photos": []
+  },
+  {
+    "id": "art4",
+    "title": "Salah Shriners e Uniplac firmam parceria em Lages que pode abrir portas para tratamento internacional gratuito a crianças catarinenses",
+    "cat": "Filantropia",
+    "date": "19 Fev 2026",
+    "cover": "https://static.wixstatic.com/media/b93cef_ad7b5d91de8e4e1997e37a2212060919~mv2.jpg",
+    "body": [
+      "Convênio será formalizado nesta sexta-feira (20) e é voltado a casos de queimaduras graves, deformidades ortopédicas, lesões na coluna e fissura labiopalatina. O Salah Shriners Santa Catarina formaliza, na sexta-feira, 20 de fevereiro, às 13h30, em Lages, a assinatura de um convênio com a Fundação das Escolas Unidas do Planalto Catarinense (Fundação Uniplac), mantenedora da universidade. A parceria estabelece cooperação na triagem, no preparo pré-operatório e no acompanhamento pós-operatório de crianças com potencial elegível para tratamento especializado gratuito nos Estados Unidos.",
+      "O ato contará com a presença do presidente do Salah Shriners, Mario Correa, do diretor regional do Planalto Lages, Itamar Santos de Jesus, além do reitor da Uniplac, Kaio Henrique Coelho do Amarante, e do Diretor Executivo da Fundação Uniplac, Carlos Eduardo de Liz. A parceria tem foco nas quatro principais áreas de atuação da rede do Shriners International: queimaduras graves, ortopedia pediátrica, lesões e deformidades na coluna e fissura labiopalatina. Por meio da conexão com os hospitais da rede internacional, o Salah Shriners atua na avaliação de elegibilidade e no encaminhamento para atendimento especializado gratuito no exterior, quando indicado.",
+      "Com o convênio, a Uniplac passa a colaborar na identificação e triagem técnica de casos, no acompanhamento preparatório antes de eventual envio para avaliação internacional e no suporte pós-operatório após o retorno ao Brasil."
+    ],
+    "photos": []
+  },
+  {
+    "id": "art5",
+    "title": "Posse do novo Divan: prepare-se para um dia de integração",
+    "cat": "Institucional",
+    "date": "04 Fev 2026",
+    "cover": "https://static.wixstatic.com/media/b93cef_73fb4ff255f64bc48071e2de5abf51b5~mv2.jpeg",
+    "body": [
+      "O dia 28 de fevereiro marcará o início de uma nova etapa do Salah Shriners, reunindo os Nobres em uma programação especial que une tradição e aperfeiçoamento. Será um dia inteiro dedicado à integração, com um seminário dinâmico, repleto de novidades, informações relevantes e ricas trocas de experiências, fortalecendo ainda mais os laços institucionais. O encontro será encerrado com a cerimônia oficial de posse do novo Divan, seguida, como sempre, de um momento de confraternização e celebração, valorizando o espírito fraterno que marca a história da entidade.",
+      "As inscrições já estão abertas, e a organização convida os Nobres a reservarem a data e participarem deste dia intenso, produtivo e festivo, pensado para fortalecer o presente e preparar os próximos passos do Salah Shriners."
+    ],
+    "photos": []
+  },
+  {
+    "id": "art6",
+    "title": "Salah Shriners lança novo sistema de comunicação e gestão institucional",
+    "cat": "Institucional",
+    "date": "27 Jan 2026",
+    "cover": "https://static.wixstatic.com/media/b93cef_5c142d8473a140a4b23397a7bd01a485~mv2.png",
+    "body": [
+      "O Salah Shriners inicia uma nova etapa na sua comunicação institucional com o lançamento de um novo sistema digital de comunicação e gestão, desenvolvido para centralizar processos, ampliar a organização interna e facilitar a interação com os Nobres. A iniciativa marca a primeira ação prática do sistema, concebido para ser evolutivo. Nesta fase inicial, a ferramenta já permite a atualização cadastral dos membros e a realização do pagamento da anuidade, concentrando informações em um único ambiente digital, com mais segurança e praticidade.",
+      "Segundo o presidente do Salah Shriners, Mário Corrêa, a atualização dos dados é fundamental para aprimorar a comunicação institucional, apoiar o planejamento das ações previstas para 2026 e fortalecer a integração entre os Nobres em todo o estado. Além da atualização cadastral, o novo sistema também passou a concentrar a contribuição anual dos membros, recurso essencial para a manutenção da estrutura administrativa, o cumprimento dos compromissos institucionais internacionais e a continuidade do trabalho filantrópico desenvolvido. O sistema recém-lançado continuará recebendo novas funcionalidades ao longo do tempo.",
+      "Entre as próximas etapas previstas estão a venda de ingressos para eventos, a inclusão de novos serviços institucionais e o fortalecimento dos canais de comunicação com os Nobres. A implementação do novo sistema integra um movimento mais amplo de organização, transparência e modernização, alinhado ao compromisso permanente de fortalecer a atuação filantrópica em benefício das crianças atendidas."
+    ],
+    "photos": []
+  },
+  {
+    "id": "art7",
+    "title": "Salah Shriners realiza visita institucional ao GOSC e recebe apoio para ações de 2026",
+    "cat": "Institucional",
+    "date": "24 Jan 2026",
+    "cover": "https://static.wixstatic.com/media/b93cef_9cd6030e3e9d4bb091e4ea6d277bb168~mv2.jpg",
+    "body": [
+      "Representantes do Salah Shriners realizaram, no dia 19 de janeiro, uma visita institucional à sede do Grande Oriente de Santa Catarina (GOSC). O encontro teve como objetivo fortalecer o relacionamento entre as instituições e alinhar os planos de trabalho para o ano. A comitiva foi recebida pelo Sereníssimo Grão-Mestre do GOSC, Nobre Abelardo Camilo Bridi, pelo Grão-Mestre Adjunto licenciado do GOSC, Nobre Avelino Lombardi Júnior, e pelo Past Potentado do Salah Shriners, Ilustre Luís Eduardo Silva de Barros, todos também membros do Salah Shriners.",
+      "A reunião foi marcada por um diálogo aberto e produtivo, com acolhimento institucional às propostas apresentadas. Participaram do encontro o Presidente (Potentado) do Salah Shriners, Mário Corrêa, acompanhado do primeiro e do segundo vice-presidentes, Leopoldo Homrich e Rodrigo Buch. Durante a reunião, foram apresentados os principais planos e diretrizes do Salah Shriners para o ano, além da troca de ideias sobre ações conjuntas e iniciativas institucionais ao longo de 2026.",
+      "A agenda resultou no recebimento de apoio institucional e no alinhamento de caminhos para colocar em prática projetos que reforcem a atuação filantrópica e fraternal da entidade no estado."
+    ],
+    "photos": []
+  },
+  {
+    "id": "art8",
+    "title": "Firmada parceria para 2026 entre o Salah Shriners e o Moto Clube Bodes do Asfalto",
+    "cat": "Institucional",
+    "date": "24 Dez 2025",
+    "cover": "https://static.wixstatic.com/media/b93cef_9be899e7c5ec4ac6a96e271a05e035ad~mv2.jpg",
+    "body": [
+      "Em reunião realizada na manhã desta terça-feira, foi firmada uma parceria para o ano de 2026 entre o Salah Shriners e o Moto Clube Bodes do Asfalto Santa Catarina. O encontro contou com a presença do coordenador estadual do MC Bodes do Asfalto SC, Fabrício Carvalho, do presidente do Salah Shriners, Mario Corrêa e do diretor regional da Grande Florianópolis, Rodrigo Paiva. A parceria prevê o desenvolvimento de ações conjuntas ao longo do próximo ano, incluindo eventos, palestras e outras iniciativas voltadas ao fortalecimento institucional e ao apoio às causas filantrópicas desenvolvidas pelo Salah Shriners."
+    ],
+    "photos": []
+  },
+  {
+    "id": "art9",
+    "title": "Parceria entre Peixada do Gui e Salah Shriners é renovada para 2026",
+    "cat": "Filantropia",
+    "date": "22 Dez 2025",
+    "cover": "https://static.wixstatic.com/media/b93cef_21f69c97569a4e8e88d1da392df112c8~mv2.jpeg",
+    "body": [
+      "A parceria entre a tradicional Peixada do Gui e o Salah Shriners foi oficialmente renovada para 2026. A confirmação ocorreu nesta quinta-feira, 19 de dezembro, durante visita do vereador Gui Pereira ao Hospital Infantil Joana de Gusmão (HIJG), em Florianópolis, onde acompanhou a aplicação dos recursos doados em 2025. A Peixada do Gui é um evento tradicional realizado anualmente na terça-feira de Carnaval, reunindo lideranças, famílias, amigos e parceiros em um momento de confraternização, com forte caráter solidário.",
+      "Na última edição, parte do valor arrecadado foi destinado à reforma da Ala B do hospital, espaço voltado ao atendimento pré e pós-operatório de crianças. A diretora-geral do Hospital Infantil Joana de Gusmão, Maristela Maria Cardozo Biazon, recebeu o vereador acompanhada do presidente do Salah Shriners, Mario Corrêa, e do diretor regional da Grande Florianópolis, Luiz Carlos Paiva Jr. A renovação da parceria consolida uma relação construída ao longo dos anos, baseada em confiança, transparência e compromisso social.",
+      "Para o Salah Shriners, o apoio contínuo de eventos como a Peixada do Gui é fundamental para viabilizar projetos, reformas e ações da instituição."
+    ],
+    "photos": []
+  },
+  {
+    "id": "art10",
+    "title": "Comitê Médico do Salah Shriners se reúne com Shriners Hospitals for Children para alinhar fluxos de atendimento",
+    "cat": "Filantropia",
+    "date": "22 Dez 2025",
+    "cover": "https://static.wixstatic.com/media/b93cef_dbc0988dd2444590b9769a21294a4f6e~mv2.jpg",
+    "body": [
+      "O Comitê Médico do Salah Shriners participou de uma reunião estratégica com representantes do Shriners Hospitals for Children (SHC), com o objetivo de estreitar relações institucionais e alinhar processos para o encaminhamento de pacientes brasileiros aos hospitais da rede nos Estados Unidos. Participaram do encontro o presidente do Salah Shriners Mario Correa, o secretário Allan Dalla Soares e os membros do Comitê Médico Roberto Benvenutti, Eduardo Messias e Guilherme Omizzolo. Representando o SHC, estiveram presentes Karin Harsing e Luísa, gerente e coordenadora regional para a América Latina, respectivamente.",
+      "Durante a conversa, foram apresentados detalhes da estrutura do SHC, que conta com 22 clínicas e hospitais especializados, reconhecidos mundialmente pelo atendimento pediátrico gratuito em áreas como ortopedia, lesões na coluna, queimaduras e fissura labiopalatina. Outro ponto central do encontro foi a explicação dos fluxos operacionais e a troca de sugestões para tornar ainda mais eficiente o processo de envio de crianças para tratamento internacional, garantindo segurança, previsibilidade e alinhamento entre as equipes médicas do Brasil e dos Estados Unidos. Para o Salah Shriners, o fortalecimento dessa relação reafirma o compromisso da instituição em colocar, de forma contínua, toda a estrutura e excelência do sistema à disposição das crianças e familiares que buscam suporte e tratamentos especializados."
+    ],
+    "photos": []
+  },
+  {
+    "id": "art11",
+    "title": "Festas celebram conquistas de 2025 e reforçam espírito de fraternidade",
+    "cat": "Institucional",
+    "date": "16 Dez 2025",
+    "cover": "https://static.wixstatic.com/media/b93cef_1f456d3cd3bc49cb80eaf090e9234c54~mv2.jpeg",
+    "body": [
+      "Festas de Encerramento do Salah Shriners pelo estado marcam o fechamento de um ano intenso, produtivo e alinhado à missão da fraternidade: servir com alegria, união e compromisso social. Os encontros reúnem Nobres, familiares e convidados em celebrações que vão além do festejo. Ao longo do ano, o Salah Shriners promoveu grandes eventos, ampliou de forma expressiva o número de membros e fortaleceu sua atuação em ações filantrópicas voltadas a crianças e adolescentes, razão maior da existência da instituição.",
+      "Mais do que uma celebração, as festas são um momento de reconhecimento coletivo. Entre conversas, reencontros e clima fraterno, fica evidente o orgulho dos participantes pelos resultados alcançados e pelo impacto social gerado a partir do trabalho voluntário e das iniciativas solidárias desenvolvidas em Santa Catarina."
+    ],
+    "photos": []
+  }
+];
+
+
+function showArticle(id) {
+  const art = ARTICLES.find(a => a.id === id);
+  if (!art) return;
+  const ov = document.getElementById('article-overlay');
+  document.getElementById('art-cover').src   = art.cover;
+  document.getElementById('art-cover').alt   = art.title;
+  document.getElementById('art-cat').textContent   = art.cat;
+  document.getElementById('art-date').textContent  = art.date;
+  document.getElementById('art-title').textContent = art.title;
+  document.getElementById('art-body').innerHTML = art.body.map(p => '<p>' + p + '</p>').join('');
+  const gal = document.getElementById('art-gallery');
+  gal.innerHTML = art.photos.map(s => '<img src="' + s + '" alt="" loading="lazy">').join('');
+  gal.style.display = art.photos.length ? 'grid' : 'none';
+  ov.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => requestAnimationFrame(() => ov.classList.add('show')));
+  ov.scrollTop = 0;
+}
+function hideArticle() {
+  const ov = document.getElementById('article-overlay');
+  ov.classList.remove('show');
+  setTimeout(() => { ov.style.display = 'none'; document.body.style.overflow = ''; }, 300);
+}
+
+
+/* ===== SALA DE IMPRENSA – NAVEGAÇÃO ===== */
+function showNewsPage() {
+  const page = document.getElementById('news-page');
+  page.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => page.classList.add('show'));
+  });
+  page.scrollTop = 0;
+}
+function hideNewsPage() {
+  const page = document.getElementById('news-page');
+  page.classList.remove('show');
+  setTimeout(() => {
+    page.style.display = 'none';
+    document.body.style.overflow = '';
+  }, 350);
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { hideArticle(); hideNewsPage(); }
+});
+
+function showSuccess(btn) {
+  const svgCheck = '<svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+  btn.innerHTML = svgCheck + ' &nbsp;Mensagem enviada!';
+  btn.style.background = '#166534';
+  document.getElementById('contact-form').reset();
+  setTimeout(() => {
+    btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg> Enviar Mensagem';
+    btn.style.background = '';
+    btn.disabled = false;
+  }, 4000);
+}
+</script>
+
+<!-- ===================== SALA DE IMPRENSA – PÁGINA INTERNA ===================== -->
+<div id="news-page" class="news-page-overlay" role="dialog" aria-label="Sala de Imprensa">
+
+  <nav class="news-page-nav">
+    <div class="news-page-nav-inner">
+      <button class="news-page-back" onclick="hideNewsPage()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Voltar ao site
+      </button>
+      <span class="news-page-nav-title">Sala de Imprensa</span>
+      <div style="width:140px"></div>
+    </div>
+  </nav>
+
+  <div class="news-page-body">
+    <div class="news-page-heading reveal">
+      <span class="tag">Todas as Notícias</span>
+      <div class="divider"></div>
+      <h2>Histórico de <span class="text-crimson">Publicações</span></h2>
+      <p class="news-page-count">11 publicações · de Dez 2025 a Mar 2026</p>
+    </div>
+
+    <div class="noticias-grid">
+
+      <article class="noticia">
+        <a href="#" onclick="showArticle('art1'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_903d75e66e864505b657dd2034203466~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_903d75e66e864505b657dd2034203466~mv2.jpg" alt="Posse gestão 2026" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Institucional</span><span class="n-date">07 Mar 2026</span></div>
+          <h3>Salah Shriners empossa gestão 2026 e realiza seminário institucional</h3>
+          <p>Tarde de integração em Florianópolis reuniu cerca de 50 Nobres para seminários, formação e a cerimônia oficial de posse da gestão 2026.</p>
+          <button onclick="showArticle('art1')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+      <article class="noticia">
+        <a href="#" onclick="showArticle('art2'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_0a28d37abca94573818cd1310ef9a071~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_0a28d37abca94573818cd1310ef9a071~mv2.jpg" alt="Parceria Bodes do Asfalto 2026" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Parceria</span><span class="n-date">01 Mar 2026</span></div>
+          <h3>Salah Shriners e Bodes do Asfalto firmam parceria para 2026</h3>
+          <p>Acordo celebrado em Itajaí prevê ações integradas em apoio às causas filantrópicas voltadas às crianças em Santa Catarina.</p>
+          <button onclick="showArticle('art2')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+      <article class="noticia">
+        <a href="#" onclick="showArticle('art3'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_4079d65e79ea4741b1afe3359422a642~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_4079d65e79ea4741b1afe3359422a642~mv2.jpg" alt="Parceria Uniplac tratamento" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Parceria</span><span class="n-date">21 Fev 2026</span></div>
+          <h3>Parceria com a Uniplac amplia acesso a tratamento internacional gratuito para crianças da Serra</h3>
+          <p>Convênio formalizado em Lages fortalece a estratégia de ampliar o acesso de crianças catarinenses a tratamentos no exterior.</p>
+          <button onclick="showArticle('art3')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+      <article class="noticia">
+        <a href="#" onclick="showArticle('art4'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_ad7b5d91de8e4e1997e37a2212060919~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_ad7b5d91de8e4e1997e37a2212060919~mv2.jpg" alt="Parceria Uniplac Lages" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Parceria</span><span class="n-date">19 Fev 2026</span></div>
+          <h3>Salah Shriners e Uniplac firmam parceria em Lages para tratamento internacional gratuito</h3>
+          <p>Convênio voltado a casos de queimaduras graves, deformidades ortopédicas, lesões na coluna e fissura labiopalatina.</p>
+          <button onclick="showArticle('art4')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+      <article class="noticia">
+        <a href="#" onclick="showArticle('art5'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_73fb4ff255f64bc48071e2de5abf51b5~mv2.jpeg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_73fb4ff255f64bc48071e2de5abf51b5~mv2.jpeg" alt="Posse novo Divan" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Evento</span><span class="n-date">04 Fev 2026</span></div>
+          <h3>Posse do novo Divan: prepare-se para um dia de integração</h3>
+          <p>Programação especial reuniu os Nobres em um dia inteiro com seminário dinâmico e a cerimônia oficial de posse do novo Divan.</p>
+          <button onclick="showArticle('art5')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+      <article class="noticia">
+        <a href="#" onclick="showArticle('art6'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_5c142d8473a140a4b23397a7bd01a485~mv2.png/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_5c142d8473a140a4b23397a7bd01a485~mv2.png" alt="Novo sistema de comunicação" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Institucional</span><span class="n-date">Jan 2026</span></div>
+          <h3>Salah Shriners lança novo sistema de comunicação e gestão institucional</h3>
+          <p>Nova plataforma digital centraliza processos, amplia a organização interna e facilita a interação com os Nobres.</p>
+          <button onclick="showArticle('art6')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+      <article class="noticia">
+        <a href="#" onclick="showArticle('art7'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_9cd6030e3e9d4bb091e4ea6d277bb168~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_9cd6030e3e9d4bb091e4ea6d277bb168~mv2.jpg" alt="Visita ao GOSC" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Institucional</span><span class="n-date">19 Jan 2026</span></div>
+          <h3>Salah Shriners realiza visita ao GOSC e recebe apoio para ações de 2026</h3>
+          <p>Representantes visitaram a sede do Grande Oriente de Santa Catarina para fortalecer o relacionamento e alinhar planos de trabalho.</p>
+          <button onclick="showArticle('art7')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+      <article class="noticia">
+        <a href="#" onclick="showArticle('art8'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_9be899e7c5ec4ac6a96e271a05e035ad~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_9be899e7c5ec4ac6a96e271a05e035ad~mv2.jpg" alt="Parceria Bodes do Asfalto" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Parceria</span><span class="n-date">Jan 2026</span></div>
+          <h3>Firmada parceria para 2026 entre o Salah Shriners e o Moto Clube Bodes do Asfalto</h3>
+          <p>Parceria prevê ações conjuntas ao longo do ano, incluindo eventos, palestras e iniciativas em prol da missão filantrópica.</p>
+          <button onclick="showArticle('art8')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+      <article class="noticia">
+        <a href="#" onclick="showArticle('art9'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_21f69c97569a4e8e88d1da392df112c8~mv2.jpeg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_21f69c97569a4e8e88d1da392df112c8~mv2.jpeg" alt="Peixada do Gui parceria" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Parceria</span><span class="n-date">19 Dez 2025</span></div>
+          <h3>Parceria entre Peixada do Gui e Salah Shriners é renovada para 2026</h3>
+          <p>Renovação confirmada após visita ao HIJG, onde foram acompanhados os recursos doados em 2025 em benefício das crianças.</p>
+          <button onclick="showArticle('art9')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+      <article class="noticia">
+        <a href="#" onclick="showArticle('art10'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_dbc0988dd2444590b9769a21294a4f6e~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_dbc0988dd2444590b9769a21294a4f6e~mv2.jpg" alt="Comitê Médico Shriners Hospitals" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Saúde</span><span class="n-date">Dez 2025</span></div>
+          <h3>Comitê Médico se reúne com Shriners Hospitals for Children para alinhar atendimento</h3>
+          <p>Reunião estratégica estreitou relações e alinhou processos para o encaminhamento de pacientes brasileiros aos hospitais nos EUA.</p>
+          <button onclick="showArticle('art10')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+      <article class="noticia">
+        <a href="#" onclick="showArticle('art11'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_1f456d3cd3bc49cb80eaf090e9234c54~mv2.jpeg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_1f456d3cd3bc49cb80eaf090e9234c54~mv2.jpeg" alt="Festas de Encerramento 2025" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Evento</span><span class="n-date">Dez 2025</span></div>
+          <h3>Festas celebram conquistas de 2025 e reforçam espírito de fraternidade</h3>
+          <p>Festas de Encerramento pelo estado marcam o fechamento de um ano intenso, produtivo e alinhado à missão da fraternidade.</p>
+          <button onclick="showArticle('art11')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+    </div><!-- /noticias-grid -->
+  </div><!-- /news-page-body -->
+</div><!-- /news-page-overlay -->
+
+
+<!-- ===================== ARTICLE READER OVERLAY ===================== -->
+<div id="article-overlay" class="article-overlay" role="dialog" aria-label="Artigo">
+  <nav class="article-top-nav">
+    <div class="article-top-nav-inner">
+      <button class="article-back-btn" onclick="hideArticle()">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Voltar às Notícias
+      </button>
+      <span class="article-breadcrumb">Sala de Imprensa</span>
+      <div style="width:160px"></div>
+    </div>
+  </nav>
+  <div class="article-hero-wrap">
+    <img id="art-cover" class="article-hero-img" src="" alt="">
+  </div>
+  <div class="article-content-wrap">
+    <div class="article-meta-row">
+      <span id="art-cat" class="n-cat"></span>
+      <span id="art-date" class="n-date"></span>
+    </div>
+    <h1 id="art-title" class="article-main-title"></h1>
+    <div id="art-body" class="article-body-text"></div>
+    <div id="art-gallery" class="article-gallery"></div>
+  </div>
+</div>
+
+</body>
+</html>
