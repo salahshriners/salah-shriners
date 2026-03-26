@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Publicar Notícia — Salah Shriners</title>
+  <title>Painel de Notícias — Salah Shriners</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -70,12 +70,37 @@
       font-family: monospace;
     }
     .token-row input:focus { outline: none; border-color: var(--crimson); }
-    .token-status {
-      font-size: 0.82rem;
-      margin-top: 8px;
-    }
+    .token-status { font-size: 0.82rem; margin-top: 8px; }
     .token-status.ok  { color: #1a7a1a; }
     .token-status.err { color: #c0392b; }
+
+    /* ---- TABS ---- */
+    .tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 0;
+      border-bottom: 2px solid var(--border);
+    }
+    .tab-btn {
+      padding: 12px 26px;
+      border: none;
+      background: transparent;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #888;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: .2s;
+    }
+    .tab-btn:hover { color: var(--crimson); }
+    .tab-btn.active {
+      color: var(--crimson);
+      border-bottom-color: var(--crimson);
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
     /* ---- FORM CARD ---- */
     .form-card {
@@ -84,6 +109,7 @@
       border-radius: var(--radius);
       padding: 32px;
       box-shadow: var(--shadow);
+      margin-top: 24px;
     }
     .form-card h2 {
       font-family: 'Playfair Display', serif;
@@ -165,9 +191,7 @@
     .photos-preview-grid {
       display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px;
     }
-    .photos-preview-grid .thumb-wrap {
-      position: relative;
-    }
+    .photos-preview-grid .thumb-wrap { position: relative; }
     .photos-preview-grid img {
       width: 90px; height: 70px;
       object-fit: cover;
@@ -181,6 +205,10 @@
       width: 20px; height: 20px;
       font-size: 11px; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
+    }
+    .existing-cover-info {
+      font-size: 0.8rem; color: #888; margin-top: 8px;
+      background: #f5f5f5; border-radius: 6px; padding: 6px 10px;
     }
 
     /* ---- PARAGRAPHS ---- */
@@ -207,38 +235,22 @@
       outline: none; border-color: var(--crimson); background: #fff;
     }
     .paragraph-block .para-num {
-      background: var(--crimson);
-      color: #fff;
+      background: var(--crimson); color: #fff;
       border-radius: 50%;
-      width: 26px; height: 26px;
-      min-width: 26px;
-      font-size: 0.75rem;
-      font-weight: 700;
+      width: 26px; height: 26px; min-width: 26px;
+      font-size: 0.75rem; font-weight: 700;
       display: flex; align-items: center; justify-content: center;
       margin-top: 12px;
     }
     .btn-rm-para {
-      background: none;
-      border: 1px solid #ddd;
-      color: #999;
-      border-radius: 6px;
-      padding: 4px 9px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: .2s;
+      background: none; border: 1px solid #ddd; color: #999;
+      border-radius: 6px; padding: 4px 9px;
+      font-size: 1.1rem; cursor: pointer; margin-top: 10px; transition: .2s;
     }
     .btn-rm-para:hover { background: #fee; border-color: var(--crimson); color: var(--crimson); }
-    .bold-hint {
-      font-size: 0.78rem;
-      color: #999;
-      margin-bottom: 10px;
-    }
+    .bold-hint { font-size: 0.78rem; color: #999; margin-bottom: 10px; }
     .bold-hint code {
-      background: #f0f0f0;
-      padding: 1px 5px;
-      border-radius: 3px;
-      font-size: 0.78rem;
+      background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 0.78rem;
     }
 
     /* ---- BUTTONS ---- */
@@ -247,64 +259,59 @@
       padding: 11px 22px;
       border: none; border-radius: 7px;
       font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.92rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: .2s;
-      text-decoration: none;
+      font-size: 0.92rem; font-weight: 700;
+      cursor: pointer; transition: .2s; text-decoration: none;
     }
     .btn-add {
-      background: transparent;
-      border: 1.5px dashed var(--crimson);
-      color: var(--crimson);
-      font-size: 0.85rem;
-      padding: 8px 16px;
-      border-radius: 7px;
-      cursor: pointer;
-      font-family: 'Source Sans 3', sans-serif;
-      font-weight: 600;
-      transition: .2s;
+      background: transparent; border: 1.5px dashed var(--crimson);
+      color: var(--crimson); font-size: 0.85rem;
+      padding: 8px 16px; border-radius: 7px; cursor: pointer;
+      font-family: 'Source Sans 3', sans-serif; font-weight: 600; transition: .2s;
     }
     .btn-add:hover { background: #fdf5f5; }
     .btn-save-token {
-      background: var(--gold);
-      color: #fff;
-      padding: 10px 20px;
-      border: none; border-radius: 7px;
+      background: var(--gold); color: #fff;
+      padding: 10px 20px; border: none; border-radius: 7px;
       font-family: 'Source Sans 3', sans-serif;
-      font-weight: 700; font-size: 0.9rem;
-      cursor: pointer; transition: .2s;
+      font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: .2s;
     }
     .btn-save-token:hover { filter: brightness(1.08); }
+    .publish-row {
+      display: flex; gap: 12px; margin-top: 10px;
+    }
     .btn-publish {
-      background: var(--crimson);
-      color: #fff;
-      width: 100%;
-      justify-content: center;
-      font-size: 1.05rem;
-      padding: 14px;
-      border-radius: 8px;
-      margin-top: 10px;
+      background: var(--crimson); color: #fff;
+      flex: 1; justify-content: center;
+      font-size: 1.05rem; padding: 14px; border-radius: 8px;
     }
     .btn-publish:hover:not(:disabled) { background: #6e1010; }
     .btn-publish:disabled { opacity: .55; cursor: not-allowed; }
+    .btn-preview {
+      background: transparent; border: 2px solid var(--crimson);
+      color: var(--crimson); padding: 14px 22px;
+      font-size: 1.05rem; border-radius: 8px; font-weight: 700;
+      cursor: pointer; font-family: 'Source Sans 3', sans-serif;
+      transition: .2s; white-space: nowrap;
+    }
+    .btn-preview:hover { background: #fdf5f5; }
+    .btn-cancel-edit {
+      background: #f0f0f0; color: #555; padding: 10px 18px;
+      border: 1px solid #ddd; border-radius: 7px; font-weight: 600;
+      cursor: pointer; font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.9rem; transition: .2s; margin-top: 10px;
+    }
+    .btn-cancel-edit:hover { background: #e0e0e0; }
 
     /* ---- PROGRESS ---- */
     .progress-card {
-      display: none;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px;
-      box-shadow: var(--shadow);
-      margin-top: 24px;
+      display: none; background: #fff;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px; box-shadow: var(--shadow); margin-top: 24px;
     }
     .progress-card h3 { font-size: 1.1rem; margin-bottom: 20px; }
     .step {
       display: flex; align-items: center; gap: 14px;
-      padding: 12px 0;
-      border-bottom: 1px solid #f0f0f0;
-      font-size: 0.92rem;
+      padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.92rem;
     }
     .step:last-child { border-bottom: none; }
     .step-icon { font-size: 1.3rem; min-width: 24px; text-align: center; }
@@ -314,73 +321,203 @@
     .step-status.running { color: var(--gold); }
     .step-status.done    { color: #1a7a1a; }
     .step-status.error   { color: #c0392b; }
-
     .success-box {
-      display: none;
-      background: #f0fef0;
-      border: 1.5px solid #4caf50;
-      border-radius: var(--radius);
-      padding: 24px 28px;
-      text-align: center;
-      margin-top: 24px;
+      display: none; background: #f0fef0;
+      border: 1.5px solid #4caf50; border-radius: var(--radius);
+      padding: 24px 28px; text-align: center; margin-top: 24px;
     }
     .success-box h3 { color: #1a7a1a; font-size: 1.2rem; margin-bottom: 8px; }
     .success-box p  { font-size: 0.9rem; color: #444; margin-bottom: 16px; }
     .success-box a  {
-      display: inline-block;
-      background: var(--crimson);
-      color: #fff;
-      padding: 10px 22px;
-      border-radius: 7px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.9rem;
-      margin: 4px;
-      transition: .2s;
+      display: inline-block; background: var(--crimson); color: #fff;
+      padding: 10px 22px; border-radius: 7px; text-decoration: none;
+      font-weight: 700; font-size: 0.9rem; margin: 4px; transition: .2s;
     }
     .success-box a:hover { background: #6e1010; }
     .success-box a.secondary {
-      background: transparent;
-      border: 1.5px solid var(--crimson);
-      color: var(--crimson);
+      background: transparent; border: 1.5px solid var(--crimson); color: var(--crimson);
     }
     .success-box a.secondary:hover { background: #fdf5f5; }
-
     .error-box {
-      display: none;
-      background: #fef0f0;
-      border: 1.5px solid #e57373;
-      border-radius: var(--radius);
-      padding: 20px 24px;
-      margin-top: 16px;
+      display: none; background: #fef0f0;
+      border: 1.5px solid #e57373; border-radius: var(--radius);
+      padding: 20px 24px; margin-top: 16px;
     }
     .error-box h4 { color: #c0392b; margin-bottom: 6px; }
     .error-box p  { font-size: 0.88rem; color: #555; }
     .error-box code { font-size: 0.82rem; background: #f9e0e0; padding: 2px 6px; border-radius: 3px; }
 
-    /* ---- DIVIDER ---- */
+    /* ---- SECTION LABEL ---- */
     .section-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--crimson);
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--crimson);
       margin: 28px 0 16px;
       display: flex; align-items: center; gap: 10px;
     }
-    .section-label::after {
-      content: ''; flex: 1;
-      height: 1px; background: #e0e0e0;
-    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: #e0e0e0; }
 
     /* ---- CHAR COUNTER ---- */
-    .char-count {
-      font-size: 0.78rem;
-      color: #aaa;
-      text-align: right;
-      margin-top: 4px;
-    }
+    .char-count { font-size: 0.78rem; color: #aaa; text-align: right; margin-top: 4px; }
     .char-count.warn { color: #e67e22; }
+
+    /* ---- GERENCIAR TAB ---- */
+    .manage-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px 32px;
+      box-shadow: var(--shadow); margin-top: 24px;
+    }
+    .manage-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
+    }
+    .manage-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; color: var(--crimson);
+    }
+    .btn-load {
+      background: var(--crimson); color: #fff;
+      padding: 10px 20px; border: none; border-radius: 7px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: .2s;
+    }
+    .btn-load:hover { background: #6e1010; }
+    .btn-load:disabled { opacity: .5; cursor: not-allowed; }
+    .manage-hint {
+      font-size: 0.85rem; color: #888; margin-bottom: 18px;
+    }
+    .articles-list { display: flex; flex-direction: column; gap: 14px; }
+    .article-row {
+      display: flex; align-items: center; gap: 16px;
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 16px; background: #fafafa; transition: .15s;
+    }
+    .article-row:hover { border-color: var(--crimson); background: #fdf5f5; }
+    .article-row-thumb {
+      width: 72px; height: 52px; min-width: 72px;
+      object-fit: cover; border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+    .article-row-info { flex: 1; min-width: 0; }
+    .article-row-title {
+      font-weight: 700; font-size: 0.95rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+    .article-row-meta { font-size: 0.78rem; color: #888; }
+    .article-row-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .btn-edit-row {
+      background: var(--gold); color: #fff;
+      padding: 7px 14px; border: none; border-radius: 6px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: .2s;
+    }
+    .btn-edit-row:hover { filter: brightness(1.1); }
+    .btn-delete-row {
+      background: transparent; color: #c0392b;
+      padding: 7px 14px; border: 1.5px solid #c0392b; border-radius: 6px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: .2s;
+    }
+    .btn-delete-row:hover { background: #c0392b; color: #fff; }
+    .manage-loading { color: #888; font-size: 0.9rem; padding: 12px 0; }
+    .manage-empty { color: #aaa; font-size: 0.9rem; text-align: center; padding: 24px 0; }
+
+    /* ---- MODAL PREVIEW ---- */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.65); z-index: 1000;
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: #fff; border-radius: 16px;
+      max-width: 480px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.28);
+      padding: 0;
+      animation: slideUp .2s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(24px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    .modal-header {
+      padding: 20px 24px 16px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid #eee;
+    }
+    .modal-header h3 { font-size: 1rem; color: var(--crimson); }
+    .modal-close {
+      background: none; border: none; font-size: 1.5rem;
+      cursor: pointer; color: #aaa; transition: .2s;
+      line-height: 1; padding: 2px 6px;
+    }
+    .modal-close:hover { color: var(--crimson); }
+    .modal-body { padding: 20px 24px 24px; }
+    .modal-note {
+      font-size: 0.78rem; color: #888; margin-bottom: 14px;
+      background: #f5f5f5; padding: 8px 12px; border-radius: 6px;
+    }
+
+    /* card preview (replicates site card) */
+    .preview-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.10);
+      font-family: 'Source Sans 3', sans-serif;
+    }
+    .preview-card-img {
+      width: 100%; height: 200px; object-fit: cover;
+      background: #ddd;
+    }
+    .preview-card-body { padding: 16px 18px 18px; }
+    .preview-card-meta {
+      display: flex; gap: 10px; align-items: center;
+      font-size: 0.75rem; margin-bottom: 8px;
+    }
+    .preview-card-cat {
+      background: var(--crimson); color: #fff;
+      padding: 2px 10px; border-radius: 12px; font-weight: 700;
+    }
+    .preview-card-date { color: #888; }
+    .preview-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 700;
+      margin-bottom: 8px; color: var(--text); line-height: 1.3;
+    }
+    .preview-card-excerpt { font-size: 0.88rem; color: #555; line-height: 1.5; }
+    .preview-card-btn {
+      display: inline-block; margin-top: 12px;
+      color: var(--crimson); font-weight: 700; font-size: 0.88rem;
+    }
+
+    /* ---- MODAL CONFIRMAR EXCLUSÃO ---- */
+    .confirm-modal-box {
+      background: #fff; border-radius: 14px;
+      max-width: 420px; width: 100%;
+      padding: 28px 28px 24px;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.28);
+      animation: slideUp .2s ease;
+    }
+    .confirm-modal-box h3 { font-size: 1.1rem; margin-bottom: 10px; }
+    .confirm-modal-box p { font-size: 0.9rem; color: #555; margin-bottom: 24px; line-height: 1.5; }
+    .confirm-modal-box strong { color: var(--crimson); }
+    .confirm-actions { display: flex; gap: 12px; justify-content: flex-end; }
+    .btn-cancel-modal {
+      background: #f0f0f0; color: #555; border: 1px solid #ddd;
+      padding: 10px 20px; border-radius: 7px;
+      font-family: 'Source Sans 3', sans-serif; font-weight: 700;
+      font-size: 0.9rem; cursor: pointer; transition: .2s;
+    }
+    .btn-cancel-modal:hover { background: #e0e0e0; }
+    .btn-confirm-delete {
+      background: #c0392b; color: #fff; border: none;
+      padding: 10px 20px; border-radius: 7px;
+      font-family: 'Source Sans 3', sans-serif; font-weight: 700;
+      font-size: 0.9rem; cursor: pointer; transition: .2s;
+    }
+    .btn-confirm-delete:hover { background: #a53125; }
   </style>
 </head>
 
@@ -391,7 +528,7 @@
   <img src="images/logo/brasao-vetorizado-transp.png" alt="Salah Shriners" onerror="this.style.display='none'">
   <div>
     <h1>Painel de Notícias</h1>
-    <p>Salah Shriners SC — Publicação de artigos</p>
+    <p>Salah Shriners SC — Publicação e gerenciamento de artigos</p>
   </div>
 </header>
 
@@ -400,7 +537,7 @@
   <!-- TOKEN -->
   <div class="token-box">
     <h3>🔑 Token de Acesso GitHub</h3>
-    <p>Necessário para publicar no site. Digite uma vez por sessão — o token não é armazenado permanentemente.</p>
+    <p>Necessário para publicar e gerenciar notícias. Digite uma vez por sessão — o token não é armazenado permanentemente.</p>
     <div class="token-row">
       <input type="password" id="gh-token" placeholder="ghp_... ou github_pat_..." autocomplete="off">
       <button class="btn-save-token" onclick="saveToken()">Salvar token</button>
@@ -408,131 +545,190 @@
     <div class="token-status" id="token-status"></div>
   </div>
 
-  <!-- FORM -->
-  <div class="form-card">
-    <h2>📰 Nova Notícia</h2>
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('nova')">📰 Nova Notícia</button>
+    <button class="tab-btn" onclick="switchTab('gerenciar')">📋 Gerenciar Notícias</button>
+  </div>
 
-    <!-- Título -->
-    <div class="field">
-      <label>Título <span>*</span></label>
-      <input type="text" id="f-title" placeholder="Ex: Salah Shriners firma parceria com..."
-             oninput="updateCharCount(this, 'cnt-title', 120)">
-      <div class="char-count" id="cnt-title">0 / 120</div>
-    </div>
+  <!-- ===================== TAB: NOVA NOTÍCIA ===================== -->
+  <div class="tab-content active" id="tab-nova">
+    <div class="form-card">
+      <h2 id="form-title">📰 Nova Notícia</h2>
 
-    <!-- Data + Categoria -->
-    <div class="field-row">
+      <!-- Título -->
       <div class="field">
-        <label>Data de publicação <span>*</span></label>
-        <input type="date" id="f-date">
+        <label>Título <span>*</span></label>
+        <input type="text" id="f-title" placeholder="Ex: Salah Shriners firma parceria com..."
+               oninput="updateCharCount(this, 'cnt-title', 120)">
+        <div class="char-count" id="cnt-title">0 / 120</div>
       </div>
+
+      <!-- Data + Categoria -->
+      <div class="field-row">
+        <div class="field">
+          <label>Data de publicação <span>*</span></label>
+          <input type="date" id="f-date">
+        </div>
+        <div class="field">
+          <label>Categoria <span>*</span></label>
+          <select id="f-cat">
+            <option value="Filantropia">Filantropia</option>
+            <option value="Institucional">Institucional</option>
+            <option value="Parceria">Parceria</option>
+            <option value="Evento">Evento</option>
+            <option value="Saúde">Saúde</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Resumo -->
       <div class="field">
-        <label>Categoria <span>*</span></label>
-        <select id="f-cat">
-          <option value="Filantropia">Filantropia</option>
-          <option value="Institucional">Institucional</option>
-          <option value="Parceria">Parceria</option>
-          <option value="Evento">Evento</option>
-          <option value="Saúde">Saúde</option>
-        </select>
+        <label>Resumo <span>*</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.8rem;color:#888">— aparece nos cards do site (máx. 220 caracteres)</span></label>
+        <textarea id="f-excerpt" rows="2" maxlength="220"
+                  placeholder="Ex: Acordo celebrado em Joinville prevê ações integradas em apoio às crianças..."
+                  oninput="updateCharCount(this, 'cnt-exc', 220)"></textarea>
+        <div class="char-count" id="cnt-exc">0 / 220</div>
+      </div>
+
+      <!-- Foto de capa -->
+      <div class="section-label">Foto de Capa</div>
+      <div class="field">
+        <div class="upload-area" id="cover-drop"
+             ondragover="event.preventDefault(); this.classList.add('drag-over')"
+             ondragleave="this.classList.remove('drag-over')"
+             ondrop="handleCoverDrop(event)">
+          <input type="file" id="f-cover" accept="image/*" onchange="handleCoverChange(this)">
+          <span class="upload-icon">🖼️</span>
+          <p><strong>Clique ou arraste</strong> a foto de capa aqui<br>
+             <span style="font-size:.78rem">JPG, PNG ou WEBP — será redimensionada automaticamente</span></p>
+        </div>
+        <div class="cover-preview-wrap" id="cover-preview-wrap" style="display:none">
+          <img id="cover-preview" alt="Preview da capa">
+          <p style="font-size:.8rem;color:#888;margin-top:6px;" id="cover-info"></p>
+        </div>
+        <div id="existing-cover-info" class="existing-cover-info" style="display:none"></div>
+      </div>
+
+      <!-- Texto do artigo -->
+      <div class="section-label">Texto do Artigo</div>
+      <p class="bold-hint">Dica: para texto em <strong>negrito</strong> use <code>&lt;strong&gt;seu texto&lt;/strong&gt;</code></p>
+      <div id="paragraphs-container"></div>
+      <button class="btn-add" onclick="addParagraph()">+ Adicionar parágrafo</button>
+
+      <!-- Fotos adicionais -->
+      <div class="section-label">Fotos Adicionais <span style="font-weight:400;font-size:.85em;letter-spacing:0">(galeria do artigo)</span></div>
+      <div class="field">
+        <div class="upload-area" id="photos-drop"
+             ondragover="event.preventDefault(); this.classList.add('drag-over')"
+             ondragleave="this.classList.remove('drag-over')"
+             ondrop="handlePhotosDrop(event)">
+          <input type="file" id="f-photos" accept="image/*" multiple onchange="handlePhotosChange(this)">
+          <span class="upload-icon">📷</span>
+          <p><strong>Clique ou arraste</strong> as fotos da galeria aqui<br>
+             <span style="font-size:.78rem">Pode selecionar várias de uma vez — opcional</span></p>
+        </div>
+        <div class="photos-preview-grid" id="photos-preview"></div>
+      </div>
+
+      <!-- Publicar -->
+      <div class="section-label">Publicar</div>
+      <div class="publish-row">
+        <button class="btn-preview" onclick="openPreview()">👁 Pré-visualizar</button>
+        <button class="btn btn-publish" id="btn-pub" onclick="publishArticle()">
+          🚀 Publicar no Site
+        </button>
+      </div>
+      <div id="edit-mode-bar" style="display:none;margin-top:12px;">
+        <button class="btn-cancel-edit" onclick="cancelEdit()">✕ Cancelar edição e voltar ao formulário limpo</button>
       </div>
     </div>
 
-    <!-- Resumo -->
-    <div class="field">
-      <label>Resumo <span>*</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.8rem;color:#888">— aparece nos cards do site (máx. 220 caracteres)</span></label>
-      <textarea id="f-excerpt" rows="2" maxlength="220"
-                placeholder="Ex: Acordo celebrado em Joinville prevê ações integradas em apoio às crianças..."
-                oninput="updateCharCount(this, 'cnt-exc', 220)"></textarea>
-      <div class="char-count" id="cnt-exc">0 / 220</div>
-    </div>
-
-    <!-- Foto de capa -->
-    <div class="section-label">Foto de Capa</div>
-    <div class="field">
-      <div class="upload-area" id="cover-drop"
-           ondragover="ev.preventDefault(); this.classList.add('drag-over')"
-           ondragleave="this.classList.remove('drag-over')"
-           ondrop="handleCoverDrop(event)">
-        <input type="file" id="f-cover" accept="image/*" onchange="handleCoverChange(this)">
-        <span class="upload-icon">🖼️</span>
-        <p><strong>Clique ou arraste</strong> a foto de capa aqui<br>
-           <span style="font-size:.78rem">JPG, PNG ou WEBP — será redimensionada automaticamente</span></p>
+    <!-- PROGRESSO -->
+    <div class="progress-card" id="progress-card">
+      <h3>⏳ Publicando artigo...</h3>
+      <div class="step">
+        <span class="step-icon">🖼️</span>
+        <span class="step-label">Enviando fotos para o GitHub</span>
+        <span class="step-status pending" id="s1">Aguardando...</span>
       </div>
-      <div class="cover-preview-wrap" id="cover-preview-wrap" style="display:none">
-        <img id="cover-preview" alt="Preview">
-        <p style="font-size:.8rem;color:#888;margin-top:6px;" id="cover-info"></p>
+      <div class="step">
+        <span class="step-icon">📄</span>
+        <span class="step-label">Lendo site atual</span>
+        <span class="step-status pending" id="s2">Aguardando...</span>
+      </div>
+      <div class="step">
+        <span class="step-icon">✏️</span>
+        <span class="step-label">Atualizando notícia no site</span>
+        <span class="step-status pending" id="s3">Aguardando...</span>
+      </div>
+      <div class="step">
+        <span class="step-icon">☁️</span>
+        <span class="step-label">Salvando no GitHub</span>
+        <span class="step-status pending" id="s4">Aguardando...</span>
       </div>
     </div>
 
-    <!-- Texto do artigo -->
-    <div class="section-label">Texto do Artigo</div>
-    <p class="bold-hint">Dica: para texto em <strong>negrito</strong> use <code>&lt;strong&gt;seu texto&lt;/strong&gt;</code></p>
-    <div id="paragraphs-container"></div>
-    <button class="btn-add" onclick="addParagraph()">+ Adicionar parágrafo</button>
+    <!-- SUCESSO -->
+    <div class="success-box" id="success-box">
+      <h3>✅ Notícia publicada com sucesso!</h3>
+      <p>O site será atualizado em até 2 minutos pelo GitHub Pages.</p>
+      <a href="https://homrich1979.github.io/salah-shriners" target="_blank">🌐 Ver o site</a>
+      <a href="#" class="secondary" onclick="resetForm(); return false;">📰 Publicar outra notícia</a>
+    </div>
 
-    <!-- Fotos adicionais -->
-    <div class="section-label">Fotos Adicionais <span style="font-weight:400;font-size:.85em;letter-spacing:0">(galeria do artigo)</span></div>
-    <div class="field">
-      <div class="upload-area" id="photos-drop"
-           ondragover="event.preventDefault(); this.classList.add('drag-over')"
-           ondragleave="this.classList.remove('drag-over')"
-           ondrop="handlePhotosDrop(event)">
-        <input type="file" id="f-photos" accept="image/*" multiple onchange="handlePhotosChange(this)">
-        <span class="upload-icon">📷</span>
-        <p><strong>Clique ou arraste</strong> as fotos da galeria aqui<br>
-           <span style="font-size:.78rem">Pode selecionar várias de uma vez — opcional</span></p>
+    <!-- ERRO -->
+    <div class="error-box" id="error-box">
+      <h4>❌ Erro ao publicar</h4>
+      <p id="error-msg">Verifique o token e tente novamente.</p>
+    </div>
+  </div><!-- /tab-nova -->
+
+  <!-- ===================== TAB: GERENCIAR ===================== -->
+  <div class="tab-content" id="tab-gerenciar">
+    <div class="manage-card">
+      <div class="manage-header">
+        <h2>📋 Gerenciar Notícias</h2>
+        <button class="btn-load" id="btn-load" onclick="loadArticles()">
+          🔄 Carregar notícias
+        </button>
       </div>
-      <div class="photos-preview-grid" id="photos-preview"></div>
+      <p class="manage-hint">Clique em "Carregar notícias" para ver todos os artigos publicados. Você pode editar ou excluir qualquer um deles.</p>
+      <div id="articles-list-container">
+        <div class="manage-empty">Clique em "Carregar notícias" para começar.</div>
+      </div>
     </div>
-
-    <!-- Publicar -->
-    <div class="section-label">Publicar</div>
-    <button class="btn btn-publish" id="btn-pub" onclick="publishArticle()">
-      🚀 Publicar no Site
-    </button>
-  </div>
-
-  <!-- PROGRESSO -->
-  <div class="progress-card" id="progress-card">
-    <h3>⏳ Publicando artigo...</h3>
-    <div class="step" id="step1">
-      <span class="step-icon">🖼️</span>
-      <span class="step-label">Enviando fotos para o GitHub</span>
-      <span class="step-status pending" id="s1">Aguardando...</span>
-    </div>
-    <div class="step" id="step2">
-      <span class="step-icon">📄</span>
-      <span class="step-label">Lendo site atual</span>
-      <span class="step-status pending" id="s2">Aguardando...</span>
-    </div>
-    <div class="step" id="step3">
-      <span class="step-icon">✏️</span>
-      <span class="step-label">Inserindo nova notícia no site</span>
-      <span class="step-status pending" id="s3">Aguardando...</span>
-    </div>
-    <div class="step" id="step4">
-      <span class="step-icon">☁️</span>
-      <span class="step-label">Salvando no GitHub</span>
-      <span class="step-status pending" id="s4">Aguardando...</span>
-    </div>
-  </div>
-
-  <!-- SUCESSO -->
-  <div class="success-box" id="success-box">
-    <h3>✅ Notícia publicada com sucesso!</h3>
-    <p>O site será atualizado em até 2 minutos pelo GitHub Pages.</p>
-    <a href="https://homrich1979.github.io/salah-shriners" target="_blank">🌐 Ver o site</a>
-    <a href="#" class="secondary" onclick="resetForm(); return false;">📰 Publicar outra notícia</a>
-  </div>
-
-  <!-- ERRO -->
-  <div class="error-box" id="error-box">
-    <h4>❌ Erro ao publicar</h4>
-    <p id="error-msg">Verifique o token e tente novamente.</p>
-  </div>
+  </div><!-- /tab-gerenciar -->
 
 </main>
+
+<!-- ===================== MODAL: PREVIEW ===================== -->
+<div class="modal-overlay" id="preview-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>👁 Pré-visualização do card</h3>
+      <button class="modal-close" onclick="closePreview()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-note">Assim o card aparecerá no site. Clique em "Publicar no Site" para confirmar.</p>
+      <div class="preview-card" id="preview-card-content">
+        <!-- preenchido por JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL: CONFIRMAR EXCLUSÃO ===================== -->
+<div class="modal-overlay" id="delete-modal">
+  <div class="confirm-modal-box">
+    <h3>🗑️ Excluir notícia?</h3>
+    <p id="delete-modal-msg">Tem certeza que deseja excluir esta notícia? Esta ação não pode ser desfeita.</p>
+    <div class="confirm-actions">
+      <button class="btn-cancel-modal" onclick="closeDeleteModal()">Cancelar</button>
+      <button class="btn-confirm-delete" id="btn-confirm-delete" onclick="confirmDelete()">Excluir</button>
+    </div>
+  </div>
+</div>
 
 <script>
 /* =====================================================
@@ -546,30 +742,39 @@ const API        = 'https://api.github.com';
 /* =====================================================
    ESTADO LOCAL
 ===================================================== */
-let coverFile   = null;
-let photosFiles = [];
-let paraCount   = 0;
+let coverFile        = null;
+let photosFiles      = [];
+let paraCount        = 0;
+let editingId        = null;        // ID do artigo sendo editado (null = novo)
+let existingCoverPath = '';         // Caminho da capa atual (modo edição)
+let existingPhotoPaths = [];        // Caminhos das fotos atuais (modo edição)
+let deleteTargetId   = null;        // ID do artigo a excluir
+let cachedHtmlSha    = null;        // SHA do index.html em cache (para evitar re-leitura)
+let cachedHtml       = null;        // Conteúdo do index.html em cache
 
 /* =====================================================
    INICIALIZAÇÃO
 ===================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-  // Pré-preencher data de hoje
-  const today = new Date().toISOString().slice(0, 10);
-  document.getElementById('f-date').value = today;
-
-  // Adicionar 3 parágrafos iniciais
-  addParagraph();
-  addParagraph();
-  addParagraph();
-
-  // Restaurar token da sessão
+  document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
+  addParagraph(); addParagraph(); addParagraph();
   const savedToken = sessionStorage.getItem('gh_token');
   if (savedToken) {
     document.getElementById('gh-token').value = savedToken;
     setTokenStatus('ok', '✓ Token salvo nesta sessão');
   }
 });
+
+/* =====================================================
+   TABS
+===================================================== */
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', (i === 0 && tab === 'nova') || (i === 1 && tab === 'gerenciar'));
+  });
+  document.getElementById('tab-nova').classList.toggle('active', tab === 'nova');
+  document.getElementById('tab-gerenciar').classList.toggle('active', tab === 'gerenciar');
+}
 
 /* =====================================================
    TOKEN
@@ -585,8 +790,7 @@ function saveToken() {
 }
 
 function getToken() {
-  return sessionStorage.getItem('gh_token') ||
-         document.getElementById('gh-token').value.trim();
+  return sessionStorage.getItem('gh_token') || document.getElementById('gh-token').value.trim();
 }
 
 function setTokenStatus(type, msg) {
@@ -608,7 +812,7 @@ function updateCharCount(el, countId, max) {
 /* =====================================================
    PARÁGRAFOS
 ===================================================== */
-function addParagraph() {
+function addParagraph(text) {
   paraCount++;
   const container = document.getElementById('paragraphs-container');
   const block = document.createElement('div');
@@ -616,19 +820,18 @@ function addParagraph() {
   block.dataset.para = paraCount;
   block.innerHTML = `
     <span class="para-num">${paraCount}</span>
-    <textarea rows="4" placeholder="Parágrafo ${paraCount}..."></textarea>
+    <textarea rows="4" placeholder="Parágrafo ${paraCount}...">${text || ''}</textarea>
     <button class="btn-rm-para" onclick="removeParagraph(this)" title="Remover parágrafo">✕</button>
   `;
   container.appendChild(block);
 }
 
 function removeParagraph(btn) {
-  const block = btn.closest('.paragraph-block');
   if (document.querySelectorAll('.paragraph-block').length <= 1) {
     alert('O artigo precisa ter pelo menos um parágrafo.');
     return;
   }
-  block.remove();
+  btn.closest('.paragraph-block').remove();
   renumberParagraphs();
 }
 
@@ -641,8 +844,7 @@ function renumberParagraphs() {
 
 function getParagraphs() {
   return [...document.querySelectorAll('.paragraph-block textarea')]
-    .map(t => t.value.trim())
-    .filter(Boolean);
+    .map(t => t.value.trim()).filter(Boolean);
 }
 
 /* =====================================================
@@ -661,6 +863,7 @@ function handleCoverDrop(event) {
 
 function setCoverFile(file) {
   coverFile = file;
+  document.getElementById('existing-cover-info').style.display = 'none';
   const reader = new FileReader();
   reader.onload = (e) => {
     document.getElementById('cover-preview').src = e.target.result;
@@ -674,15 +877,12 @@ function setCoverFile(file) {
 /* =====================================================
    FOTOS ADICIONAIS
 ===================================================== */
-function handlePhotosChange(input) {
-  addPhotos([...input.files]);
-}
+function handlePhotosChange(input) { addPhotos([...input.files]); }
 
 function handlePhotosDrop(event) {
   event.preventDefault();
   document.getElementById('photos-drop').classList.remove('drag-over');
-  const files = [...event.dataTransfer.files].filter(f => f.type.startsWith('image/'));
-  addPhotos(files);
+  addPhotos([...event.dataTransfer.files].filter(f => f.type.startsWith('image/')));
 }
 
 function addPhotos(files) {
@@ -709,6 +909,24 @@ function removePhoto(btn, idx) {
   btn.closest('.thumb-wrap').remove();
 }
 
+function addExistingPhotoThumb(path, idx) {
+  const preview = document.getElementById('photos-preview');
+  const wrap = document.createElement('div');
+  wrap.className = 'thumb-wrap';
+  wrap.dataset.existingIdx = idx;
+  const imgSrc = SITE_URL + '/' + path;
+  wrap.innerHTML = `
+    <img src="${imgSrc}" alt="Foto atual" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'90\' height=\'70\'%3E%3Crect fill=\'%23ddd\' width=\'90\' height=\'70\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'10\' dy=\'.3em\'%3EFoto%3C/text%3E%3C/svg%3E'">
+    <button class="thumb-remove" onclick="removeExistingPhoto(this, ${idx})" title="Remover foto">✕</button>
+  `;
+  preview.appendChild(wrap);
+}
+
+function removeExistingPhoto(btn, idx) {
+  existingPhotoPaths[idx] = null;
+  btn.closest('.thumb-wrap').remove();
+}
+
 /* =====================================================
    FORMATAÇÃO DE DATA
 ===================================================== */
@@ -718,23 +936,31 @@ function formatDate(isoDate) {
   return `${parseInt(d)} ${months[parseInt(m) - 1]} ${y}`;
 }
 
+function parseDateToISO(dateStr) {
+  // "25 Mar 2026" → "2026-03-25"
+  const months = {Jan:1,Fev:2,Mar:3,Abr:4,Mai:5,Jun:6,Jul:7,Ago:8,Set:9,Out:10,Nov:11,Dez:12};
+  const parts = (dateStr || '').trim().split(' ');
+  if (parts.length === 3) {
+    const d = String(parseInt(parts[0])).padStart(2,'0');
+    const m = String(months[parts[1]] || 1).padStart(2,'0');
+    return `${parts[2]}-${m}-${d}`;
+  }
+  return new Date().toISOString().slice(0,10);
+}
+
 /* =====================================================
    GERAÇÃO DE NOMES DE ARQUIVO
 ===================================================== */
 function sanitizeName(name) {
-  return name.replace(/\.[^.]+$/, '')
-             .toLowerCase()
-             .replace(/[^a-z0-9]/g, '_')
-             .replace(/_+/g, '_')
-             .slice(0, 18);
+  return name.replace(/\.[^.]+$/, '').toLowerCase()
+             .replace(/[^a-z0-9]/g, '_').replace(/_+/g, '_').slice(0, 18);
 }
 
 function makeFilename(file, prefix) {
   const ts  = new Date().toISOString().slice(0, 10).replace(/-/g, '');
   const ext = (file.name.split('.').pop() || 'jpg').toLowerCase()
               .replace('jpeg','jpg').replace('webp','jpg');
-  const base = sanitizeName(file.name);
-  return `${ts}_${prefix}_${base}.${ext}`;
+  return `${ts}_${prefix}_${sanitizeName(file.name)}.${ext}`;
 }
 
 /* =====================================================
@@ -785,7 +1011,6 @@ async function ghFetch(path, method, token, body) {
 }
 
 async function uploadImage(token, gitPath, base64, commitMsg) {
-  // Verificar se já existe (para pegar SHA)
   let sha;
   try {
     const existing = await ghFetch(
@@ -807,44 +1032,125 @@ async function getIndexHtml(token) {
   );
   const sha  = data.sha;
   const html = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+  cachedHtmlSha = sha;
+  cachedHtml = html;
   return { sha, html };
 }
 
 async function putIndexHtml(token, sha, html, commitMsg) {
   const base64 = btoa(unescape(encodeURIComponent(html)));
-  return ghFetch(
+  const result = await ghFetch(
     `/repos/${REPO_OWNER}/${REPO_NAME}/contents/index.html`,
     'PUT', token, { message: commitMsg, content: base64, sha }
   );
+  // Invalidar cache
+  cachedHtmlSha = null;
+  cachedHtml = null;
+  return result;
 }
 
 /* =====================================================
-   MANIPULAÇÃO DO index.html
+   MANIPULAÇÃO DO index.html — UTILITÁRIOS
 ===================================================== */
 function jesc(str) {
-  return str
-    .replace(/\\/g, '\\\\')
-    .replace(/"/g,  '\\"')
-    .replace(/\r/g, '')
-    .replace(/\n/g, '\\n');
+  return str.replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\r/g,'').replace(/\n/g,'\\n');
 }
 
 function hesc(str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function countArticles(html) {
   return (html.match(/"id":\s*"art\d+"/g) || []).length;
 }
 
-function extractCardExcerpt(html, dClass) {
-  // Extrai o texto do <p> de um card com a classe indicada (ex: 'noticia reveal d1')
-  const startTag = `<article class="${dClass}">`;
-  const start = html.indexOf(startTag);
+/* Extrai o objeto completo de um artigo do array ARTICLES */
+function extractArticleObj(html, id) {
+  const idStr = `"id": "${id}"`;
+  const idPos = html.indexOf(idStr);
+  if (idPos === -1) return null;
+  let s = idPos;
+  while (s > 0 && html[s] !== '{') s--;
+  let depth = 0, e = s;
+  for (let i = s; i < Math.min(html.length, s + 100000); i++) {
+    if (html[i] === '{') depth++;
+    else if (html[i] === '}') { depth--; if (depth === 0) { e = i; break; } }
+  }
+  return { start: s, end: e, text: html.slice(s, e + 1) };
+}
+
+/* Extrai dados básicos de um artigo */
+function extractArticleJsonData(html, id) {
+  const obj = extractArticleObj(html, id);
+  if (!obj) return null;
+  const t = obj.text;
+  return {
+    id,
+    title:  (t.match(/"title":\s*"((?:[^"\\]|\\.)*)"/)  || [])[1] || '',
+    cat:    (t.match(/"cat":\s*"(.*?)"/)                 || [])[1] || '',
+    date:   (t.match(/"date":\s*"(.*?)"/)                || [])[1] || '',
+    cover:  (t.match(/"cover":\s*"((?:[^"\\]|\\.)*)"/)   || [])[1] || ''
+  };
+}
+
+/* Extrai dados completos de um artigo (inclui body e photos) */
+function extractArticleFullData(html, id) {
+  const obj = extractArticleObj(html, id);
+  if (!obj) return null;
+  const t = obj.text;
+
+  const basic = {
+    id,
+    title:  (t.match(/"title":\s*"((?:[^"\\]|\\.)*)"/)  || [])[1] || '',
+    cat:    (t.match(/"cat":\s*"(.*?)"/)                 || [])[1] || '',
+    date:   (t.match(/"date":\s*"(.*?)"/)                || [])[1] || '',
+    cover:  (t.match(/"cover":\s*"((?:[^"\\]|\\.)*)"/)   || [])[1] || '',
+    body:   [],
+    photos: []
+  };
+
+  // Extrair body array
+  const bodyMatch = t.match(/"body":\s*\[([\s\S]*?)\]\s*,\s*"photos"/);
+  if (bodyMatch) {
+    try {
+      basic.body = JSON.parse('[' + bodyMatch[1] + ']');
+    } catch (_) {
+      // Fallback: split por linhas
+      basic.body = bodyMatch[1].split(',\n').map(s => {
+        const m = s.trim().match(/^"((?:[^"\\]|\\.)*)"$/);
+        return m ? m[1].replace(/\\n/g,'\n').replace(/\\"/g,'"') : s.trim().replace(/^"|"$/g,'');
+      }).filter(Boolean);
+    }
+  }
+
+  // Extrair photos array
+  const photosMatch = t.match(/"photos":\s*\[([\s\S]*?)\]/);
+  if (photosMatch) {
+    try {
+      basic.photos = JSON.parse('[' + photosMatch[1] + ']');
+    } catch (_) {
+      basic.photos = photosMatch[1].split(',').map(s => s.trim().replace(/^"|"$/g,'')).filter(Boolean);
+    }
+  }
+
+  return basic;
+}
+
+/* Extrai o ID do artigo de um card de destaque */
+function extractFeaturedArticleId(html, delay) {
+  const tag = `<article class="noticia reveal ${delay}">`;
+  const start = html.indexOf(tag);
+  if (start === -1) return null;
+  const end = html.indexOf('</article>', start);
+  const cardHtml = html.slice(start, end);
+  const m = cardHtml.match(/showArticle\('(art\d+)'\)/);
+  return m ? m[1] : null;
+}
+
+/* Extrai o excerpt do <p> de um card featured */
+function extractCardExcerpt(html, delay) {
+  const tag = `<article class="noticia reveal ${delay}">`;
+  const start = html.indexOf(tag);
   if (start === -1) return '';
   const end = html.indexOf('</article>', start);
   const cardHtml = html.slice(start, end);
@@ -852,35 +1158,44 @@ function extractCardExcerpt(html, dClass) {
   return pMatch ? pMatch[1] : '';
 }
 
-function extractArticleJsonData(html, id) {
-  // Extrai dados do objeto no array ARTICLES
-  const idStr = `"id": "${id}"`;
-  const idPos = html.indexOf(idStr);
-  if (idPos === -1) return null;
-
-  // Encontrar { que inicia o objeto
-  let s = idPos;
-  while (s > 0 && html[s] !== '{') s--;
-
-  // Encontrar } que fecha o objeto
-  let depth = 0, e = s;
-  for (let i = s; i < Math.min(html.length, s + 50000); i++) {
-    if (html[i] === '{') depth++;
-    else if (html[i] === '}') { depth--; if (depth === 0) { e = i; break; } }
-  }
-  const obj = html.slice(s, e + 1);
-
-  return {
-    id,
-    title:  (obj.match(/"title":\s*"((?:[^"\\]|\\.)*)"/) || [])[1] || '',
-    cat:    (obj.match(/"cat":\s*"(.*?)"/)  || [])[1] || '',
-    date:   (obj.match(/"date":\s*"(.*?)"/) || [])[1] || '',
-    cover:  (obj.match(/"cover":\s*"((?:[^"\\]|\\.)*)"/) || [])[1] || ''
-  };
+/* Extrai o excerpt do card de uma notícia no grid de notícias completo */
+function extractNewsCardExcerpt(html, id) {
+  const firstGrid  = html.indexOf('<div class="noticias-grid">');
+  const secondGrid = html.indexOf('<div class="noticias-grid">', firstGrid + 1);
+  const marker = `showArticle('${id}')`;
+  const markerPos = html.indexOf(marker, secondGrid);
+  if (markerPos === -1) return '';
+  const artStart = html.lastIndexOf('<article', markerPos);
+  const artEnd   = html.indexOf('</article>', markerPos);
+  const cardHtml = html.slice(artStart, artEnd);
+  const pMatch = cardHtml.match(/<p>([\s\S]*?)<\/p>/);
+  return pMatch ? pMatch[1] : '';
 }
 
+/* Encontra o range do card de um artigo no grid completo */
+function findNewsCardRange(html, id) {
+  const firstGrid  = html.indexOf('<div class="noticias-grid">');
+  const secondGrid = html.indexOf('<div class="noticias-grid">', firstGrid + 1);
+  const marker = `showArticle('${id}')`;
+  const markerPos = html.indexOf(marker, secondGrid);
+  if (markerPos === -1) return null;
+  const artStart = html.lastIndexOf('<article', markerPos);
+  const artEnd   = html.indexOf('</article>', markerPos) + '</article>'.length;
+  return { start: artStart, end: artEnd };
+}
+
+/* Todos os IDs de artigos em ordem (como aparecem no array) */
+function getAllArticleIds(html) {
+  const matches = html.match(/"id":\s*"(art\d+)"/g) || [];
+  return matches.map(m => m.match(/"(art\d+)"/)[1]);
+}
+
+/* =====================================================
+   CONSTRUÇÃO DE HTML DOS CARDS
+===================================================== */
+const arrowSvg = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>`;
+
 function buildFeaturedCard(data, delay, excerpt) {
-  const arrowSvg = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>`;
   return `\n      <article class="noticia reveal ${delay}">
         <a href="#" onclick="showArticle('${data.id}'); return false;" class="noticia-thumb">
           <img src="${data.cover}" alt="${hesc(data.title)}" loading="lazy">
@@ -895,7 +1210,6 @@ function buildFeaturedCard(data, delay, excerpt) {
 }
 
 function buildNewsCard(data, excerpt) {
-  const arrowSvg = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>`;
   return `\n      <article class="noticia">
         <a href="#" onclick="showArticle('${data.id}'); return false;" class="noticia-thumb">
           <img src="${data.cover}" alt="${hesc(data.title)}" loading="lazy">
@@ -910,21 +1224,22 @@ function buildNewsCard(data, excerpt) {
 }
 
 function buildArticleJson(id, title, cat, dateStr, cover, paragraphs, photos) {
-  const bodyLines = paragraphs.map(p => `      "${jesc(p)}"`).join(',\n');
+  const bodyLines  = paragraphs.map(p => `      "${jesc(p)}"`).join(',\n');
   const photoLines = photos.map(p => `"${p}"`).join(', ');
   return `  {\n    "id": "${id}",\n    "title": "${jesc(title)}",\n    "cat": "${cat}",\n    "date": "${dateStr}",\n    "cover": "${cover}",\n    "body": [\n${bodyLines}\n    ],\n    "photos": [${photoLines}]\n  }`;
 }
 
+/* =====================================================
+   INJETAR NOVO ARTIGO
+===================================================== */
 function injectArticle(html, newData, excerpt) {
   const N = countArticles(html);
   const newId = `art${N}`;
   newData.id = newId;
 
   /* 1 — Prepend ao array ARTICLES */
-  const articleJson = buildArticleJson(
-    newId, newData.title, newData.cat, newData.date,
-    newData.cover, newData.paragraphs, newData.photos
-  );
+  const articleJson = buildArticleJson(newId, newData.title, newData.cat, newData.date,
+                                       newData.cover, newData.paragraphs, newData.photos);
   html = html.replace('const ARTICLES = [', `const ARTICLES = [\n${articleJson},`);
 
   /* 2 — Atualizar grid destaque (d1, d2, d3) */
@@ -933,54 +1248,176 @@ function injectArticle(html, newData, excerpt) {
   const exc0 = extractCardExcerpt(html, 'noticia reveal d1');
   const exc1 = extractCardExcerpt(html, 'noticia reveal d2');
 
-  // Substituir d1 → nova notícia
   const d1Start = html.indexOf('<article class="noticia reveal d1">');
   const d1End   = html.indexOf('</article>', d1Start) + '</article>'.length;
-  html = html.slice(0, d1Start) +
-         buildFeaturedCard(newData, 'd1', excerpt) +
-         html.slice(d1End);
+  html = html.slice(0, d1Start) + buildFeaturedCard(newData, 'd1', excerpt) + html.slice(d1End);
 
-  // Substituir d2 → antiga d1 (art0)
   const d2Start = html.indexOf('<article class="noticia reveal d2">');
   const d2End   = html.indexOf('</article>', d2Start) + '</article>'.length;
-  if (art0) html = html.slice(0, d2Start) +
-         buildFeaturedCard(art0, 'd2', exc0) +
-         html.slice(d2End);
+  if (art0) html = html.slice(0, d2Start) + buildFeaturedCard(art0, 'd2', exc0) + html.slice(d2End);
 
-  // Substituir d3 → antiga d2 (art1)
   const d3Start = html.indexOf('<article class="noticia reveal d3">');
   const d3End   = html.indexOf('</article>', d3Start) + '</article>'.length;
-  if (art1) html = html.slice(0, d3Start) +
-         buildFeaturedCard(art1, 'd3', exc1) +
-         html.slice(d3End);
+  if (art1) html = html.slice(0, d3Start) + buildFeaturedCard(art1, 'd3', exc1) + html.slice(d3End);
 
-  /* 3 — Inserir card no topo do grid completo de notícias */
+  /* 3 — Inserir card no topo do grid completo */
   const firstGrid  = html.indexOf('<div class="noticias-grid">');
   const secondGrid = html.indexOf('<div class="noticias-grid">', firstGrid + 1);
   const insertPos  = secondGrid + '<div class="noticias-grid">'.length;
-  const newsCard   = buildNewsCard(newData, excerpt);
-  html = html.slice(0, insertPos) + newsCard + html.slice(insertPos);
+  html = html.slice(0, insertPos) + buildNewsCard(newData, excerpt) + html.slice(insertPos);
 
   return html;
 }
 
 /* =====================================================
+   SUBSTITUIR ARTIGO EXISTENTE (EDIÇÃO)
+===================================================== */
+function replaceArticle(html, id, newData, excerpt) {
+  /* 1 — Substituir JSON no array ARTICLES */
+  const objInfo = extractArticleObj(html, id);
+  if (!objInfo) throw new Error(`Artigo ${id} não encontrado no HTML.`);
+  const newJson = buildArticleJson(id, newData.title, newData.cat, newData.date,
+                                   newData.cover, newData.paragraphs, newData.photos);
+  html = html.slice(0, objInfo.start) + newJson + html.slice(objInfo.end + 1);
+
+  /* 2 — Atualizar nos cards de destaque se necessário */
+  for (const delay of ['d1', 'd2', 'd3']) {
+    if (extractFeaturedArticleId(html, delay) === id) {
+      const dStart = html.indexOf(`<article class="noticia reveal ${delay}">`);
+      const dEnd   = html.indexOf('</article>', dStart) + '</article>'.length;
+      html = html.slice(0, dStart) + buildFeaturedCard(newData, delay, excerpt) + html.slice(dEnd);
+    }
+  }
+
+  /* 3 — Atualizar card no grid completo */
+  const range = findNewsCardRange(html, id);
+  if (range) {
+    html = html.slice(0, range.start) + buildNewsCard(newData, excerpt) + html.slice(range.end);
+  }
+
+  return html;
+}
+
+/* =====================================================
+   REMOVER ARTIGO (EXCLUSÃO)
+===================================================== */
+function removeArticle(html, id) {
+  /* 1 — Remover do array ARTICLES */
+  const objInfo = extractArticleObj(html, id);
+  if (!objInfo) throw new Error(`Artigo ${id} não encontrado.`);
+
+  let removeStart = objInfo.start;
+  let removeEnd   = objInfo.end + 1;
+
+  // Tentar remover vírgula após o objeto
+  let k = removeEnd;
+  while (k < html.length && (html[k] === ' ' || html[k] === '\n' || html[k] === '\r')) k++;
+  if (html[k] === ',') {
+    removeEnd = k + 1;
+  } else {
+    // Tentar remover vírgula antes do objeto
+    let j = removeStart - 1;
+    while (j > 0 && (html[j] === ' ' || html[j] === '\n' || html[j] === '\r')) j--;
+    if (html[j] === ',') removeStart = j;
+  }
+  html = html.slice(0, removeStart) + html.slice(removeEnd);
+
+  /* 2 — Atualizar grid destaque se necessário */
+  for (const delay of ['d1', 'd2', 'd3']) {
+    if (extractFeaturedArticleId(html, delay) === id) {
+      // Substituir por próximo artigo disponível
+      const allIds = getAllArticleIds(html);
+      // Pegar IDs que não estão nos outros delays
+      const usedIds = ['d1','d2','d3']
+        .filter(d => d !== delay)
+        .map(d => extractFeaturedArticleId(html, d))
+        .filter(Boolean);
+      const nextId = allIds.find(aid => !usedIds.includes(aid));
+      if (nextId) {
+        const nextData = extractArticleJsonData(html, nextId);
+        const nextExc  = extractNewsCardExcerpt(html, nextId);
+        const dStart = html.indexOf(`<article class="noticia reveal ${delay}">`);
+        const dEnd   = html.indexOf('</article>', dStart) + '</article>'.length;
+        html = html.slice(0, dStart) + buildFeaturedCard(nextData, delay, nextExc) + html.slice(dEnd);
+      }
+      break;
+    }
+  }
+
+  /* 3 — Remover do grid completo */
+  const range = findNewsCardRange(html, id);
+  if (range) {
+    html = html.slice(0, range.start) + html.slice(range.end);
+  }
+
+  return html;
+}
+
+/* =====================================================
+   PRÉ-VISUALIZAÇÃO
+===================================================== */
+function openPreview() {
+  const title   = document.getElementById('f-title').value.trim();
+  const excerpt = document.getElementById('f-excerpt').value.trim();
+  const cat     = document.getElementById('f-cat').value;
+  const dateIso = document.getElementById('f-date').value;
+
+  if (!title || !excerpt) {
+    alert('Preencha pelo menos o Título e o Resumo para pré-visualizar.');
+    return;
+  }
+
+  const dateStr  = dateIso ? formatDate(dateIso) : '—';
+  const imgSrc   = coverFile
+    ? URL.createObjectURL(coverFile)
+    : (existingCoverPath ? `${SITE_URL}/${existingCoverPath}` : '');
+
+  const imgTag = imgSrc
+    ? `<img class="preview-card-img" src="${imgSrc}" alt="Capa">`
+    : `<div class="preview-card-img" style="display:flex;align-items:center;justify-content:center;color:#aaa;font-size:.85rem;">Sem foto de capa</div>`;
+
+  document.getElementById('preview-card-content').innerHTML = `
+    ${imgTag}
+    <div class="preview-card-body">
+      <div class="preview-card-meta">
+        <span class="preview-card-cat">${hesc(cat)}</span>
+        <span class="preview-card-date">${hesc(dateStr)}</span>
+      </div>
+      <div class="preview-card-title">${hesc(title)}</div>
+      <div class="preview-card-excerpt">${hesc(excerpt)}</div>
+      <span class="preview-card-btn">Ler mais →</span>
+    </div>
+  `;
+
+  document.getElementById('preview-modal').classList.add('open');
+}
+
+function closePreview() {
+  document.getElementById('preview-modal').classList.remove('open');
+}
+
+// Fechar modais clicando fora
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'preview-modal') closePreview();
+  if (e.target.id === 'delete-modal') closeDeleteModal();
+});
+
+/* =====================================================
    VALIDAÇÃO
 ===================================================== */
 function validate() {
-  const title    = document.getElementById('f-title').value.trim();
-  const date     = document.getElementById('f-date').value;
-  const excerpt  = document.getElementById('f-excerpt').value.trim();
-  const paras    = getParagraphs();
-  const token    = getToken();
+  const token   = getToken();
+  const title   = document.getElementById('f-title').value.trim();
+  const date    = document.getElementById('f-date').value;
+  const excerpt = document.getElementById('f-excerpt').value.trim();
+  const paras   = getParagraphs();
 
-  if (!token || (!token.startsWith('ghp_') && !token.startsWith('github_pat_'))) {
+  if (!token || (!token.startsWith('ghp_') && !token.startsWith('github_pat_')))
     return 'Token GitHub inválido. Preencha o token acima.';
-  }
   if (!title)   return 'O título é obrigatório.';
   if (!date)    return 'A data de publicação é obrigatória.';
   if (!excerpt) return 'O resumo é obrigatório.';
-  if (!coverFile) return 'A foto de capa é obrigatória.';
+  if (!coverFile && !existingCoverPath) return 'A foto de capa é obrigatória.';
   if (paras.length === 0) return 'Escreva pelo menos um parágrafo.';
   return null;
 }
@@ -996,15 +1433,18 @@ function setStep(n, state, msg) {
 
 function showProgress() {
   document.getElementById('progress-card').style.display = 'block';
-  document.getElementById('success-box').style.display = 'none';
-  document.getElementById('error-box').style.display   = 'none';
+  document.getElementById('success-box').style.display   = 'none';
+  document.getElementById('error-box').style.display     = 'none';
   document.getElementById('btn-pub').disabled = true;
 }
 
-function showSuccess() {
+function showSuccess(editMode) {
   document.getElementById('progress-card').querySelector('h3').textContent = '✅ Concluído!';
   document.getElementById('success-box').style.display = 'block';
   document.getElementById('btn-pub').disabled = false;
+  if (editMode) {
+    document.querySelector('.success-box h3').textContent = '✅ Notícia atualizada com sucesso!';
+  }
 }
 
 function showError(msg) {
@@ -1017,7 +1457,6 @@ function showError(msg) {
    PUBLICAR — FLUXO PRINCIPAL
 ===================================================== */
 async function publishArticle() {
-  // Validar
   const err = validate();
   if (err) { alert(err); return; }
 
@@ -1027,6 +1466,7 @@ async function publishArticle() {
   const cat     = document.getElementById('f-cat').value;
   const excerpt = document.getElementById('f-excerpt').value.trim();
   const paras   = getParagraphs();
+  const isEdit  = !!editingId;
 
   showProgress();
   setStep(1, 'running', 'Enviando...');
@@ -1035,28 +1475,25 @@ async function publishArticle() {
   setStep(4, 'pending', 'Aguardando...');
 
   try {
-    /* STEP 1 — Upload imagens */
-    const ts = new Date().toISOString().slice(0,10).replace(/-/g,'');
-    let coverPath = '';
-    const photoPaths = [];
+    /* STEP 1 — Upload imagens novas */
+    let coverPath = existingCoverPath;
+    const photoPaths = existingPhotoPaths.filter(Boolean);
 
-    // Capa
-    const coverBlob = await compressImage(coverFile);
-    const coverB64  = await blobToBase64(coverBlob);
-    const coverName = makeFilename(coverFile, 'capa');
-    await uploadImage(token, `images/noticias/${coverName}`, coverB64,
-                      `Imagem de capa: ${coverName}`);
-    coverPath = `images/noticias/${coverName}`;
+    if (coverFile) {
+      const coverBlob = await compressImage(coverFile);
+      const coverB64  = await blobToBase64(coverBlob);
+      const coverName = makeFilename(coverFile, 'capa');
+      await uploadImage(token, `images/noticias/${coverName}`, coverB64, `Imagem de capa: ${coverName}`);
+      coverPath = `images/noticias/${coverName}`;
+    }
 
-    // Fotos adicionais
-    const validPhotos = photosFiles.filter(Boolean);
-    for (let i = 0; i < validPhotos.length; i++) {
-      setStep(1, 'running', `Enviando foto ${i + 2} de ${validPhotos.length + 1}...`);
-      const blob = await compressImage(validPhotos[i]);
+    const newPhotos = photosFiles.filter(Boolean);
+    for (let i = 0; i < newPhotos.length; i++) {
+      setStep(1, 'running', `Enviando foto ${i + 1} de ${newPhotos.length}...`);
+      const blob = await compressImage(newPhotos[i]);
       const b64  = await blobToBase64(blob);
-      const name = makeFilename(validPhotos[i], `foto${i + 1}`);
-      await uploadImage(token, `images/noticias/${name}`, b64,
-                        `Foto adicional: ${name}`);
+      const name = makeFilename(newPhotos[i], `foto${i + 1}`);
+      await uploadImage(token, `images/noticias/${name}`, b64, `Foto adicional: ${name}`);
       photoPaths.push(`images/noticias/${name}`);
     }
     setStep(1, 'done', '✓ Concluído');
@@ -1066,30 +1503,272 @@ async function publishArticle() {
     const { sha, html } = await getIndexHtml(token);
     setStep(2, 'done', '✓ Concluído');
 
-    /* STEP 3 — Injetar artigo */
+    /* STEP 3 — Injetar ou substituir artigo */
     setStep(3, 'running', 'Processando...');
     const newData = { title, cat, date: dateStr, cover: coverPath, paragraphs: paras, photos: photoPaths };
-    const updatedHtml = injectArticle(html, newData, excerpt);
+    let updatedHtml;
+    if (isEdit) {
+      updatedHtml = replaceArticle(html, editingId, newData, excerpt);
+    } else {
+      updatedHtml = injectArticle(html, newData, excerpt);
+    }
     setStep(3, 'done', '✓ Concluído');
 
     /* STEP 4 — Salvar no GitHub */
     setStep(4, 'running', 'Salvando...');
-    await putIndexHtml(token, sha, updatedHtml,
-                       `Publicar notícia: ${title}`);
+    const commitMsg = isEdit ? `Editar notícia: ${title}` : `Publicar notícia: ${title}`;
+    await putIndexHtml(token, sha, updatedHtml, commitMsg);
     setStep(4, 'done', '✓ Concluído');
 
-    showSuccess();
+    showSuccess(isEdit);
 
   } catch (e) {
     console.error(e);
-    showError(`${e.message}`);
-    // Marcar step atual como erro
+    showError(e.message);
     for (let i = 1; i <= 4; i++) {
       const el = document.getElementById(`s${i}`);
-      if (el.className.includes('running')) {
-        setStep(i, 'error', 'Erro!');
-      }
+      if (el.className.includes('running')) setStep(i, 'error', 'Erro!');
     }
+  }
+}
+
+/* =====================================================
+   CARREGAR NOTÍCIAS — TAB GERENCIAR
+===================================================== */
+async function loadArticles() {
+  const token = getToken();
+  if (!token || (!token.startsWith('ghp_') && !token.startsWith('github_pat_'))) {
+    alert('Preencha o token GitHub antes de carregar as notícias.');
+    return;
+  }
+
+  const container = document.getElementById('articles-list-container');
+  const btn = document.getElementById('btn-load');
+  container.innerHTML = '<div class="manage-loading">🔄 Carregando notícias...</div>';
+  btn.disabled = true;
+  btn.textContent = 'Carregando...';
+
+  try {
+    const { html } = await getIndexHtml(token);
+    const ids = getAllArticleIds(html);
+
+    if (ids.length === 0) {
+      container.innerHTML = '<div class="manage-empty">Nenhuma notícia encontrada.</div>';
+      return;
+    }
+
+    const listEl = document.createElement('div');
+    listEl.className = 'articles-list';
+
+    for (const id of ids) {
+      const data = extractArticleJsonData(html, id);
+      if (!data) continue;
+
+      const row = document.createElement('div');
+      row.className = 'article-row';
+      const imgSrc = `${SITE_URL}/${data.cover}`;
+      const escapedTitle = data.title.replace(/'/g, "\\'");
+
+      row.innerHTML = `
+        <img class="article-row-thumb"
+             src="${imgSrc}" alt="${hesc(data.title)}"
+             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'72\' height=\'52\'%3E%3Crect fill=\'%23e0e0e0\' width=\'72\' height=\'52\'/%3E%3C/svg%3E'">
+        <div class="article-row-info">
+          <div class="article-row-title">${hesc(data.title)}</div>
+          <div class="article-row-meta">${data.cat} · ${data.date} · ID: ${id}</div>
+        </div>
+        <div class="article-row-actions">
+          <button class="btn-edit-row" onclick="editArticle('${id}')">✏️ Editar</button>
+          <button class="btn-delete-row" onclick="askDelete('${id}', '${escapedTitle}')">🗑️ Excluir</button>
+        </div>
+      `;
+      listEl.appendChild(row);
+    }
+
+    container.innerHTML = '';
+    container.appendChild(listEl);
+
+  } catch (e) {
+    container.innerHTML = `<div class="manage-loading" style="color:#c0392b">❌ Erro: ${e.message}</div>`;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '🔄 Carregar notícias';
+  }
+}
+
+/* =====================================================
+   EDITAR ARTIGO
+===================================================== */
+async function editArticle(id) {
+  const token = getToken();
+  if (!token || (!token.startsWith('ghp_') && !token.startsWith('github_pat_'))) {
+    alert('Preencha o token GitHub antes de editar.');
+    return;
+  }
+
+  // Usar cache se disponível
+  let html = cachedHtml;
+  if (!html) {
+    try {
+      const result = await getIndexHtml(token);
+      html = result.html;
+    } catch (e) {
+      alert('Erro ao carregar o site: ' + e.message);
+      return;
+    }
+  }
+
+  const data = extractArticleFullData(html, id);
+  if (!data) {
+    alert('Artigo não encontrado.');
+    return;
+  }
+  const excerpt = extractNewsCardExcerpt(html, id);
+
+  // Entrar em modo edição
+  editingId = id;
+  existingCoverPath = data.cover;
+  existingPhotoPaths = [...data.photos];
+  coverFile = null;
+  photosFiles = [];
+
+  // Preencher o formulário
+  document.getElementById('f-title').value = data.title;
+  updateCharCount(document.getElementById('f-title'), 'cnt-title', 120);
+  document.getElementById('f-date').value = parseDateToISO(data.date);
+  document.getElementById('f-cat').value = data.cat;
+  document.getElementById('f-excerpt').value = excerpt;
+  updateCharCount(document.getElementById('f-excerpt'), 'cnt-exc', 220);
+
+  // Preencher parágrafos
+  document.getElementById('paragraphs-container').innerHTML = '';
+  paraCount = 0;
+  for (const p of data.body) {
+    addParagraph(p.replace(/\\n/g,'\n'));
+  }
+  if (data.body.length === 0) {
+    addParagraph(); addParagraph(); addParagraph();
+  }
+
+  // Mostrar capa existente
+  document.getElementById('cover-preview-wrap').style.display = 'none';
+  if (data.cover) {
+    const infoEl = document.getElementById('existing-cover-info');
+    infoEl.style.display = 'block';
+    infoEl.innerHTML = `📷 Capa atual: <code style="font-size:.8rem">${data.cover}</code><br>
+      <img src="${SITE_URL}/${data.cover}" alt="Capa atual"
+           style="max-width:100%;max-height:160px;border-radius:8px;margin-top:8px;object-fit:cover;"
+           onerror="this.style.display='none'">
+      <br><span style="color:#888;font-size:.78rem">Selecione um arquivo acima para substituir a capa</span>`;
+  }
+
+  // Mostrar fotos adicionais existentes
+  document.getElementById('photos-preview').innerHTML = '';
+  existingPhotoPaths.forEach((path, idx) => {
+    if (path) addExistingPhotoThumb(path, idx);
+  });
+
+  // Atualizar UI
+  document.getElementById('form-title').textContent = `✏️ Editando: ${data.title}`;
+  document.getElementById('btn-pub').textContent = '💾 Salvar alterações';
+  document.getElementById('progress-card').style.display = 'none';
+  document.getElementById('success-box').style.display = 'none';
+  document.getElementById('error-box').style.display = 'none';
+  document.getElementById('edit-mode-bar').style.display = 'block';
+
+  // Ir para a aba de nova notícia
+  switchTab('nova');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function cancelEdit() {
+  editingId = null;
+  existingCoverPath = '';
+  existingPhotoPaths = [];
+  resetForm();
+  document.getElementById('form-title').textContent = '📰 Nova Notícia';
+  document.getElementById('btn-pub').textContent = '🚀 Publicar no Site';
+  document.getElementById('edit-mode-bar').style.display = 'none';
+}
+
+/* =====================================================
+   EXCLUIR ARTIGO
+===================================================== */
+function askDelete(id, title) {
+  deleteTargetId = id;
+  document.getElementById('delete-modal-msg').innerHTML =
+    `Tem certeza que deseja excluir a notícia:<br><strong>"${hesc(title)}"</strong>?<br><br>Esta ação não pode ser desfeita.`;
+  document.getElementById('delete-modal').classList.add('open');
+}
+
+function closeDeleteModal() {
+  document.getElementById('delete-modal').classList.remove('open');
+  deleteTargetId = null;
+}
+
+async function confirmDelete() {
+  if (!deleteTargetId) return;
+  const id = deleteTargetId;
+  closeDeleteModal();
+
+  const token = getToken();
+  if (!token || (!token.startsWith('ghp_') && !token.startsWith('github_pat_'))) {
+    alert('Preencha o token GitHub antes de excluir.');
+    return;
+  }
+
+  const btn = document.getElementById('btn-load');
+  const container = document.getElementById('articles-list-container');
+
+  // Encontrar a linha do artigo e mostrar status
+  const rows = document.querySelectorAll('.article-row');
+  let targetRow = null;
+  rows.forEach(row => {
+    if (row.innerHTML.includes(`'${id}'`)) targetRow = row;
+  });
+  if (targetRow) {
+    targetRow.style.opacity = '0.5';
+    targetRow.style.pointerEvents = 'none';
+    targetRow.querySelector('.article-row-info').insertAdjacentHTML('beforeend',
+      '<div style="color:var(--gold);font-size:.8rem;margin-top:4px">Excluindo...</div>');
+  }
+
+  try {
+    let html = cachedHtml;
+    let sha  = cachedHtmlSha;
+    if (!html) {
+      const result = await getIndexHtml(token);
+      html = result.html;
+      sha  = result.sha;
+    }
+
+    const updatedHtml = removeArticle(html, id);
+    await putIndexHtml(token, sha, updatedHtml, `Excluir notícia: ${id}`);
+
+    // Remover linha da lista
+    if (targetRow) targetRow.remove();
+
+    // Checar se lista ficou vazia
+    const remaining = document.querySelectorAll('.article-row');
+    if (remaining.length === 0) {
+      container.innerHTML = '<div class="manage-empty">Nenhuma notícia encontrada.</div>';
+    }
+
+    // Mostrar confirmação
+    const notice = document.createElement('div');
+    notice.style.cssText = 'background:#f0fef0;border:1px solid #4caf50;border-radius:8px;padding:12px 16px;font-size:.9rem;color:#1a7a1a;margin-bottom:14px;';
+    notice.textContent = `✅ Notícia excluída com sucesso. O site será atualizado em até 2 minutos.`;
+    container.insertAdjacentElement('beforebegin', notice);
+    setTimeout(() => notice.remove(), 8000);
+
+  } catch (e) {
+    if (targetRow) {
+      targetRow.style.opacity = '1';
+      targetRow.style.pointerEvents = 'auto';
+      const statusEl = targetRow.querySelector('[style*="Excluindo"]');
+      if (statusEl) statusEl.remove();
+    }
+    alert('Erro ao excluir: ' + e.message);
   }
 }
 
@@ -1105,13 +1784,20 @@ function resetForm() {
   addParagraph(); addParagraph(); addParagraph();
   coverFile  = null;
   photosFiles = [];
+  existingCoverPath = '';
+  existingPhotoPaths = [];
   document.getElementById('cover-preview-wrap').style.display = 'none';
+  document.getElementById('existing-cover-info').style.display = 'none';
   document.getElementById('photos-preview').innerHTML = '';
   document.getElementById('progress-card').style.display = 'none';
   document.getElementById('success-box').style.display   = 'none';
   document.getElementById('error-box').style.display     = 'none';
   document.getElementById('cnt-title').textContent = '0 / 120';
   document.getElementById('cnt-exc').textContent   = '0 / 220';
+  document.getElementById('edit-mode-bar').style.display = 'none';
+  document.getElementById('form-title').textContent = '📰 Nova Notícia';
+  document.getElementById('btn-pub').textContent = '🚀 Publicar no Site';
+  editingId = null;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
