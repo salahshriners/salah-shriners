@@ -248,9 +248,30 @@
       font-size: 1.1rem; cursor: pointer; margin-top: 10px; transition: .2s;
     }
     .btn-rm-para:hover { background: #fee; border-color: var(--crimson); color: var(--crimson); }
-    .bold-hint { font-size: 0.78rem; color: #999; margin-bottom: 10px; }
-    .bold-hint code {
-      background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 0.78rem;
+
+    /* ---- BARRA DE FORMATAÇÃO ---- */
+    .para-editor { flex: 1; display: flex; flex-direction: column; gap: 0; }
+    .para-toolbar {
+      display: flex; gap: 3px; align-items: center;
+      background: #f4f4f4; border: 1px solid var(--border);
+      border-bottom: none; border-radius: 7px 7px 0 0;
+      padding: 5px 8px;
+    }
+    .fmt-btn {
+      background: transparent; border: none;
+      width: 30px; height: 28px;
+      border-radius: 5px; cursor: pointer;
+      font-size: 0.88rem; color: #444;
+      display: flex; align-items: center; justify-content: center;
+      transition: .15s; font-family: Georgia, serif;
+    }
+    .fmt-btn:hover { background: #e0e0e0; color: var(--crimson); }
+    .fmt-btn:active { background: #d0d0d0; }
+    .fmt-sep {
+      width: 1px; height: 18px; background: #ccc; margin: 0 4px;
+    }
+    .para-editor textarea {
+      border-radius: 0 0 7px 7px !important;
     }
 
     /* ---- BUTTONS ---- */
@@ -622,7 +643,6 @@
 
       <!-- Texto do artigo -->
       <div class="section-label">Texto do Artigo</div>
-      <p class="bold-hint">Dica: para texto em <strong>negrito</strong> use <code>&lt;strong&gt;seu texto&lt;/strong&gt;</code></p>
       <div id="paragraphs-container"></div>
       <button class="btn-add" onclick="addParagraph()">+ Adicionar parágrafo</button>
 
@@ -841,7 +861,17 @@ function addParagraph(text) {
   block.dataset.para = paraCount;
   block.innerHTML = `
     <span class="para-num">${paraCount}</span>
-    <textarea rows="4" placeholder="Parágrafo ${paraCount}...">${text || ''}</textarea>
+    <div class="para-editor">
+      <div class="para-toolbar">
+        <button type="button" class="fmt-btn" onclick="applyFormat(this,'strong')" title="Negrito (selecione o texto primeiro)"><strong>B</strong></button>
+        <button type="button" class="fmt-btn" onclick="applyFormat(this,'em')"     title="Itálico"><em>I</em></button>
+        <button type="button" class="fmt-btn" onclick="applyFormat(this,'u')"      title="Sublinhado"><u>U</u></button>
+        <button type="button" class="fmt-btn" onclick="applyFormat(this,'s')"      title="Tachado"><s>S</s></button>
+        <span class="fmt-sep"></span>
+        <button type="button" class="fmt-btn" onclick="applyFormat(this,'mark')"   title="Destacar" style="font-size:.75rem">🖍</button>
+      </div>
+      <textarea rows="4" placeholder="Parágrafo ${paraCount}...">${text || ''}</textarea>
+    </div>
     <button class="btn-rm-para" onclick="removeParagraph(this)" title="Remover parágrafo">✕</button>
   `;
   container.appendChild(block);
@@ -866,6 +896,46 @@ function renumberParagraphs() {
 function getParagraphs() {
   return [...document.querySelectorAll('.paragraph-block textarea')]
     .map(t => t.value.trim()).filter(Boolean);
+}
+
+/* =====================================================
+   FORMATAÇÃO DE TEXTO (toolbar de parágrafos)
+===================================================== */
+function applyFormat(btn, tag) {
+  const ta    = btn.closest('.para-editor').querySelector('textarea');
+  const start = ta.selectionStart;
+  const end   = ta.selectionEnd;
+
+  if (start === end) {
+    // Nada selecionado: focar a textarea e mostrar dica
+    ta.focus();
+    const hint = btn.closest('.para-toolbar').querySelector('.fmt-hint');
+    if (!hint) {
+      const h = document.createElement('span');
+      h.className = 'fmt-hint';
+      h.style.cssText = 'font-size:.72rem;color:#999;margin-left:6px;pointer-events:none;';
+      h.textContent = 'Selecione o texto primeiro';
+      btn.closest('.para-toolbar').appendChild(h);
+      setTimeout(() => h.remove(), 2000);
+    }
+    return;
+  }
+
+  const before   = ta.value.substring(0, start);
+  const selected = ta.value.substring(start, end);
+  const after    = ta.value.substring(end);
+  const open     = `<${tag}>`;
+  const close    = `</${tag}>`;
+
+  // Toggle: remove tags se já aplicadas
+  if (before.endsWith(open) && after.startsWith(close)) {
+    ta.value = before.slice(0, -open.length) + selected + after.slice(close.length);
+    ta.setSelectionRange(start - open.length, end - open.length);
+  } else {
+    ta.value = before + open + selected + close + after;
+    ta.setSelectionRange(start + open.length, end + open.length);
+  }
+  ta.focus();
 }
 
 /* =====================================================
