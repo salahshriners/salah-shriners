@@ -763,10 +763,21 @@ let cachedHtmlSha    = null;        // SHA do index.html em cache (para evitar r
 let cachedHtml       = null;        // Conteúdo do index.html em cache
 
 /* =====================================================
+   DATA LOCAL (evita problema de fuso UTC)
+===================================================== */
+function localToday() {
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm   = String(d.getMonth() + 1).padStart(2, '0');
+  const dd   = String(d.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+/* =====================================================
    INICIALIZAÇÃO
 ===================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
+  document.getElementById('f-date').value = localToday();
   addParagraph(); addParagraph(); addParagraph();
   const savedToken = sessionStorage.getItem('gh_token');
   if (savedToken) {
@@ -955,7 +966,7 @@ function parseDateToISO(dateStr) {
     const m = String(months[parts[1]] || 1).padStart(2,'0');
     return `${parts[2]}-${m}-${d}`;
   }
-  return new Date().toISOString().slice(0,10);
+  return localToday();
 }
 
 /* =====================================================
@@ -967,7 +978,7 @@ function sanitizeName(name) {
 }
 
 function makeFilename(file, prefix) {
-  const ts  = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const ts  = localToday().replace(/-/g, '');
   const ext = (file.name.split('.').pop() || 'jpg').toLowerCase()
               .replace('jpeg','jpg').replace('webp','jpg');
   return `${ts}_${prefix}_${sanitizeName(file.name)}.${ext}`;
@@ -1807,7 +1818,7 @@ async function confirmDelete() {
 function resetForm() {
   document.getElementById('f-title').value   = '';
   document.getElementById('f-excerpt').value = '';
-  document.getElementById('f-date').value    = new Date().toISOString().slice(0,10);
+  document.getElementById('f-date').value    = localToday();
   document.getElementById('paragraphs-container').innerHTML = '';
   paraCount = 0;
   addParagraph(); addParagraph(); addParagraph();
