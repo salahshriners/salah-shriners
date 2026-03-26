@@ -402,7 +402,7 @@
     <h3>🔑 Token de Acesso GitHub</h3>
     <p>Necessário para publicar no site. Digite uma vez por sessão — o token não é armazenado permanentemente.</p>
     <div class="token-row">
-      <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+      <input type="password" id="gh-token" placeholder="ghp_... ou github_pat_..." autocomplete="off">
       <button class="btn-save-token" onclick="saveToken()">Salvar token</button>
     </div>
     <div class="token-status" id="token-status"></div>
@@ -576,8 +576,8 @@ document.addEventListener('DOMContentLoaded', () => {
 ===================================================== */
 function saveToken() {
   const token = document.getElementById('gh-token').value.trim();
-  if (!token || !token.startsWith('ghp_')) {
-    setTokenStatus('err', '⚠ Token inválido — deve começar com ghp_');
+  if (!token || (!token.startsWith('ghp_') && !token.startsWith('github_pat_'))) {
+    setTokenStatus('err', '⚠ Token inválido — deve começar com ghp_ ou github_pat_');
     return;
   }
   sessionStorage.setItem('gh_token', token);
@@ -974,7 +974,7 @@ function validate() {
   const paras    = getParagraphs();
   const token    = getToken();
 
-  if (!token || !token.startsWith('ghp_')) {
+  if (!token || (!token.startsWith('ghp_') && !token.startsWith('github_pat_'))) {
     return 'Token GitHub inválido. Preencha o token acima.';
   }
   if (!title)   return 'O título é obrigatório.';
