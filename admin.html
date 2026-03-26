@@ -432,8 +432,8 @@
     .modal-overlay.open { display: flex; }
     .modal-box {
       background: #fff; border-radius: 16px;
-      max-width: 480px; width: 100%;
-      max-height: 90vh; overflow-y: auto;
+      max-width: 720px; width: 100%;
+      max-height: 92vh; overflow-y: auto;
       box-shadow: 0 8px 48px rgba(0,0,0,0.28);
       padding: 0;
       animation: slideUp .2s ease;
@@ -460,36 +460,46 @@
       background: #f5f5f5; padding: 8px 12px; border-radius: 6px;
     }
 
-    /* card preview (replicates site card) */
-    .preview-card {
-      border: 1px solid #e0e0e0;
-      border-radius: 12px; overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,.10);
-      font-family: 'Source Sans 3', sans-serif;
+    /* artigo completo preview */
+    .preview-article {}
+    .preview-article-cover {
+      width: 100%; max-height: 340px; object-fit: cover;
+      display: block;
     }
-    .preview-card-img {
-      width: 100%; height: 200px; object-fit: cover;
-      background: #ddd;
+    .preview-article-cover-empty {
+      width: 100%; height: 200px; background: #e8e8e8;
+      display: flex; align-items: center; justify-content: center;
+      color: #aaa; font-size: .9rem;
     }
-    .preview-card-body { padding: 16px 18px 18px; }
-    .preview-card-meta {
+    .preview-article-body { padding: 24px 28px 28px; }
+    .preview-article-meta {
       display: flex; gap: 10px; align-items: center;
-      font-size: 0.75rem; margin-bottom: 8px;
+      font-size: 0.8rem; margin-bottom: 14px;
     }
-    .preview-card-cat {
+    .preview-article-cat {
       background: var(--crimson); color: #fff;
-      padding: 2px 10px; border-radius: 12px; font-weight: 700;
+      padding: 3px 12px; border-radius: 14px; font-weight: 700;
     }
-    .preview-card-date { color: #888; }
-    .preview-card-title {
+    .preview-article-date { color: #888; }
+    .preview-article-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.05rem; font-weight: 700;
-      margin-bottom: 8px; color: var(--text); line-height: 1.3;
+      font-size: 1.6rem; font-weight: 700; line-height: 1.25;
+      margin-bottom: 18px; color: var(--text);
     }
-    .preview-card-excerpt { font-size: 0.88rem; color: #555; line-height: 1.5; }
-    .preview-card-btn {
-      display: inline-block; margin-top: 12px;
-      color: var(--crimson); font-weight: 700; font-size: 0.88rem;
+    .preview-article-para {
+      font-size: 0.97rem; color: #333; line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .preview-article-photos {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px; margin-top: 24px;
+    }
+    .preview-article-photos img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover;
+      border-radius: 8px; border: 1px solid #e0e0e0;
+    }
+    .preview-no-photos {
+      font-size: .82rem; color: #aaa; margin-top: 16px; font-style: italic;
     }
 
     /* ---- MODAL CONFIRMAR EXCLUSÃO ---- */
@@ -706,12 +716,12 @@
 <div class="modal-overlay" id="preview-modal">
   <div class="modal-box">
     <div class="modal-header">
-      <h3>👁 Pré-visualização do card</h3>
+      <h3>👁 Pré-visualização da notícia</h3>
       <button class="modal-close" onclick="closePreview()">✕</button>
     </div>
-    <div class="modal-body">
-      <p class="modal-note">Assim o card aparecerá no site. Clique em "Publicar no Site" para confirmar.</p>
-      <div class="preview-card" id="preview-card-content">
+    <div class="modal-body" style="padding:0 0 4px;">
+      <p class="modal-note" style="margin:14px 24px 0;">Assim a notícia aparecerá no site. Clique em "Publicar no Site" para confirmar.</p>
+      <div class="preview-article" id="preview-card-content">
         <!-- preenchido por JS -->
       </div>
     </div>
@@ -1361,31 +1371,50 @@ function openPreview() {
   const excerpt = document.getElementById('f-excerpt').value.trim();
   const cat     = document.getElementById('f-cat').value;
   const dateIso = document.getElementById('f-date').value;
+  const paras   = getParagraphs();
 
-  if (!title || !excerpt) {
-    alert('Preencha pelo menos o Título e o Resumo para pré-visualizar.');
+  if (!title) {
+    alert('Preencha pelo menos o Título para pré-visualizar.');
     return;
   }
 
-  const dateStr  = dateIso ? formatDate(dateIso) : '—';
-  const imgSrc   = coverFile
+  const dateStr = dateIso ? formatDate(dateIso) : '—';
+
+  // Capa
+  const imgSrc = coverFile
     ? URL.createObjectURL(coverFile)
     : (existingCoverPath ? `${SITE_URL}/${existingCoverPath}` : '');
 
-  const imgTag = imgSrc
-    ? `<img class="preview-card-img" src="${imgSrc}" alt="Capa">`
-    : `<div class="preview-card-img" style="display:flex;align-items:center;justify-content:center;color:#aaa;font-size:.85rem;">Sem foto de capa</div>`;
+  const coverHtml = imgSrc
+    ? `<img class="preview-article-cover" src="${imgSrc}" alt="Capa">`
+    : `<div class="preview-article-cover-empty">Sem foto de capa</div>`;
+
+  // Parágrafos
+  const parasHtml = paras.length > 0
+    ? paras.map(p => `<p class="preview-article-para">${p}</p>`).join('')
+    : `<p class="preview-article-para" style="color:#aaa;font-style:italic">Nenhum parágrafo adicionado ainda.</p>`;
+
+  // Fotos adicionais — novas (File) + existentes (path)
+  const newPhotoSrcs = photosFiles.filter(Boolean).map(f => URL.createObjectURL(f));
+  const existingPhotoSrcs = existingPhotoPaths.filter(Boolean).map(p => `${SITE_URL}/${p}`);
+  const allPhotoSrcs = [...existingPhotoSrcs, ...newPhotoSrcs];
+
+  const photosHtml = allPhotoSrcs.length > 0
+    ? `<div class="preview-article-photos">${allPhotoSrcs.map(src =>
+        `<img src="${src}" alt="Foto" onerror="this.style.display='none'">`
+      ).join('')}</div>`
+    : `<p class="preview-no-photos">Nenhuma foto adicional.</p>`;
 
   document.getElementById('preview-card-content').innerHTML = `
-    ${imgTag}
-    <div class="preview-card-body">
-      <div class="preview-card-meta">
-        <span class="preview-card-cat">${hesc(cat)}</span>
-        <span class="preview-card-date">${hesc(dateStr)}</span>
+    ${coverHtml}
+    <div class="preview-article-body">
+      <div class="preview-article-meta">
+        <span class="preview-article-cat">${hesc(cat)}</span>
+        <span class="preview-article-date">${hesc(dateStr)}</span>
       </div>
-      <div class="preview-card-title">${hesc(title)}</div>
-      <div class="preview-card-excerpt">${hesc(excerpt)}</div>
-      <span class="preview-card-btn">Ler mais →</span>
+      <h2 class="preview-article-title">${hesc(title)}</h2>
+      ${parasHtml}
+      ${photosHtml}
     </div>
   `;
 
