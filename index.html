@@ -2596,54 +2596,57 @@ statsObs.observe(document.getElementById('stats'));
 /* ---- FORM ---- */
 function handleSubmit(e) {
   e.preventDefault();
-  const btn  = document.getElementById('submit-btn');
+  const btn     = document.getElementById('submit-btn');
   const nome    = document.getElementById('nome').value.trim();
   const email   = document.getElementById('email').value.trim();
   const tel     = document.getElementById('tel').value.trim();
   const assunto = document.getElementById('assunto').value || 'Contato pelo site';
   const msg     = document.getElementById('msg').value.trim();
 
-  // ── Tenta enviar via Formspree (quando hospedado em servidor) ──────────────
-  const FORMSPREE = 'https://formspree.io/f/78869daa-bd8f-4e8c-94f6-2e653af1726b'; // endpoint Salah Shriners
+  const ENDPOINT = 'https://formsubmit.co/ajax/secretario@salahshriners.org';
 
-  const payload = { nome, email, tel, assunto, mensagem: msg,
-                    _replyto: email, _subject: 'Contato Salah Shriners: ' + assunto };
+  const payload = {
+    nome, email, tel, assunto, mensagem: msg,
+    _replyto:  email,
+    _subject:  'Contato Salah Shriners: ' + assunto,
+    _captcha:  'false',
+    _template: 'table'
+  };
 
   btn.disabled = true;
   btn.textContent = 'Enviando…';
 
-  fetch(FORMSPREE, {
-    method: 'POST',
+  fetch(ENDPOINT, {
+    method:  'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify(payload)
+    body:    JSON.stringify(payload)
   })
-  .then(r => {
-    if (r.ok) {
+  .then(r => r.json().then(data => ({ ok: r.ok, data })))
+  .then(({ ok }) => {
+    if (ok) {
       showSuccess(btn);
     } else {
-      // Fallback: abre cliente de e-mail com dados preenchidos
-      sendMailto(nome, email, tel, assunto, msg);
-      showSuccess(btn);
+      showFormError(btn, 'Não foi possível enviar. Tente novamente ou escreva para secretario@salahshriners.org');
     }
   })
   .catch(() => {
-    // Sem conexão / CORS no file:// → abre cliente de e-mail
-    sendMailto(nome, email, tel, assunto, msg);
-    showSuccess(btn);
+    showFormError(btn, 'Erro de conexão. Verifique sua internet e tente novamente.');
   });
 }
 
-function sendMailto(nome, email, tel, assunto, msg) {
-  const dest  = 'secretario@salahshriners.org';
-  const subj  = encodeURIComponent('Contato Salah Shriners: ' + assunto);
-  const corpo = encodeURIComponent(
-    'Nome: ' + nome + '\n' +
-    'E-mail: ' + email + '\n' +
-    'Telefone: ' + (tel || 'não informado') + '\n' +
-    'Assunto: ' + assunto + '\n\n' +
-    'Mensagem:\n' + msg
-  );
-  window.location.href = 'mailto:' + dest + '?subject=' + subj + '&body=' + corpo;
+function showFormError(btn, msg) {
+  btn.disabled = false;
+  btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg> Enviar Mensagem';
+  const form = document.getElementById('contact-form');
+  let errEl = document.getElementById('form-error-msg');
+  if (!errEl) {
+    errEl = document.createElement('p');
+    errEl.id = 'form-error-msg';
+    errEl.style.cssText = 'color:#c0392b;font-size:.88rem;margin-top:10px;text-align:center;';
+    form.appendChild(errEl);
+  }
+  errEl.textContent = '⚠ ' + msg;
+  setTimeout(() => { if (errEl) errEl.textContent = ''; }, 8000);
 }
 
 const ARTICLES = [
