@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Salah Shriners SC — Em Breve</title>
+  <title>Salah Shriners — Em Breve</title>
   <link rel="icon" type="image/png" href="images/logo/brasao-vetorizado-transp.png">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap');
@@ -40,9 +40,9 @@
   <div class="container">
     <div class="ornament"><div class="ornament-line"></div><div class="ornament-symbol">✦</div><div class="ornament-line right"></div></div>
     <div class="logo-container"><img src="images/logo/brasao-vetorizado-transp.png" alt="Salah Shriners"></div>
-    <h1>Salah Shriners SC</h1>
+    <h1>Salah Shriners</h1>
     <p class="subtitle">Fraternidade &middot; Filantropia &middot; Diversão</p>
-    <p class="message">Estamos preparando algo especial para você.<br>Nosso novo site será inaugurado em <strong>02 de abril de 2026</strong>. Aguarde!</p>
+    <p class="message">Estamos preparando algo especial para você.<br>Nosso novo site será inaugurado em <strong>01 de abril de 2026 às 12h</strong>. Aguarde!</p>
     <p class="countdown-label">Inauguração em</p>
     <div class="countdown">
       <div class="countdown-item"><div class="countdown-number" id="days">00</div><div class="countdown-unit">Dias</div></div>
@@ -50,12 +50,12 @@
       <div class="countdown-item"><div class="countdown-number" id="minutes">00</div><div class="countdown-unit">Min</div></div>
       <div class="countdown-item"><div class="countdown-number" id="seconds">00</div><div class="countdown-unit">Seg</div></div>
     </div>
-    <div class="launch-date">Inauguração oficial: <span>quinta-feira, 02 de abril de 2026</span></div>
+    <div class="launch-date">Inauguração oficial: <span>quarta-feira, 01 de abril de 2026 às 12h</span></div>
   </div>
   <script>
     const s=document.getElementById('stars');
     for(let i=0;i<55;i++){const el=document.createElement('div');el.className='star';el.style.left=Math.random()*100+'%';el.style.top=Math.random()*100+'%';el.style.setProperty('--dur',(2+Math.random()*4)+'s');el.style.animationDelay=Math.random()*4+'s';const sz=(1+Math.random()*2)+'px';el.style.width=el.style.height=sz;s.appendChild(el);}
-    const target=new Date('2026-04-02T00:00:00-03:00');
+    const target=new Date('2026-04-01T12:00:00-03:00');
     function update(){const diff=target-new Date();if(diff<=0){document.querySelector('.countdown').innerHTML='<p style="color:#d4af37;font-family:Cinzel,serif">Bem-vindo!</p>';return;}document.getElementById('days').textContent=String(Math.floor(diff/86400000)).padStart(2,'0');document.getElementById('hours').textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');document.getElementById('minutes').textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');document.getElementById('seconds').textContent=String(Math.floor((diff%60000)/1000)).padStart(2,'0');}
     update();setInterval(update,1000);
   </script>
