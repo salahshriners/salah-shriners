@@ -61,7 +61,7 @@
       const diff = TARGET - new Date();
       if (diff <= 0) {
         ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
-        window.location.replace('site-completo.html');
+        window.location.replace('/');
         return;
       }
       document.getElementById('cd-days').textContent  = pad(Math.floor(diff / 86400000));
