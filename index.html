@@ -16,7 +16,7 @@
    RESET & BASE
    ================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
   font-family: 'Source Sans 3', sans-serif;
   color: var(--text);
@@ -264,6 +264,7 @@ p  { line-height: 1.78; color: var(--text-muted); }
 #hero {
   position: relative;
   height: 100vh;
+  height: 100svh; /* iOS Safari: usa a viewport sem a barra de endereço */
   min-height: 640px;
   display: flex;
   align-items: flex-end;
@@ -1531,6 +1532,7 @@ footer {
   .stat-cell         { padding: 1.5rem 1rem; }
   .stats-row .stat-cell:nth-child(2) { border-right: none; }
   .stats-row .stat-cell:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.15); }
+  .stats-row .stat-cell:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.15); }
   .pilares-grid      { grid-template-columns: repeat(2, 1fr); }
   .noticias-grid     { grid-template-columns: repeat(2, 1fr); }
   .faq-grid          { grid-template-columns: 1fr; }
@@ -1561,6 +1563,22 @@ footer {
   .mkpi { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
   .mkpi:last-child { border-bottom: none; }
   .noticias-header { flex-direction: column; align-items: flex-start; }
+  /* iOS Safari: background-attachment: fixed não funciona em mobile — causa fundo branco/vazio */
+  .missao-bg { background-attachment: scroll; }
+  /* Reduz padding inferior do conteúdo do hero — 7.5rem é muito em smartphones */
+  .slide-content,
+  .slide-content.sc-bottom,
+  .slide-content.sc-center,
+  .slide-content.sc-top,
+  .slide-content.sc-reverse { padding-bottom: 5.5rem; }
+  /* Seção Sobre: evita que filhos absolutamente posicionados causem overflow horizontal */
+  #sobre { overflow: hidden; }
+  /* Botões do hero em coluna em mobile */
+  .hero-btns .btn { width: 100%; max-width: 320px; justify-content: center; }
+  /* Stats: coloca borda inferior na última célula também */
+  #stats { padding: 24px 0; }
+  /* Seção missão: garante padding adequado em 1 coluna */
+  .missao-inner { padding: 60px 0; }
 }
 @media (max-width: 480px) {
   .container    { padding: 0 1.25rem; }
@@ -1589,6 +1607,32 @@ footer {
 
   /* Padding de seções levemente reduzido */
   .section      { padding: 58px 0; }
+
+  /* Textos longos (emails, URLs) quebram corretamente em telas estreitas */
+  .ci dd, .ci dd a, .f-ci span, .f-ci a, .b-row dd { word-break: break-word; }
+
+  /* Stats: padding reduzido em telas de 480px */
+  .stat-cell    { padding: 1.2rem 0.75rem; }
+
+  /* Seção notícias: reduz margem do cabeçalho */
+  .noticias-header { margin-bottom: 28px; }
+
+  /* Ajustes de tipografia para leitura melhor em mobile */
+  h1 { font-size: clamp(2rem, 8vw, 2.4rem); }
+  h2 { font-size: clamp(1.6rem, 6vw, 1.9rem); }
+
+  /* Parceiros: cards menores em smartphones */
+  .parceiro-card { padding: 16px 12px; }
+
+  /* Botões no hero: espaçamento adequado */
+  .hero-btns { gap: 10px; }
+
+  /* Diretoria: seção com menos padding para aproveitar espaço */
+  #diretoria { padding-top: 48px; padding-bottom: 48px; }
+
+  /* Footer: ajusta padding em mobile */
+  footer { padding: 56px 0 0; }
+  .footer-grid { padding-bottom: 40px; }
 }
 
 /* Smartphones muito pequenos (≤ 360px) */
@@ -1604,6 +1648,25 @@ footer {
   /* Seções com menos espaço */
   .section { padding: 48px 0; }
   #sobre   { padding: 48px 0; }
+
+  /* Stats mínimos em telas muito pequenas */
+  .stat-cell { padding: 1rem 0.5rem; }
+  .stat-n    { font-size: 2rem; }
+  .stat-l    { font-size: 0.72rem; letter-spacing: 1px; }
+
+  /* Container com padding mínimo para maximizar espaço de conteúdo */
+  .container { padding: 0 0.875rem; }
+
+  /* Pilares em 1 coluna: altura mínima para toque */
+  .pilar-panel { min-height: 280px; }
+
+  /* Doação: heading menor */
+  .doacao-top { padding: 2rem 1.2rem 1.5rem; }
+
+  /* FAQ: padding interno reduzido */
+  .faq-q { padding: 1.1rem 1rem; }
+  .faq-a { padding: 0 1rem 0 calc(1rem + 30px + 13px); }
+  .faq-item.open .faq-a { padding-bottom: 1rem; }
 }
 
   
@@ -2233,49 +2296,41 @@ footer {
     </div>
     <div class="noticias-grid">
 
-      
-      
       <article class="noticia reveal d1">
-        <a href="#" onclick="showArticle('art2'); return false;" class="noticia-thumb">
-          <img src="https://static.wixstatic.com/media/b93cef_0a28d37abca94573818cd1310ef9a071~mv2.jpg" alt="Salah Shriners e Bodes do Asfalto firmam parceria para 2026 e ampliam atuação conjunta em Santa Catarina" loading="lazy">
-        </a>
-        <div class="noticia-body">
-          <div class="noticia-meta"><span class="n-cat">Institucional</span><span class="n-date">02 Mar 2026</span></div>
-          <h3>Salah Shriners e Bodes do Asfalto firmam parceria para 2026 e ampliam atuação conjunta em Santa Catarina</h3>
-          <p></p>
-          <button onclick="showArticle('art2')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
-        </div>
-      </article>
-
-
-
-      
-      <article class="noticia reveal d2">
         <a href="#" onclick="showArticle('art0'); return false;" class="noticia-thumb">
-          <img src="images/noticias/profis1.jpg" alt="Reforma do PROFIS em Joinville se aproxima com apoio do Salah Shriners" loading="lazy">
+          <img src="images/noticias/profis1.jpg" alt="Reforma PROFIS Joinville" loading="lazy">
         </a>
         <div class="noticia-body">
-          <div class="noticia-meta"><span class="n-cat">Filantropia</span><span class="n-date">22 Mar 2026</span></div>
-          <h3>Reforma do PROFIS em Joinville se aproxima com apoio do Salah Shriners</h3>
-          <p></p>
-          <button onclick="showArticle('art0')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+          <div class="noticia-meta"><span class="n-cat" data-i18n="noticias.art0.cat">Filantropia</span><span class="n-date">22 Mar 2026</span></div>
+          <h3 data-i18n="noticias.art0.titulo">Reforma do PROFIS em Joinville se aproxima com apoio do Salah Shriners</h3>
+          <p data-i18n="noticias.art0.resumo">Visita técnica avalia condições do Centro de Convivência e define próximos passos para reforma viabilizada com recursos do Paddle Solidário.</p>
+          <button onclick="showArticle('art0')" class="n-link"><span data-i18n="noticias.lerMais">Ler mais</span> <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
         </div>
       </article>
 
-
-      
-      <article class="noticia reveal d3">
+      <article class="noticia reveal d2">
         <a href="#" onclick="showArticle('art1'); return false;" class="noticia-thumb">
-          <img src="images/noticias/posse1.jpg" alt="Salah Shriners empossa gestão 2026 e realiza seminário institucional" loading="lazy">
+          <img src="images/noticias/posse1.jpg" alt="Posse gestão 2026" loading="lazy">
         </a>
         <div class="noticia-body">
-          <div class="noticia-meta"><span class="n-cat">Institucional</span><span class="n-date">11 Mar 2026</span></div>
-          <h3>Salah Shriners empossa gestão 2026 e realiza seminário institucional</h3>
-          <p></p>
-          <button onclick="showArticle('art1')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+          <div class="noticia-meta"><span class="n-cat" data-i18n="noticias.art1.cat">Institucional</span><span class="n-date">11 Mar 2026</span></div>
+          <h3 data-i18n="noticias.art1.titulo">Salah Shriners empossa gestão 2026 e realiza seminário institucional</h3>
+          <p data-i18n="noticias.art1.resumo">Tarde de integração em Florianópolis reuniu cerca de 50 Nobres para seminários, formação e a cerimônia oficial de posse da gestão 2026.</p>
+          <button onclick="showArticle('art1')" class="n-link"><span data-i18n="noticias.lerMais">Ler mais</span> <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
         </div>
       </article>
 
+      <article class="noticia reveal d3">
+        <a href="#" onclick="showArticle('art2'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_0a28d37abca94573818cd1310ef9a071~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_0a28d37abca94573818cd1310ef9a071~mv2.jpg" alt="Parceria Bodes do Asfalto 2026" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat" data-i18n="noticias.art2.cat">Parceria</span><span class="n-date">02 Mar 2026</span></div>
+          <h3 data-i18n="noticias.art2.titulo">Salah Shriners e Bodes do Asfalto firmam parceria para 2026</h3>
+          <p data-i18n="noticias.art2.resumo">Acordo celebrado em Itajaí prevê ações integradas em apoio às causas filantrópicas voltadas às crianças em Santa Catarina.</p>
+          <button onclick="showArticle('art2')" class="n-link"><span data-i18n="noticias.lerMais">Ler mais</span> <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
 
     </div>
   </div>
@@ -2753,7 +2808,6 @@ function showFormError(btn, msg) {
 }
 
 const ARTICLES = [
-  
   {
     "id": "art0",
     "title": "Reforma do PROFIS em Joinville se aproxima com apoio do Salah Shriners",
@@ -3020,8 +3074,6 @@ function showSuccess(btn) {
     </div>
 
     <div class="noticias-grid">
-      
-
 
       <article class="noticia">
         <a href="#" onclick="showArticle('art1'); return false;" class="noticia-thumb">
