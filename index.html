@@ -245,17 +245,23 @@ p  { line-height: 1.78; color: var(--text-muted); }
 #mobile-nav a:not(.btn):hover { color: var(--gold); }
 .mob-nav-btns {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;   /* permite quebrar linha quando não cabe */
+  gap: 8px;
   margin-top: 1.4rem;
 }
 .mob-nav-btns .btn {
-  flex: 1;
+  flex: 1 1 calc(50% - 8px); /* 2 por linha por padrão */
+  min-width: 110px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 0.88rem;
-  padding: 11px 10px;
+  font-size: 0.85rem;
+  padding: 11px 8px;
+}
+/* Conecte-se: ocupa linha inteira (3º elemento quebra para nova linha) */
+.mob-nav-btns .btn:last-child {
+  flex: 1 1 100%;
 }
 
 /* ================================================
@@ -1399,7 +1405,13 @@ textarea { resize: vertical; min-height: 128px; }
   display: none;
 }
 @media(max-width:600px){
-  .parceiros-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  /* overflow:hidden no *item* do grid faz min-width:auto = 0 (CSS spec §9.6.3)
+     — elimina o overflow sem precisar de minmax() ou min-width:0 explícito.
+     Resultado: colunas dividem espaço igualmente sem transbordar. */
+  .parceiros-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 24px; }
+  .parceiro-card  { overflow: hidden; padding: 12px 8px 10px; min-height: 76px;
+                    border-radius: 10px; box-shadow: 0 1px 8px rgba(0,0,0,0.07); }
+  .parceiro-card img { max-width: 100%; max-height: 42px; width: auto; }
 }
 
 /* ================================================
@@ -1573,8 +1585,15 @@ footer {
   .slide-content.sc-reverse { padding-bottom: 5.5rem; }
   /* Seção Sobre: evita que filhos absolutamente posicionados causem overflow horizontal */
   #sobre { overflow: hidden; }
+  /* Seções principais: overflow hidden como proteção extra contra scroll lateral */
+  #parceiros, #noticias, #diretoria, #faq, #doacao, #contato, footer { overflow: hidden; }
+  /* Hero em mobile: reduz para 70vh para as imagens não ficarem gigantes.
+     Com 100vh num iPhone de 844px, o cover precisa escalar muito, aparecendo "enorme". */
+  #hero { height: 70vh; height: 70svh; min-height: 500px; }
   /* Botões do hero em coluna em mobile */
   .hero-btns .btn { width: 100%; max-width: 320px; justify-content: center; }
+  /* Slides de fundo: mostra a parte superior/central das imagens, mais relevante em portrait */
+  .hero-slide { background-position: center 30%; }
   /* Stats: coloca borda inferior na última célula também */
   #stats { padding: 24px 0; }
   /* Seção missão: garante padding adequado em 1 coluna */
@@ -1614,15 +1633,19 @@ footer {
   /* Stats: padding reduzido em telas de 480px */
   .stat-cell    { padding: 1.2rem 0.75rem; }
 
-  /* Seção notícias: reduz margem do cabeçalho */
+  /* Notícias/galeria: molduras mais compactas no mesmo padrão dos parceiros */
   .noticias-header { margin-bottom: 28px; }
+  .noticia-thumb   { height: 170px; }
+  .noticia-body    { padding: 1.1rem 1rem; }
+  .noticia h3      { font-size: 0.95rem; }
+  .noticia p       { font-size: 0.84rem; }
 
   /* Ajustes de tipografia para leitura melhor em mobile */
   h1 { font-size: clamp(2rem, 8vw, 2.4rem); }
   h2 { font-size: clamp(1.6rem, 6vw, 1.9rem); }
 
-  /* Parceiros: cards menores em smartphones */
-  .parceiro-card { padding: 16px 12px; }
+  /* Parceiros: mantém padding compacto (definido no 600px breakpoint) */
+  .parceiro-card { padding: 12px 8px 10px; }
 
   /* Botões no hero: espaçamento adequado */
   .hero-btns { gap: 10px; }
