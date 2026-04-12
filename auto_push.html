@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Salah Shriners — Push para GitHub</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 20px; background: #f8f6f1; }
+  h1 { color: #8b1a2e; font-size: 24px; }
+  .card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin: 20px 0; }
+  .steps { counter-reset: step; list-style: none; padding: 0; }
+  .steps li { counter-increment: step; display: flex; gap: 14px; align-items: flex-start; margin-bottom: 18px; }
+  .steps li::before { content: counter(step); background: #8b1a2e; color: #fff; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; font-size: 14px; }
+  .steps li .text { padding-top: 4px; line-height: 1.5; }
+  .steps li .text strong { color: #8b1a2e; }
+  .img-hint { background: #f0f0f0; border-radius: 8px; padding: 10px 14px; margin-top: 8px; font-size: 13px; color: #555; border-left: 3px solid #8b1a2e; }
+  button.main { background: #8b1a2e; color: #fff; border: none; padding: 14px 32px; border-radius: 10px; font-size: 17px; cursor: pointer; margin-top: 4px; display: block; }
+  button.main:hover { background: #a82035; }
+  button.main:disabled { background: #aaa; cursor: not-allowed; }
+  button.test { background: #1a5276; color: #fff; border: none; padding: 10px 22px; border-radius: 8px; font-size: 14px; cursor: pointer; margin-top: 8px; }
+  button.test:hover { background: #2471a3; }
+  input[type=password] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
+  #log { margin-top: 16px; font-family: monospace; font-size: 13px; max-height: 400px; overflow-y: auto; background: #1a1a1a; color: #eee; padding: 16px; border-radius: 8px; display: none; white-space: pre-wrap; }
+  .ok { color: #4caf50; } .err { color: #f44336; } .info { color: #90caf9; } .warn { color: #ffcc00; }
+  #progress { margin-top: 12px; height: 10px; background: #eee; border-radius: 5px; overflow: hidden; display: none; }
+  #bar { height: 100%; background: #8b1a2e; transition: width 0.3s; width: 0; }
+  #status-txt { font-size: 13px; color: #555; margin-top: 6px; display: none; }
+  .alert { background: #fff8e1; border: 1px solid #ffc107; border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-size: 14px; }
+  .alert strong { color: #e65100; }
+  .success-banner { background: #e8f5e9; border: 2px solid #4caf50; border-radius: 10px; padding: 16px 20px; font-size: 16px; display: none; }
+  #browser-warning {
+    display: none;
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.82);
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  #browser-warning.show { display: flex; }
+  .bw-box {
+    background: #fff; border-radius: 16px;
+    max-width: 460px; width: 100%;
+    padding: 36px 32px 28px;
+    text-align: center;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.4);
+  }
+  .bw-box .bw-icon { font-size: 3rem; margin-bottom: 14px; }
+  .bw-box h2 { color: #8b1a2e; font-size: 1.25rem; margin-bottom: 10px; }
+  .bw-box p  { font-size: .92rem; color: #444; line-height: 1.6; margin-bottom: 20px; }
+  .bw-box .bw-btn {
+    display: inline-block;
+    background: #8b1a2e; color: #fff;
+    padding: 11px 28px; border-radius: 8px;
+    font-size: .95rem; font-weight: 700;
+    text-decoration: none; cursor: pointer;
+    border: none; font-family: system-ui, sans-serif;
+  }
+  .bw-box .bw-browser { font-size: .8rem; color: #888; margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<!-- AVISO: NAVEGADOR INCOMPATÍVEL -->
+<div id="browser-warning">
+  <div class="bw-box">
+    <div class="bw-icon">🌐</div>
+    <h2>Abra no Google Chrome</h2>
+    <p>
+      Esta ferramenta usa uma tecnologia chamada <strong>File System Access API</strong>
+      que só funciona no <strong>Google Chrome</strong> ou <strong>Microsoft Edge</strong>.<br><br>
+      O seu navegador atual (<span id="bw-browser-name">Safari / Firefox</span>) não é compatível.
+    </p>
+    <button class="bw-btn" onclick="openInChrome()" style="margin-bottom:10px;width:100%;font-size:1rem">
+      🚀 Abrir no Chrome
+    </button>
+
+    <div id="bw-path-box" style="display:none;margin:10px 0;text-align:left">
+      <p style="font-size:.8rem;color:#555;margin:0 0 6px">Ou copie o caminho abaixo e cole na barra de endereços do Chrome:</p>
+      <div style="display:flex;gap:6px;align-items:center">
+        <input id="bw-path-input" type="text" readonly
+          style="flex:1;padding:8px 10px;border:1px solid #ddd;border-radius:7px;font-size:.78rem;font-family:monospace;background:#f5f5f5;color:#333">
+        <button onclick="copyPath()"
+          style="background:#8b1a2e;color:#fff;border:none;border-radius:7px;padding:8px 14px;font-size:.82rem;cursor:pointer;white-space:nowrap"
+          id="bw-copy-btn">Copiar</button>
+      </div>
+      <p style="font-size:.75rem;color:#888;margin:6px 0 0">No Chrome: pressione <strong>Cmd+L</strong>, cole e pressione Enter.</p>
+    </div>
+
+    <a class="bw-btn" href="https://www.google.com/chrome/" target="_blank"
+       style="display:block;width:100%;box-sizing:border-box;background:#777;margin-top:6px;font-size:.85rem">
+      ⬇️ Não tenho o Chrome — Baixar agora
+    </a>
+  </div>
+</div>
+
+<h1>🏛️ Salah Shriners — Enviar para GitHub</h1>
+
+<!-- INSTRUÇÕES PASSO A PASSO -->
+<div class="card">
+  <h2 style="margin-top:0; font-size:17px; color:#333;">📋 Siga exatamente estes passos:</h2>
+  <ol class="steps">
+    <li>
+      <div class="text">
+        Digite o Token GitHub no campo abaixo e clique em <strong>"Verificar Token"</strong> para confirmar.
+      </div>
+    </li>
+    <li>
+      <div class="text">
+        Clique no botão vermelho <strong>"Selecionar Pasta e Enviar"</strong>.
+      </div>
+    </li>
+    <li>
+      <div class="text">
+        Uma janela do Finder vai abrir. <strong>Navegue até a pasta "Site"</strong> (a mesma pasta onde este arquivo está).
+        <div class="img-hint">
+          💡 Dica: No Mac, essa janela parece um "Abrir Arquivo". Você vai ver as suas pastas. Clique em "Site" uma vez para selecioná-la e depois clique no botão <strong>"Selecionar"</strong> (ou "Abrir") no canto inferior direito da janela.
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="text">
+        O Chrome pode mostrar um aviso <em>"salahshriners.org quer ver arquivos"</em> — clique <strong>"Permitir"</strong> (ou "Allow").
+      </div>
+    </li>
+    <li>
+      <div class="text">
+        Aguarde. O progresso aparecerá abaixo. <strong>Não feche esta janela</strong> enquanto o upload estiver em andamento.
+      </div>
+    </li>
+  </ol>
+</div>
+
+<!-- TOKEN -->
+<div class="card">
+  <p style="margin-top:0"><strong>Token GitHub</strong>:</p>
+  <input type="password" id="token" placeholder="ghp_... ou github_pat_..." autocomplete="off">
+  <button class="test" onclick="testToken()">🔑 Verificar Token</button>
+  <div id="token-result" style="margin-top:8px; font-size:13px;"></div>
+</div>
+
+<!-- BOTÃO PRINCIPAL -->
+<div class="card" style="text-align:center">
+  <p style="margin:0 0 8px; font-size:15px;">Depois de ler as instruções acima, clique aqui:</p>
+  <button class="main" id="btn" onclick="startPush()">📁 Selecionar Pasta e Enviar</button>
+  <div id="progress"><div id="bar"></div></div>
+  <div id="status-txt"></div>
+  <div class="success-banner" id="success">
+    ✅ <strong>Upload concluído!</strong> Aguarde ~1 minuto e acesse <a href="https://salahshriners.org" target="_blank">salahshriners.org</a> para verificar.
+  </div>
+</div>
+
+<!-- LOG -->
+<div id="log"></div>
+
+<script>
+/* Abrir no Chrome */
+function openInChrome() {
+  const url = window.location.href;
+
+  if (url.startsWith('file://')) {
+    // Arquivo local: mostrar caminho para copiar
+    const pathInput = document.getElementById('bw-path-input');
+    const pathBox   = document.getElementById('bw-path-box');
+    pathInput.value = url;
+    pathBox.style.display = 'block';
+    pathInput.select();
+    // Tentar copiar automaticamente
+    try { navigator.clipboard.writeText(url); showCopied(); } catch(_) {}
+  } else {
+    // URL web: usar protocolo googlechrome://
+    const chromeUrl = url
+      .replace(/^https:\/\//, 'googlechromes://')
+      .replace(/^http:\/\//, 'googlechrome://');
+    window.location.href = chromeUrl;
+  }
+}
+
+function copyPath() {
+  const val = document.getElementById('bw-path-input').value;
+  navigator.clipboard.writeText(val).then(showCopied).catch(() => {
+    document.getElementById('bw-path-input').select();
+    document.execCommand('copy');
+    showCopied();
+  });
+}
+
+function showCopied() {
+  const btn = document.getElementById('bw-copy-btn');
+  if (!btn) return;
+  btn.textContent = '✓ Copiado!';
+  btn.style.background = '#2e7d32';
+  setTimeout(() => { btn.textContent = 'Copiar'; btn.style.background = '#8b1a2e'; }, 2500);
+}
+
+/* Detecção de navegador compatível */
+(function () {
+  if (typeof window.showDirectoryPicker !== 'function') {
+    const warn = document.getElementById('browser-warning');
+    const nameEl = document.getElementById('bw-browser-name');
+    const ua = navigator.userAgent;
+    let name = 'este navegador';
+    if (/Safari/.test(ua) && !/Chrome/.test(ua)) name = 'Safari';
+    else if (/Firefox/.test(ua)) name = 'Firefox';
+    else if (/OPR|Opera/.test(ua)) name = 'Opera';
+    nameEl.textContent = name;
+    warn.classList.add('show');
+    // Desabilitar botão principal
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('btn');
+      if (btn) { btn.disabled = true; btn.title = 'Abra no Google Chrome para usar esta função.'; }
+    });
+  }
+})();
+
+const OWNER = 'salahshriners';
+const REPO  = 'salah-shriners';
+const BRANCH = 'main';
+
+const FILES = [
+  'index.html',
+  'images/inline/inline_17.jpg',
+  'images/inline/inline_18.jpg',
+  'images/inline/inline_19.jpg',
+  'images/inline/inline_03.png',
+  'images/inline/inline_04.png',
+  'images/inline/inline_05.png',
+  'images/inline/inline_06.png',
+  'images/inline/inline_07.png',
+  'images/inline/inline_08.png',
+  'images/inline/inline_09.png',
+  'images/inline/inline_10.png',
+  'images/inline/inline_11.png',
+  'images/inline/inline_12.png',
+  'images/inline/inline_13.png',
+  'images/inline/inline_14.png',
+  'images/inline/inline_15.png',
+  'images/inline/inline_16.png',
+  'images/logo/brasao-vetorizado-transp.png',
+  'images/logo/Logo Shriners Hospital-transp.png',
+  'images/logo/Shriners International-transp.png',
+  'images/logo/menina-no-colo.png',
+  'images/parceiros/dromedary-2023.png',
+  'images/parceiros/dromedary-2025.png',
+  'images/conteudo/dir_mario.jpg',
+  'images/conteudo/dir_leopoldo.jpg',
+  'images/conteudo/dir_buch.jpg',
+  'images/conteudo/dir_marcelo_web.jpg',
+  'images/conteudo/dir_delcio_web.jpg',
+  'images/conteudo/dir_bressan_web.jpg',
+  'images/conteudo/dir_allan_web.jpg',
+  'images/conteudo/celebrating-100-years.jpg',
+  'images/pilares/Fraternidade.jpg',
+  'images/pilares/Filantropia.jpg',
+  'images/pilares/Familia.jpg',
+  'images/noticias/posse1.jpg',
+  'images/noticias/profis1.jpg',
+  'admin.html',
+  'auto_push.html',
+];
+
+function log(msg, cls) {
+  const div = document.getElementById('log');
+  div.style.display = 'block';
+  div.innerHTML += `<span class="${cls||''}">${msg}</span>\n`;
+  div.scrollTop = div.scrollHeight;
+}
+
+function setStatus(msg) {
+  const el = document.getElementById('status-txt');
+  el.style.display = 'block';
+  el.textContent = msg;
+}
+
+async function testToken() {
+  const token = document.getElementById('token').value.trim();
+  const res = document.getElementById('token-result');
+  res.textContent = '⏳ Verificando...';
+  try {
+    const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}`, {
+      headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (r.ok) {
+      res.innerHTML = '<span style="color:green">✅ Token válido! Repositório acessível.</span>';
+    } else {
+      const j = await r.json();
+      res.innerHTML = `<span style="color:red">❌ Erro ${r.status}: ${j.message}</span>`;
+    }
+  } catch(e) {
+    res.innerHTML = `<span style="color:red">❌ Erro de rede: ${e.message}</span>`;
+  }
+}
+
+function ab2b64(buf) {
+  const bytes = new Uint8Array(buf);
+  let binary = '';
+  const CHUNK = 8192;
+  for (let i = 0; i < bytes.length; i += CHUNK)
+    binary += String.fromCharCode(...bytes.subarray(i, Math.min(i + CHUNK, bytes.length)));
+  return btoa(binary);
+}
+
+async function getHandle(root, path) {
+  const parts = path.split('/');
+  let cur = root;
+  for (let i = 0; i < parts.length - 1; i++) {
+    try { cur = await cur.getDirectoryHandle(parts[i]); }
+    catch(e) { return null; }
+  }
+  try { return await cur.getFileHandle(parts[parts.length - 1]); }
+  catch(e) { return null; }
+}
+
+async function ghGet(token, path) {
+  const r = await fetch(
+    `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`,
+    { headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' } }
+  );
+  if (r.status === 404) return null;
+  return r.json();
+}
+
+async function ghPut(token, path, b64, sha, msg) {
+  const body = { message: msg, content: b64, branch: BRANCH };
+  if (sha) body.sha = sha;
+  const r = await fetch(
+    `https://api.github.com/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(path).replace(/%2F/g, '/')}`,
+    {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'token ' + token,
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.github.v3+json'
+      },
+      body: JSON.stringify(body)
+    }
+  );
+  const j = await r.json();
+  j._status = r.status;
+  return j;
+}
+
+async function startPush() {
+  const token = document.getElementById('token').value.trim();
+  if (!token) { alert('Token não encontrado!'); return; }
+
+  let root;
+  try {
+    root = await window.showDirectoryPicker({ mode: 'read' });
+  } catch(e) {
+    if (e.name === 'AbortError') {
+      alert('⚠️ Você cancelou a seleção de pasta.\n\nClique no botão novamente e selecione a pasta "Site".\n\nNa janela que abrir, clique UMA VEZ em "Site" e depois clique em "Selecionar" no canto inferior direito.');
+    } else {
+      alert('Erro: ' + e.message);
+    }
+    return;
+  }
+
+  log(`📂 Pasta selecionada: "${root.name}"`, 'info');
+
+  if (root.name !== 'Site') {
+    const ok = confirm(`⚠️ Você selecionou a pasta "${root.name}".\n\nA pasta correta é "Site".\n\nDeseja continuar mesmo assim? (Se os arquivos estiverem nesta pasta, pode funcionar.)`);
+    if (!ok) { log('Operação cancelada pelo usuário.', 'warn'); return; }
+  }
+
+  document.getElementById('btn').disabled = true;
+  document.getElementById('progress').style.display = 'block';
+  log(`\n🚀 Iniciando envio de ${FILES.length} arquivos para GitHub...\n`, 'info');
+
+  let done = 0, uploaded = 0, notFound = 0, errors = 0;
+
+  for (const filePath of FILES) {
+    document.getElementById('bar').style.width = Math.round(done / FILES.length * 100) + '%';
+    setStatus(`Enviando ${done + 1} de ${FILES.length}: ${filePath}`);
+
+    const handle = await getHandle(root, filePath);
+    if (!handle) {
+      log(`⚠ Não encontrado: ${filePath}`, 'warn');
+      notFound++;
+      done++;
+      continue;
+    }
+
+    const file = await handle.getFile();
+    const ab = await file.arrayBuffer();
+    const b64 = ab2b64(ab);
+    const sizeKB = Math.round(ab.byteLength / 1024);
+
+    // Get existing SHA
+    let sha = null;
+    try {
+      const existing = await ghGet(token, filePath);
+      if (existing && existing.sha) sha = existing.sha;
+    } catch(e) { /* file doesn't exist yet */ }
+
+    // Upload
+    try {
+      const result = await ghPut(token, filePath, b64, sha, `Upload: ${filePath}`);
+      if (result._status === 200 || result._status === 201) {
+        log(`✅ ${filePath} (${sizeKB} KB) — ${sha ? 'atualizado' : 'criado'}`, 'ok');
+        uploaded++;
+      } else {
+        log(`❌ Erro em ${filePath}: ${result.message || JSON.stringify(result)}`, 'err');
+        errors++;
+      }
+    } catch(e) {
+      log(`❌ Falha de rede em ${filePath}: ${e.message}`, 'err');
+      errors++;
+    }
+
+    done++;
+    // Small delay to avoid rate limiting
+    await new Promise(r => setTimeout(r, 300));
+  }
+
+  document.getElementById('bar').style.width = '100%';
+  setStatus('');
+
+  log(`\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`, 'info');
+  log(`📊 Resultado:`, 'info');
+  log(`   ✅ Enviados com sucesso: ${uploaded}`, 'ok');
+  if (notFound > 0) log(`   ⚠  Não encontrados: ${notFound}`, 'warn');
+  if (errors > 0)   log(`   ❌ Erros: ${errors}`, 'err');
+  log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`, 'info');
+
+  document.getElementById('btn').disabled = false;
+
+  if (errors === 0) {
+    document.getElementById('success').style.display = 'block';
+    log('🎉 Aguarde ~1 minuto e acesse salahshriners.org!', 'ok');
+  } else {
+    log('⚠ Alguns arquivos falharam. Tente novamente.', 'warn');
+  }
+}
+
+// ── Deploy via servidor local (sem showDirectoryPicker) ─────────────────────
+async function startPushViaServer(token) {
+  if (!token) { token = document.getElementById('token').value.trim(); }
+  if (!token) { log('❌ Token não informado.', 'err'); return; }
+
+  document.getElementById('btn').disabled = true;
+  document.getElementById('progress').style.display = 'block';
+  document.getElementById('log').style.display = 'block';
+  log(`\n🌐 Deploy via servidor local (localhost:8765)...\n`, 'info');
+  log(`🚀 Enviando ${FILES.length} arquivos para GitHub...\n`, 'info');
+
+  let done = 0, uploaded = 0, notFound = 0, errors = 0;
+
+  for (const filePath of FILES) {
+    document.getElementById('bar').style.width = Math.round(done / FILES.length * 100) + '%';
+    setStatus(`Enviando ${done + 1} de ${FILES.length}: ${filePath}`);
+
+    let ab;
+    try {
+      const resp = await fetch('http://localhost:8765/' + filePath);
+      if (!resp.ok) { log(`⚠ Não encontrado no servidor: ${filePath}`, 'warn'); notFound++; done++; continue; }
+      ab = await resp.arrayBuffer();
+    } catch(e) {
+      log(`⚠ Falha ao buscar no servidor: ${filePath} — ${e.message}`, 'warn');
+      notFound++; done++; continue;
+    }
+
+    const b64 = ab2b64(ab);
+    const sizeKB = Math.round(ab.byteLength / 1024);
+
+    let sha = null;
+    try {
+      const existing = await ghGet(token, filePath);
+      if (existing && existing.sha) sha = existing.sha;
+    } catch(e) { /* novo arquivo */ }
+
+    try {
+      const result = await ghPut(token, filePath, b64, sha, `Upload: ${filePath}`);
+      if (result._status === 200 || result._status === 201) {
+        log(`✅ ${filePath} (${sizeKB} KB) — ${sha ? 'atualizado' : 'criado'}`, 'ok');
+        uploaded++;
+      } else {
+        log(`❌ Erro em ${filePath}: ${result.message || JSON.stringify(result)}`, 'err');
+        errors++;
+      }
+    } catch(e) {
+      log(`❌ Falha de rede em ${filePath}: ${e.message}`, 'err');
+      errors++;
+    }
+
+    done++;
+    await new Promise(r => setTimeout(r, 300));
+  }
+
+  document.getElementById('bar').style.width = '100%';
+  setStatus('');
+  document.getElementById('btn').disabled = false;
+
+  log(`\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`, 'info');
+  log(`📊 Resultado:`, 'info');
+  log(`   ✅ Enviados com sucesso: ${uploaded}`, 'ok');
+  if (notFound > 0) log(`   ⚠  Não encontrados: ${notFound}`, 'warn');
+  if (errors > 0)   log(`   ❌ Erros: ${errors}`, 'err');
+  log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`, 'info');
+
+  if (errors === 0) {
+    document.getElementById('success').style.display = 'block';
+    log('🎉 Aguarde ~1 minuto e acesse salahshriners.org!', 'ok');
+  } else {
+    log('⚠ Alguns arquivos falharam. Tente novamente.', 'warn');
+  }
+}
+</script>
+</body>
+</html>
