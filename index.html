@@ -1802,7 +1802,7 @@ footer {
   border-radius: 14px;
   box-shadow: 0 8px 36px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
   overflow: hidden;
-  min-width: 170px;
+  min-width: 110px;
   z-index: 9999;
   animation: langFadeIn 0.15s ease;
 }
@@ -1817,8 +1817,8 @@ footer {
 .lang-opt {
   display: flex;
   align-items: center;
-  gap: 11px;
-  padding: 0 14px 0 0;
+  gap: 8px;
+  padding: 6px 10px;
   width: 100%;
   border: none;
   background: none;
@@ -1829,21 +1829,23 @@ footer {
   text-decoration: none;
 }
 .lang-opt:last-child { border-bottom: none; }
-.lang-opt:hover { background: #f8f8f8; }
+.lang-opt:hover { background: #f5f5f5; }
 .lang-opt.active { background: #fdf6f6; }
 
-/* Bandeira — fundo real da bandeira em SVG */
+/* Bandeira pequena */
 .lang-opt-flag-box {
-  width: 52px;
-  min-width: 52px;
-  height: 44px;
+  width: 36px;
+  min-width: 36px;
+  height: 26px;
+  border-radius: 3px;
   overflow: hidden;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   line-height: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.18);
 }
 
 /* Bandeiras reais via gradientes CSS */
@@ -1884,33 +1886,19 @@ footer {
   filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
 }
 
-.lang-opt-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1px;
-  padding-right: 14px;
-}
 .lang-opt-code {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: #1a1a1a;
-  letter-spacing: 0.3px;
-}
-.lang-opt-name {
-  font-size: 0.7rem;
-  color: #888;
-  font-weight: 400;
+  letter-spacing: 0.5px;
 }
 .lang-opt.active .lang-opt-code { color: var(--crimson, #841515); }
-.lang-opt.active .lang-opt-name { color: #b05050; }
 
 /* Indicador ativo */
 .lang-opt-check {
   margin-left: auto;
-  margin-right: 12px;
   color: var(--crimson, #841515);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   display: none;
 }
 .lang-opt.active .lang-opt-check { display: block; }
@@ -1983,26 +1971,23 @@ footer {
             <line x1="2" y1="12" x2="22" y2="12"/>
             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
           </svg>
-          <span class="lang-current-label" id="lang-current-label">PT</span>
+          <span class="lang-current-label" id="lang-current-label">BR</span>
           <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="lang-dropdown" id="lang-dropdown">
           <button class="lang-opt active" data-lang="pt" onclick="setLang('pt'); closeLangDropdown()">
             <span class="lang-opt-flag-box flag-br"></span>
-            <span class="lang-opt-code">PT</span>
-            <span class="lang-opt-name">Português</span>
+            <span class="lang-opt-code">BR</span>
             <span class="lang-opt-check">✓</span>
           </button>
           <button class="lang-opt" data-lang="en" onclick="setLang('en'); closeLangDropdown()">
             <span class="lang-opt-flag-box flag-en"></span>
             <span class="lang-opt-code">EN</span>
-            <span class="lang-opt-name">English</span>
             <span class="lang-opt-check">✓</span>
           </button>
           <button class="lang-opt" data-lang="es" onclick="setLang('es'); closeLangDropdown()">
             <span class="lang-opt-flag-box flag-es"></span>
             <span class="lang-opt-code">ES</span>
-            <span class="lang-opt-name">Español</span>
             <span class="lang-opt-check">✓</span>
           </button>
         </div>
@@ -2031,26 +2016,23 @@ footer {
         <line x1="2" y1="12" x2="22" y2="12"/>
         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
       </svg>
-      <span class="lang-current-label" id="lang-current-label-mob">PT</span>
+      <span class="lang-current-label" id="lang-current-label-mob">BR</span>
       <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="lang-dropdown" id="lang-dropdown-mob">
       <button class="lang-opt active" data-lang="pt" onclick="setLang('pt'); closeLangDropdown('mob'); closeNav()">
         <span class="lang-opt-flag-box flag-br"></span>
-        <span class="lang-opt-code">PT</span>
-        <span class="lang-opt-name">Português</span>
+        <span class="lang-opt-code">BR</span>
         <span class="lang-opt-check">✓</span>
       </button>
       <button class="lang-opt" data-lang="en" onclick="setLang('en'); closeLangDropdown('mob'); closeNav()">
         <span class="lang-opt-flag-box flag-en"></span>
         <span class="lang-opt-code">EN</span>
-        <span class="lang-opt-name">English</span>
         <span class="lang-opt-check">✓</span>
       </button>
       <button class="lang-opt" data-lang="es" onclick="setLang('es'); closeLangDropdown('mob'); closeNav()">
         <span class="lang-opt-flag-box flag-es"></span>
         <span class="lang-opt-code">ES</span>
-        <span class="lang-opt-name">Español</span>
         <span class="lang-opt-check">✓</span>
       </button>
     </div>
@@ -4015,7 +3997,7 @@ function setLang(lang) {
   });
 
   // Update globe dropdown: active option + label
-  const labelMap = { pt: 'PT', en: 'EN', es: 'ES' };
+  const labelMap = { pt: 'BR', en: 'EN', es: 'ES' };
   const label = labelMap[lang] || lang.toUpperCase();
   ['lang-current-label', 'lang-current-label-mob'].forEach(id => {
     const el = document.getElementById(id);
