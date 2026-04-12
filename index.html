@@ -259,7 +259,7 @@ p  { line-height: 1.78; color: var(--text-muted); }
   font-size: 0.85rem;
   padding: 11px 8px;
 }
-/* Conecte-se: ocupa linha inteira (3º elemento quebra para nova linha) */
+/* Seja um Shriner: ocupa linha inteira (último elemento quebra para nova linha) */
 .mob-nav-btns .btn:last-child {
   flex: 1 1 100%;
 }
@@ -1980,48 +1980,7 @@ footer {
   <a href="#parceiros" onclick="closeNav()" data-i18n="nav.parceiros">Parceiros</a>
   <a href="#noticias"  onclick="closeNav()" data-i18n="nav.noticias">Notícias</a>
   <a href="#contato"   onclick="closeNav()" data-i18n="nav.contato">Contato</a>
-  <!-- Mobile Language Switcher -->
-  <div class="lang-globe-wrap lang-globe-wrap-mobile" id="lang-switcher-mob">
-    <button class="lang-globe-btn" onclick="toggleLangDropdown(event, 'mob')" aria-label="Selecionar idioma">
-      <svg class="lang-globe-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <ellipse cx="12" cy="12" rx="4" ry="10"/>
-        <line x1="2" y1="12" x2="22" y2="12"/>
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-      </svg>
-      <span class="lang-current-label" id="lang-current-label-mob">BR</span>
-      <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-    </button>
-    <div class="lang-dropdown" id="lang-dropdown-mob">
-      <button class="lang-opt active" data-lang="pt" onclick="setLang('pt'); closeLangDropdown('mob'); closeNav()">
-        <span class="lang-opt-flag-box flag-br"></span>
-        <span class="lang-opt-code">BR</span>
-        <span class="lang-opt-check">✓</span>
-      </button>
-      <button class="lang-opt" data-lang="en" onclick="setLang('en'); closeLangDropdown('mob'); closeNav()">
-        <span class="lang-opt-flag-box flag-en"></span>
-        <span class="lang-opt-code">EN</span>
-        <span class="lang-opt-check">✓</span>
-      </button>
-      <button class="lang-opt" data-lang="es" onclick="setLang('es'); closeLangDropdown('mob'); closeNav()">
-        <span class="lang-opt-flag-box flag-es"></span>
-        <span class="lang-opt-code">ES</span>
-        <span class="lang-opt-check">✓</span>
-      </button>
-      <button class="lang-opt" data-lang="fr" onclick="setLang('fr'); closeLangDropdown('mob'); closeNav()">
-        <span class="lang-opt-flag-box flag-fr"></span>
-        <span class="lang-opt-code">FR</span>
-        <span class="lang-opt-check">✓</span>
-      </button>
-      <button class="lang-opt" data-lang="de" onclick="setLang('de'); closeLangDropdown('mob'); closeNav()">
-        <span class="lang-opt-flag-box flag-de"></span>
-        <span class="lang-opt-code">DE</span>
-        <span class="lang-opt-check">✓</span>
-      </button>
-    </div>
-  </div>
   <div class="mob-nav-btns">
-    <a href="https://salahshriners.com/inscricao/" target="_blank" onclick="closeNav()" class="btn btn-gold" data-i18n="nav.sejaShriner">Seja um Shriner</a>
     <a href="#doacao" onclick="closeNav()" class="btn btn-outline-w" data-i18n="nav.doe">Doe Agora</a>
     <a href="https://salahshriners.com" target="_blank" class="btn btn-conecte" style="display:inline-flex;align-items:center;gap:6px;">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -2031,6 +1990,7 @@ footer {
       </svg>
       <span data-i18n="nav.conecte">Conecte-se</span>
     </a>
+    <a href="https://salahshriners.com/inscricao/" target="_blank" onclick="closeNav()" class="btn btn-gold" data-i18n="nav.sejaShriner">Seja um Shriner</a>
   </div>
 </div>
 
