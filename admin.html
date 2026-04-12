@@ -180,74 +180,108 @@
     .upload-area .upload-icon { font-size: 2rem; display: block; margin-bottom: 8px; }
     .upload-area p { font-size: 0.88rem; color: #777; pointer-events: none; }
     .upload-area p strong { color: var(--crimson); }
-    .cover-preview-wrap { margin-top: 14px; }
+    .cover-preview-wrap {
+      margin-top: 14px;
+      position: relative;
+      display: inline-block;
+      max-width: 100%;
+    }
     .cover-preview-wrap img {
       max-width: 100%;
-      max-height: 220px;
+      max-height: 240px;
       border-radius: 8px;
       object-fit: cover;
       box-shadow: var(--shadow);
+      display: block;
     }
-    .photos-preview-grid {
-      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px;
-    }
-    .photos-preview-grid .thumb-wrap { position: relative; }
-    .photos-preview-grid img {
-      width: 90px; height: 70px;
-      object-fit: cover;
-      border-radius: 6px;
-      border: 2px solid var(--border);
-    }
-    .thumb-remove {
-      position: absolute; top: -6px; right: -6px;
+    .cover-remove-btn {
+      position: absolute; top: -10px; right: -10px;
       background: var(--crimson); color: #fff;
-      border: none; border-radius: 50%;
-      width: 20px; height: 20px;
-      font-size: 11px; cursor: pointer;
+      border: 2.5px solid #fff; border-radius: 50%;
+      width: 28px; height: 28px;
+      font-size: 14px; font-weight: 700; line-height: 1;
+      cursor: pointer; z-index: 2;
       display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      transition: background .15s, transform .15s;
     }
+    .cover-remove-btn:hover { background: #6e1010; transform: scale(1.15); }
+    .cover-edit-btn {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.62); color: #fff;
+      border: none; border-radius: 0 0 7px 7px;
+      padding: 7px 0; font-size: 12px; font-weight: 600;
+      cursor: pointer; opacity: 0;
+      transition: opacity .2s;
+      font-family: 'Source Sans 3', sans-serif;
+      width: 100%; letter-spacing: .01em;
+    }
+    .cover-preview-wrap:hover .cover-edit-btn { opacity: 1; }
+    .photos-preview-grid {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px;
+    }
+    .photos-preview-grid .thumb-wrap {
+      position: relative; display: inline-block;
+    }
+    .photos-preview-grid img {
+      width: 116px; height: 86px;
+      object-fit: cover;
+      border-radius: 7px;
+      border: 2px solid var(--border);
+      display: block;
+      transition: border-color .2s;
+    }
+    .thumb-wrap:hover img { border-color: var(--crimson); }
+    .thumb-remove {
+      position: absolute; top: -8px; right: -8px;
+      background: var(--crimson); color: #fff;
+      border: 2.5px solid #fff; border-radius: 50%;
+      width: 24px; height: 24px;
+      font-size: 13px; font-weight: 700; line-height: 1;
+      cursor: pointer; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      transition: background .15s, transform .15s;
+    }
+    .thumb-remove:hover { background: #6e1010; transform: scale(1.15); }
+    .thumb-edit {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.62); color: #fff;
+      border: none; border-radius: 0 0 5px 5px;
+      padding: 4px 0; font-size: 11px; font-weight: 600;
+      cursor: pointer; opacity: 0;
+      transition: opacity .2s;
+      font-family: 'Source Sans 3', sans-serif;
+      width: 100%;
+    }
+    .thumb-wrap:hover .thumb-edit { opacity: 1; }
     .existing-cover-info {
       font-size: 0.8rem; color: #888; margin-top: 8px;
       background: #f5f5f5; border-radius: 6px; padding: 6px 10px;
     }
 
-    /* ---- PARAGRAPHS ---- */
-    .paragraphs-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 10px;
-    }
-    .paragraph-block {
-      display: flex; gap: 10px; align-items: flex-start;
-      margin-bottom: 12px;
-    }
-    .paragraph-block textarea {
-      flex: 1;
-      padding: 11px 14px;
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      font-size: 0.92rem;
-      font-family: 'Source Sans 3', sans-serif;
-      line-height: 1.55;
+    /* ---- ARTICLE BODY (textarea única) ---- */
+    .article-body-editor { display: flex; flex-direction: column; }
+    .article-body-editor textarea {
+      border-radius: 0 0 7px 7px !important;
+      min-height: 300px;
       resize: vertical;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      font-family: 'Source Sans 3', sans-serif;
+      line-height: 1.75;
       background: #fafafa;
+      border: 1px solid var(--border);
+      border-top: none;
+      color: var(--text);
+      transition: border-color .2s, background .2s;
     }
-    .paragraph-block textarea:focus {
+    .article-body-editor textarea:focus {
       outline: none; border-color: var(--crimson); background: #fff;
     }
-    .paragraph-block .para-num {
-      background: var(--crimson); color: #fff;
-      border-radius: 50%;
-      width: 26px; height: 26px; min-width: 26px;
-      font-size: 0.75rem; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-      margin-top: 12px;
+    .body-hint {
+      font-size: .78rem; color: #aaa; margin-top: 6px;
     }
-    .btn-rm-para {
-      background: none; border: 1px solid #ddd; color: #999;
-      border-radius: 6px; padding: 4px 9px;
-      font-size: 1.1rem; cursor: pointer; margin-top: 10px; transition: .2s;
-    }
-    .btn-rm-para:hover { background: #fee; border-color: var(--crimson); color: var(--crimson); }
 
     /* ---- BARRA DE FORMATAÇÃO ---- */
     .para-editor { flex: 1; display: flex; flex-direction: column; gap: 0; }
@@ -463,6 +497,13 @@
       from { transform: translateY(24px); opacity: 0; }
       to   { transform: translateY(0);    opacity: 1; }
     }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%       { transform: translateX(-8px); }
+      40%       { transform: translateX(8px); }
+      60%       { transform: translateX(-6px); }
+      80%       { transform: translateX(6px); }
+    }
     .modal-header {
       padding: 20px 24px 16px;
       display: flex; justify-content: space-between; align-items: center;
@@ -549,10 +590,162 @@
       font-size: 0.9rem; cursor: pointer; transition: .2s;
     }
     .btn-confirm-delete:hover { background: #a53125; }
+
+    /* ---- MODAL: EDITOR DE FOTO ---- */
+    .photo-editor-modal-box {
+      background: #fff; border-radius: 16px;
+      max-width: 780px; width: 100%;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.32);
+      animation: slideUp .2s ease;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .photo-editor-toolbar {
+      display: flex; gap: 8px; align-items: center;
+      padding: 13px 18px; background: #f5f5f5;
+      border-bottom: 1px solid #e0e0e0;
+      flex-wrap: wrap;
+    }
+    .editor-mode-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 7px 14px; border: 1.5px solid #ddd;
+      background: #fff; border-radius: 7px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.84rem; font-weight: 600; cursor: pointer;
+      transition: .15s; color: #444;
+    }
+    .editor-mode-btn:hover { border-color: var(--crimson); color: var(--crimson); }
+    .editor-mode-btn.active { background: var(--crimson); color: #fff; border-color: var(--crimson); }
+    .editor-scale-group {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .82rem; color: #555; margin-left: auto;
+    }
+    .editor-scale-group input[type="range"] {
+      width: 100px; accent-color: var(--crimson); cursor: pointer;
+    }
+    .btn-editor-reset {
+      background: #f0f0f0; color: #555; border: 1px solid #ddd;
+      padding: 7px 14px; border-radius: 7px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.84rem; font-weight: 600; cursor: pointer; transition: .2s;
+    }
+    .btn-editor-reset:hover { background: #e0e0e0; }
+    .btn-editor-apply {
+      background: var(--crimson); color: #fff; border: none;
+      padding: 7px 18px; border-radius: 7px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.84rem; font-weight: 700; cursor: pointer; transition: .2s;
+    }
+    .btn-editor-apply:hover { background: #6e1010; }
+    .photo-editor-canvas-wrap {
+      background: #1a1a1a;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    #photo-editor-canvas {
+      display: block;
+      max-width: 100%;
+      touch-action: none;
+    }
+    .editor-mode-label {
+      font-size: .78rem; color: #888; padding: 7px 18px;
+      border-top: 1px solid #e8e8e8; background: #fafafa;
+      text-align: center; min-height: 30px;
+    }
+    /* ---- TELA DE LOGIN ---- */
+    #login-screen {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--crimson);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .login-box {
+      background: #fff; border-radius: 16px;
+      padding: 40px 36px 36px;
+      max-width: 380px; width: 100%;
+      box-shadow: 0 12px 60px rgba(0,0,0,0.35);
+      text-align: center;
+      animation: slideUp .3s ease;
+    }
+    .login-box img {
+      height: 72px; margin-bottom: 18px;
+    }
+    .login-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: var(--crimson);
+      margin-bottom: 4px;
+    }
+    .login-box p {
+      font-size: .83rem; color: #888; margin-bottom: 28px;
+    }
+    .login-field {
+      margin-bottom: 14px; text-align: left;
+    }
+    .login-field label {
+      display: block; font-size: .78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .05em;
+      color: #555; margin-bottom: 5px;
+    }
+    .login-field input {
+      width: 100%; padding: 11px 14px;
+      border: 1.5px solid #ddd; border-radius: 8px;
+      font-size: .95rem; font-family: 'Source Sans 3', sans-serif;
+      color: var(--text); transition: border-color .2s;
+      background: #fafafa;
+    }
+    .login-field input:focus {
+      outline: none; border-color: var(--crimson); background: #fff;
+    }
+    .btn-login {
+      width: 100%; padding: 13px;
+      background: var(--crimson); color: #fff; border: none;
+      border-radius: 8px; font-family: 'Source Sans 3', sans-serif;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      margin-top: 8px; transition: background .2s;
+      letter-spacing: .02em;
+    }
+    .btn-login:hover { background: #6e1010; }
+    .login-error {
+      display: none; margin-top: 14px;
+      background: #fef0f0; border: 1px solid #f5c6c6;
+      border-radius: 7px; padding: 10px 14px;
+      font-size: .84rem; color: #c0392b; font-weight: 600;
+    }
+    .login-footer {
+      margin-top: 22px; font-size: .75rem; color: #bbb;
+    }
   </style>
 </head>
 
 <body>
+
+<!-- ===================== TELA DE LOGIN ===================== -->
+<div id="login-screen">
+  <div class="login-box">
+    <img src="images/logo/brasao-vetorizado-transp.png" alt="Salah Shriners"
+         onerror="this.style.display='none'">
+    <h2>Painel de Notícias</h2>
+    <p>Salah Shriners SC — Acesso restrito</p>
+
+    <div class="login-field">
+      <label>Usuário</label>
+      <input type="text" id="login-user" placeholder="Digite seu usuário"
+             autocomplete="username" onkeydown="if(event.key==='Enter') doLogin()">
+    </div>
+    <div class="login-field">
+      <label>Senha</label>
+      <input type="password" id="login-pass" placeholder="Digite sua senha"
+             autocomplete="current-password" onkeydown="if(event.key==='Enter') doLogin()">
+    </div>
+
+    <button class="btn-login" onclick="doLogin()">🔐 Entrar</button>
+
+    <div class="login-error" id="login-error">
+      ⚠️ Usuário ou senha incorretos. Tente novamente.
+    </div>
+    <p class="login-footer">Salah Shriners SC · Painel Administrativo</p>
+  </div>
+</div>
 
 <!-- HEADER -->
 <header class="admin-header">
@@ -636,15 +829,30 @@
         </div>
         <div class="cover-preview-wrap" id="cover-preview-wrap" style="display:none">
           <img id="cover-preview" alt="Preview da capa">
-          <p style="font-size:.8rem;color:#888;margin-top:6px;" id="cover-info"></p>
+          <button class="cover-remove-btn" onclick="removeCover()" title="Remover foto de capa">✕</button>
+          <button class="cover-edit-btn"   onclick="openPhotoEditor('cover')" title="Editar foto de capa">✏️ Editar foto de capa</button>
+          <p style="font-size:.8rem;color:#888;margin-top:8px;" id="cover-info"></p>
         </div>
         <div id="existing-cover-info" class="existing-cover-info" style="display:none"></div>
       </div>
 
       <!-- Texto do artigo -->
       <div class="section-label">Texto do Artigo</div>
-      <div id="paragraphs-container"></div>
-      <button class="btn-add" onclick="addParagraph()">+ Adicionar parágrafo</button>
+      <div class="field">
+        <div class="para-editor article-body-editor">
+          <div class="para-toolbar" id="body-toolbar">
+            <button type="button" class="fmt-btn" onclick="applyBodyFormat('strong')" title="Negrito (selecione o texto primeiro)"><strong>B</strong></button>
+            <button type="button" class="fmt-btn" onclick="applyBodyFormat('em')"     title="Itálico"><em>I</em></button>
+            <button type="button" class="fmt-btn" onclick="applyBodyFormat('u')"      title="Sublinhado"><u>U</u></button>
+            <button type="button" class="fmt-btn" onclick="applyBodyFormat('s')"      title="Tachado"><s>S</s></button>
+            <span class="fmt-sep"></span>
+            <button type="button" class="fmt-btn" onclick="applyBodyFormat('mark')"   title="Destacar" style="font-size:.75rem">🖍</button>
+          </div>
+          <textarea id="f-body" rows="14"
+            placeholder="Escreva o texto completo do artigo aqui.&#10;&#10;Separe os parágrafos com uma linha em branco (tecle Enter duas vezes).&#10;&#10;Não há limite de caracteres."></textarea>
+        </div>
+        <p class="body-hint">💡 Separe parágrafos com uma linha em branco. Use os botões acima para formatar o texto selecionado.</p>
+      </div>
 
       <!-- Fotos adicionais -->
       <div class="section-label">Fotos Adicionais <span style="font-weight:400;font-size:.85em;letter-spacing:0">(galeria do artigo)</span></div>
@@ -760,7 +968,82 @@
   </div>
 </div>
 
+<!-- ===================== MODAL: EDITOR DE FOTO ===================== -->
+<div class="modal-overlay" id="photo-editor-modal">
+  <div class="photo-editor-modal-box">
+    <div class="modal-header">
+      <h3>✂️ Editar Foto</h3>
+      <button class="modal-close" onclick="closePhotoEditor()">✕</button>
+    </div>
+    <div class="photo-editor-toolbar">
+      <button class="editor-mode-btn" data-mode="move" onclick="setEditorMode('move')">✋ Mover</button>
+      <button class="editor-mode-btn" data-mode="crop" onclick="setEditorMode('crop')">✂️ Cortar</button>
+      <span class="fmt-sep" style="height:24px;margin:0 4px;"></span>
+      <button class="btn-editor-reset" onclick="resetPhotoEditor()">↩ Redefinir</button>
+      <button class="btn-editor-apply" onclick="applyPhotoEditor()">✅ Definir</button>
+      <div class="editor-scale-group">
+        <span>Zoom:</span>
+        <input type="range" id="editor-scale" min="0.1" max="3" step="0.05" value="1"
+               oninput="updateEditorScale(this.value)">
+        <span id="editor-scale-label">100%</span>
+      </div>
+    </div>
+    <div class="photo-editor-canvas-wrap">
+      <canvas id="photo-editor-canvas"
+        onmousedown="editorMousedown(event)"
+        onmousemove="editorMousemove(event)"
+        onmouseup="editorMouseup(event)"
+        onmouseleave="editorMouseleave(event)"
+        ontouchstart="editorTouchStart(event)"
+        ontouchmove="editorTouchMove(event)"
+        ontouchend="editorTouchEnd(event)">
+      </canvas>
+    </div>
+    <div class="editor-mode-label" id="editor-mode-label">
+      ✋ Arraste para mover a imagem | Use o controle de zoom para ajustar o tamanho
+    </div>
+  </div>
+</div>
+
 <script>
+/* =====================================================
+   AUTENTICAÇÃO
+===================================================== */
+(function () {
+  const ADMIN_USER = 'admin';
+  const ADMIN_PASS = 'salah199';
+  const SESSION_KEY = 'salah_auth';
+
+  function checkAuth() {
+    if (sessionStorage.getItem(SESSION_KEY) === '1') {
+      document.getElementById('login-screen').style.display = 'none';
+    }
+  }
+
+  window.doLogin = function () {
+    const user = (document.getElementById('login-user').value || '').trim();
+    const pass = (document.getElementById('login-pass').value || '').trim();
+    if (user === ADMIN_USER && pass === ADMIN_PASS) {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('login-error').style.display  = 'none';
+    } else {
+      const err = document.getElementById('login-error');
+      err.style.display = 'block';
+      document.getElementById('login-pass').value = '';
+      document.getElementById('login-pass').focus();
+      // Animação de shake
+      const box = document.querySelector('.login-box');
+      box.style.animation = 'none';
+      void box.offsetWidth;
+      box.style.animation = 'shake .35s ease';
+    }
+  };
+
+  // Verificar ao carregar
+  document.addEventListener('DOMContentLoaded', checkAuth);
+})();
+
 /* =====================================================
    CONFIGURAÇÃO
 ===================================================== */
@@ -774,13 +1057,30 @@ const API        = 'https://api.github.com';
 ===================================================== */
 let coverFile        = null;
 let photosFiles      = [];
-let paraCount        = 0;
 let editingId        = null;        // ID do artigo sendo editado (null = novo)
 let existingCoverPath = '';         // Caminho da capa atual (modo edição)
 let existingPhotoPaths = [];        // Caminhos das fotos atuais (modo edição)
 let deleteTargetId   = null;        // ID do artigo a excluir
 let cachedHtmlSha    = null;        // SHA do index.html em cache (para evitar re-leitura)
 let cachedHtml       = null;        // Conteúdo do index.html em cache
+
+/* EDITOR DE FOTOS — estado */
+let editorPhotoIdx   = null;
+let editorOrigImg    = null;
+let editorOrigFile   = null;
+let editorScale      = 1;
+let editorOffsetX    = 0;
+let editorOffsetY    = 0;
+let editorMode       = 'move';
+let editorIsDragging = false;
+let editorDragLastX  = 0;
+let editorDragLastY  = 0;
+let editorCropActive = false;
+let editorCropX1     = 0;
+let editorCropY1     = 0;
+let editorCropX2     = 0;
+let editorCropY2     = 0;
+let editorCropRect   = null;
 
 /* =====================================================
    DATA LOCAL (evita problema de fuso UTC)
@@ -798,7 +1098,6 @@ function localToday() {
 ===================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('f-date').value = localToday();
-  addParagraph(); addParagraph(); addParagraph();
   const savedToken = sessionStorage.getItem('gh_token');
   if (savedToken) {
     document.getElementById('gh-token').value = savedToken;
@@ -851,71 +1150,32 @@ function updateCharCount(el, countId, max) {
 }
 
 /* =====================================================
-   PARÁGRAFOS
+   TEXTO DO ARTIGO — textarea única, sem limite de caracteres
 ===================================================== */
-function addParagraph(text) {
-  paraCount++;
-  const container = document.getElementById('paragraphs-container');
-  const block = document.createElement('div');
-  block.className = 'paragraph-block';
-  block.dataset.para = paraCount;
-  block.innerHTML = `
-    <span class="para-num">${paraCount}</span>
-    <div class="para-editor">
-      <div class="para-toolbar">
-        <button type="button" class="fmt-btn" onclick="applyFormat(this,'strong')" title="Negrito (selecione o texto primeiro)"><strong>B</strong></button>
-        <button type="button" class="fmt-btn" onclick="applyFormat(this,'em')"     title="Itálico"><em>I</em></button>
-        <button type="button" class="fmt-btn" onclick="applyFormat(this,'u')"      title="Sublinhado"><u>U</u></button>
-        <button type="button" class="fmt-btn" onclick="applyFormat(this,'s')"      title="Tachado"><s>S</s></button>
-        <span class="fmt-sep"></span>
-        <button type="button" class="fmt-btn" onclick="applyFormat(this,'mark')"   title="Destacar" style="font-size:.75rem">🖍</button>
-      </div>
-      <textarea rows="4" placeholder="Parágrafo ${paraCount}...">${text || ''}</textarea>
-    </div>
-    <button class="btn-rm-para" onclick="removeParagraph(this)" title="Remover parágrafo">✕</button>
-  `;
-  container.appendChild(block);
-}
-
-function removeParagraph(btn) {
-  if (document.querySelectorAll('.paragraph-block').length <= 1) {
-    alert('O artigo precisa ter pelo menos um parágrafo.');
-    return;
-  }
-  btn.closest('.paragraph-block').remove();
-  renumberParagraphs();
-}
-
-function renumberParagraphs() {
-  document.querySelectorAll('.paragraph-block').forEach((block, i) => {
-    block.querySelector('.para-num').textContent = i + 1;
-    block.querySelector('textarea').placeholder = `Parágrafo ${i + 1}...`;
-  });
-}
-
 function getParagraphs() {
-  return [...document.querySelectorAll('.paragraph-block textarea')]
-    .map(t => t.value.trim()).filter(Boolean);
+  const text = (document.getElementById('f-body') || {}).value || '';
+  // Separa por linha(s) em branco; cada bloco vira um parágrafo no array
+  return text.split(/\n{2,}/).map(p => p.trim()).filter(Boolean);
 }
 
 /* =====================================================
-   FORMATAÇÃO DE TEXTO (toolbar de parágrafos)
+   FORMATAÇÃO DE TEXTO (toolbar do corpo do artigo)
 ===================================================== */
-function applyFormat(btn, tag) {
-  const ta    = btn.closest('.para-editor').querySelector('textarea');
+function applyBodyFormat(tag) {
+  const ta    = document.getElementById('f-body');
+  if (!ta) return;
   const start = ta.selectionStart;
   const end   = ta.selectionEnd;
 
   if (start === end) {
-    // Nada selecionado: focar a textarea e mostrar dica
     ta.focus();
-    const hint = btn.closest('.para-toolbar').querySelector('.fmt-hint');
-    if (!hint) {
+    const toolbar = document.getElementById('body-toolbar');
+    if (toolbar && !toolbar.querySelector('.fmt-hint')) {
       const h = document.createElement('span');
       h.className = 'fmt-hint';
-      h.style.cssText = 'font-size:.72rem;color:#999;margin-left:6px;pointer-events:none;';
+      h.style.cssText = 'font-size:.72rem;color:#999;margin-left:8px;pointer-events:none;';
       h.textContent = 'Selecione o texto primeiro';
-      btn.closest('.para-toolbar').appendChild(h);
+      toolbar.appendChild(h);
       setTimeout(() => h.remove(), 2000);
     }
     return;
@@ -924,10 +1184,10 @@ function applyFormat(btn, tag) {
   const before   = ta.value.substring(0, start);
   const selected = ta.value.substring(start, end);
   const after    = ta.value.substring(end);
-  const open     = `<${tag}>`;
-  const close    = `</${tag}>`;
+  const open  = `<${tag}>`;
+  const close = `</${tag}>`;
 
-  // Toggle: remove tags se já aplicadas
+  // Toggle: remove tags se já estiverem aplicadas
   if (before.endsWith(open) && after.startsWith(close)) {
     ta.value = before.slice(0, -open.length) + selected + after.slice(close.length);
     ta.setSelectionRange(start - open.length, end - open.length);
@@ -965,6 +1225,14 @@ function setCoverFile(file) {
   reader.readAsDataURL(file);
 }
 
+function removeCover() {
+  coverFile = null;
+  document.getElementById('cover-preview-wrap').style.display = 'none';
+  document.getElementById('cover-preview').src = '';
+  document.getElementById('cover-info').textContent = '';
+  document.getElementById('f-cover').value = '';
+}
+
 /* =====================================================
    FOTOS ADICIONAIS
 ===================================================== */
@@ -987,7 +1255,8 @@ function addPhotos(files) {
       wrap.dataset.idx = idx;
       wrap.innerHTML = `
         <img src="${e.target.result}" alt="Foto ${idx + 1}">
-        <button class="thumb-remove" onclick="removePhoto(this, ${idx})">✕</button>
+        <button class="thumb-remove" onclick="removePhoto(this, ${idx})" title="Remover foto">✕</button>
+        <button class="thumb-edit"   onclick="openPhotoEditor(${idx})"   title="Editar foto">✏️ Editar</button>
       `;
       document.getElementById('photos-preview').appendChild(wrap);
     };
@@ -1750,15 +2019,9 @@ async function editArticle(id) {
   document.getElementById('f-excerpt').value = excerpt;
   updateCharCount(document.getElementById('f-excerpt'), 'cnt-exc', 220);
 
-  // Preencher parágrafos
-  document.getElementById('paragraphs-container').innerHTML = '';
-  paraCount = 0;
-  for (const p of data.body) {
-    addParagraph(p.replace(/\\n/g,'\n'));
-  }
-  if (data.body.length === 0) {
-    addParagraph(); addParagraph(); addParagraph();
-  }
+  // Preencher texto do artigo na textarea única
+  const bodyText = data.body.map(p => p.replace(/\\n/g, '\n')).join('\n\n');
+  document.getElementById('f-body').value = bodyText;
 
   // Mostrar capa existente
   document.getElementById('cover-preview-wrap').style.display = 'none';
@@ -1883,15 +2146,335 @@ async function confirmDelete() {
 }
 
 /* =====================================================
+   EDITOR DE FOTOS
+===================================================== */
+function openPhotoEditor(idx) {
+  const file = (idx === 'cover') ? coverFile : photosFiles[idx];
+  if (!file) return;
+  editorPhotoIdx = idx;
+  editorOrigFile = file;
+  editorScale    = 1;
+  editorOffsetX  = 0;
+  editorOffsetY  = 0;
+  editorCropActive = false;
+  editorCropRect   = null;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const img = new Image();
+    img.onload = () => {
+      editorOrigImg = img;
+      const canvas = document.getElementById('photo-editor-canvas');
+      const maxW = Math.min(720, window.innerWidth - 80);
+      const maxH = Math.min(460, window.innerHeight - 280);
+      canvas.width  = maxW;
+      canvas.height = maxH;
+      // Auto-fit inicial
+      const sx = maxW / img.width;
+      const sy = maxH / img.height;
+      editorScale = Math.min(sx, sy, 1);
+      document.getElementById('editor-scale').value = editorScale;
+      document.getElementById('editor-scale-label').textContent = Math.round(editorScale * 100) + '%';
+      setEditorMode('move');
+      renderEditorCanvas();
+      document.getElementById('photo-editor-modal').classList.add('open');
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function closePhotoEditor() {
+  document.getElementById('photo-editor-modal').classList.remove('open');
+  editorPhotoIdx = null;
+  editorOrigImg  = null;
+  editorCropRect = null;
+  editorCropActive = false;
+}
+
+function setEditorMode(mode) {
+  editorMode = mode;
+  const canvas = document.getElementById('photo-editor-canvas');
+  if (canvas) canvas.style.cursor = mode === 'crop' ? 'crosshair' : 'grab';
+  document.querySelectorAll('.editor-mode-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.mode === mode);
+  });
+  const labels = {
+    move: '✋ Arraste a imagem para reposicioná-la · Use o zoom para ajustar o tamanho',
+    crop: '✂️ Clique e arraste para selecionar a área de corte · Clique em "Definir" para aplicar'
+  };
+  const lbl = document.getElementById('editor-mode-label');
+  if (lbl) lbl.textContent = labels[mode] || '';
+  if (mode !== 'crop') {
+    editorCropActive = false;
+    editorCropRect   = null;
+    renderEditorCanvas();
+  }
+}
+
+function updateEditorScale(val) {
+  editorScale = parseFloat(val);
+  document.getElementById('editor-scale-label').textContent = Math.round(editorScale * 100) + '%';
+  renderEditorCanvas();
+}
+
+function resetPhotoEditor() {
+  if (!editorOrigImg) return;
+  editorOffsetX    = 0;
+  editorOffsetY    = 0;
+  editorCropRect   = null;
+  editorCropActive = false;
+  const canvas = document.getElementById('photo-editor-canvas');
+  const sx = canvas.width  / editorOrigImg.width;
+  const sy = canvas.height / editorOrigImg.height;
+  editorScale = Math.min(sx, sy, 1);
+  document.getElementById('editor-scale').value = editorScale;
+  document.getElementById('editor-scale-label').textContent = Math.round(editorScale * 100) + '%';
+  setEditorMode('move');
+  renderEditorCanvas();
+}
+
+function renderEditorCanvas() {
+  const canvas = document.getElementById('photo-editor-canvas');
+  if (!canvas || !editorOrigImg) return;
+  const ctx = canvas.getContext('2d');
+  const img = editorOrigImg;
+
+  // Fundo xadrez (indica área fora da imagem)
+  ctx.fillStyle = '#1e1e1e';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  const cs = 14;
+  ctx.fillStyle = '#2a2a2a';
+  for (let y = 0; y < canvas.height; y += cs * 2)
+    for (let x = 0; x < canvas.width; x += cs * 2) {
+      ctx.fillRect(x,    y,    cs, cs);
+      ctx.fillRect(x+cs, y+cs, cs, cs);
+    }
+
+  // Posição e tamanho da imagem no canvas
+  const drawW = img.width  * editorScale;
+  const drawH = img.height * editorScale;
+  const drawX = (canvas.width  - drawW) / 2 + editorOffsetX;
+  const drawY = (canvas.height - drawH) / 2 + editorOffsetY;
+
+  ctx.drawImage(img, drawX, drawY, drawW, drawH);
+
+  // Overlay de corte
+  const cropRect = editorCropRect ||
+    (editorCropActive ? {
+      x: Math.min(editorCropX1, editorCropX2),
+      y: Math.min(editorCropY1, editorCropY2),
+      w: Math.abs(editorCropX2 - editorCropX1),
+      h: Math.abs(editorCropY2 - editorCropY1)
+    } : null);
+
+  if (cropRect && cropRect.w > 4 && cropRect.h > 4) {
+    const { x, y, w, h } = cropRect;
+
+    // Escurecer fora da seleção
+    ctx.fillStyle = 'rgba(0,0,0,0.55)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Mostrar imagem só dentro da seleção
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(x, y, w, h);
+    ctx.clip();
+    ctx.drawImage(img, drawX, drawY, drawW, drawH);
+    ctx.restore();
+
+    // Borda da seleção
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth   = 2;
+    ctx.strokeRect(x, y, w, h);
+
+    // Guias de terços
+    if (w > 40 && h > 40) {
+      ctx.save();
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+      ctx.lineWidth   = 1;
+      ctx.beginPath();
+      ctx.moveTo(x + w/3, y);   ctx.lineTo(x + w/3,   y+h);
+      ctx.moveTo(x + 2*w/3, y); ctx.lineTo(x + 2*w/3, y+h);
+      ctx.moveTo(x, y + h/3);   ctx.lineTo(x+w, y + h/3);
+      ctx.moveTo(x, y + 2*h/3); ctx.lineTo(x+w, y + 2*h/3);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Alças nos cantos e meios
+    const hs = 9;
+    ctx.fillStyle = '#ffffff';
+    [[x,y],[x+w,y],[x,y+h],[x+w,y+h],
+     [x+w/2,y],[x+w/2,y+h],[x,y+h/2],[x+w,y+h/2]
+    ].forEach(([cx,cy]) => ctx.fillRect(cx-hs/2, cy-hs/2, hs, hs));
+
+    // Rótulo com dimensões em pixels
+    const pxW = Math.round(w / editorScale);
+    const pxH = Math.round(h / editorScale);
+    ctx.fillStyle = 'rgba(0,0,0,0.72)';
+    ctx.fillRect(x, y - 24, 96, 20);
+    ctx.fillStyle = '#fff';
+    ctx.font = '11px monospace';
+    ctx.fillText(`${pxW} × ${pxH}px`, x + 5, y - 9);
+  }
+}
+
+/* Eventos de mouse/touch no canvas */
+function editorMousedown(e) {
+  const canvas = document.getElementById('photo-editor-canvas');
+  const rect   = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  if (editorMode === 'crop') {
+    editorCropActive = true;
+    editorCropRect   = null;
+    editorCropX1 = x; editorCropY1 = y;
+    editorCropX2 = x; editorCropY2 = y;
+  } else {
+    editorIsDragging = true;
+    editorDragLastX  = x;
+    editorDragLastY  = y;
+    canvas.style.cursor = 'grabbing';
+  }
+}
+
+function editorMousemove(e) {
+  if (!editorIsDragging && !editorCropActive) return;
+  const canvas = document.getElementById('photo-editor-canvas');
+  const rect   = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  if (editorMode === 'move' && editorIsDragging) {
+    editorOffsetX += x - editorDragLastX;
+    editorOffsetY += y - editorDragLastY;
+    editorDragLastX = x;
+    editorDragLastY = y;
+    renderEditorCanvas();
+  } else if (editorMode === 'crop' && editorCropActive) {
+    editorCropX2 = x;
+    editorCropY2 = y;
+    renderEditorCanvas();
+  }
+}
+
+function editorMouseup(e) {
+  if (editorMode === 'crop' && editorCropActive) {
+    const canvas = document.getElementById('photo-editor-canvas');
+    const rect   = canvas.getBoundingClientRect();
+    editorCropX2 = e.clientX - rect.left;
+    editorCropY2 = e.clientY - rect.top;
+    editorCropActive = false;
+    editorCropRect = {
+      x: Math.min(editorCropX1, editorCropX2),
+      y: Math.min(editorCropY1, editorCropY2),
+      w: Math.abs(editorCropX2 - editorCropX1),
+      h: Math.abs(editorCropY2 - editorCropY1)
+    };
+    renderEditorCanvas();
+  }
+  editorIsDragging = false;
+  const canvas = document.getElementById('photo-editor-canvas');
+  if (canvas && editorMode === 'move') canvas.style.cursor = 'grab';
+}
+
+function editorMouseleave() { editorIsDragging = false; }
+
+function editorTouchStart(e) {
+  e.preventDefault();
+  const t = e.touches[0];
+  editorMousedown({ clientX: t.clientX, clientY: t.clientY });
+}
+function editorTouchMove(e) {
+  e.preventDefault();
+  const t = e.touches[0];
+  editorMousemove({ clientX: t.clientX, clientY: t.clientY });
+}
+function editorTouchEnd(e) {
+  const t = e.changedTouches[0];
+  editorMouseup({ clientX: t.clientX, clientY: t.clientY });
+}
+
+async function applyPhotoEditor() {
+  if (!editorOrigImg || editorPhotoIdx === null) return;
+  const img    = editorOrigImg;
+  const canvas = document.getElementById('photo-editor-canvas');
+  const out    = document.createElement('canvas');
+  let ctx;
+
+  if (editorCropRect && editorCropRect.w > 10 && editorCropRect.h > 10) {
+    // Mapear rect do canvas para coordenadas da imagem original
+    const drawW = img.width  * editorScale;
+    const drawH = img.height * editorScale;
+    const drawX = (canvas.width  - drawW) / 2 + editorOffsetX;
+    const drawY = (canvas.height - drawH) / 2 + editorOffsetY;
+
+    const imgX = (editorCropRect.x - drawX) / editorScale;
+    const imgY = (editorCropRect.y - drawY) / editorScale;
+    const imgW = editorCropRect.w / editorScale;
+    const imgH = editorCropRect.h / editorScale;
+
+    const cx = Math.max(0, Math.round(imgX));
+    const cy = Math.max(0, Math.round(imgY));
+    const cw = Math.min(Math.round(imgW), img.width  - cx);
+    const ch = Math.min(Math.round(imgH), img.height - cy);
+
+    if (cw < 10 || ch < 10) {
+      alert('Área de corte muito pequena. Desenhe uma seleção maior e tente novamente.');
+      return;
+    }
+    out.width  = cw;
+    out.height = ch;
+    ctx = out.getContext('2d');
+    ctx.drawImage(img, cx, cy, cw, ch, 0, 0, cw, ch);
+
+  } else {
+    // Apenas reescala conforme o zoom atual
+    out.width  = Math.max(1, Math.round(img.width  * editorScale));
+    out.height = Math.max(1, Math.round(img.height * editorScale));
+    ctx = out.getContext('2d');
+    ctx.drawImage(img, 0, 0, out.width, out.height);
+  }
+
+  out.toBlob(blob => {
+    const isCover  = (editorPhotoIdx === 'cover');
+    const origFile = editorOrigFile || (isCover ? coverFile : photosFiles[editorPhotoIdx]);
+    const fileName = origFile ? origFile.name : (isCover ? 'capa-editada.jpg' : 'foto-editada.jpg');
+    const newFile  = new File([blob], fileName, { type: 'image/jpeg' });
+
+    if (isCover) {
+      // Atualizar foto de capa
+      coverFile = newFile;
+      const url = URL.createObjectURL(blob);
+      document.getElementById('cover-preview').src = url;
+      document.getElementById('cover-info').textContent =
+        `${fileName} — ${(blob.size / 1024).toFixed(0)} KB (editada)`;
+    } else {
+      // Atualizar thumbnail nas fotos adicionais
+      photosFiles[editorPhotoIdx] = newFile;
+      const url  = URL.createObjectURL(blob);
+      const wrap = document.querySelector(`.thumb-wrap[data-idx="${editorPhotoIdx}"]`);
+      if (wrap) wrap.querySelector('img').src = url;
+    }
+
+    closePhotoEditor();
+  }, 'image/jpeg', 0.92);
+}
+
+// Fechar editor clicando fora
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'photo-editor-modal') closePhotoEditor();
+});
+
+/* =====================================================
    RESET
 ===================================================== */
 function resetForm() {
   document.getElementById('f-title').value   = '';
   document.getElementById('f-excerpt').value = '';
   document.getElementById('f-date').value    = localToday();
-  document.getElementById('paragraphs-container').innerHTML = '';
-  paraCount = 0;
-  addParagraph(); addParagraph(); addParagraph();
+  document.getElementById('f-body').value    = '';
   coverFile  = null;
   photosFiles = [];
   existingCoverPath = '';
