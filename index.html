@@ -228,7 +228,7 @@ p  { line-height: 1.78; color: var(--text-muted); }
   position: fixed;
   top: var(--nav-h); left: 0; right: 0;
   background: var(--crimson-900);
-  padding: 1.5rem 2rem 2rem;
+  padding: 0.9rem 1.5rem 1.2rem;
   z-index: 999;
   box-shadow: 0 12px 40px rgba(0,0,0,0.4);
 }
@@ -236,28 +236,28 @@ p  { line-height: 1.78; color: var(--text-muted); }
 #mobile-nav a:not(.btn) {
   display: block;
   color: rgba(255,255,255,0.85);
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  padding: 0.9rem 0;
+  padding: 0.6rem 0;
   border-bottom: 1px solid rgba(255,255,255,0.08);
   transition: color 0.2s;
 }
 #mobile-nav a:not(.btn):hover { color: var(--gold); }
 .mob-nav-btns {
   display: flex;
-  flex-wrap: wrap;   /* permite quebrar linha quando não cabe */
-  gap: 8px;
-  margin-top: 1.4rem;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 0.8rem;
 }
 .mob-nav-btns .btn {
-  flex: 1 1 calc(50% - 8px); /* 2 por linha por padrão */
+  flex: 1 1 calc(50% - 7px);
   min-width: 110px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 0.85rem;
-  padding: 11px 8px;
+  font-size: 0.82rem;
+  padding: 9px 8px;
 }
 /* Seja um Shriner: ocupa linha inteira (último elemento quebra para nova linha) */
 .mob-nav-btns .btn:last-child {
