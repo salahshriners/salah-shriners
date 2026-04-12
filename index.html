@@ -302,6 +302,15 @@ p  { line-height: 1.78; color: var(--text-muted); }
     rgba(40, 7, 7, 0.55) 100%
   );
 }
+/* Slide do cartoon: overlay mais leve para os personagens ficarem visíveis */
+.hero-slide-cartoon::after {
+  background: linear-gradient(
+    to top,
+    rgba(20, 4, 4, 0.72) 0%,
+    rgba(20, 4, 4, 0.40) 50%,
+    rgba(20, 4, 4, 0.15) 100%
+  );
+}
 .hero-body {
   position: relative;
   z-index: 2;
@@ -1997,7 +2006,7 @@ footer {
 <!-- ===================== HERO ===================== -->
 <section id="hero">
   <div class="hero-track">
-        <div class="hero-slide active" style="background-image:url('https://salahshriners.lovable.app/assets/hero-slide-1-B6wMkjx-.avif')"></div>
+        <div class="hero-slide hero-slide-cartoon active" style="background-image:url('images/inline/hero-personagens.jpg'); background-position: center center; background-size: cover;"></div>
     <div class="hero-slide"        style="background-image:url('https://salahshriners.lovable.app/assets/hero-slide-2-R8-ObJQ6.avif')"></div>
     <div class="hero-slide"        style="background-image:url('images/inline/inline_17.jpg')"></div>
     <div class="hero-slide"        style="background-image:url('images/inline/inline_18.jpg')"></div>
