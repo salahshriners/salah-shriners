@@ -1846,6 +1846,8 @@ footer {
 .flag-br::after { content: '🇧🇷'; font-size: 1.5rem; line-height: 1; }
 .flag-en::after { content: '🇺🇸'; font-size: 1.5rem; line-height: 1; }
 .flag-es::after { content: '🇪🇸'; font-size: 1.5rem; line-height: 1; }
+.flag-fr::after { content: '🇫🇷'; font-size: 1.5rem; line-height: 1; }
+.flag-de::after { content: '🇩🇪'; font-size: 1.5rem; line-height: 1; }
 
 .lang-opt-code {
   font-size: 0.78rem;
@@ -1951,6 +1953,16 @@ footer {
             <span class="lang-opt-code">ES</span>
             <span class="lang-opt-check">✓</span>
           </button>
+          <button class="lang-opt" data-lang="fr" onclick="setLang('fr'); closeLangDropdown()">
+            <span class="lang-opt-flag-box flag-fr"></span>
+            <span class="lang-opt-code">FR</span>
+            <span class="lang-opt-check">✓</span>
+          </button>
+          <button class="lang-opt" data-lang="de" onclick="setLang('de'); closeLangDropdown()">
+            <span class="lang-opt-flag-box flag-de"></span>
+            <span class="lang-opt-code">DE</span>
+            <span class="lang-opt-check">✓</span>
+          </button>
         </div>
       </div>
       <button class="hamburger" id="hbg" aria-label="Menu">
@@ -1994,6 +2006,16 @@ footer {
       <button class="lang-opt" data-lang="es" onclick="setLang('es'); closeLangDropdown('mob'); closeNav()">
         <span class="lang-opt-flag-box flag-es"></span>
         <span class="lang-opt-code">ES</span>
+        <span class="lang-opt-check">✓</span>
+      </button>
+      <button class="lang-opt" data-lang="fr" onclick="setLang('fr'); closeLangDropdown('mob'); closeNav()">
+        <span class="lang-opt-flag-box flag-fr"></span>
+        <span class="lang-opt-code">FR</span>
+        <span class="lang-opt-check">✓</span>
+      </button>
+      <button class="lang-opt" data-lang="de" onclick="setLang('de'); closeLangDropdown('mob'); closeNav()">
+        <span class="lang-opt-flag-box flag-de"></span>
+        <span class="lang-opt-code">DE</span>
         <span class="lang-opt-check">✓</span>
       </button>
     </div>
@@ -3916,6 +3938,336 @@ const I18N = {
     'footer.copy': '© 2026 Salah Shriners SC — Todos los derechos reservados.',
 
     'meta.description': 'Salah Shriners SC — Fraternidad, Filantropía y Diversión. Una fraternidad de hombres con buen carácter comprometidos con la familia, el compañerismo y hacer del mundo un lugar mejor.',
+  },
+
+  fr: {
+    'nav.home': 'Accueil',
+    'nav.sobre': 'À Propos',
+    'nav.diretoria': 'Direction',
+    'nav.parceiros': 'Partenaires',
+    'nav.noticias': 'Actualités',
+    'nav.contato': 'Contact',
+    'nav.doe': 'Faire un Don',
+    'nav.sejaShriner': 'Je veux être Shriner !',
+    'nav.conecte': 'Se connecter',
+
+    'hero.title': 'Fraternité. Philanthropie. Famille.',
+    'hero.subtitle': "Une fraternité d'hommes de bon caractère, de compassion et de valeurs solides, engagés envers la famille, la camaraderie et l'amélioration du monde à travers Shriners Children's.",
+    'hero.slide.line1': 'Shriners — 150 ans de plaisir, camaraderie et philanthropie',
+    'hero.slide2.line2': "Former des hommes de bon caractère",
+    'hero.slide3.line2': 'Axés sur la Famille',
+    'hero.slide4.line2': 'Au Service de nos Communautés',
+    'hero.slide5.line2': 'Et beaucoup de plaisir !',
+
+    'stats.hospitais': 'Hôpitaux Pédiatriques',
+    'stats.paises': 'Pays',
+    'stats.instituicoes': 'Institutions Shriners',
+    'stats.membros': 'Membres dans le Monde',
+
+    'pilares.1.titulo': 'Fraternité',
+    'pilares.1.texto': "Être Shriner, c'est aussi célébrer la vie. Avec plus de 7 000 clubs et unités dans le monde entier, les Shriners offrent d'innombrables opportunités de camaraderie, de plaisir et d'activités qui renforcent les liens d'amitié.",
+    'pilares.2.titulo': 'Philanthropie',
+    'pilares.2.texto': "Les Hôpitaux Shriners pour Enfants fournissent des soins pédiatriques spécialisés — apportant amour et soutien aux enfants, quelle que soit la capacité financière de leur famille.",
+    'pilares.3.titulo': 'Famille',
+    'pilares.3.texto': "Nous sommes une grande famille avec un fort accent sur le familial. Notre amour fraternel s'exprime dans nos événements, nos programmes et dans l'attention sincère accordée à chaque membre et à ses proches.",
+
+    'sobre.tag': 'À Propos de Nous',
+    'sobre.intro': "Une fraternité fondée sur le plaisir, la camaraderie et les principes maçonniques d'amour fraternel, d'aide et de vérité — engagée à servir l'humanité à travers Shriners Children's.",
+    'sobre.check1.titulo': 'Mission Claire',
+    'sobre.check1.texto': "Faciliter les moyens pour que les enfants et adolescents jusqu'à 18 ans reçoivent un traitement médical spécialisé avec rapidité, sécurité et qualité, indépendamment de la capacité financière de leur famille.",
+    'sobre.check2.titulo': 'Présence Mondiale',
+    'sobre.check2.texto': "Présents dans plus de 40 pays, avec environ 200 temples et des milliers de clubs dans le monde entier, unis par les principes de fraternité, de philanthropie et de service à l'humanité.",
+    'sobre.check3.titulo': 'Sans But Lucratif',
+    'sobre.check3.texto': "Toute notre action est guidée par la cause philanthropique, sans aucun intérêt commercial. Chaque contribution reçue est directement destinée aux soins et au traitement des enfants que nous accompagnons.",
+
+    'faq.tag': 'Questions Fréquentes',
+    'faq.1.q': 'Qui sont les Shriners ?',
+    'faq.1.a': "Salah Shriners est une fraternité d'hommes de bon caractère, de compassion et de valeurs solides, engagés envers la famille, la camaraderie et l'amélioration du monde. C'est une entité autonome, sans but lucratif, à caractère philanthropique, présente dans plus de 40 pays.",
+    'faq.2.q': 'Comment référer un cas pour traitement ?',
+    'faq.3.q': "Que sont les Shriners Hospitals for Children ?",
+    'faq.3.a': "Fondés en 1922, les Hôpitaux Shriners pour Enfants (Shriners Children's) sont un système de santé pédiatrique de référence mondiale, apportant amour au secours des enfants. Ils accueillent les enfants jusqu'à 18 ans nécessitant un traitement spécialisé, sans frais pour les familles.",
+    'faq.4.q': 'Comment puis-je devenir Shriner ?',
+    'faq.5.q': 'Comment puis-je faire un don ?',
+    'faq.6.q': "Salah Shriners agit-il uniquement à Santa Catarina ?",
+    'faq.6.a': "Salah Shriners a son siège à Santa Catarina, Brésil, mais son action philanthropique transcende les frontières. En tant que partie d'une fraternité mondiale présente dans de nombreux pays, nous nous concentrons sur la mise en relation des enfants avec les soins qui changeront leur vie dans les Hôpitaux Shriners pour Enfants.",
+
+    'quote.text': "Nous sommes des hommes partageant ce que la vie a de meilleur. Le plaisir est notre pierre angulaire et la philanthropie est la clé de notre camaraderie. Fraternité, famille, joie, compassion et service — voilà les piliers de notre chemin.",
+
+    'diretoria.tag': 'Gestion 2026',
+    'diretoria.titulo': 'Direction',
+    'diretoria.subtitulo': 'Exécutive',
+    'diretoria.cargo.potentado': 'Potentate',
+    'diretoria.cargo.chefeRaban': 'Chef Raban',
+    'diretoria.cargo.rabanAssistente': 'Raban Assistant',
+    'diretoria.cargo.sumoSacerdote': 'Grand Prêtre et Prophète',
+    'diretoria.cargo.guiaOriental': 'Guide Oriental',
+    'diretoria.cargo.tesoureiro': 'Trésorier',
+    'diretoria.cargo.secretario': 'Secrétaire',
+
+    'parceiros.tag': 'Réseau de Soutien',
+    'parceiros.titulo': 'Nos',
+    'parceiros.tituloCrimson': 'Partenaires',
+    'parceiros.desc': "Organisations et institutions qui partagent notre mission de transformer des vies.",
+
+    'noticias.tag': 'Salle de Presse',
+    'noticias.titulo': 'Dernières',
+    'noticias.tituloCrimson': 'Actualités',
+    'noticias.verTodas': 'Voir tout →',
+    'noticias.lerMais': 'Lire la suite',
+    'noticias.art0.cat': 'Philanthropie',
+    'noticias.art0.titulo': 'La rénovation du PROFIS à Joinville avance avec le soutien du Salah Shriners',
+    'noticias.art0.resumo': "Une visite technique a évalué les conditions du Centre de Convivialité et défini les prochaines étapes de la rénovation financée par les ressources du Paddle Solidaire.",
+    'noticias.art1.cat': 'Institutionnel',
+    'noticias.art1.titulo': 'Salah Shriners installe la direction 2026 et organise un séminaire institutionnel',
+    'noticias.art1.resumo': "Un après-midi d'intégration à Florianópolis a réuni environ 50 Nobles pour des séminaires, une formation et la cérémonie officielle d'installation de la direction 2026.",
+    'noticias.art2.cat': 'Alliance',
+    'noticias.art2.titulo': 'Salah Shriners et Bodes do Asfalto formalisent une alliance pour 2026',
+    'noticias.art2.resumo': "L'accord signé à Itajaí comprend des actions intégrées en soutien aux causes philanthropiques en faveur des enfants de Santa Catarina.",
+
+    'newsPage.voltar': 'Retour au site',
+    'newsPage.tag': 'Toutes les Actualités',
+    'newsPage.h2': 'Archive des',
+    'newsPage.h2crimson': 'Publications',
+    'newsPage.count': '11 articles · Déc 2025 à Mar 2026',
+    'noticias.cat.evento': 'Événement',
+    'noticias.cat.saude': 'Santé',
+    'noticias.art3.cat': 'Alliance',
+    'noticias.art3.titulo': "L'alliance avec Uniplac élargit l'accès au traitement international gratuit pour les enfants de la Serra",
+    'noticias.art3.resumo': "La convention signée à Lages renforce la stratégie d'élargir l'accès des enfants catarinenses aux traitements à l'étranger.",
+    'noticias.art4.cat': 'Alliance',
+    'noticias.art4.titulo': 'Salah Shriners et Uniplac signent une alliance à Lages pour un traitement international gratuit',
+    'noticias.art4.resumo': "Convention orientée vers les cas de brûlures graves, déformités orthopédiques, lésions de la colonne et fente labio-palatine.",
+    'noticias.art5.cat': 'Événement',
+    'noticias.art5.titulo': "Installation du nouveau Divan : préparez-vous pour une journée d'intégration",
+    'noticias.art5.resumo': "Un programme spécial a réuni les Nobles toute une journée avec un séminaire dynamique et la cérémonie officielle d'installation du nouveau Divan.",
+    'noticias.art6.cat': 'Institutionnel',
+    'noticias.art6.titulo': 'Salah Shriners lance un nouveau système de communication et de gestion institutionnelle',
+    'noticias.art6.resumo': "La nouvelle plateforme numérique centralise les processus, améliore l'organisation interne et facilite l'interaction avec les Nobles.",
+    'noticias.art7.cat': 'Institutionnel',
+    'noticias.art7.titulo': 'Salah Shriners visite le GOSC et reçoit du soutien pour les actions de 2026',
+    'noticias.art7.resumo': "Des représentants ont visité le siège du Grand Orient de Santa Catarina pour renforcer la relation et aligner les plans de travail.",
+    'noticias.art8.cat': 'Alliance',
+    'noticias.art8.titulo': 'Salah Shriners et le Moto Club Bodes do Asfalto formalisent une alliance pour 2026',
+    'noticias.art8.resumo': "L'alliance prévoit des actions conjointes tout au long de l'année, incluant des événements, des conférences et des initiatives en faveur de la mission philanthropique.",
+    'noticias.art9.cat': 'Alliance',
+    'noticias.art9.titulo': 'Peixada do Gui et Salah Shriners renouvellent leur alliance pour 2026',
+    'noticias.art9.resumo': "Renouvellement confirmé après une visite au HIJG pour suivre les ressources données en 2025 au profit des enfants.",
+    'noticias.art10.cat': 'Santé',
+    'noticias.art10.titulo': 'Le Comité Médical se réunit avec Shriners Hospitals for Children pour aligner les soins',
+    'noticias.art10.resumo': "La réunion stratégique a renforcé les relations et aligné les processus pour l'orientation des patients brésiliens vers les hôpitaux aux États-Unis.",
+    'noticias.art11.cat': 'Événement',
+    'noticias.art11.titulo': "Les festivités célèbrent les réalisations de 2025 et renforcent l'esprit de fraternité",
+    'noticias.art11.resumo': "Les fêtes de clôture dans tout l'État marquent la fin d'une année intense, productive et alignée avec la mission de la fraternité.",
+
+    'contato.tag': 'Prenez Contact',
+    'contato.titulo': 'Contactez-nous',
+    'contato.tituloCrimson': '',
+    'contato.intro': "Vous avez une question, souhaitez référer un cas ou en savoir plus sur les Shriners ? Nous serions ravis de vous entendre.",
+    'contato.form.nomeLabel': 'Nom Complet',
+    'contato.form.nomePlaceholder': 'Votre nom complet',
+    'contato.form.emailLabel': 'Adresse e-mail',
+    'contato.form.telLabel': 'Téléphone / WhatsApp',
+    'contato.form.assuntoLabel': 'Sujet',
+    'contato.form.assunto0': 'Sélectionnez un sujet',
+    'contato.form.assunto1': 'Référer un Cas',
+    'contato.form.assunto2': 'Alliance Institutionnelle',
+    'contato.form.assunto3': 'Presse',
+    'contato.form.assunto4': 'Autres Sujets',
+    'contato.form.msgLabel': 'Message',
+    'contato.form.msgPlaceholder': 'Écrivez votre message...',
+    'contato.form.enviar': 'Envoyer le Message',
+    'contato.info.titulo': 'Informations de Contact',
+    'contato.info.email': 'Adresse e-mail',
+    'contato.info.endereco': 'Adresse',
+
+    'doacao.tag': 'Soutenez Notre Noble Cause',
+    'doacao.titulo': 'Votre don transforme',
+    'doacao.tituloEM': 'des vies',
+    'doacao.desc': "Chaque contribution va directement aux soins des enfants qui ont besoin de soins médicaux spécialisés, indépendamment de la capacité financière de leur famille.",
+    'doacao.pix.titulo': 'Virement PIX',
+    'doacao.pix.desc': 'Faites un don via PIX :',
+    'doacao.pix.label': 'Clé PIX — CNPJ',
+    'doacao.conta.titulo': 'Dépôt Bancaire',
+    'doacao.conta.desc': 'Les dons peuvent être déposés sur le compte suivant :',
+    'doacao.conta.nome': 'Shriners Club International de Santa Catarina',
+    'doacao.conta.banco': 'Banque',
+    'doacao.conta.agencia': 'Agence',
+    'doacao.conta.conta': 'Compte',
+    'doacao.conta.cnpj': 'CNPJ',
+    'doacao.duvidas': 'Des questions sur les dons ?',
+
+    'footer.brand.desc': "Une fraternité d'hommes de bon caractère, engagés dans l'amitié, la solidarité et le service — transformant des vies à Santa Catarina et dans le monde.",
+    'footer.nav.titulo': 'Navigation',
+    'footer.contato.titulo': 'Contact',
+    'footer.sejaShriner': 'Je veux être Shriner !',
+    'footer.copy': '© 2026 Salah Shriners SC — Tous droits réservés.',
+
+    'meta.description': "Salah Shriners SC — Fraternité, Philanthropie et Plaisir. Une fraternité d'hommes de bon caractère engagés envers la famille, la camaraderie et rendre le monde meilleur.",
+  },
+
+  de: {
+    'nav.home': 'Startseite',
+    'nav.sobre': 'Über Uns',
+    'nav.diretoria': 'Vorstand',
+    'nav.parceiros': 'Partner',
+    'nav.noticias': 'Neuigkeiten',
+    'nav.contato': 'Kontakt',
+    'nav.doe': 'Spenden',
+    'nav.sejaShriner': 'Ich will Shriner werden!',
+    'nav.conecte': 'Einloggen',
+
+    'hero.title': 'Bruderschaft. Philanthropie. Familie.',
+    'hero.subtitle': "Eine Bruderschaft von Männern mit gutem Charakter, Mitgefühl und soliden Werten, die sich für Familie, Kameradschaft und die Verbesserung der Welt durch Shriners Children's einsetzen.",
+    'hero.slide.line1': 'Shriners — 150 Jahre Spaß, Kameradschaft und Philanthropie',
+    'hero.slide2.line2': 'Männer mit gutem Charakter formen',
+    'hero.slide3.line2': 'Mit Fokus auf die Familie',
+    'hero.slide4.line2': 'Im Dienst unserer Gemeinschaften',
+    'hero.slide5.line2': 'Und jede Menge Spaß!',
+
+    'stats.hospitais': 'Kinderkrankenhäuser',
+    'stats.paises': 'Länder',
+    'stats.instituicoes': 'Shriners-Institutionen',
+    'stats.membros': 'Mitglieder weltweit',
+
+    'pilares.1.titulo': 'Bruderschaft',
+    'pilares.1.texto': 'Shriner zu sein bedeutet auch, das Leben zu feiern. Mit mehr als 7.000 Clubs und Einheiten weltweit bieten die Shriners unzählige Möglichkeiten zur Kameradschaft, zum Vergnügen und zu Aktivitäten, die Freundschaftsbande stärken.',
+    'pilares.2.titulo': 'Philanthropie',
+    'pilares.2.texto': 'Die Shriners Hospitals for Children bieten spezialisierte pädiatrische Versorgung — sie bringen Liebe und Unterstützung zu Kindern, unabhängig von der finanziellen Leistungsfähigkeit ihrer Familien.',
+    'pilares.3.titulo': 'Familie',
+    'pilares.3.texto': 'Wir sind eine große Familie mit einem starken Fokus auf das Familiäre. Unsere brüderliche Liebe drückt sich in unseren Veranstaltungen, Programmen und in der aufrichtigen Fürsorge für jedes Mitglied und seine Lieben aus.',
+
+    'sobre.tag': 'Über Uns',
+    'sobre.intro': "Eine Bruderschaft, die auf Spaß, Kameradschaft und den maurerischen Prinzipien der brüderlichen Liebe, Hilfe und Wahrheit basiert — engagiert, der Menschheit durch Shriners Children's zu dienen.",
+    'sobre.check1.titulo': 'Klare Mission',
+    'sobre.check1.texto': 'Mittel bereitzustellen, damit Kinder und Jugendliche bis 18 Jahre spezialisierte medizinische Behandlung mit Schnelligkeit, Sicherheit und Qualität erhalten, unabhängig von der finanziellen Leistungsfähigkeit ihrer Familien.',
+    'sobre.check2.titulo': 'Globale Präsenz',
+    'sobre.check2.texto': 'In mehr als 40 Ländern präsent, mit rund 200 Tempeln und tausenden von Clubs weltweit, vereint durch die Grundsätze von Bruderschaft, Philanthropie und Dienst an der Menschheit.',
+    'sobre.check3.titulo': 'Gemeinnützig',
+    'sobre.check3.texto': 'Unser gesamtes Handeln wird von der philanthropischen Sache geleitet, ohne jegliches kommerzielles Interesse. Jeder erhaltene Beitrag wird direkt für die Betreuung und Behandlung der Kinder verwendet, die wir begleiten.',
+
+    'faq.tag': 'Häufig Gestellte Fragen',
+    'faq.1.q': 'Wer sind die Shriners?',
+    'faq.1.a': 'Salah Shriners ist eine Bruderschaft von Männern mit gutem Charakter, Mitgefühl und soliden Werten, die sich für Familie, Kameradschaft und die Verbesserung der Welt einsetzen. Es ist eine autonome, gemeinnützige, philanthropische Einrichtung, die in mehr als 40 Ländern präsent ist.',
+    'faq.2.q': 'Wie kann ich einen Fall für die Behandlung melden?',
+    'faq.3.q': 'Was sind die Shriners Hospitals for Children?',
+    'faq.3.a': "Die 1922 gegründeten Shriners Hospitals for Children (Shriners Children's) sind ein weltweites Referenzsystem für pädiatrische Gesundheitsversorgung, das Kindern Liebe und Unterstützung bringt. Sie behandeln Kinder bis 18 Jahre, die spezialisierte Behandlung benötigen, kostenlos für die Familien.",
+    'faq.4.q': 'Wie kann ich Shriner werden?',
+    'faq.5.q': 'Wie kann ich eine Spende machen?',
+    'faq.6.q': 'Ist Salah Shriners nur in Santa Catarina tätig?',
+    'faq.6.a': 'Salah Shriners hat seinen Sitz in Santa Catarina, Brasilien, aber seine philanthropische Tätigkeit überschreitet Grenzen. Als Teil einer weltweiten Bruderschaft, die in zahlreichen Ländern präsent ist, konzentrieren wir uns darauf, Kinder mit der lebensverändernden Versorgung in den Shriners Hospitals for Children zu verbinden.',
+
+    'quote.text': 'Wir sind Männer, die das Beste des Lebens teilen. Freude ist unser Eckstein und Philanthropie ist der Schlüssel zu unserer Kameradschaft. Bruderschaft, Familie, Freude, Mitgefühl und Dienst — das sind die Säulen unseres Weges.',
+
+    'diretoria.tag': 'Verwaltung 2026',
+    'diretoria.titulo': 'Vorstand',
+    'diretoria.subtitulo': 'Exekutiv',
+    'diretoria.cargo.potentado': 'Potentate',
+    'diretoria.cargo.chefeRaban': 'Chefrabban',
+    'diretoria.cargo.rabanAssistente': 'Assistentrabban',
+    'diretoria.cargo.sumoSacerdote': 'Hoher Priester und Prophet',
+    'diretoria.cargo.guiaOriental': 'Orientalischer Führer',
+    'diretoria.cargo.tesoureiro': 'Schatzmeister',
+    'diretoria.cargo.secretario': 'Sekretär',
+
+    'parceiros.tag': 'Unterstützungsnetzwerk',
+    'parceiros.titulo': 'Unsere',
+    'parceiros.tituloCrimson': 'Partner',
+    'parceiros.desc': 'Organisationen und Institutionen, die unsere Mission teilen, Leben zu verändern.',
+
+    'noticias.tag': 'Pressemitteilungen',
+    'noticias.titulo': 'Neueste',
+    'noticias.tituloCrimson': 'Nachrichten',
+    'noticias.verTodas': 'Alle anzeigen →',
+    'noticias.lerMais': 'Weiterlesen',
+    'noticias.art0.cat': 'Philanthropie',
+    'noticias.art0.titulo': 'Die Renovierung des PROFIS in Joinville schreitet mit Unterstützung der Salah Shriners voran',
+    'noticias.art0.resumo': 'Ein technischer Besuch bewertete die Bedingungen des Gemeinschaftszentrums und definierte die nächsten Schritte der Renovierung, die mit Mitteln des Paddle Solidário finanziert wird.',
+    'noticias.art1.cat': 'Institutionell',
+    'noticias.art1.titulo': 'Salah Shriners installiert den Vorstand 2026 und hält ein institutionelles Seminar ab',
+    'noticias.art1.resumo': 'Ein Integrationsnachmittag in Florianópolis brachte rund 50 Edle zu Seminaren, Weiterbildung und der offiziellen Installationszeremonie des Vorstands 2026 zusammen.',
+    'noticias.art2.cat': 'Allianz',
+    'noticias.art2.titulo': 'Salah Shriners und Bodes do Asfalto formalisieren eine Allianz für 2026',
+    'noticias.art2.resumo': 'Das in Itajaí unterzeichnete Abkommen sieht integrierte Maßnahmen zur Unterstützung philanthropischer Anliegen zugunsten der Kinder von Santa Catarina vor.',
+
+    'newsPage.voltar': 'Zurück zur Website',
+    'newsPage.tag': 'Alle Nachrichten',
+    'newsPage.h2': 'Archiv der',
+    'newsPage.h2crimson': 'Veröffentlichungen',
+    'newsPage.count': '11 Artikel · Dez 2025 bis Mär 2026',
+    'noticias.cat.evento': 'Veranstaltung',
+    'noticias.cat.saude': 'Gesundheit',
+    'noticias.art3.cat': 'Allianz',
+    'noticias.art3.titulo': 'Allianz mit Uniplac erweitert den Zugang zu kostenloser internationaler Behandlung für Kinder der Serra',
+    'noticias.art3.resumo': 'Das in Lages unterzeichnete Abkommen stärkt die Strategie, den Zugang catarinensischer Kinder zu Behandlungen im Ausland zu erweitern.',
+    'noticias.art4.cat': 'Allianz',
+    'noticias.art4.titulo': 'Salah Shriners und Uniplac unterzeichnen in Lages eine Allianz für kostenlose internationale Behandlung',
+    'noticias.art4.resumo': 'Abkommen ausgerichtet auf Fälle von schweren Verbrennungen, orthopädischen Deformitäten, Wirbelsäulenverletzungen und Lippen-Kiefer-Gaumenspalte.',
+    'noticias.art5.cat': 'Veranstaltung',
+    'noticias.art5.titulo': 'Installation des neuen Divans: Bereiten Sie sich auf einen Integrationstag vor',
+    'noticias.art5.resumo': 'Ein besonderes Programm brachte die Edlen einen ganzen Tag lang mit einem dynamischen Seminar und der offiziellen Installationszeremonie des neuen Divans zusammen.',
+    'noticias.art6.cat': 'Institutionell',
+    'noticias.art6.titulo': 'Salah Shriners startet neues Kommunikations- und institutionelles Managementsystem',
+    'noticias.art6.resumo': 'Die neue digitale Plattform zentralisiert Prozesse, verbessert die interne Organisation und erleichtert die Interaktion mit den Edlen.',
+    'noticias.art7.cat': 'Institutionell',
+    'noticias.art7.titulo': 'Salah Shriners besucht den GOSC und erhält Unterstützung für die Maßnahmen 2026',
+    'noticias.art7.resumo': 'Vertreter besuchten den Sitz des Großorients von Santa Catarina, um die Beziehung zu stärken und die Arbeitspläne abzustimmen.',
+    'noticias.art8.cat': 'Allianz',
+    'noticias.art8.titulo': 'Salah Shriners und der Moto Club Bodes do Asfalto formalisieren eine Allianz für 2026',
+    'noticias.art8.resumo': 'Die Allianz sieht gemeinsame Maßnahmen im Laufe des Jahres vor, einschließlich Veranstaltungen, Vorträge und Initiativen zugunsten der philanthropischen Mission.',
+    'noticias.art9.cat': 'Allianz',
+    'noticias.art9.titulo': 'Peixada do Gui und Salah Shriners erneuern ihre Allianz für 2026',
+    'noticias.art9.resumo': 'Erneuerung bestätigt nach einem Besuch im HIJG, um die 2025 gespendeten Mittel zum Wohl der Kinder zu verfolgen.',
+    'noticias.art10.cat': 'Gesundheit',
+    'noticias.art10.titulo': 'Das Medizinische Komitee trifft sich mit den Shriners Hospitals for Children zur Abstimmung der Versorgung',
+    'noticias.art10.resumo': 'Das strategische Treffen stärkte die Beziehungen und stimmte die Prozesse für die Überweisung brasilianischer Patienten an die Krankenhäuser in den USA ab.',
+    'noticias.art11.cat': 'Veranstaltung',
+    'noticias.art11.titulo': 'Feierlichkeiten feiern die Errungenschaften von 2025 und stärken den Geist der Bruderschaft',
+    'noticias.art11.resumo': 'Die Abschlussfeste im ganzen Bundesstaat markieren das Ende eines intensiven, produktiven Jahres, das mit der Mission der Bruderschaft übereinstimmt.',
+
+    'contato.tag': 'Nehmen Sie Kontakt auf',
+    'contato.titulo': 'Kontaktieren Sie uns',
+    'contato.tituloCrimson': '',
+    'contato.intro': 'Haben Sie eine Frage, möchten Sie einen Fall melden oder mehr über die Shriners erfahren? Wir würden uns freuen, von Ihnen zu hören.',
+    'contato.form.nomeLabel': 'Vollständiger Name',
+    'contato.form.nomePlaceholder': 'Ihr vollständiger Name',
+    'contato.form.emailLabel': 'E-Mail-Adresse',
+    'contato.form.telLabel': 'Telefon / WhatsApp',
+    'contato.form.assuntoLabel': 'Betreff',
+    'contato.form.assunto0': 'Betreff auswählen',
+    'contato.form.assunto1': 'Einen Fall melden',
+    'contato.form.assunto2': 'Institutionelle Allianz',
+    'contato.form.assunto3': 'Presse',
+    'contato.form.assunto4': 'Andere Themen',
+    'contato.form.msgLabel': 'Nachricht',
+    'contato.form.msgPlaceholder': 'Schreiben Sie Ihre Nachricht...',
+    'contato.form.enviar': 'Nachricht senden',
+    'contato.info.titulo': 'Kontaktinformationen',
+    'contato.info.email': 'E-Mail-Adresse',
+    'contato.info.endereco': 'Adresse',
+
+    'doacao.tag': 'Unterstützen Sie unsere edle Sache',
+    'doacao.titulo': 'Ihre Spende verändert',
+    'doacao.tituloEM': 'Leben',
+    'doacao.desc': 'Jeder Beitrag geht direkt an die Versorgung von Kindern, die spezialisierte medizinische Betreuung benötigen, unabhängig von der finanziellen Leistungsfähigkeit ihrer Familien.',
+    'doacao.pix.titulo': 'PIX-Überweisung',
+    'doacao.pix.desc': 'Spenden Sie per PIX:',
+    'doacao.pix.label': 'PIX-Schlüssel — CNPJ',
+    'doacao.conta.titulo': 'Bankeinzahlung',
+    'doacao.conta.desc': 'Spenden können auf folgendes Konto eingezahlt werden:',
+    'doacao.conta.nome': 'Shriners Club International de Santa Catarina',
+    'doacao.conta.banco': 'Bank',
+    'doacao.conta.agencia': 'Filiale',
+    'doacao.conta.conta': 'Konto',
+    'doacao.conta.cnpj': 'CNPJ',
+    'doacao.duvidas': 'Fragen zu Spenden?',
+
+    'footer.brand.desc': 'Eine Bruderschaft von Männern mit gutem Charakter, die sich für Freundschaft, Solidarität und Dienst einsetzen — Leben verändern in Santa Catarina und in der Welt.',
+    'footer.nav.titulo': 'Navigation',
+    'footer.contato.titulo': 'Kontakt',
+    'footer.sejaShriner': 'Ich will Shriner werden!',
+    'footer.copy': '© 2026 Salah Shriners SC — Alle Rechte vorbehalten.',
+
+    'meta.description': 'Salah Shriners SC — Bruderschaft, Philanthropie und Spaß. Eine Bruderschaft von Männern mit gutem Charakter, die sich für Familie, Kameradschaft und eine bessere Welt einsetzen.',
   }
 };
 
@@ -3946,7 +4298,8 @@ function setLang(lang) {
   });
 
   // Update <html lang>
-  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang === 'en' ? 'en' : 'es';
+  const langAttrMap = { pt: 'pt-BR', en: 'en', es: 'es', fr: 'fr', de: 'de' };
+  document.documentElement.lang = langAttrMap[lang] || lang;
 
   // Update meta description
   const metaDesc = document.getElementById('meta-description');
@@ -3958,7 +4311,7 @@ function setLang(lang) {
   });
 
   // Update globe dropdown: active option + label
-  const labelMap = { pt: 'BR', en: 'EN', es: 'ES' };
+  const labelMap = { pt: 'BR', en: 'EN', es: 'ES', fr: 'FR', de: 'DE' };
   const label = labelMap[lang] || lang.toUpperCase();
   ['lang-current-label', 'lang-current-label-mob'].forEach(id => {
     const el = document.getElementById(id);
