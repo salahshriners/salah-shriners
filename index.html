@@ -1762,56 +1762,180 @@ footer {
 
 
 /* ══════════════════════════════════════
-   LANGUAGE SWITCHER
+   LANGUAGE SWITCHER — Globe Dropdown
 ══════════════════════════════════════ */
-/* Lang-switcher — canto direito do nav */
-.lang-switcher {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  background: rgba(255,255,255,0.10);
-  border-radius: 22px;
-  padding: 4px 6px;
+.lang-globe-wrap {
+  position: relative;
   flex-shrink: 0;
   margin-left: 6px;
 }
-.lang-btn {
+
+/* Botão globo */
+.lang-globe-btn {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1px;
-  background: none;
-  border: none;
-  color: rgba(255,255,255,0.75);
-  padding: 4px 8px;
-  border-radius: 16px;
+  gap: 5px;
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.18);
+  color: #fff;
+  padding: 5px 10px 5px 8px;
+  border-radius: 22px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, border-color 0.2s;
   font-family: inherit;
   line-height: 1;
 }
-.lang-flag { font-size: 1.05rem; line-height: 1; }
-.lang-code  { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: inherit; }
-.lang-btn:hover { color: #fff; background: rgba(255,255,255,0.18); }
-.lang-btn.active { background: var(--gold); color: #1a1000; }
-.lang-btn.active .lang-code { color: #1a1000; }
+.lang-globe-btn:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.35); }
+.lang-globe-btn.open   { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.4); }
+.lang-globe-btn svg.lang-globe-svg { width: 17px; height: 17px; flex-shrink: 0; }
+.lang-current-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+.lang-chevron { width: 9px; height: 9px; transition: transform 0.2s; flex-shrink: 0; }
+.lang-globe-btn.open .lang-chevron { transform: rotate(180deg); }
 
-.lang-switcher-mobile {
-  background: rgba(255,255,255,0.08);
-  border-radius: 20px;
-  padding: 6px 10px;
-  margin: 8px 1.5rem 4px;
+/* Dropdown */
+.lang-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 36px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+  min-width: 170px;
+  z-index: 9999;
+  animation: langFadeIn 0.15s ease;
+}
+.lang-dropdown.open { display: block; }
+
+@keyframes langFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Cada opção de idioma */
+.lang-opt {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 14px 0 0;
+  width: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  text-decoration: none;
+}
+.lang-opt:last-child { border-bottom: none; }
+.lang-opt:hover { background: #f8f8f8; }
+.lang-opt.active { background: #fdf6f6; }
+
+/* Bandeira — fundo real da bandeira em SVG */
+.lang-opt-flag-box {
+  width: 52px;
+  min-width: 52px;
+  height: 44px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+/* Bandeiras reais via gradientes CSS */
+.flag-br { background: linear-gradient(to bottom, #009C3B 33%, #FFDF00 33%, #FFDF00 67%, #009C3B 67%); position: relative; }
+.flag-br::after {
+  content: '🇧🇷';
+  position: absolute; font-size: 1.5rem;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+}
+.flag-en { background: linear-gradient(to bottom,
+  #B22234 0%, #B22234 7.7%, #fff 7.7%, #fff 15.4%,
+  #B22234 15.4%, #B22234 23.1%, #fff 23.1%, #fff 30.8%,
+  #B22234 30.8%, #B22234 38.5%, #fff 38.5%, #fff 46.2%,
+  #B22234 46.2%, #B22234 53.8%, #fff 53.8%, #fff 61.5%,
+  #B22234 61.5%, #B22234 69.2%, #fff 69.2%, #fff 76.9%,
+  #B22234 76.9%, #B22234 84.6%, #fff 84.6%, #fff 92.3%,
+  #B22234 92.3%, #B22234 100%); position: relative; }
+.flag-en::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; width: 55%; height: 54%;
+  background: #3C3B6E;
+}
+.flag-en::after {
+  content: '🇺🇸';
+  position: absolute; font-size: 1.5rem;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+}
+.flag-es { background: linear-gradient(to bottom,
+  #c60b1e 0%, #c60b1e 25%,
+  #ffc400 25%, #ffc400 75%,
+  #c60b1e 75%, #c60b1e 100%); position: relative; }
+.flag-es::after {
+  content: '🇪🇸';
+  position: absolute; font-size: 1.5rem;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+}
+
+.lang-opt-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  padding-right: 14px;
+}
+.lang-opt-code {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: 0.3px;
+}
+.lang-opt-name {
+  font-size: 0.7rem;
+  color: #888;
+  font-weight: 400;
+}
+.lang-opt.active .lang-opt-code { color: var(--crimson, #841515); }
+.lang-opt.active .lang-opt-name { color: #b05050; }
+
+/* Indicador ativo */
+.lang-opt-check {
+  margin-left: auto;
+  margin-right: 12px;
+  color: var(--crimson, #841515);
+  font-size: 0.85rem;
+  display: none;
+}
+.lang-opt.active .lang-opt-check { display: block; }
+
+/* Mobile — dentro do menu hamburger */
+.lang-globe-wrap-mobile {
+  margin: 10px 1.5rem 6px;
+  display: flex;
   justify-content: center;
 }
-.lang-switcher-mobile .lang-btn {
-  padding: 5px 12px;
+.lang-globe-wrap-mobile .lang-globe-btn {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.2);
 }
-.lang-switcher-mobile .lang-flag { font-size: 1.2rem; }
-.lang-switcher-mobile .lang-code { font-size: 0.65rem; }
+.lang-globe-wrap-mobile .lang-dropdown {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+.lang-globe-wrap-mobile .lang-dropdown.open {
+  display: block;
+}
 
-@media (max-width: 1100px) {
-  .lang-switcher:not(.lang-switcher-mobile) { display: none; }  /* hamburger cobre */
-}
+/* Manter compatibilidade com setLang() */
+.lang-btn { display: none; }
 </style>
 </head>
 <body>
@@ -1851,10 +1975,37 @@ footer {
         <span data-i18n="nav.conecte">Conecte-se</span>
       </a>
       <!-- Language Switcher — canto direito -->
-      <div class="lang-switcher" id="lang-switcher">
-        <button class="lang-btn active" data-lang="pt" onclick="setLang('pt')"><span class="lang-flag">🇧🇷</span><span class="lang-code">BR</span></button>
-        <button class="lang-btn" data-lang="en" onclick="setLang('en')"><span class="lang-flag">🇺🇸</span><span class="lang-code">EN</span></button>
-        <button class="lang-btn" data-lang="es" onclick="setLang('es')"><span class="lang-flag">🇪🇸</span><span class="lang-code">ES</span></button>
+      <div class="lang-globe-wrap" id="lang-switcher">
+        <button class="lang-globe-btn" onclick="toggleLangDropdown(event)" aria-label="Selecionar idioma">
+          <svg class="lang-globe-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <ellipse cx="12" cy="12" rx="4" ry="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span class="lang-current-label" id="lang-current-label">PT</span>
+          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="lang-dropdown" id="lang-dropdown">
+          <button class="lang-opt active" data-lang="pt" onclick="setLang('pt'); closeLangDropdown()">
+            <span class="lang-opt-flag-box flag-br"></span>
+            <span class="lang-opt-code">PT</span>
+            <span class="lang-opt-name">Português</span>
+            <span class="lang-opt-check">✓</span>
+          </button>
+          <button class="lang-opt" data-lang="en" onclick="setLang('en'); closeLangDropdown()">
+            <span class="lang-opt-flag-box flag-en"></span>
+            <span class="lang-opt-code">EN</span>
+            <span class="lang-opt-name">English</span>
+            <span class="lang-opt-check">✓</span>
+          </button>
+          <button class="lang-opt" data-lang="es" onclick="setLang('es'); closeLangDropdown()">
+            <span class="lang-opt-flag-box flag-es"></span>
+            <span class="lang-opt-code">ES</span>
+            <span class="lang-opt-name">Español</span>
+            <span class="lang-opt-check">✓</span>
+          </button>
+        </div>
       </div>
       <button class="hamburger" id="hbg" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -1872,10 +2023,37 @@ footer {
   <a href="#noticias"  onclick="closeNav()" data-i18n="nav.noticias">Notícias</a>
   <a href="#contato"   onclick="closeNav()" data-i18n="nav.contato">Contato</a>
   <!-- Mobile Language Switcher -->
-  <div class="lang-switcher lang-switcher-mobile" id="lang-switcher-mob">
-    <button class="lang-btn active" data-lang="pt" onclick="setLang('pt'); closeNav()"><span class="lang-flag">🇧🇷</span><span class="lang-code">BR</span></button>
-    <button class="lang-btn" data-lang="en" onclick="setLang('en'); closeNav()"><span class="lang-flag">🇺🇸</span><span class="lang-code">EN</span></button>
-    <button class="lang-btn" data-lang="es" onclick="setLang('es'); closeNav()"><span class="lang-flag">🇪🇸</span><span class="lang-code">ES</span></button>
+  <div class="lang-globe-wrap lang-globe-wrap-mobile" id="lang-switcher-mob">
+    <button class="lang-globe-btn" onclick="toggleLangDropdown(event, 'mob')" aria-label="Selecionar idioma">
+      <svg class="lang-globe-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <ellipse cx="12" cy="12" rx="4" ry="10"/>
+        <line x1="2" y1="12" x2="22" y2="12"/>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </svg>
+      <span class="lang-current-label" id="lang-current-label-mob">PT</span>
+      <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="lang-dropdown" id="lang-dropdown-mob">
+      <button class="lang-opt active" data-lang="pt" onclick="setLang('pt'); closeLangDropdown('mob'); closeNav()">
+        <span class="lang-opt-flag-box flag-br"></span>
+        <span class="lang-opt-code">PT</span>
+        <span class="lang-opt-name">Português</span>
+        <span class="lang-opt-check">✓</span>
+      </button>
+      <button class="lang-opt" data-lang="en" onclick="setLang('en'); closeLangDropdown('mob'); closeNav()">
+        <span class="lang-opt-flag-box flag-en"></span>
+        <span class="lang-opt-code">EN</span>
+        <span class="lang-opt-name">English</span>
+        <span class="lang-opt-check">✓</span>
+      </button>
+      <button class="lang-opt" data-lang="es" onclick="setLang('es'); closeLangDropdown('mob'); closeNav()">
+        <span class="lang-opt-flag-box flag-es"></span>
+        <span class="lang-opt-code">ES</span>
+        <span class="lang-opt-name">Español</span>
+        <span class="lang-opt-check">✓</span>
+      </button>
+    </div>
   </div>
   <div class="mob-nav-btns">
     <a href="https://salahshriners.com/inscricao/" target="_blank" onclick="closeNav()" class="btn btn-gold" data-i18n="nav.sejaShriner">Seja um Shriner</a>
@@ -3831,11 +4009,54 @@ function setLang(lang) {
   const metaDesc = document.getElementById('meta-description');
   if (metaDesc && t['meta.description']) metaDesc.content = t['meta.description'];
 
-  // Update active button state
+  // Update active button state (legacy .lang-btn — kept for compatibility)
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
   });
+
+  // Update globe dropdown: active option + label
+  const labelMap = { pt: 'PT', en: 'EN', es: 'ES' };
+  const label = labelMap[lang] || lang.toUpperCase();
+  ['lang-current-label', 'lang-current-label-mob'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = label;
+  });
+  document.querySelectorAll('.lang-opt').forEach(opt => {
+    opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
+  });
 }
+
+// ── Language Dropdown ────────────────────────────────────────────────────────
+function toggleLangDropdown(event, suffix) {
+  event.stopPropagation();
+  const id = suffix ? 'lang-dropdown-' + suffix : 'lang-dropdown';
+  const dd = document.getElementById(id);
+  if (!dd) return;
+  const isOpen = dd.classList.contains('open');
+  // Close all dropdowns first
+  document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.lang-globe-btn').forEach(b => b.classList.remove('open'));
+  if (!isOpen) {
+    dd.classList.add('open');
+    dd.closest('.lang-globe-wrap').querySelector('.lang-globe-btn').classList.add('open');
+  }
+}
+
+function closeLangDropdown(suffix) {
+  const id = suffix ? 'lang-dropdown-' + suffix : 'lang-dropdown';
+  const dd = document.getElementById(id);
+  if (dd) {
+    dd.classList.remove('open');
+    const btn = dd.closest('.lang-globe-wrap') && dd.closest('.lang-globe-wrap').querySelector('.lang-globe-btn');
+    if (btn) btn.classList.remove('open');
+  }
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', function() {
+  document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.lang-globe-btn').forEach(b => b.classList.remove('open'));
+});
 
 // Apply on load
 document.addEventListener('DOMContentLoaded', function() {
