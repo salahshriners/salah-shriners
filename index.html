@@ -311,6 +311,13 @@ p  { line-height: 1.78; color: var(--text-muted); }
     rgba(20, 4, 4, 0.15) 100%
   );
 }
+/* No mobile usa imagem portrait com as crianças (sem o gênio cortado) */
+@media (max-width: 768px) {
+  .hero-slide-cartoon {
+    background-image: url('images/inline/hero-smartphones.png') !important;
+    background-position: center top !important;
+  }
+}
 .hero-body {
   position: relative;
   z-index: 2;
