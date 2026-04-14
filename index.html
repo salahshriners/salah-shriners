@@ -1769,6 +1769,38 @@ footer {
   width: 100%; border-radius: var(--radius);
   object-fit: cover; aspect-ratio: 16/10;
 }
+
+/* ── Share bar ── */
+.article-share-bar {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+  margin-top: 2.5rem; padding-top: 1.5rem;
+  border-top: 2px solid #f0f0f0;
+}
+.share-label {
+  font-size: 0.78rem; font-weight: 700; color: #888;
+  letter-spacing: 0.8px; text-transform: uppercase; margin-right: 4px; flex-shrink: 0;
+}
+.share-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 18px; border-radius: 50px; font-size: 0.84rem; font-weight: 600;
+  cursor: pointer; border: none; text-decoration: none; transition: all 0.2s;
+  font-family: inherit; line-height: 1;
+}
+.share-btn svg { flex-shrink: 0; }
+.share-btn-copy  { background: #f0f0f0; color: #333; }
+.share-btn-copy:hover { background: #e0e0e0; }
+.share-btn-copy.copied { background: #d1fae5; color: #065f46; }
+.share-btn-whatsapp { background: #25D366; color: #fff; }
+.share-btn-whatsapp:hover { background: #1ebe5d; }
+.share-btn-email { background: #fff; color: #333; border: 1.5px solid #ddd; }
+.share-btn-email:hover { background: #f4f4f4; }
+.share-btn-x { background: #000; color: #fff; }
+.share-btn-x:hover { background: #222; }
+@media (max-width: 500px) {
+  .article-share-bar { gap: 8px; }
+  .share-btn { padding: 8px 13px; font-size: 0.8rem; }
+}
+
 @media (max-width: 640px) {
   .article-main-title { font-size: 1.4rem; }
   .article-content-wrap { padding: 1.5rem 1rem 3rem; }
@@ -2013,7 +2045,7 @@ footer {
 <!-- ===================== HERO ===================== -->
 <section id="hero">
   <div class="hero-track">
-        <div class="hero-slide hero-slide-cartoon active" style="background-image:url('images/inline/hero-computer.jpg'); background-position: center 82%; background-size: cover;"></div>
+        <div class="hero-slide hero-slide-cartoon active" style="background-image:url('images/inline/hero-computer-v2.jpg'); background-position: center 82%; background-size: cover;"></div>
     <div class="hero-slide"        style="background-image:url('https://salahshriners.lovable.app/assets/hero-slide-2-R8-ObJQ6.avif')"></div>
     <div class="hero-slide"        style="background-image:url('images/inline/inline_17.jpg')"></div>
     <div class="hero-slide"        style="background-image:url('images/inline/inline_18.jpg')"></div>
@@ -2438,53 +2470,41 @@ footer {
     </div>
     <div class="noticias-grid">
 
-      
-      
       <article class="noticia reveal d1">
-        <a href="#" onclick="showArticle('art13'); return false;" class="noticia-thumb">
-          <img src="images/noticias/20260414_capa_whatsapp_image_202.jpg" alt="Salah Shriners articula proposta de parceria com Unisul e Junior Achievement para desenvolver soluções para seus desafios" loading="lazy">
-        </a>
-        <div class="noticia-body">
-          <div class="noticia-meta"><span class="n-cat">Parceria</span><span class="n-date">14 Abr 2026</span></div>
-          <h3>Salah Shriners articula proposta de parceria com Unisul e Junior Achievement para desenvolver soluções para seus desafios</h3>
-          <p>Um desafio prático com jovens e a ampliação de ações na área da saúde infantil em Santa Catarina estão entre os principais encaminhamentos de uma proposta de parceria em desenvolvimento.</p>
-          <button onclick="showArticle('art13')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
-        </div>
-      </article>
-
-
-
-      
-      
-      <article class="noticia reveal d2">
         <a href="#" onclick="showArticle('art0'); return false;" class="noticia-thumb">
-          <img src="images/noticias/profis1.jpg" alt="Reforma do PROFIS em Joinville se aproxima com apoio do Salah Shriners" loading="lazy">
+          <img src="images/noticias/profis1.jpg" alt="Reforma PROFIS Joinville" loading="lazy">
         </a>
         <div class="noticia-body">
-          <div class="noticia-meta"><span class="n-cat">Filantropia</span><span class="n-date">22 Mar 2026</span></div>
-          <h3>Reforma do PROFIS em Joinville se aproxima com apoio do Salah Shriners</h3>
-          <p></p>
-          <button onclick="showArticle('art0')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+          <div class="noticia-meta"><span class="n-cat" data-i18n="noticias.art0.cat">Filantropia</span><span class="n-date">22 Mar 2026</span></div>
+          <h3 data-i18n="noticias.art0.titulo">Reforma do PROFIS em Joinville se aproxima com apoio do Salah Shriners</h3>
+          <p data-i18n="noticias.art0.resumo">Visita técnica avalia condições do Centro de Convivência e define próximos passos para reforma viabilizada com recursos do Paddle Solidário.</p>
+          <button onclick="showArticle('art0')" class="n-link"><span data-i18n="noticias.lerMais">Ler mais</span> <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
         </div>
       </article>
 
-
-
-      
-      
-      <article class="noticia reveal d3">
+      <article class="noticia reveal d2">
         <a href="#" onclick="showArticle('art1'); return false;" class="noticia-thumb">
-          <img src="images/noticias/posse1.jpg" alt="Salah Shriners empossa gestão 2026 e realiza seminário institucional" loading="lazy">
+          <img src="images/noticias/posse1.jpg" alt="Posse gestão 2026" loading="lazy">
         </a>
         <div class="noticia-body">
-          <div class="noticia-meta"><span class="n-cat">Institucional</span><span class="n-date">11 Mar 2026</span></div>
-          <h3>Salah Shriners empossa gestão 2026 e realiza seminário institucional</h3>
-          <p></p>
-          <button onclick="showArticle('art1')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+          <div class="noticia-meta"><span class="n-cat" data-i18n="noticias.art1.cat">Institucional</span><span class="n-date">11 Mar 2026</span></div>
+          <h3 data-i18n="noticias.art1.titulo">Salah Shriners empossa gestão 2026 e realiza seminário institucional</h3>
+          <p data-i18n="noticias.art1.resumo">Tarde de integração em Florianópolis reuniu cerca de 50 Nobres para seminários, formação e a cerimônia oficial de posse da gestão 2026.</p>
+          <button onclick="showArticle('art1')" class="n-link"><span data-i18n="noticias.lerMais">Ler mais</span> <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
         </div>
       </article>
 
-
+      <article class="noticia reveal d3">
+        <a href="#" onclick="showArticle('art2'); return false;" class="noticia-thumb">
+          <img src="https://static.wixstatic.com/media/b93cef_0a28d37abca94573818cd1310ef9a071~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_0a28d37abca94573818cd1310ef9a071~mv2.jpg" alt="Parceria Bodes do Asfalto 2026" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat" data-i18n="noticias.art2.cat">Parceria</span><span class="n-date">02 Mar 2026</span></div>
+          <h3 data-i18n="noticias.art2.titulo">Salah Shriners e Bodes do Asfalto firmam parceria para 2026</h3>
+          <p data-i18n="noticias.art2.resumo">Acordo celebrado em Itajaí prevê ações integradas em apoio às causas filantrópicas voltadas às crianças em Santa Catarina.</p>
+          <button onclick="showArticle('art2')" class="n-link"><span data-i18n="noticias.lerMais">Ler mais</span> <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
 
     </div>
   </div>
@@ -2963,38 +2983,6 @@ function showFormError(btn, msg) {
 
 const ARTICLES = [
   {
-    "id": "art13",
-    "title": "Salah Shriners articula proposta de parceria com Unisul e Junior Achievement para desenvolver soluções para seus desafios",
-    "cat": "Parceria",
-    "date": "14 Abr 2026",
-    "cover": "images/noticias/20260414_capa_whatsapp_image_202.jpg",
-    "body": [
-      "Um desafio prático com jovens e a ampliação de ações na área da saúde infantil em Santa Catarina estão entre os principais encaminhamentos de uma proposta de parceria em desenvolvimento.",
-      "A iniciativa reúne o Salah Shriners, a Unisul e a Junior Achievement, com foco em inovação social e formação de lideranças. A proposta foi discutida em reunião que contou com a presença do presidente do Salah Shriners, Mário Correa, da reitora da Unisul, Cinthia Tamara Vieira Rocha, e do diretor executivo da Junior Achievement em Santa Catarina, Evandro Badin.",
-      "O primeiro projeto já tem data marcada: no dia 30 de maio, a Unisul será sede de um desafio que reunirá cerca de 50 jovens. Durante um dia inteiro, os participantes irão trabalhar em equipes para desenvolver soluções para uma demanda do Salah Shriners. Ao final, os projetos serão avaliados por um corpo de jurados, que escolherá a melhor proposta. A atividade segue a metodologia da Junior Achievement e busca estimular o pensamento estratégico aliado ao impacto social.",
-      "Além do desafio, a cooperação prevê a construção de um modelo de atuação contínua entre o Salah Shriners e a universidade, nos moldes de outras parcerias institucionais. Entre as frentes em desenvolvimento estão o apoio na identificação de crianças que possam ser encaminhadas para tratamento médico especializado, inclusive no exterior, além da realização de palestras com o comitê médico e a promoção de mutirões.",
-      "A iniciativa reforça o papel do Salah Shriners como articulador de redes de apoio, conectando instituições de ensino, organizações sociais e especialistas em torno de soluções concretas para ampliar o acesso de crianças a tratamentos de saúde."
-    ],
-    "photos": []
-  },
-  {
-    "id": "art12",
-    "title": "Salah Shriners lança novo site com estrutura moderna e navegação simplificada",
-    "cat": "Institucional",
-    "date": "14 Abr 2026",
-    "cover": "images/noticias/20260414_capa_salah_feed_2_12_.png",
-    "body": [
-      "O Salah Shriners colocou no ar seu novo site institucional, marcando um avanço importante na forma de apresentar a causa e fortalecer sua presença digital. A iniciativa buscou alinhar a comunicação da instituição aos padrões internacionais do Shriners International, adaptando-os à realidade e aos hábitos do público brasileiro.",
-      "De acordo com o primeiro vice-presidente e responsável pela repaginação, Leopoldo Homrich, o “Leo”, a principal inovação está na estrutura adotada: um modelo OnePage, em que todas as informações estão organizadas em blocos dentro de uma única página. Com isso, o visitante acessa o conteúdo completo apenas rolando a tela, sem a necessidade de navegar por diferentes abas, tornando a experiência mais fluida, objetiva e intuitiva”, explica.",
-      "Além do novo formato, o site foi desenvolvido com foco em clareza e funcionalidade. A proposta é facilitar o entendimento sobre a atuação do Salah Shriners, seus projetos e formas de participação, reforçando o compromisso da instituição com uma comunicação mais direta e acessível. Outro avanço é a ampliação do alcance internacional, o site conta com versões em inglês, espanhol, francês e alemão acompanhando o caráter global da organização.",
-      "Resgate de conhecimento",
-      "O desenvolvimento do projeto também resgata uma história relevante nos bastidores. Leo retomou conhecimentos de programação adquiridos ainda na universidade.“Com o apoio das novas tecnologias, especialmente ferramentas baseadas em inteligência artificial, foi possível garantir mais segurança, modernizar a estrutura e utilizar uma linguagem de programação mais leve e eficiente”, detalha.",
-      "O resultado foi celebrado pelo presidente do Salah Shriners, Mário Corrêa.“Esse site traduz o momento que estamos vivendo. Precisávamos de uma comunicação mais direta e alinhada com a dimensão da nossa causa. Hoje, quem acessar entenderá com facilidade quem somos e, principalmente, o impacto do nosso trabalho.”",
-      "Acesse: https://salahshriners.org/"
-    ],
-    "photos": []
-  },
-  {
     "id": "art0",
     "title": "Reforma do PROFIS em Joinville se aproxima com apoio do Salah Shriners",
     "cat": "Filantropia",
@@ -3175,7 +3163,7 @@ const ARTICLES = [
 ];
 
 
-function showArticle(id) {
+function showArticle(id, pushState) {
   const art = ARTICLES.find(a => a.id === id);
   if (!art) return;
   const ov = document.getElementById('article-overlay');
@@ -3192,11 +3180,56 @@ function showArticle(id) {
   document.body.style.overflow = 'hidden';
   requestAnimationFrame(() => requestAnimationFrame(() => ov.classList.add('show')));
   ov.scrollTop = 0;
+
+  /* ── Deep link: atualiza URL ── */
+  if (pushState !== false) {
+    history.pushState({ article: id }, '', '#noticia/' + id);
+  }
+
+  /* ── Share bar: monta URLs de compartilhamento ── */
+  const pageUrl  = location.origin + location.pathname + '#noticia/' + id;
+  const encUrl   = encodeURIComponent(pageUrl);
+  const encTitle = encodeURIComponent(art.title);
+  const wa = document.getElementById('share-whatsapp');
+  const em = document.getElementById('share-email');
+  const xb = document.getElementById('share-x');
+  if (wa) wa.href = 'https://wa.me/?text=' + encTitle + '%20' + encUrl;
+  if (em) em.href = 'mailto:?subject=' + encTitle + '&body=' + encTitle + '%0A%0A' + encUrl;
+  if (xb) xb.href = 'https://x.com/intent/tweet?text=' + encTitle + '&url=' + encUrl;
+  const shareBar = document.getElementById('art-share');
+  if (shareBar) shareBar.dataset.url = pageUrl;
 }
+
+function copyArticleLink(btn) {
+  const shareBar = document.getElementById('art-share');
+  const url = (shareBar && shareBar.dataset.url) ? shareBar.dataset.url : window.location.href;
+  navigator.clipboard.writeText(url).then(function() {
+    const orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Copiado!';
+    setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2500);
+  }).catch(function() {
+    /* Fallback para navegadores sem clipboard API */
+    const ta = document.createElement('textarea');
+    ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Copiado!';
+    setTimeout(function() { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2500);
+  });
+}
+
 function hideArticle() {
   const ov = document.getElementById('article-overlay');
   ov.classList.remove('show');
   setTimeout(() => { ov.style.display = 'none'; document.body.style.overflow = ''; }, 300);
+  /* Volta URL para #noticias sem criar novo histórico */
+  if (location.hash && location.hash.startsWith('#noticia/')) {
+    history.pushState({}, '', '#noticias');
+  }
 }
 
 
@@ -3221,6 +3254,33 @@ function hideNewsPage() {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { hideArticle(); hideNewsPage(); }
 });
+
+/* ── Deep link: abre notícia ao carregar página via URL ── */
+(function() {
+  function handleHash(hash, isPop) {
+    var m = (hash || '').match(/^#noticia\/(art\d+)$/);
+    if (m) {
+      showArticle(m[1], !isPop);
+    } else {
+      /* Se veio de popstate sem hash de notícia, fecha overlay se aberto */
+      if (isPop) {
+        var ov = document.getElementById('article-overlay');
+        if (ov && ov.classList.contains('show')) {
+          ov.classList.remove('show');
+          setTimeout(function() { ov.style.display = 'none'; document.body.style.overflow = ''; }, 300);
+        }
+      }
+    }
+  }
+  /* Carregamento inicial */
+  document.addEventListener('DOMContentLoaded', function() {
+    handleHash(location.hash, false);
+  });
+  /* Botão Voltar / Avançar do browser */
+  window.addEventListener('popstate', function(e) {
+    handleHash(location.hash, true);
+  });
+})();
 
 function showSuccess(btn) {
   const svgCheck = '<svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
@@ -3260,30 +3320,6 @@ function showSuccess(btn) {
     </div>
 
     <div class="noticias-grid">
-      <article class="noticia">
-        <a href="#" onclick="showArticle('art13'); return false;" class="noticia-thumb">
-          <img src="images/noticias/20260414_capa_whatsapp_image_202.jpg" alt="Salah Shriners articula proposta de parceria com Unisul e Junior Achievement para desenvolver soluções para seus desafios" loading="lazy">
-        </a>
-        <div class="noticia-body">
-          <div class="noticia-meta"><span class="n-cat">Parceria</span><span class="n-date">14 Abr 2026</span></div>
-          <h3>Salah Shriners articula proposta de parceria com Unisul e Junior Achievement para desenvolver soluções para seus desafios</h3>
-          <p>Um desafio prático com jovens e a ampliação de ações na área da saúde infantil em Santa Catarina estão entre os principais encaminhamentos de uma proposta de parceria em desenvolvimento.</p>
-          <button onclick="showArticle('art13')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
-        </div>
-      </article>
-
-      <article class="noticia">
-        <a href="#" onclick="showArticle('art12'); return false;" class="noticia-thumb">
-          <img src="images/noticias/20260414_capa_salah_feed_2_12_.png" alt="Salah Shriners lança novo site com estrutura moderna e navegação simplificada" loading="lazy">
-        </a>
-        <div class="noticia-body">
-          <div class="noticia-meta"><span class="n-cat">Institucional</span><span class="n-date">14 Abr 2026</span></div>
-          <h3>Salah Shriners lança novo site com estrutura moderna e navegação simplificada</h3>
-          <p>O Salah Shriners colocou no ar seu novo site institucional, marcando um avanço importante na forma de apresentar a causa e fortalecer sua presença digital.</p>
-          <button onclick="showArticle('art12')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
-        </div>
-      </article>
-
 
       <article class="noticia">
         <a href="#" onclick="showArticle('art1'); return false;" class="noticia-thumb">
@@ -3447,6 +3483,43 @@ function showSuccess(btn) {
     <h1 id="art-title" class="article-main-title"></h1>
     <div id="art-body" class="article-body-text"></div>
     <div id="art-gallery" class="article-gallery"></div>
+
+    <!-- Share bar -->
+    <div id="art-share" class="article-share-bar">
+      <span class="share-label">Compartilhar</span>
+      <!-- Copiar link -->
+      <button class="share-btn share-btn-copy" onclick="copyArticleLink(this)" title="Copiar link">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-4 10h6a2 2 0 002-2v-8a2 2 0 00-2-2h-6a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+        </svg>
+        Copiar link
+      </button>
+      <!-- WhatsApp -->
+      <a id="share-whatsapp" class="share-btn share-btn-whatsapp" href="#" target="_blank" rel="noopener" title="Compartilhar no WhatsApp">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.116 1.522 5.847L.057 23.886l6.196-1.624A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 01-5.003-1.372l-.359-.213-3.68.965.983-3.588-.234-.368A9.794 9.794 0 012.18 12C2.18 6.57 6.571 2.18 12 2.18c5.43 0 9.82 4.39 9.82 9.82 0 5.43-4.39 9.818-9.82 9.818z"/>
+        </svg>
+        WhatsApp
+      </a>
+      <!-- E-mail -->
+      <a id="share-email" class="share-btn share-btn-email" href="#" title="Compartilhar por e-mail">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        E-mail
+      </a>
+      <!-- X / Twitter -->
+      <a id="share-x" class="share-btn share-btn-x" href="#" target="_blank" rel="noopener" title="Compartilhar no X (Twitter)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+        X / Twitter
+      </a>
+    </div>
+
   </div>
 </div>
 
