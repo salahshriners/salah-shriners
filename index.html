@@ -972,6 +972,54 @@ p  { line-height: 1.78; color: var(--text-muted); }
 }
 
 /* ================================================
+   SALA DE IMPRENSA – FILTROS
+   ================================================ */
+.news-filter-btns {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.news-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.45px;
+  cursor: pointer;
+  border: 2px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+.news-filter-btn:hover {
+  background: var(--gold);
+  color: #3a2800;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(222,181,80,0.35);
+}
+.news-filter-btn.active {
+  background: var(--gold);
+  color: #3a2800;
+  box-shadow: 0 4px 14px rgba(222,181,80,0.35);
+}
+.noticia.hidden-by-filter { display: none !important; }
+@media (max-width: 900px) {
+  .news-filter-btns { gap: 4px; }
+  .news-filter-btn { padding: 5px 10px; font-size: 0.7rem; }
+}
+@media (max-width: 660px) {
+  .news-page-nav-inner { flex-wrap: wrap; height: auto; padding: 10px 1rem 8px; gap: 6px; }
+  .news-page-nav-title { order: -1; flex: 1; }
+  .news-page-back { order: -2; }
+  .news-filter-btns { width: 100%; justify-content: center; flex-wrap: wrap; padding-bottom: 2px; }
+}
+
+/* ================================================
    QUOTE SECTION
    ================================================ */
 #quote {
@@ -3250,6 +3298,34 @@ function hideNewsPage() {
     page.style.display = 'none';
     document.body.style.overflow = '';
   }, 350);
+  // Reset filtro ao fechar
+  filterNews('todos');
+}
+function filterNews(cat) {
+  // Atualiza botão ativo
+  document.querySelectorAll('.news-filter-btn').forEach(btn => {
+    const btnCat = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+    btn.classList.toggle('active', btnCat === cat);
+  });
+  // Mostra/oculta artigos
+  const articles = document.querySelectorAll('#news-page .noticia');
+  let visible = 0;
+  articles.forEach(art => {
+    const artCat = (art.dataset.cat || '').toLowerCase();
+    const show = cat === 'todos' || artCat === cat;
+    art.classList.toggle('hidden-by-filter', !show);
+    if (show) visible++;
+  });
+  // Atualiza contagem
+  const countEl = document.querySelector('.news-page-count');
+  if (countEl) {
+    const labels = { todos: '11 publicações · de Dez 2025 a Mar 2026',
+      institucional: visible + ' publicação' + (visible !== 1 ? 'ões' : '') + ' · Institucional',
+      parceria:      visible + ' publicação' + (visible !== 1 ? 'ões' : '') + ' · Parceria',
+      evento:        visible + ' publicação' + (visible !== 1 ? 'ões' : '') + ' · Evento',
+      saude:         visible + ' publicação' + (visible !== 1 ? 'ões' : '') + ' · Saúde' };
+    countEl.textContent = labels[cat] || (visible + ' publicações');
+  }
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { hideArticle(); hideNewsPage(); }
@@ -3307,7 +3383,13 @@ function showSuccess(btn) {
         <span data-i18n="newsPage.voltar">Voltar ao site</span>
       </button>
       <span class="news-page-nav-title" data-i18n="noticias.tag">Sala de Imprensa</span>
-      <div style="width:140px"></div>
+      <div class="news-filter-btns">
+        <button class="news-filter-btn active" onclick="filterNews('todos')">Todos</button>
+        <button class="news-filter-btn" onclick="filterNews('institucional')">Institucional</button>
+        <button class="news-filter-btn" onclick="filterNews('parceria')">Parceria</button>
+        <button class="news-filter-btn" onclick="filterNews('evento')">Evento</button>
+        <button class="news-filter-btn" onclick="filterNews('saude')">Saúde</button>
+      </div>
     </div>
   </nav>
 
@@ -3321,7 +3403,7 @@ function showSuccess(btn) {
 
     <div class="noticias-grid">
 
-      <article class="noticia">
+      <article class="noticia" data-cat="institucional">
         <a href="#" onclick="showArticle('art1'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_903d75e66e864505b657dd2034203466~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_903d75e66e864505b657dd2034203466~mv2.jpg" alt="Posse gestão 2026" loading="lazy">
         </a>
@@ -3333,7 +3415,7 @@ function showSuccess(btn) {
         </div>
       </article>
 
-      <article class="noticia">
+      <article class="noticia" data-cat="parceria">
         <a href="#" onclick="showArticle('art2'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_0a28d37abca94573818cd1310ef9a071~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_0a28d37abca94573818cd1310ef9a071~mv2.jpg" alt="Parceria Bodes do Asfalto 2026" loading="lazy">
         </a>
@@ -3345,7 +3427,7 @@ function showSuccess(btn) {
         </div>
       </article>
 
-      <article class="noticia">
+      <article class="noticia" data-cat="parceria">
         <a href="#" onclick="showArticle('art3'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_4079d65e79ea4741b1afe3359422a642~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_4079d65e79ea4741b1afe3359422a642~mv2.jpg" alt="Parceria Uniplac tratamento" loading="lazy">
         </a>
@@ -3357,7 +3439,7 @@ function showSuccess(btn) {
         </div>
       </article>
 
-      <article class="noticia">
+      <article class="noticia" data-cat="parceria">
         <a href="#" onclick="showArticle('art4'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_ad7b5d91de8e4e1997e37a2212060919~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_ad7b5d91de8e4e1997e37a2212060919~mv2.jpg" alt="Parceria Uniplac Lages" loading="lazy">
         </a>
@@ -3369,7 +3451,7 @@ function showSuccess(btn) {
         </div>
       </article>
 
-      <article class="noticia">
+      <article class="noticia" data-cat="evento">
         <a href="#" onclick="showArticle('art5'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_73fb4ff255f64bc48071e2de5abf51b5~mv2.jpeg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_73fb4ff255f64bc48071e2de5abf51b5~mv2.jpeg" alt="Posse novo Divan" loading="lazy">
         </a>
@@ -3381,7 +3463,7 @@ function showSuccess(btn) {
         </div>
       </article>
 
-      <article class="noticia">
+      <article class="noticia" data-cat="institucional">
         <a href="#" onclick="showArticle('art6'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_5c142d8473a140a4b23397a7bd01a485~mv2.png/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_5c142d8473a140a4b23397a7bd01a485~mv2.png" alt="Novo sistema de comunicação" loading="lazy">
         </a>
@@ -3393,7 +3475,7 @@ function showSuccess(btn) {
         </div>
       </article>
 
-      <article class="noticia">
+      <article class="noticia" data-cat="institucional">
         <a href="#" onclick="showArticle('art7'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_9cd6030e3e9d4bb091e4ea6d277bb168~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_9cd6030e3e9d4bb091e4ea6d277bb168~mv2.jpg" alt="Visita ao GOSC" loading="lazy">
         </a>
@@ -3405,7 +3487,7 @@ function showSuccess(btn) {
         </div>
       </article>
 
-      <article class="noticia">
+      <article class="noticia" data-cat="parceria">
         <a href="#" onclick="showArticle('art8'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_9be899e7c5ec4ac6a96e271a05e035ad~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_9be899e7c5ec4ac6a96e271a05e035ad~mv2.jpg" alt="Parceria Bodes do Asfalto" loading="lazy">
         </a>
@@ -3417,7 +3499,7 @@ function showSuccess(btn) {
         </div>
       </article>
 
-      <article class="noticia">
+      <article class="noticia" data-cat="parceria">
         <a href="#" onclick="showArticle('art9'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_21f69c97569a4e8e88d1da392df112c8~mv2.jpeg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_21f69c97569a4e8e88d1da392df112c8~mv2.jpeg" alt="Peixada do Gui parceria" loading="lazy">
         </a>
@@ -3429,7 +3511,7 @@ function showSuccess(btn) {
         </div>
       </article>
 
-      <article class="noticia">
+      <article class="noticia" data-cat="saude">
         <a href="#" onclick="showArticle('art10'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_dbc0988dd2444590b9769a21294a4f6e~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_dbc0988dd2444590b9769a21294a4f6e~mv2.jpg" alt="Comitê Médico Shriners Hospitals" loading="lazy">
         </a>
@@ -3441,7 +3523,7 @@ function showSuccess(btn) {
         </div>
       </article>
 
-      <article class="noticia">
+      <article class="noticia" data-cat="evento">
         <a href="#" onclick="showArticle('art11'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_1f456d3cd3bc49cb80eaf090e9234c54~mv2.jpeg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_1f456d3cd3bc49cb80eaf090e9234c54~mv2.jpeg" alt="Festas de Encerramento 2025" loading="lazy">
         </a>
