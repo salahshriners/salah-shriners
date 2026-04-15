@@ -1764,6 +1764,7 @@ footer {
   position: fixed; inset: 0;
   background: #fff;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   z-index: 4000;
   display: none;
   opacity: 0;
@@ -1825,7 +1826,7 @@ footer {
   border-top: 2px solid #f0f0f0;
 }
 .share-label {
-  font-size: 0.78rem; font-weight: 700; color: #888;
+  font-size: 0.78rem; font-weight: 700; color: var(--gold);
   letter-spacing: 0.8px; text-transform: uppercase; margin-right: 4px; flex-shrink: 0;
 }
 .share-btn {
@@ -1845,7 +1846,7 @@ footer {
 .share-btn-x { background: #000; color: #fff; }
 .share-btn-x:hover { background: #222; }
 @media (max-width: 500px) {
-  .article-share-bar { gap: 8px; }
+  .article-share-bar { gap: 8px; margin-bottom: env(safe-area-inset-bottom, 1rem); }
   .share-btn { padding: 8px 13px; font-size: 0.8rem; }
 }
 
@@ -3239,11 +3240,7 @@ function showArticle(id, pushState) {
   const encUrl   = encodeURIComponent(pageUrl);
   const encTitle = encodeURIComponent(art.title);
   const wa = document.getElementById('share-whatsapp');
-  const em = document.getElementById('share-email');
-  const xb = document.getElementById('share-x');
   if (wa) wa.href = 'https://wa.me/?text=' + encTitle + '%20' + encUrl;
-  if (em) em.href = 'mailto:?subject=' + encTitle + '&body=' + encTitle + '%0A%0A' + encUrl;
-  if (xb) xb.href = 'https://x.com/intent/tweet?text=' + encTitle + '&url=' + encUrl;
   const shareBar = document.getElementById('art-share');
   if (shareBar) shareBar.dataset.url = pageUrl;
 }
@@ -3585,21 +3582,7 @@ function showSuccess(btn) {
         </svg>
         WhatsApp
       </a>
-      <!-- E-mail -->
-      <a id="share-email" class="share-btn share-btn-email" href="#" title="Compartilhar por e-mail">
-        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-        </svg>
-        E-mail
-      </a>
-      <!-- X / Twitter -->
-      <a id="share-x" class="share-btn share-btn-x" href="#" target="_blank" rel="noopener" title="Compartilhar no X (Twitter)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-        </svg>
-        X / Twitter
-      </a>
+
     </div>
 
   </div>
