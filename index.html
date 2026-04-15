@@ -3080,7 +3080,7 @@ const ARTICLES = [
       "images/noticias/posse7.jpg",
       "images/noticias/posse8.jpg",
       "images/noticias/posse9.jpg",
-      "images/noticias/posse10.jpg"
+      "images/conteudo/criancas+genio_oficial.png"
     ]
   },
   {
@@ -3223,7 +3223,11 @@ function showArticle(id, pushState) {
   document.getElementById('art-title').textContent = art.title;
   document.getElementById('art-body').innerHTML = art.body.map(p => '<p>' + p + '</p>').join('');
   const gal = document.getElementById('art-gallery');
-  gal.innerHTML = art.photos.map(s => '<img src="' + s + '" alt="" loading="lazy">').join('');
+  gal.innerHTML = art.photos.map(s => {
+    const isPng = s.toLowerCase().endsWith('.png');
+    const style = isPng ? ' style="object-fit:contain;background:#fff;aspect-ratio:5/4;"' : '';
+    return '<img src="' + s + '" alt="" loading="lazy"' + style + '>';
+  }).join('');
   gal.style.display = art.photos.length ? 'grid' : 'none';
   ov.style.display = 'block';
   document.body.style.overflow = 'hidden';
