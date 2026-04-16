@@ -10,6 +10,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#a50e24">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Salah Shriners">
   <style>
 
 /* ================================================
@@ -4558,6 +4564,17 @@ document.addEventListener('DOMContentLoaded', function() {
   setLang(currentLang);
 });
 
+</script>
+
+<!-- Service Worker (PWA) -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js')
+      .then(function(reg) { console.log('[Salah PWA] SW registrado:', reg.scope); })
+      .catch(function(err) { console.warn('[Salah PWA] Falha SW:', err); });
+  });
+}
 </script>
 </body>
 </html>
