@@ -951,6 +951,11 @@ p  { line-height: 1.78; color: var(--text-muted); }
   letter-spacing: 0.3px;
 }
 .news-page-back:hover { background: rgba(255,255,255,0.28); }
+.back-label-short { display: none; }
+@media (max-width: 660px) {
+  .back-label-full { display: none; }
+  .back-label-short { display: inline; }
+}
 .news-page-nav-title {
   color: #fff;
   font-family: 'Playfair Display', serif;
@@ -3400,7 +3405,7 @@ function showSuccess(btn) {
         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
         </svg>
-        <span data-i18n="newsPage.voltar">Voltar ao site</span>
+        <span class="back-label-full" data-i18n="newsPage.voltar">Voltar ao site</span><span class="back-label-short">Voltar</span>
       </button>
       <span class="news-page-nav-title" data-i18n="noticias.tag">Sala de Imprensa</span>
       <div class="news-filter-btns">
