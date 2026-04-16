@@ -1016,9 +1016,22 @@ p  { line-height: 1.78; color: var(--text-muted); }
   .news-page-nav-inner { flex-wrap: wrap; height: auto; padding: 10px 1rem 8px; gap: 6px; }
   .news-page-nav-title { order: -1; flex: 1; }
   .news-page-back { order: -2; }
-  .news-filter-btns { width: 100%; justify-content: center; flex-wrap: wrap; padding-bottom: 2px; }
+  .news-filter-btns {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    padding-bottom: 4px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+  }
+  .news-filter-btns::-webkit-scrollbar { display: none; }
+  .news-filter-btn { padding: 4px 10px; font-size: 0.65rem; flex-shrink: 0; }
 }
-
+@media (max-width: 400px) {
+  .news-filter-btn { padding: 3px 8px; font-size: 0.6rem; letter-spacing: 0.2px; }
+}
 /* ================================================
    QUOTE SECTION
    ================================================ */
