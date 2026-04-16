@@ -1,0 +1,50 @@
+{
+  "name": "Salah Shriners SC",
+  "short_name": "Salah Shriners",
+  "description": "Fraternidade, Filantropia e Diversão — Templo Salah Shriners, Santa Catarina",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#a50e24",
+  "lang": "pt-BR",
+  "orientation": "portrait-primary",
+  "categories": ["lifestyle", "social"],
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Noticias",
+      "short_name": "Noticias",
+      "description": "Ultimas noticias do Salah Shriners",
+      "url": "/#noticias",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Fale Conosco",
+      "short_name": "Contato",
+      "description": "Entre em contato com o Salah Shriners",
+      "url": "/#contato",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Doacoes",
+      "short_name": "Doacoes",
+      "description": "Apoie nossa causa filantropica",
+      "url": "/#doacao",
+      "icons": [{ "src": "/images/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
