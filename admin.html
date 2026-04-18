@@ -566,7 +566,8 @@
     .preview-article-excerpt {
       font-size: 1.05rem; color: #555; line-height: 1.6;
       margin-bottom: 20px; font-style: italic;
-      border-left: 3px solid var(--crimson); padding-left: 14px;
+      border-left: 3px solid var(--crimson);
+      padding-left: 14px;
     }
     .preview-article-para {
       font-size: 0.97rem; color: #333; line-height: 1.75;
@@ -830,7 +831,7 @@
       <div class="field">
         <label>Resumo <span>*</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.8rem;color:#888">— aparece nos cards do site (máx. 220 caracteres)</span></label>
         <textarea id="f-excerpt" rows="2" maxlength="220"
-                  placeholder="Ex: Acordo celebrado em Joinville prevê ações integradas em apoio às crianças..."
+                  placeholder="Ex: Acordo celebrado em Joinville prevà ações integradas em apoio às crianças..."
                   oninput="updateCharCount(this, 'cnt-exc', 220)"></textarea>
         <div class="char-count" id="cnt-exc">0 / 220</div>
       </div>
@@ -868,8 +869,9 @@
             <span class="fmt-sep"></span>
             <button type="button" class="fmt-btn" onclick="applyBodyFormat('mark')"   title="Destacar" style="font-size:.75rem">🖍</button>
           </div>
-          <textarea id="f-body" rows="14"
-            placeholder="Escreva o texto completo do artigo aqui.&#10;&#10;Separe os parágrafos com uma linha em branco (tecle Enter duas vezes).&#10;&#10;Não há limite de caracteres."></textarea>
+          <div id="f-body" contenteditable="true" class="f-body-wysiwyg"
+               data-placeholder="Escreva o texto completo do artigo aqui.&#10;&#10;Pressione Enter para novo parágrafo.&#10;Selecione o texto e use os botões para formatar."
+               data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" spellcheck="false"></div>
         </div>
         <p class="body-hint">💡 <strong>Enter</strong> = novo parágrafo &nbsp;|&nbsp; Selecione texto e use <strong>B I U</strong> para formatar — o resultado aparece direto, sem tags HTML.</p>
       </div>
@@ -1116,12 +1118,24 @@ function localToday() {
 /* =====================================================
    INICIALIZAÇÃO
 ===================================================== */
+// Backup do conteúdo do f-body — salvo a cada keystroke para evitar perda
+// por interferência de extensões do Chrome (ex: Grammarly, LanguageTool).
+let _savedBodyHtml = '';
+
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('f-date').value = localToday();
   const savedToken = sessionStorage.getItem('gh_token');
   if (savedToken) {
     document.getElementById('gh-token').value = savedToken;
     setTokenStatus('ok', '✓ Token salvo nesta sessão');
+  }
+
+  // Persistir conteúdo do editor a cada alteração
+  const bodyEditor = document.getElementById('f-body');
+  if (bodyEditor) {
+    bodyEditor.addEventListener('input', function() {
+      _savedBodyHtml = this.innerHTML;
+    });
   }
 });
 
@@ -1176,28 +1190,36 @@ function getParagraphs() {
   const editor = document.getElementById('f-body');
   if (!editor) return [];
 
-  // 1. Verificar texto visível — fonte de verdade mais confiável
-  const plainText = (editor.innerText || editor.textContent || '').trim();
-  if (!plainText) return [];
+  // Extensões de browser (Grammarly, LanguageTool etc.) podem substituir o
+  // contenteditable por um elemento próprio, deixando f-body vazio.
+  // Por isso salvamos o innerHTML a cada keystroke em _savedBodyHtml e
+  // usamos ele como fallback quando o editor parece vazio.
+  const rawHtml = (editor.innerHTML || '').trim() || (_savedBodyHtml || '').trim();
+  if (!rawHtml || rawHtml === '<br>') return [];
 
-  // 2. Coletar blocos preservando formatação HTML
+  // Montar DOM temporário para extrair parágrafos sem sujar a página
+  const tmp = document.createElement('div');
+  tmp.innerHTML = rawHtml;
+
   const paras = [];
-  editor.childNodes.forEach(node => {
+  tmp.childNodes.forEach(node => {
     if (node.nodeType === Node.TEXT_NODE) {
       const t = node.textContent.trim();
       if (t) paras.push(t);
     } else if (node.nodeName === 'BR') {
-      // separador, ignora
+      // separador de linha, ignora
     } else if (node.nodeType === Node.ELEMENT_NODE) {
-      if (!node.textContent.trim()) return;
+      const visibleText = node.textContent.trim();
+      if (!visibleText) return;
       paras.push(node.innerHTML.trim());
     }
   });
 
   if (paras.length > 0) return paras;
 
-  // 3. Fallback: innerText linha por linha
-  return plainText.split('\n').map(l => l.trim()).filter(Boolean);
+  // Fallback: texto puro linha por linha
+  const plain = (tmp.textContent || '').trim();
+  return plain ? plain.split('\n').map(l => l.trim()).filter(Boolean) : [];
 }
 
 /* =====================================================
@@ -1206,29 +1228,38 @@ function getParagraphs() {
 function applyBodyFormat(tag) {
   const editor = document.getElementById('f-body');
   if (!editor) return;
+
   const sel = window.getSelection();
   const hasSelection = sel && sel.rangeCount > 0 && !sel.isCollapsed;
+
   if (!hasSelection) {
     editor.focus();
     const toolbar = document.getElementById('body-toolbar');
     if (toolbar && !toolbar.querySelector('.fmt-hint')) {
-      const hint = document.createElement('span');
-      hint.className = 'fmt-hint';
-      hint.style.cssText = 'font-size:.72rem;color:#999;margin-left:8px;pointer-events:none;';
-      hint.textContent = 'Selecione o texto primeiro';
-      toolbar.appendChild(hint);
-      setTimeout(() => hint.remove(), 2000);
+      const h = document.createElement('span');
+      h.className = 'fmt-hint';
+      h.style.cssText = 'font-size:.72rem;color:#999;margin-left:8px;pointer-events:none;';
+      h.textContent = 'Selecione o texto primeiro';
+      toolbar.appendChild(h);
+      setTimeout(() => h.remove(), 2000);
     }
     return;
   }
+
+  // Mapeia tag → execCommand
   const cmdMap = { strong: 'bold', em: 'italic', u: 'underline', s: 'strikeThrough' };
   if (cmdMap[tag]) {
     document.execCommand(cmdMap[tag], false, null);
   } else if (tag === 'mark') {
+    // Highlight: usa backColor temporariamente
     document.execCommand('hiliteColor', false, '#FFF176');
   }
   editor.focus();
 }
+
+/* =====================================================
+   FOTO DE CAPA
+===================================================== */
 function handleCoverChange(input) {
   if (input.files[0]) setCoverFile(input.files[0]);
 }
@@ -1304,7 +1335,7 @@ function addExistingPhotoThumb(path, idx) {
   wrap.dataset.existingIdx = idx;
   const imgSrc = SITE_URL + '/' + path;
   wrap.innerHTML = `
-    <img src="${imgSrc}" alt="Foto atual" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'90\' height=\'70\'%3E%3Crect fill=\'%23ddd\' width=\'90\' height=\'70\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'10\' dy=\'.3em\'%3EFoto%3C/text%3E%3C/svg%3E'">
+    <img src="${imgSrc}" alt="Foto atual" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'90\' height=\'70\'%3E%3Crect fill=\'%23ddd\" width=\'90\' height=\'70\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'10\' dy=\'.3em\'%3EFoto%3C/text%3E%3C/svg%3E'">
     <button class="thumb-remove" onclick="removeExistingPhoto(this, ${idx})" title="Remover foto">✕</button>
   `;
   preview.appendChild(wrap);
@@ -1746,22 +1777,6 @@ function removeArticle(html, id) {
 ===================================================== */
 function openPreview() {
   try {
-  // === DIAGNÓSTICO TEMPORÁRIO ===
-  const _ed = document.getElementById('f-body');
-  const _diag = {
-    htmlLen: (_ed.innerHTML||'').trim().length,
-    textLen: (_ed.textContent||'').trim().length,
-    innerTextLen: (_ed.innerText||'').trim().length,
-    childNodes: _ed.childNodes.length,
-    firstChild: _ed.firstChild ? _ed.firstChild.nodeName + '/' + (_ed.firstChild.textContent||'').substring(0,30) : 'NONE',
-    paras: getParagraphs()
-  };
-  document.getElementById('preview-card-content').innerHTML =
-    '<div style="background:#fff3cd;padding:16px;font-family:monospace;font-size:13px;white-space:pre-wrap;border-radius:8px;margin:16px;">' +
-    'DIAGNÓSTICO:\n' + JSON.stringify(_diag, null, 2) + '</div>';
-  document.getElementById('preview-modal').classList.add('open');
-  return;
-  // === FIM DIAGNÓSTICO ===
   const title   = document.getElementById('f-title').value.trim();
   const excerpt = document.getElementById('f-excerpt').value.trim();
   const cat     = document.getElementById('f-cat').value;
@@ -1820,8 +1835,8 @@ function openPreview() {
 
   document.getElementById('preview-modal').classList.add('open');
   } catch(err) {
-    alert('Erro na preview: ' + err.message);
-    console.error('[openPreview]', err);
+    alert('Erro ao gerar preview: ' + err.message + '\n\nAbra o Console do Chrome (F12 > Console) para mais detalhes.');
+    console.error('[openPreview] erro:', err);
   }
 }
 
@@ -2357,7 +2372,7 @@ function renderEditorCanvas() {
       ctx.restore();
     }
 
-    // Alças nos cantos e meios
+    // Alças nons cantos e meios
     const hs = 9;
     ctx.fillStyle = '#ffffff';
     [[x,y],[x+w,y],[x,y+h],[x+w,y+h],
@@ -2384,7 +2399,7 @@ function editorMousedown(e) {
   if (editorMode === 'crop') {
     editorCropActive = true;
     editorCropRect   = null;
-    editorCropX1 = x; editorCropY1 = y;
+    editorCropX = x; editorCropY1 = y;
     editorCropX2 = x; editorCropY2 = y;
   } else {
     editorIsDragging = true;
