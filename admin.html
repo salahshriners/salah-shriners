@@ -1385,7 +1385,7 @@ function makeFilename(file, prefix) {
 /* =====================================================
    COMPRESSÃO DE IMAGEM
 ===================================================== */
-async function compressImage(file, maxWidth = 1200, quality = 0.85) {
+async function compressImage(file, maxWidth = 2400, quality = 0.90) {
   return new Promise(resolve => {
     const img = new Image();
     const url = URL.createObjectURL(file);
@@ -1645,11 +1645,11 @@ function buildNewsCard(data, excerpt) {
 function buildArticleJson(id, title, cat, dateStr, cover, paragraphs, photos) {
   const bodyLines  = paragraphs.map(p => `      "${jesc(p)}"`).join(',\n');
   const photoLines = photos.map(p => `"${p}"`).join(', ');
-  return `  {\n    "id": "${id}",\n    "title": "${jesc(title)}",\n    "cat": "${cat}",\n    "date": "${dateStr}",\n    "cover": "${cover}",\n    "body": [\n${bodyLines}\n    ],\n    "photos": [${photoLines}]\n  }`;
+  return `   {\n    "id": "${id}",\n    "title": "${jesc(title)}",\n    "cat": "${cat}",\n    "date": "${dateStr}",\n    "cover": "${cover}",\n    "body": [\n${bodyLines}\n    ],\n    "photos": [${photoLines}]\n  }`;
 }
 
 /* =====================================================
-   INJETAR NOVO ARTIGO
+   INJETAI NOVO ARTIGO
 ===================================================== */
 function injectArticle(html, newData, excerpt) {
   const N = countArticles(html);
@@ -1763,7 +1763,7 @@ function removeArticle(html, id) {
     }
   }
 
-  /* 3 — Remover do grid completo */
+  /* 3 � Remover do grid completo */
   const range = findNewsCardRange(html, id);
   if (range) {
     html = html.slice(0, range.start) + html.slice(range.end);
@@ -2316,7 +2316,7 @@ function renderEditorCanvas() {
   ctx.fillStyle = '#2a2a2a';
   for (let y = 0; y < canvas.height; y += cs * 2)
     for (let x = 0; x < canvas.width; x += cs * 2) {
-      ctx.fillRect(x,    y,    cs, cs);
+      ctx.fillRect(x,      y,    cs, cs);
       ctx.fillRect(x+cs, y+cs, cs, cs);
     }
 
@@ -2365,14 +2365,14 @@ function renderEditorCanvas() {
       ctx.lineWidth   = 1;
       ctx.beginPath();
       ctx.moveTo(x + w/3, y);   ctx.lineTo(x + w/3,   y+h);
-      ctx.moveTo(x + 2*w/3, y); ctx.lineTo(x + 2*w/3, y+h);
+      ctx.moveTo(x + 2*w/3, y); ctx.lineTo(x + 2*&w/3, y+h);
       ctx.moveTo(x, y + h/3);   ctx.lineTo(x+w, y + h/3);
       ctx.moveTo(x, y + 2*h/3); ctx.lineTo(x+w, y + 2*h/3);
       ctx.stroke();
       ctx.restore();
     }
 
-    // Alças nons cantos e meios
+    // Alças nos cantos e meios
     const hs = 9;
     ctx.fillStyle = '#ffffff';
     [[x,y],[x+w,y],[x,y+h],[x+w,y+h],
@@ -2399,7 +2399,7 @@ function editorMousedown(e) {
   if (editorMode === 'crop') {
     editorCropActive = true;
     editorCropRect   = null;
-    editorCropX = x; editorCropY1 = y;
+    editorCropX1 = x; editorCropY1 = y;
     editorCropX2 = x; editorCropY2 = y;
   } else {
     editorIsDragging = true;
@@ -2499,9 +2499,12 @@ async function applyPhotoEditor() {
     ctx.drawImage(img, cx, cy, cw, ch, 0, 0, cw, ch);
 
   } else {
-    // Apenas reescala conforme o zoom atual
-    out.width  = Math.max(1, Math.round(img.width  * editorScale));
-    out.height = Math.max(1, Math.round(img.height * editorScale));
+    // Saída na resolução original da imagem.
+    // NÃO usar editorScale aqui — ele representa apenas o zoom de exibição no
+    // canvas de preview (max 720px), não a resolução de saída desejada.
+    // O compressImage chamado no upload vai limitar ao maxWidth se necessário.
+    out.width  = img.width;
+    out.height = img.height;
     ctx = out.getContext('2d');
     ctx.drawImage(img, 0, 0, out.width, out.height);
   }
