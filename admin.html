@@ -1176,39 +1176,28 @@ function getParagraphs() {
   const editor = document.getElementById('f-body');
   if (!editor) return [];
 
-  const rawHtml = editor.innerHTML.trim();
-  if (!rawHtml || rawHtml === '<br>') return [];
+  // 1. Verificar texto visível — fonte de verdade mais confiável
+  const plainText = (editor.innerText || editor.textContent || '').trim();
+  if (!plainText) return [];
 
+  // 2. Coletar blocos preservando formatação HTML
   const paras = [];
   editor.childNodes.forEach(node => {
     if (node.nodeType === Node.TEXT_NODE) {
       const t = node.textContent.trim();
       if (t) paras.push(t);
-    } else if (node.nodeName === 'P' || node.nodeName === 'DIV') {
-      const inner = node.innerHTML.trim();
-      const isEmpty = !inner || /^<br\s*\/?>$/i.test(inner);
-      if (!isEmpty) paras.push(inner);
     } else if (node.nodeName === 'BR') {
-      // separador vazio, ignora
+      // separador, ignora
     } else if (node.nodeType === Node.ELEMENT_NODE) {
-      const outer = node.outerHTML.trim();
-      if (outer) paras.push(outer);
+      if (!node.textContent.trim()) return;
+      paras.push(node.innerHTML.trim());
     }
   });
 
-  if (paras.length === 0) {
-    const cleaned = rawHtml
-      .replace(/<(div|p)>\s*<br\s*\/?>\s*<\/(div|p)>/gi, '')
-      .trim();
-    if (cleaned) return [cleaned];
-    // Fallback 2: innerText — captura texto visível mesmo sem tags de bloco
-    const plainText = (editor.innerText || editor.textContent || '').trim();
-    if (plainText) {
-      return plainText.split('\n').map(l => l.trim()).filter(Boolean);
-    }
-    return [];
-  }
-  return paras;
+  if (paras.length > 0) return paras;
+
+  // 3. Fallback: innerText linha por linha
+  return plainText.split('\n').map(l => l.trim()).filter(Boolean);
 }
 
 /* =====================================================
@@ -1756,6 +1745,7 @@ function removeArticle(html, id) {
    PRÉ-VISUALIZAÇÃO
 ===================================================== */
 function openPreview() {
+  try {
   const title   = document.getElementById('f-title').value.trim();
   const excerpt = document.getElementById('f-excerpt').value.trim();
   const cat     = document.getElementById('f-cat').value;
@@ -1813,6 +1803,10 @@ function openPreview() {
   `;
 
   document.getElementById('preview-modal').classList.add('open');
+  } catch(err) {
+    alert('Erro na preview: ' + err.message);
+    console.error('[openPreview]', err);
+  }
 }
 
 function closePreview() {
