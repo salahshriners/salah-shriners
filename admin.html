@@ -559,6 +559,11 @@
       font-size: 1.6rem; font-weight: 700; line-height: 1.25;
       margin-bottom: 18px; color: var(--text);
     }
+    .preview-article-excerpt {
+      font-size: 1.05rem; color: #555; line-height: 1.6;
+      margin-bottom: 20px; font-style: italic;
+      border-left: 3px solid var(--crimson); padding-left: 14px;
+    }
     .preview-article-para {
       font-size: 0.97rem; color: #333; line-height: 1.75;
       margin-bottom: 16px;
@@ -1166,29 +1171,35 @@ function updateCharCount(el, countId, max) {
 function getParagraphs() {
   const editor = document.getElementById('f-body');
   if (!editor) return [];
+
+  const rawHtml = editor.innerHTML.trim();
+  if (!rawHtml || rawHtml === '<br>') return [];
+
   const paras = [];
   editor.childNodes.forEach(node => {
     if (node.nodeType === Node.TEXT_NODE) {
       const t = node.textContent.trim();
       if (t) paras.push(t);
     } else if (node.nodeName === 'P' || node.nodeName === 'DIV') {
-      const inner = node.innerHTML.replace(/<br\s*\/?>/gi, '').trim();
-      if (inner) paras.push(inner);
+      const inner = node.innerHTML.trim();
+      const isEmpty = !inner || /^<br\s*\/?>$/i.test(inner);
+      if (!isEmpty) paras.push(inner);
     } else if (node.nodeName === 'BR') {
-      // separador, ignora
-    } else {
-      const hh = node.outerHTML ? node.outerHTML.trim() : node.textContent.trim();
-      if (hh) paras.push(hh);
+      // separador vazio, ignora
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      const outer = node.outerHTML.trim();
+      if (outer) paras.push(outer);
     }
   });
-  const filtered = paras.filter(p => p && p !== '<br>');
-  if (filtered.length === 0) {
-    const full = editor.innerHTML.trim();
-    if (full && full !== '<br>' && full !== '') {
-      return [full];
-    }
+
+  if (paras.length === 0) {
+    const cleaned = rawHtml
+      .replace(/<(div|p)>\s*<br\s*\/?>\s*<\/(div|p)>/gi, '')
+      .trim();
+    if (cleaned) return [cleaned];
+    return [];
   }
-  return filtered;
+  return paras;
 }
 
 /* =====================================================
@@ -1760,8 +1771,8 @@ function openPreview() {
 
   // Parágrafos
   const parasHtml = paras.length > 0
-    ? paras.map(p => `<p class="preview-article-para">${p}</p>`).join('')
-    : `<p class="preview-article-para" style="color:#aaa;font-style:italic">Nenhum parágrafo adicionado ainda.</p>`;
+    ? paras.map(p => `<div class="preview-article-para">${p}</div>`).join('')
+    : `<div class="preview-article-para" style="color:#aaa;font-style:italic">Nenhum parágrafo adicionado ainda.</div>`;
 
   // Fotos adicionais — novas (File) + existentes (path)
   const newPhotoSrcs = photosFiles.filter(Boolean).map(f => URL.createObjectURL(f));
@@ -1774,6 +1785,10 @@ function openPreview() {
       ).join('')}</div>`
     : `<p class="preview-no-photos">Nenhuma foto adicional.</p>`;
 
+  const excerptHtml = excerpt
+    ? `<p class="preview-article-excerpt">${hesc(excerpt)}</p>`
+    : '';
+
   document.getElementById('preview-card-content').innerHTML = `
     ${coverHtml}
     <div class="preview-article-body">
@@ -1782,6 +1797,7 @@ function openPreview() {
         <span class="preview-article-date">${hesc(dateStr)}</span>
       </div>
       <h2 class="preview-article-title">${hesc(title)}</h2>
+      ${excerptHtml}
       ${parasHtml}
       ${photosHtml}
     </div>
