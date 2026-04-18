@@ -1815,8 +1815,8 @@ footer {
 }
 .article-back-btn:hover { background: rgba(255,255,255,0.28); }
 .article-breadcrumb { color: rgba(255,255,255,0.85); font-size: 0.85rem; }
-.article-hero-wrap { width: 100%; max-height: 480px; overflow: hidden; }
-.article-hero-img { width:100%; max-height:480px; height:auto; object-fit:contain; background:#111; display:block; }
+.article-hero-wrap { width: 100%; height: 420px; overflow: hidden; }
+.article-hero-img { width:100%; height:420px; object-fit:cover; object-position:center; display:block; }
 .article-content-wrap {
   max-width: 760px; margin: 0 auto; padding: 3rem 2rem 5rem;
 }
@@ -1878,6 +1878,7 @@ footer {
 @media (max-width: 640px) {
   .article-main-title { font-size: 1.4rem; }
   .article-content-wrap { padding: 1.5rem 1rem 3rem; }
+  .article-hero-wrap { height: 240px; }
   .article-hero-img { height: 240px; }
   .article-breadcrumb { display: none; }
 }
