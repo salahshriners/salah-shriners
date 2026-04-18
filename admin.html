@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel de NotÃ­cias â Salah Shriners</title>
+  <title>Painel de Notícias — Salah Shriners</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -294,7 +294,7 @@
       font-size: .78rem; color: #aaa; margin-top: 6px;
     }
 
-    /* ---- BARRA DE FORMATAÃÃO ---- */
+    /* ---- BARRA DE FORMATAÇÃO ---- */
     .para-editor { flex: 1; display: flex; flex-direction: column; gap: 0; }
     .para-toolbar {
       display: flex; gap: 3px; align-items: center;
@@ -575,7 +575,7 @@
       font-size: .82rem; color: #aaa; margin-top: 16px; font-style: italic;
     }
 
-    /* ---- MODAL CONFIRMAR EXCLUSÃO ---- */
+    /* ---- MODAL CONFIRMAR EXCLUSÃO ---- */
     .confirm-modal-box {
       background: #fff; border-radius: 14px;
       max-width: 420px; width: 100%;
@@ -735,12 +735,12 @@
   <div class="login-box">
     <img src="images/logo/brasao-vetorizado-transp.png" alt="Salah Shriners"
          onerror="this.style.display='none'">
-    <h2>Painel de NotÃ­cias</h2>
-    <p>Salah Shriners SC â Acesso restrito</p>
+    <h2>Painel de Notícias</h2>
+    <p>Salah Shriners SC — Acesso restrito</p>
 
     <div class="login-field">
-      <label>UsuÃ¡rio</label>
-      <input type="text" id="login-user" placeholder="Digite seu usuÃ¡rio"
+      <label>Usuário</label>
+      <input type="text" id="login-user" placeholder="Digite seu usuário"
              autocomplete="username" onkeydown="if(event.key==='Enter') doLogin()">
     </div>
     <div class="login-field">
@@ -749,12 +749,12 @@
              autocomplete="current-password" onkeydown="if(event.key==='Enter') doLogin()">
     </div>
 
-    <button class="btn-login" onclick="doLogin()">ð Entrar</button>
+    <button class="btn-login" onclick="doLogin()">🔐 Entrar</button>
 
     <div class="login-error" id="login-error">
-      â ï¸ UsuÃ¡rio ou senha incorretos. Tente novamente.
+      ⚠️ Usuário ou senha incorretos. Tente novamente.
     </div>
-    <p class="login-footer">Salah Shriners SC Â· Painel Administrativo</p>
+    <p class="login-footer">Salah Shriners SC · Painel Administrativo</p>
   </div>
 </div>
 
@@ -762,8 +762,8 @@
 <header class="admin-header">
   <img src="images/logo/brasao-vetorizado-transp.png" alt="Salah Shriners" onerror="this.style.display='none'">
   <div>
-    <h1>Painel de NotÃ­cias</h1>
-    <p>Salah Shriners SC â PublicaÃ§Ã£o e gerenciamento de artigos</p>
+    <h1>Painel de Notícias</h1>
+    <p>Salah Shriners SC — Publicação e gerenciamento de artigos</p>
   </div>
 </header>
 
@@ -771,8 +771,8 @@
 
   <!-- TOKEN -->
   <div class="token-box">
-    <h3>ð Token de Acesso GitHub</h3>
-    <p>NecessÃ¡rio para publicar e gerenciar notÃ­cias. Digite uma vez por sessÃ£o â o token nÃ£o Ã© armazenado permanentemente.</p>
+    <h3>🔑 Token de Acesso GitHub</h3>
+    <p>Necessário para publicar e gerenciar notícias. Digite uma vez por sessão — o token não é armazenado permanentemente.</p>
     <div class="token-row">
       <input type="password" id="gh-token" placeholder="ghp_... ou github_pat_..." autocomplete="off">
       <button class="btn-save-token" onclick="saveToken()">Salvar token</button>
@@ -782,18 +782,18 @@
 
   <!-- TABS -->
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('nova')">ð° Nova NotÃ­cia</button>
-    <button class="tab-btn" onclick="switchTab('gerenciar')">ð Gerenciar NotÃ­cias</button>
+    <button class="tab-btn active" onclick="switchTab('nova')">📰 Nova Notícia</button>
+    <button class="tab-btn" onclick="switchTab('gerenciar')">📋 Gerenciar Notícias</button>
   </div>
 
-  <!-- ===================== TAB: NOVA NOTÃCIA ===================== -->
+  <!-- ===================== TAB: NOVA NOTÍCIA ===================== -->
   <div class="tab-content active" id="tab-nova">
     <div class="form-card">
-      <h2 id="form-title">ð° Nova NotÃ­cia</h2>
+      <h2 id="form-title">📰 Nova Notícia</h2>
 
-      <!-- TÃ­tulo -->
+      <!-- Título -->
       <div class="field">
-        <label>TÃ­tulo <span>*</span></label>
+        <label>Título <span>*</span></label>
         <input type="text" id="f-title" placeholder="Ex: Salah Shriners firma parceria com..."
                oninput="updateCharCount(this, 'cnt-title', 120)">
         <div class="char-count" id="cnt-title">0 / 120</div>
@@ -802,7 +802,7 @@
       <!-- Data + Categoria -->
       <div class="field-row">
         <div class="field">
-          <label>Data de publicaÃ§Ã£o <span>*</span></label>
+          <label>Data de publicação <span>*</span></label>
           <input type="date" id="f-date">
         </div>
         <div class="field">
@@ -812,16 +812,16 @@
             <option value="Institucional">Institucional</option>
             <option value="Parceria">Parceria</option>
             <option value="Evento">Evento</option>
-            <option value="SaÃºde">SaÃºde</option>
+            <option value="Saúde">Saúde</option>
           </select>
         </div>
       </div>
 
       <!-- Resumo -->
       <div class="field">
-        <label>Resumo <span>*</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.8rem;color:#888">â aparece nos cards do site (mÃ¡x. 220 caracteres)</span></label>
+        <label>Resumo <span>*</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.8rem;color:#888">— aparece nos cards do site (máx. 220 caracteres)</span></label>
         <textarea id="f-excerpt" rows="2" maxlength="220"
-                  placeholder="Ex: Acordo celebrado em Joinville prevÃª aÃ§Ãµes integradas em apoio Ã s crianÃ§as..."
+                  placeholder="Ex: Acordo celebrado em Joinville prevê ações integradas em apoio às crianças..."
                   oninput="updateCharCount(this, 'cnt-exc', 220)"></textarea>
         <div class="char-count" id="cnt-exc">0 / 220</div>
       </div>
@@ -834,14 +834,14 @@
              ondragleave="this.classList.remove('drag-over')"
              ondrop="handleCoverDrop(event)">
           <input type="file" id="f-cover" accept="image/*" onchange="handleCoverChange(this)">
-          <span class="upload-icon">ð¼ï¸</span>
+          <span class="upload-icon">🖼️</span>
           <p><strong>Clique ou arraste</strong> a foto de capa aqui<br>
-             <span style="font-size:.78rem">JPG, PNG ou WEBP â serÃ¡ redimensionada automaticamente</span></p>
+             <span style="font-size:.78rem">JPG, PNG ou WEBP — será redimensionada automaticamente</span></p>
         </div>
         <div class="cover-preview-wrap" id="cover-preview-wrap" style="display:none">
           <img id="cover-preview" alt="Preview da capa">
-          <button class="cover-remove-btn" onclick="removeCover()" title="Remover foto de capa">â</button>
-          <button class="cover-edit-btn"   onclick="openPhotoEditor('cover')" title="Editar foto de capa">âï¸ Editar foto de capa</button>
+          <button class="cover-remove-btn" onclick="removeCover()" title="Remover foto de capa">✕</button>
+          <button class="cover-edit-btn"   onclick="openPhotoEditor('cover')" title="Editar foto de capa">✏️ Editar foto de capa</button>
           <p style="font-size:.8rem;color:#888;margin-top:8px;" id="cover-info"></p>
         </div>
         <div id="existing-cover-info" class="existing-cover-info" style="display:none"></div>
@@ -853,16 +853,16 @@
         <div class="para-editor article-body-editor">
           <div class="para-toolbar" id="body-toolbar">
             <button type="button" class="fmt-btn" onclick="applyBodyFormat('strong')" title="Negrito (selecione o texto primeiro)"><strong>B</strong></button>
-            <button type="button" class="fmt-btn" onclick="applyBodyFormat('em')"     title="ItÃ¡lico"><em>I</em></button>
+            <button type="button" class="fmt-btn" onclick="applyBodyFormat('em')"     title="Itálico"><em>I</em></button>
             <button type="button" class="fmt-btn" onclick="applyBodyFormat('u')"      title="Sublinhado"><u>U</u></button>
             <button type="button" class="fmt-btn" onclick="applyBodyFormat('s')"      title="Tachado"><s>S</s></button>
             <span class="fmt-sep"></span>
-            <button type="button" class="fmt-btn" onclick="applyBodyFormat('mark')"   title="Destacar" style="font-size:.75rem">ð</button>
+            <button type="button" class="fmt-btn" onclick="applyBodyFormat('mark')"   title="Destacar" style="font-size:.75rem">🖍</button>
           </div>
           <textarea id="f-body" rows="14"
-            placeholder="Escreva o texto completo do artigo aqui.&#10;&#10;Separe os parÃ¡grafos com uma linha em branco (tecle Enter duas vezes).&#10;&#10;NÃ£o hÃ¡ limite de caracteres."></textarea>
+            placeholder="Escreva o texto completo do artigo aqui.&#10;&#10;Separe os parágrafos com uma linha em branco (tecle Enter duas vezes).&#10;&#10;Não há limite de caracteres."></textarea>
         </div>
-        <p class="body-hint">ð¡ <strong>Enter</strong> = novo parÃ¡grafo &nbsp;|&nbsp; Selecione texto e use <strong>B I U</strong> para formatar â o resultado aparece direto, sem tags HTML.</p>
+        <p class="body-hint">💡 <strong>Enter</strong> = novo parágrafo &nbsp;|&nbsp; Selecione texto e use <strong>B I U</strong> para formatar — o resultado aparece direto, sem tags HTML.</p>
       </div>
 
       <!-- Fotos adicionais -->
@@ -873,9 +873,9 @@
              ondragleave="this.classList.remove('drag-over')"
              ondrop="handlePhotosDrop(event)">
           <input type="file" id="f-photos" accept="image/*" multiple onchange="handlePhotosChange(this)">
-          <span class="upload-icon">ð·</span>
+          <span class="upload-icon">📷</span>
           <p><strong>Clique ou arraste</strong> as fotos da galeria aqui<br>
-             <span style="font-size:.78rem">Pode selecionar vÃ¡rias de uma vez â opcional</span></p>
+             <span style="font-size:.78rem">Pode selecionar várias de uma vez — opcional</span></p>
         </div>
         <div class="photos-preview-grid" id="photos-preview"></div>
       </div>
@@ -883,36 +883,36 @@
       <!-- Publicar -->
       <div class="section-label">Publicar</div>
       <div class="publish-row">
-        <button class="btn-preview" onclick="openPreview()">ð PrÃ©-visualizar</button>
+        <button class="btn-preview" onclick="openPreview()">👁 Pré-visualizar</button>
         <button class="btn btn-publish" id="btn-pub" onclick="publishArticle()">
-          ð Publicar no Site
+          🚀 Publicar no Site
         </button>
       </div>
       <div id="edit-mode-bar" style="display:none;margin-top:12px;">
-        <button class="btn-cancel-edit" onclick="cancelEdit()">â Cancelar ediÃ§Ã£o e voltar ao formulÃ¡rio limpo</button>
+        <button class="btn-cancel-edit" onclick="cancelEdit()">✕ Cancelar edição e voltar ao formulário limpo</button>
       </div>
     </div>
 
     <!-- PROGRESSO -->
     <div class="progress-card" id="progress-card">
-      <h3>â³ Publicando artigo...</h3>
+      <h3>⏳ Publicando artigo...</h3>
       <div class="step">
-        <span class="step-icon">ð¼ï¸</span>
+        <span class="step-icon">🖼️</span>
         <span class="step-label">Enviando fotos para o GitHub</span>
         <span class="step-status pending" id="s1">Aguardando...</span>
       </div>
       <div class="step">
-        <span class="step-icon">ð</span>
+        <span class="step-icon">📄</span>
         <span class="step-label">Lendo site atual</span>
         <span class="step-status pending" id="s2">Aguardando...</span>
       </div>
       <div class="step">
-        <span class="step-icon">âï¸</span>
-        <span class="step-label">Atualizando notÃ­cia no site</span>
+        <span class="step-icon">✏️</span>
+        <span class="step-label">Atualizando notícia no site</span>
         <span class="step-status pending" id="s3">Aguardando...</span>
       </div>
       <div class="step">
-        <span class="step-icon">âï¸</span>
+        <span class="step-icon">☁️</span>
         <span class="step-label">Salvando no GitHub</span>
         <span class="step-status pending" id="s4">Aguardando...</span>
       </div>
@@ -920,15 +920,15 @@
 
     <!-- SUCESSO -->
     <div class="success-box" id="success-box">
-      <h3>â NotÃ­cia publicada com sucesso!</h3>
-      <p>O site serÃ¡ atualizado em atÃ© 2 minutos pelo GitHub Pages.</p>
-      <a href="https://homrich1979.github.io/salah-shriners" target="_blank">ð Ver o site</a>
-      <a href="#" class="secondary" onclick="resetForm(); return false;">ð° Publicar outra notÃ­cia</a>
+      <h3>✅ Notícia publicada com sucesso!</h3>
+      <p>O site será atualizado em até 2 minutos pelo GitHub Pages.</p>
+      <a href="https://homrich1979.github.io/salah-shriners" target="_blank">🌐 Ver o site</a>
+      <a href="#" class="secondary" onclick="resetForm(); return false;">📰 Publicar outra notícia</a>
     </div>
 
     <!-- ERRO -->
     <div class="error-box" id="error-box">
-      <h4>â Erro ao publicar</h4>
+      <h4>❌ Erro ao publicar</h4>
       <p id="error-msg">Verifique o token e tente novamente.</p>
     </div>
   </div><!-- /tab-nova -->
@@ -937,14 +937,14 @@
   <div class="tab-content" id="tab-gerenciar">
     <div class="manage-card">
       <div class="manage-header">
-        <h2>ð Gerenciar NotÃ­cias</h2>
+        <h2>📋 Gerenciar Notícias</h2>
         <button class="btn-load" id="btn-load" onclick="loadArticles()">
-          ð Carregar notÃ­cias
+          🔄 Carregar notícias
         </button>
       </div>
-      <p class="manage-hint">Clique em "Carregar notÃ­cias" para ver todos os artigos publicados. VocÃª pode editar ou excluir qualquer um deles.</p>
+      <p class="manage-hint">Clique em "Carregar notícias" para ver todos os artigos publicados. Você pode editar ou excluir qualquer um deles.</p>
       <div id="articles-list-container">
-        <div class="manage-empty">Clique em "Carregar notÃ­cias" para comeÃ§ar.</div>
+        <div class="manage-empty">Clique em "Carregar notícias" para começar.</div>
       </div>
     </div>
   </div><!-- /tab-gerenciar -->
@@ -955,11 +955,11 @@
 <div class="modal-overlay" id="preview-modal">
   <div class="modal-box">
     <div class="modal-header">
-      <h3>ð PrÃ©-visualizaÃ§Ã£o da notÃ­cia</h3>
-      <button class="modal-close" onclick="closePreview()">â</button>
+      <h3>👁 Pré-visualização da notícia</h3>
+      <button class="modal-close" onclick="closePreview()">✕</button>
     </div>
     <div class="modal-body" style="padding:0 0 4px;">
-      <p class="modal-note" style="margin:14px 24px 0;">Assim a notÃ­cia aparecerÃ¡ no site. Clique em "Publicar no Site" para confirmar.</p>
+      <p class="modal-note" style="margin:14px 24px 0;">Assim a notícia aparecerá no site. Clique em "Publicar no Site" para confirmar.</p>
       <div class="preview-article" id="preview-card-content">
         <!-- preenchido por JS -->
       </div>
@@ -967,11 +967,11 @@
   </div>
 </div>
 
-<!-- ===================== MODAL: CONFIRMAR EXCLUSÃO ===================== -->
+<!-- ===================== MODAL: CONFIRMAR EXCLUSÃO ===================== -->
 <div class="modal-overlay" id="delete-modal">
   <div class="confirm-modal-box">
-    <h3>ðï¸ Excluir notÃ­cia?</h3>
-    <p id="delete-modal-msg">Tem certeza que deseja excluir esta notÃ­cia? Esta aÃ§Ã£o nÃ£o pode ser desfeita.</p>
+    <h3>🗑️ Excluir notícia?</h3>
+    <p id="delete-modal-msg">Tem certeza que deseja excluir esta notícia? Esta ação não pode ser desfeita.</p>
     <div class="confirm-actions">
       <button class="btn-cancel-modal" onclick="closeDeleteModal()">Cancelar</button>
       <button class="btn-confirm-delete" id="btn-confirm-delete" onclick="confirmDelete()">Excluir</button>
@@ -983,15 +983,15 @@
 <div class="modal-overlay" id="photo-editor-modal">
   <div class="photo-editor-modal-box">
     <div class="modal-header">
-      <h3>âï¸ Editar Foto</h3>
-      <button class="modal-close" onclick="closePhotoEditor()">â</button>
+      <h3>✂️ Editar Foto</h3>
+      <button class="modal-close" onclick="closePhotoEditor()">✕</button>
     </div>
     <div class="photo-editor-toolbar">
-      <button class="editor-mode-btn" data-mode="move" onclick="setEditorMode('move')">â Mover</button>
-      <button class="editor-mode-btn" data-mode="crop" onclick="setEditorMode('crop')">âï¸ Cortar</button>
+      <button class="editor-mode-btn" data-mode="move" onclick="setEditorMode('move')">✋ Mover</button>
+      <button class="editor-mode-btn" data-mode="crop" onclick="setEditorMode('crop')">✂️ Cortar</button>
       <span class="fmt-sep" style="height:24px;margin:0 4px;"></span>
-      <button class="btn-editor-reset" onclick="resetPhotoEditor()">â© Redefinir</button>
-      <button class="btn-editor-apply" onclick="applyPhotoEditor()">â Definir</button>
+      <button class="btn-editor-reset" onclick="resetPhotoEditor()">↩ Redefinir</button>
+      <button class="btn-editor-apply" onclick="applyPhotoEditor()">✅ Definir</button>
       <div class="editor-scale-group">
         <span>Zoom:</span>
         <input type="range" id="editor-scale" min="0.1" max="3" step="0.05" value="1"
@@ -1011,14 +1011,14 @@
       </canvas>
     </div>
     <div class="editor-mode-label" id="editor-mode-label">
-      â Arraste para mover a imagem | Use o controle de zoom para ajustar o tamanho
+      ✋ Arraste para mover a imagem | Use o controle de zoom para ajustar o tamanho
     </div>
   </div>
 </div>
 
 <script>
 /* =====================================================
-   AUTENTICAÃÃO
+   AUTENTICAÇÃO
 ===================================================== */
 (function () {
   const ADMIN_USER = 'admin';
@@ -1043,7 +1043,7 @@
       err.style.display = 'block';
       document.getElementById('login-pass').value = '';
       document.getElementById('login-pass').focus();
-      // AnimaÃ§Ã£o de shake
+      // Animação de shake
       const box = document.querySelector('.login-box');
       box.style.animation = 'none';
       void box.offsetWidth;
@@ -1056,7 +1056,7 @@
 })();
 
 /* =====================================================
-   CONFIGURAÃÃO
+   CONFIGURAÇÃO
 ===================================================== */
 const REPO_OWNER = 'homrich1979';
 const REPO_NAME  = 'salah-shriners';
@@ -1069,13 +1069,13 @@ const API        = 'https://api.github.com';
 let coverFile        = null;
 let photosFiles      = [];
 let editingId        = null;        // ID do artigo sendo editado (null = novo)
-let existingCoverPath = '';         // Caminho da capa atual (modo ediÃ§Ã£o)
-let existingPhotoPaths = [];        // Caminhos das fotos atuais (modo ediÃ§Ã£o)
+let existingCoverPath = '';         // Caminho da capa atual (modo edição)
+let existingPhotoPaths = [];        // Caminhos das fotos atuais (modo edição)
 let deleteTargetId   = null;        // ID do artigo a excluir
 let cachedHtmlSha    = null;        // SHA do index.html em cache (para evitar re-leitura)
-let cachedHtml       = null;        // ConteÃºdo do index.html em cache
+let cachedHtml       = null;        // Conteúdo do index.html em cache
 
-/* EDITOR DE FOTOS â estado */
+/* EDITOR DE FOTOS — estado */
 let editorPhotoIdx   = null;
 let editorOrigImg    = null;
 let editorOrigFile   = null;
@@ -1105,14 +1105,14 @@ function localToday() {
 }
 
 /* =====================================================
-   INICIALIZAÃÃO
+   INICIALIZAÇÃO
 ===================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('f-date').value = localToday();
   const savedToken = sessionStorage.getItem('gh_token');
   if (savedToken) {
     document.getElementById('gh-token').value = savedToken;
-    setTokenStatus('ok', 'â Token salvo nesta sessÃ£o');
+    setTokenStatus('ok', '✓ Token salvo nesta sessão');
   }
 });
 
@@ -1133,11 +1133,11 @@ function switchTab(tab) {
 function saveToken() {
   const token = document.getElementById('gh-token').value.trim();
   if (!token || (!token.startsWith('ghp_') && !token.startsWith('github_pat_'))) {
-    setTokenStatus('err', 'â  Token invÃ¡lido â deve comeÃ§ar com ghp_ ou github_pat_');
+    setTokenStatus('err', '⚠ Token inválido — deve começar com ghp_ ou github_pat_');
     return;
   }
   sessionStorage.setItem('gh_token', token);
-  setTokenStatus('ok', 'â Token salvo para esta sessÃ£o');
+  setTokenStatus('ok', '✓ Token salvo para esta sessão');
 }
 
 function getToken() {
@@ -1161,7 +1161,7 @@ function updateCharCount(el, countId, max) {
 }
 
 /* =====================================================
-   TEXTO DO ARTIGO â textarea Ãºnica, sem limite de caracteres
+   TEXTO DO ARTIGO — textarea única, sem limite de caracteres
 ===================================================== */
 function getParagraphs() {
   const editor = document.getElementById('f-body');
@@ -1192,7 +1192,7 @@ function getParagraphs() {
 }
 
 /* =====================================================
-   FORMATAÃÃO DE TEXTO (toolbar do corpo do artigo)
+   FORMATAÇÃO DE TEXTO (toolbar do corpo do artigo)
 ===================================================== */
 function applyBodyFormat(tag) {
   const editor = document.getElementById('f-body');
@@ -1239,7 +1239,7 @@ function setCoverFile(file) {
     document.getElementById('cover-preview').src = e.target.result;
     document.getElementById('cover-preview-wrap').style.display = 'block';
     document.getElementById('cover-info').textContent =
-      `${file.name} â ${(file.size / 1024).toFixed(0)} KB`;
+      `${file.name} — ${(file.size / 1024).toFixed(0)} KB`;
   };
   reader.readAsDataURL(file);
 }
@@ -1274,8 +1274,8 @@ function addPhotos(files) {
       wrap.dataset.idx = idx;
       wrap.innerHTML = `
         <img src="${e.target.result}" alt="Foto ${idx + 1}">
-        <button class="thumb-remove" onclick="removePhoto(this, ${idx})" title="Remover foto">â</button>
-        <button class="thumb-edit"   onclick="openPhotoEditor(${idx})"   title="Editar foto">âï¸ Editar</button>
+        <button class="thumb-remove" onclick="removePhoto(this, ${idx})" title="Remover foto">✕</button>
+        <button class="thumb-edit"   onclick="openPhotoEditor(${idx})"   title="Editar foto">✏️ Editar</button>
       `;
       document.getElementById('photos-preview').appendChild(wrap);
     };
@@ -1296,7 +1296,7 @@ function addExistingPhotoThumb(path, idx) {
   const imgSrc = SITE_URL + '/' + path;
   wrap.innerHTML = `
     <img src="${imgSrc}" alt="Foto atual" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'90\' height=\'70\'%3E%3Crect fill=\'%23ddd\' width=\'90\' height=\'70\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' fill=\'%23999\' font-size=\'10\' dy=\'.3em\'%3EFoto%3C/text%3E%3C/svg%3E'">
-    <button class="thumb-remove" onclick="removeExistingPhoto(this, ${idx})" title="Remover foto">â</button>
+    <button class="thumb-remove" onclick="removeExistingPhoto(this, ${idx})" title="Remover foto">✕</button>
   `;
   preview.appendChild(wrap);
 }
@@ -1307,7 +1307,7 @@ function removeExistingPhoto(btn, idx) {
 }
 
 /* =====================================================
-   FORMATAÃÃO DE DATA
+   FORMATAÇÃO DE DATA
 ===================================================== */
 function formatDate(isoDate) {
   const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
@@ -1316,7 +1316,7 @@ function formatDate(isoDate) {
 }
 
 function parseDateToISO(dateStr) {
-  // "25 Mar 2026" â "2026-03-25"
+  // "25 Mar 2026" → "2026-03-25"
   const months = {Jan:1,Fev:2,Mar:3,Abr:4,Mai:5,Jun:6,Jul:7,Ago:8,Set:9,Out:10,Nov:11,Dez:12};
   const parts = (dateStr || '').trim().split(' ');
   if (parts.length === 3) {
@@ -1328,7 +1328,7 @@ function parseDateToISO(dateStr) {
 }
 
 /* =====================================================
-   GERAÃÃO DE NOMES DE ARQUIVO
+   GERAÇÃO DE NOMES DE ARQUIVO
 ===================================================== */
 function sanitizeName(name) {
   return name.replace(/\.[^.]+$/, '').toLowerCase()
@@ -1343,7 +1343,7 @@ function makeFilename(file, prefix) {
 }
 
 /* =====================================================
-   COMPRESSÃO DE IMAGEM
+   COMPRESSÃO DE IMAGEM
 ===================================================== */
 async function compressImage(file, maxWidth = 1200, quality = 0.85) {
   return new Promise(resolve => {
@@ -1429,7 +1429,7 @@ async function putIndexHtml(token, sha, html, commitMsg) {
 }
 
 /* =====================================================
-   MANIPULAÃÃO DO index.html â UTILITÃRIOS
+   MANIPULAÇÃO DO index.html — UTILITÁRIOS
 ===================================================== */
 function jesc(str) {
   return str.replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\r/g,'').replace(/\n/g,'\\n');
@@ -1458,7 +1458,7 @@ function extractArticleObj(html, id) {
   return { start: s, end: e, text: html.slice(s, e + 1) };
 }
 
-/* Extrai dados bÃ¡sicos de um artigo */
+/* Extrai dados básicos de um artigo */
 function extractArticleJsonData(html, id) {
   const obj = extractArticleObj(html, id);
   if (!obj) return null;
@@ -1537,7 +1537,7 @@ function extractCardExcerpt(html, delay) {
   return pMatch ? pMatch[1] : '';
 }
 
-/* Extrai o excerpt do card de uma notÃ­cia no grid de notÃ­cias completo */
+/* Extrai o excerpt do card de uma notícia no grid de notícias completo */
 function extractNewsCardExcerpt(html, id) {
   const firstGrid  = html.indexOf('<div class="noticias-grid">');
   const secondGrid = html.indexOf('<div class="noticias-grid">', firstGrid + 1);
@@ -1570,7 +1570,7 @@ function getAllArticleIds(html) {
 }
 
 /* =====================================================
-   CONSTRUÃÃO DE HTML DOS CARDS
+   CONSTRUÇÃO DE HTML DOS CARDS
 ===================================================== */
 const arrowSvg = `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>`;
 
@@ -1616,12 +1616,12 @@ function injectArticle(html, newData, excerpt) {
   const newId = `art${N}`;
   newData.id = newId;
 
-  /* 1 â Prepend ao array ARTICLES */
+  /* 1 — Prepend ao array ARTICLES */
   const articleJson = buildArticleJson(newId, newData.title, newData.cat, newData.date,
                                        newData.cover, newData.paragraphs, newData.photos);
   html = html.replace('const ARTICLES = [', `const ARTICLES = [\n${articleJson},`);
 
-  /* 2 â Atualizar grid destaque (d1, d2, d3) */
+  /* 2 — Atualizar grid destaque (d1, d2, d3) */
   const art0 = extractArticleJsonData(html, 'art0');
   const art1 = extractArticleJsonData(html, 'art1');
   const exc0 = extractCardExcerpt(html, 'noticia reveal d1');
@@ -1639,7 +1639,7 @@ function injectArticle(html, newData, excerpt) {
   const d3End   = html.indexOf('</article>', d3Start) + '</article>'.length;
   if (art1) html = html.slice(0, d3Start) + buildFeaturedCard(art1, 'd3', exc1) + html.slice(d3End);
 
-  /* 3 â Inserir card no topo do grid completo */
+  /* 3 — Inserir card no topo do grid completo */
   const firstGrid  = html.indexOf('<div class="noticias-grid">');
   const secondGrid = html.indexOf('<div class="noticias-grid">', firstGrid + 1);
   const insertPos  = secondGrid + '<div class="noticias-grid">'.length;
@@ -1649,17 +1649,17 @@ function injectArticle(html, newData, excerpt) {
 }
 
 /* =====================================================
-   SUBSTITUIR ARTIGO EXISTENTE (EDIÃÃO)
+   SUBSTITUIR ARTIGO EXISTENTE (EDIÇÃO)
 ===================================================== */
 function replaceArticle(html, id, newData, excerpt) {
-  /* 1 â Substituir JSON no array ARTICLES */
+  /* 1 — Substituir JSON no array ARTICLES */
   const objInfo = extractArticleObj(html, id);
-  if (!objInfo) throw new Error(`Artigo ${id} nÃ£o encontrado no HTML.`);
+  if (!objInfo) throw new Error(`Artigo ${id} não encontrado no HTML.`);
   const newJson = buildArticleJson(id, newData.title, newData.cat, newData.date,
                                    newData.cover, newData.paragraphs, newData.photos);
   html = html.slice(0, objInfo.start) + newJson + html.slice(objInfo.end + 1);
 
-  /* 2 â Atualizar nos cards de destaque se necessÃ¡rio */
+  /* 2 — Atualizar nos cards de destaque se necessário */
   for (const delay of ['d1', 'd2', 'd3']) {
     if (extractFeaturedArticleId(html, delay) === id) {
       const dStart = html.indexOf(`<article class="noticia reveal ${delay}">`);
@@ -1668,7 +1668,7 @@ function replaceArticle(html, id, newData, excerpt) {
     }
   }
 
-  /* 3 â Atualizar card no grid completo */
+  /* 3 — Atualizar card no grid completo */
   const range = findNewsCardRange(html, id);
   if (range) {
     html = html.slice(0, range.start) + buildNewsCard(newData, excerpt) + html.slice(range.end);
@@ -1678,35 +1678,35 @@ function replaceArticle(html, id, newData, excerpt) {
 }
 
 /* =====================================================
-   REMOVER ARTIGO (EXCLUSÃO)
+   REMOVER ARTIGO (EXCLUSÃO)
 ===================================================== */
 function removeArticle(html, id) {
-  /* 1 â Remover do array ARTICLES */
+  /* 1 — Remover do array ARTICLES */
   const objInfo = extractArticleObj(html, id);
-  if (!objInfo) throw new Error(`Artigo ${id} nÃ£o encontrado.`);
+  if (!objInfo) throw new Error(`Artigo ${id} não encontrado.`);
 
   let removeStart = objInfo.start;
   let removeEnd   = objInfo.end + 1;
 
-  // Tentar remover vÃ­rgula apÃ³s o objeto
+  // Tentar remover vírgula após o objeto
   let k = removeEnd;
   while (k < html.length && (html[k] === ' ' || html[k] === '\n' || html[k] === '\r')) k++;
   if (html[k] === ',') {
     removeEnd = k + 1;
   } else {
-    // Tentar remover vÃ­rgula antes do objeto
+    // Tentar remover vírgula antes do objeto
     let j = removeStart - 1;
     while (j > 0 && (html[j] === ' ' || html[j] === '\n' || html[j] === '\r')) j--;
     if (html[j] === ',') removeStart = j;
   }
   html = html.slice(0, removeStart) + html.slice(removeEnd);
 
-  /* 2 â Atualizar grid destaque se necessÃ¡rio */
+  /* 2 — Atualizar grid destaque se necessário */
   for (const delay of ['d1', 'd2', 'd3']) {
     if (extractFeaturedArticleId(html, delay) === id) {
-      // Substituir por prÃ³ximo artigo disponÃ­vel
+      // Substituir por próximo artigo disponível
       const allIds = getAllArticleIds(html);
-      // Pegar IDs que nÃ£o estÃ£o nos outros delays
+      // Pegar IDs que não estão nos outros delays
       const usedIds = ['d1','d2','d3']
         .filter(d => d !== delay)
         .map(d => extractFeaturedArticleId(html, d))
@@ -1723,7 +1723,7 @@ function removeArticle(html, id) {
     }
   }
 
-  /* 3 â Remover do grid completo */
+  /* 3 — Remover do grid completo */
   const range = findNewsCardRange(html, id);
   if (range) {
     html = html.slice(0, range.start) + html.slice(range.end);
@@ -1733,7 +1733,7 @@ function removeArticle(html, id) {
 }
 
 /* =====================================================
-   PRÃ-VISUALIZAÃÃO
+   PRÉ-VISUALIZAÇÃO
 ===================================================== */
 function openPreview() {
   const title   = document.getElementById('f-title').value.trim();
@@ -1743,11 +1743,11 @@ function openPreview() {
   const paras   = getParagraphs();
 
   if (!title) {
-    alert('Preencha pelo menos o TÃ­tulo para prÃ©-visualizar.');
+    alert('Preencha pelo menos o Título para pré-visualizar.');
     return;
   }
 
-  const dateStr = dateIso ? formatDate(dateIso) : 'â';
+  const dateStr = dateIso ? formatDate(dateIso) : '—';
 
   // Capa
   const imgSrc = coverFile
@@ -1758,12 +1758,12 @@ function openPreview() {
     ? `<img class="preview-article-cover" src="${imgSrc}" alt="Capa">`
     : `<div class="preview-article-cover-empty">Sem foto de capa</div>`;
 
-  // ParÃ¡grafos
+  // Parágrafos
   const parasHtml = paras.length > 0
     ? paras.map(p => `<p class="preview-article-para">${p}</p>`).join('')
-    : `<p class="preview-article-para" style="color:#aaa;font-style:italic">Nenhum parÃ¡grafo adicionado ainda.</p>`;
+    : `<p class="preview-article-para" style="color:#aaa;font-style:italic">Nenhum parágrafo adicionado ainda.</p>`;
 
-  // Fotos adicionais â novas (File) + existentes (path)
+  // Fotos adicionais — novas (File) + existentes (path)
   const newPhotoSrcs = photosFiles.filter(Boolean).map(f => URL.createObjectURL(f));
   const existingPhotoSrcs = existingPhotoPaths.filter(Boolean).map(p => `${SITE_URL}/${p}`);
   const allPhotoSrcs = [...existingPhotoSrcs, ...newPhotoSrcs];
@@ -1801,7 +1801,7 @@ document.addEventListener('click', (e) => {
 });
 
 /* =====================================================
-   VALIDAÃÃO
+   VALIDAÇÃO
 ===================================================== */
 function validate() {
   const token   = getToken();
@@ -1811,12 +1811,12 @@ function validate() {
   const paras   = getParagraphs();
 
   if (!token || (!token.startsWith('ghp_') && !token.startsWith('github_pat_')))
-    return 'Token GitHub invÃ¡lido. Preencha o token acima.';
-  if (!title)   return 'O tÃ­tulo Ã© obrigatÃ³rio.';
-  if (!date)    return 'A data de publicaÃ§Ã£o Ã© obrigatÃ³ria.';
-  if (!excerpt) return 'O resumo Ã© obrigatÃ³rio.';
-  if (!coverFile && !existingCoverPath) return 'A foto de capa Ã© obrigatÃ³ria.';
-  if (paras.length === 0) return 'Escreva pelo menos um parÃ¡grafo.';
+    return 'Token GitHub inválido. Preencha o token acima.';
+  if (!title)   return 'O título é obrigatório.';
+  if (!date)    return 'A data de publicação é obrigatória.';
+  if (!excerpt) return 'O resumo é obrigatório.';
+  if (!coverFile && !existingCoverPath) return 'A foto de capa é obrigatória.';
+  if (paras.length === 0) return 'Escreva pelo menos um parágrafo.';
   return null;
 }
 
@@ -1837,11 +1837,11 @@ function showProgress() {
 }
 
 function showSuccess(editMode) {
-  document.getElementById('progress-card').querySelector('h3').textContent = 'â ConcluÃ­do!';
+  document.getElementById('progress-card').querySelector('h3').textContent = '✅ Concluído!';
   document.getElementById('success-box').style.display = 'block';
   document.getElementById('btn-pub').disabled = false;
   if (editMode) {
-    document.querySelector('.success-box h3').textContent = 'â NotÃ­cia atualizada com sucesso!';
+    document.querySelector('.success-box h3').textContent = '✅ Notícia atualizada com sucesso!';
   }
 }
 
@@ -1852,7 +1852,7 @@ function showError(msg) {
 }
 
 /* =====================================================
-   PUBLICAR â FLUXO PRINCIPAL
+   PUBLICAR — FLUXO PRINCIPAL
 ===================================================== */
 async function publishArticle() {
   const err = validate();
@@ -1873,7 +1873,7 @@ async function publishArticle() {
   setStep(4, 'pending', 'Aguardando...');
 
   try {
-    /* STEP 1 â Upload imagens novas */
+    /* STEP 1 — Upload imagens novas */
     let coverPath = existingCoverPath;
     const photoPaths = existingPhotoPaths.filter(Boolean);
 
@@ -1894,14 +1894,14 @@ async function publishArticle() {
       await uploadImage(token, `images/noticias/${name}`, b64, `Foto adicional: ${name}`);
       photoPaths.push(`images/noticias/${name}`);
     }
-    setStep(1, 'done', 'â ConcluÃ­do');
+    setStep(1, 'done', '✓ Concluído');
 
-    /* STEP 2 â Ler index.html atual */
+    /* STEP 2 — Ler index.html atual */
     setStep(2, 'running', 'Lendo...');
     const { sha, html } = await getIndexHtml(token);
-    setStep(2, 'done', 'â ConcluÃ­do');
+    setStep(2, 'done', '✓ Concluído');
 
-    /* STEP 3 â Injetar ou substituir artigo */
+    /* STEP 3 — Injetar ou substituir artigo */
     setStep(3, 'running', 'Processando...');
     const newData = { title, cat, date: dateStr, cover: coverPath, paragraphs: paras, photos: photoPaths };
     let updatedHtml;
@@ -1910,13 +1910,13 @@ async function publishArticle() {
     } else {
       updatedHtml = injectArticle(html, newData, excerpt);
     }
-    setStep(3, 'done', 'â ConcluÃ­do');
+    setStep(3, 'done', '✓ Concluído');
 
-    /* STEP 4 â Salvar no GitHub */
+    /* STEP 4 — Salvar no GitHub */
     setStep(4, 'running', 'Salvando...');
-    const commitMsg = isEdit ? `Editar notÃ­cia: ${title}` : `Publicar notÃ­cia: ${title}`;
+    const commitMsg = isEdit ? `Editar notícia: ${title}` : `Publicar notícia: ${title}`;
     await putIndexHtml(token, sha, updatedHtml, commitMsg);
-    setStep(4, 'done', 'â ConcluÃ­do');
+    setStep(4, 'done', '✓ Concluído');
 
     showSuccess(isEdit);
 
@@ -1931,18 +1931,18 @@ async function publishArticle() {
 }
 
 /* =====================================================
-   CARREGAR NOTÃCIAS â TAB GERENCIAR
+   CARREGAR NOTÍCIAS — TAB GERENCIAR
 ===================================================== */
 async function loadArticles() {
   const token = getToken();
   if (!token || (!token.startsWith('ghp_') && !token.startsWith('github_pat_'))) {
-    alert('Preencha o token GitHub antes de carregar as notÃ­cias.');
+    alert('Preencha o token GitHub antes de carregar as notícias.');
     return;
   }
 
   const container = document.getElementById('articles-list-container');
   const btn = document.getElementById('btn-load');
-  container.innerHTML = '<div class="manage-loading">ð Carregando notÃ­cias...</div>';
+  container.innerHTML = '<div class="manage-loading">🔄 Carregando notícias...</div>';
   btn.disabled = true;
   btn.textContent = 'Carregando...';
 
@@ -1951,7 +1951,7 @@ async function loadArticles() {
     const ids = getAllArticleIds(html);
 
     if (ids.length === 0) {
-      container.innerHTML = '<div class="manage-empty">Nenhuma notÃ­cia encontrada.</div>';
+      container.innerHTML = '<div class="manage-empty">Nenhuma notícia encontrada.</div>';
       return;
     }
 
@@ -1973,11 +1973,11 @@ async function loadArticles() {
              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'72\' height=\'52\'%3E%3Crect fill=\'%23e0e0e0\' width=\'72\' height=\'52\'/%3E%3C/svg%3E'">
         <div class="article-row-info">
           <div class="article-row-title">${hesc(data.title)}</div>
-          <div class="article-row-meta">${data.cat} Â· ${data.date} Â· ID: ${id}</div>
+          <div class="article-row-meta">${data.cat} · ${data.date} · ID: ${id}</div>
         </div>
         <div class="article-row-actions">
-          <button class="btn-edit-row" onclick="editArticle('${id}')">âï¸ Editar</button>
-          <button class="btn-delete-row" onclick="askDelete('${id}', '${escapedTitle}')">ðï¸ Excluir</button>
+          <button class="btn-edit-row" onclick="editArticle('${id}')">✏️ Editar</button>
+          <button class="btn-delete-row" onclick="askDelete('${id}', '${escapedTitle}')">🗑️ Excluir</button>
         </div>
       `;
       listEl.appendChild(row);
@@ -1987,10 +1987,10 @@ async function loadArticles() {
     container.appendChild(listEl);
 
   } catch (e) {
-    container.innerHTML = `<div class="manage-loading" style="color:#c0392b">â Erro: ${e.message}</div>`;
+    container.innerHTML = `<div class="manage-loading" style="color:#c0392b">❌ Erro: ${e.message}</div>`;
   } finally {
     btn.disabled = false;
-    btn.textContent = 'ð Carregar notÃ­cias';
+    btn.textContent = '🔄 Carregar notícias';
   }
 }
 
@@ -2004,7 +2004,7 @@ async function editArticle(id) {
     return;
   }
 
-  // Usar cache se disponÃ­vel
+  // Usar cache se disponível
   let html = cachedHtml;
   if (!html) {
     try {
@@ -2018,19 +2018,19 @@ async function editArticle(id) {
 
   const data = extractArticleFullData(html, id);
   if (!data) {
-    alert('Artigo nÃ£o encontrado.');
+    alert('Artigo não encontrado.');
     return;
   }
   const excerpt = extractNewsCardExcerpt(html, id);
 
-  // Entrar em modo ediÃ§Ã£o
+  // Entrar em modo edição
   editingId = id;
   existingCoverPath = data.cover;
   existingPhotoPaths = [...data.photos];
   coverFile = null;
   photosFiles = [];
 
-  // Preencher o formulÃ¡rio
+  // Preencher o formulário
   document.getElementById('f-title').value = data.title;
   updateCharCount(document.getElementById('f-title'), 'cnt-title', 120);
   document.getElementById('f-date').value = parseDateToISO(data.date);
@@ -2047,7 +2047,7 @@ async function editArticle(id) {
   if (data.cover) {
     const infoEl = document.getElementById('existing-cover-info');
     infoEl.style.display = 'block';
-    infoEl.innerHTML = `ð· Capa atual: <code style="font-size:.8rem">${data.cover}</code><br>
+    infoEl.innerHTML = `📷 Capa atual: <code style="font-size:.8rem">${data.cover}</code><br>
       <img src="${SITE_URL}/${data.cover}" alt="Capa atual"
            style="max-width:100%;max-height:160px;border-radius:8px;margin-top:8px;object-fit:cover;"
            onerror="this.style.display='none'">
@@ -2061,14 +2061,14 @@ async function editArticle(id) {
   });
 
   // Atualizar UI
-  document.getElementById('form-title').textContent = `âï¸ Editando: ${data.title}`;
-  document.getElementById('btn-pub').textContent = 'ð¾ Salvar alteraÃ§Ãµes';
+  document.getElementById('form-title').textContent = `✏️ Editando: ${data.title}`;
+  document.getElementById('btn-pub').textContent = '💾 Salvar alterações';
   document.getElementById('progress-card').style.display = 'none';
   document.getElementById('success-box').style.display = 'none';
   document.getElementById('error-box').style.display = 'none';
   document.getElementById('edit-mode-bar').style.display = 'block';
 
-  // Ir para a aba de nova notÃ­cia
+  // Ir para a aba de nova notícia
   switchTab('nova');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -2078,8 +2078,8 @@ function cancelEdit() {
   existingCoverPath = '';
   existingPhotoPaths = [];
   resetForm();
-  document.getElementById('form-title').textContent = 'ð° Nova NotÃ­cia';
-  document.getElementById('btn-pub').textContent = 'ð Publicar no Site';
+  document.getElementById('form-title').textContent = '📰 Nova Notícia';
+  document.getElementById('btn-pub').textContent = '🚀 Publicar no Site';
   document.getElementById('edit-mode-bar').style.display = 'none';
 }
 
@@ -2089,7 +2089,7 @@ function cancelEdit() {
 function askDelete(id, title) {
   deleteTargetId = id;
   document.getElementById('delete-modal-msg').innerHTML =
-    `Tem certeza que deseja excluir a notÃ­cia:<br><strong>"${hesc(title)}"</strong>?<br><br>Esta aÃ§Ã£o nÃ£o pode ser desfeita.`;
+    `Tem certeza que deseja excluir a notícia:<br><strong>"${hesc(title)}"</strong>?<br><br>Esta ação não pode ser desfeita.`;
   document.getElementById('delete-modal').classList.add('open');
 }
 
@@ -2135,7 +2135,7 @@ async function confirmDelete() {
     }
 
     const updatedHtml = removeArticle(html, id);
-    await putIndexHtml(token, sha, updatedHtml, `Excluir notÃ­cia: ${id}`);
+    await putIndexHtml(token, sha, updatedHtml, `Excluir notícia: ${id}`);
 
     // Remover linha da lista
     if (targetRow) targetRow.remove();
@@ -2143,13 +2143,13 @@ async function confirmDelete() {
     // Checar se lista ficou vazia
     const remaining = document.querySelectorAll('.article-row');
     if (remaining.length === 0) {
-      container.innerHTML = '<div class="manage-empty">Nenhuma notÃ­cia encontrada.</div>';
+      container.innerHTML = '<div class="manage-empty">Nenhuma notícia encontrada.</div>';
     }
 
-    // Mostrar confirmaÃ§Ã£o
+    // Mostrar confirmação
     const notice = document.createElement('div');
     notice.style.cssText = 'background:#f0fef0;border:1px solid #4caf50;border-radius:8px;padding:12px 16px;font-size:.9rem;color:#1a7a1a;margin-bottom:14px;';
-    notice.textContent = `â NotÃ­cia excluÃ­da com sucesso. O site serÃ¡ atualizado em atÃ© 2 minutos.`;
+    notice.textContent = `✅ Notícia excluída com sucesso. O site será atualizado em até 2 minutos.`;
     container.insertAdjacentElement('beforebegin', notice);
     setTimeout(() => notice.remove(), 8000);
 
@@ -2219,8 +2219,8 @@ function setEditorMode(mode) {
     btn.classList.toggle('active', btn.dataset.mode === mode);
   });
   const labels = {
-    move: 'â Arraste a imagem para reposicionÃ¡-la Â· Use o zoom para ajustar o tamanho',
-    crop: 'âï¸ Clique e arraste para selecionar a Ã¡rea de corte Â· Clique em "Definir" para aplicar'
+    move: '✋ Arraste a imagem para reposicioná-la · Use o zoom para ajustar o tamanho',
+    crop: '✂️ Clique e arraste para selecionar a área de corte · Clique em "Definir" para aplicar'
   };
   const lbl = document.getElementById('editor-mode-label');
   if (lbl) lbl.textContent = labels[mode] || '';
@@ -2259,7 +2259,7 @@ function renderEditorCanvas() {
   const ctx = canvas.getContext('2d');
   const img = editorOrigImg;
 
-  // Fundo xadrez (indica Ã¡rea fora da imagem)
+  // Fundo xadrez (indica área fora da imagem)
   ctx.fillStyle = '#1e1e1e';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   const cs = 14;
@@ -2270,7 +2270,7 @@ function renderEditorCanvas() {
       ctx.fillRect(x+cs, y+cs, cs, cs);
     }
 
-  // PosiÃ§Ã£o e tamanho da imagem no canvas
+  // Posição e tamanho da imagem no canvas
   const drawW = img.width  * editorScale;
   const drawH = img.height * editorScale;
   const drawX = (canvas.width  - drawW) / 2 + editorOffsetX;
@@ -2290,11 +2290,11 @@ function renderEditorCanvas() {
   if (cropRect && cropRect.w > 4 && cropRect.h > 4) {
     const { x, y, w, h } = cropRect;
 
-    // Escurecer fora da seleÃ§Ã£o
+    // Escurecer fora da seleção
     ctx.fillStyle = 'rgba(0,0,0,0.55)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Mostrar imagem sÃ³ dentro da seleÃ§Ã£o
+    // Mostrar imagem só dentro da seleção
     ctx.save();
     ctx.beginPath();
     ctx.rect(x, y, w, h);
@@ -2302,12 +2302,12 @@ function renderEditorCanvas() {
     ctx.drawImage(img, drawX, drawY, drawW, drawH);
     ctx.restore();
 
-    // Borda da seleÃ§Ã£o
+    // Borda da seleção
     ctx.strokeStyle = '#ffffff';
     ctx.lineWidth   = 2;
     ctx.strokeRect(x, y, w, h);
 
-    // Guias de terÃ§os
+    // Guias de terços
     if (w > 40 && h > 40) {
       ctx.save();
       ctx.setLineDash([4, 4]);
@@ -2322,21 +2322,21 @@ function renderEditorCanvas() {
       ctx.restore();
     }
 
-    // AlÃ§as nos cantos e meios
+    // Alças nos cantos e meios
     const hs = 9;
     ctx.fillStyle = '#ffffff';
     [[x,y],[x+w,y],[x,y+h],[x+w,y+h],
      [x+w/2,y],[x+w/2,y+h],[x,y+h/2],[x+w,y+h/2]
     ].forEach(([cx,cy]) => ctx.fillRect(cx-hs/2, cy-hs/2, hs, hs));
 
-    // RÃ³tulo com dimensÃµes em pixels
+    // Rótulo com dimensões em pixels
     const pxW = Math.round(w / editorScale);
     const pxH = Math.round(h / editorScale);
     ctx.fillStyle = 'rgba(0,0,0,0.72)';
     ctx.fillRect(x, y - 24, 96, 20);
     ctx.fillStyle = '#fff';
     ctx.font = '11px monospace';
-    ctx.fillText(`${pxW} Ã ${pxH}px`, x + 5, y - 9);
+    ctx.fillText(`${pxW} × ${pxH}px`, x + 5, y - 9);
   }
 }
 
@@ -2440,7 +2440,7 @@ async function applyPhotoEditor() {
     const ch = Math.min(Math.round(imgH), img.height - cy);
 
     if (cw < 10 || ch < 10) {
-      alert('Ãrea de corte muito pequena. Desenhe uma seleÃ§Ã£o maior e tente novamente.');
+      alert('Área de corte muito pequena. Desenhe uma seleção maior e tente novamente.');
       return;
     }
     out.width  = cw;
@@ -2468,7 +2468,7 @@ async function applyPhotoEditor() {
       const url = URL.createObjectURL(blob);
       document.getElementById('cover-preview').src = url;
       document.getElementById('cover-info').textContent =
-        `${fileName} â ${(blob.size / 1024).toFixed(0)} KB (editada)`;
+        `${fileName} — ${(blob.size / 1024).toFixed(0)} KB (editada)`;
     } else {
       // Atualizar thumbnail nas fotos adicionais
       photosFiles[editorPhotoIdx] = newFile;
@@ -2507,8 +2507,8 @@ function resetForm() {
   document.getElementById('cnt-title').textContent = '0 / 120';
   document.getElementById('cnt-exc').textContent   = '0 / 220';
   document.getElementById('edit-mode-bar').style.display = 'none';
-  document.getElementById('form-title').textContent = 'ð° Nova NotÃ­cia';
-  document.getElementById('btn-pub').textContent = 'ð Publicar no Site';
+  document.getElementById('form-title').textContent = '📰 Nova Notícia';
+  document.getElementById('btn-pub').textContent = '🚀 Publicar no Site';
   editingId = null;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
