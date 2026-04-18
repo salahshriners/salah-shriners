@@ -1746,6 +1746,22 @@ function removeArticle(html, id) {
 ===================================================== */
 function openPreview() {
   try {
+  // === DIAGNÓSTICO TEMPORÁRIO ===
+  const _ed = document.getElementById('f-body');
+  const _diag = {
+    htmlLen: (_ed.innerHTML||'').trim().length,
+    textLen: (_ed.textContent||'').trim().length,
+    innerTextLen: (_ed.innerText||'').trim().length,
+    childNodes: _ed.childNodes.length,
+    firstChild: _ed.firstChild ? _ed.firstChild.nodeName + '/' + (_ed.firstChild.textContent||'').substring(0,30) : 'NONE',
+    paras: getParagraphs()
+  };
+  document.getElementById('preview-card-content').innerHTML =
+    '<div style="background:#fff3cd;padding:16px;font-family:monospace;font-size:13px;white-space:pre-wrap;border-radius:8px;margin:16px;">' +
+    'DIAGNÓSTICO:\n' + JSON.stringify(_diag, null, 2) + '</div>';
+  document.getElementById('preview-modal').classList.add('open');
+  return;
+  // === FIM DIAGNÓSTICO ===
   const title   = document.getElementById('f-title').value.trim();
   const excerpt = document.getElementById('f-excerpt').value.trim();
   const cat     = document.getElementById('f-cat').value;
