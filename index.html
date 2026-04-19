@@ -3364,11 +3364,12 @@ function filterNews(cat) {
   // Atualiza contagem
   const countEl = document.querySelector('.news-page-count');
   if (countEl) {
-    const labels = { todos: '11 publicações · de Dez 2025 a Mar 2026',
+    const labels = { todos: '12 publicações · de Dez 2025 a Mar 2026',
       institucional: visible + ' publicação' + (visible !== 1 ? 'ões' : '') + ' · Institucional',
       parceria:      visible + ' publicação' + (visible !== 1 ? 'ões' : '') + ' · Parceria',
       evento:        visible + ' publicação' + (visible !== 1 ? 'ões' : '') + ' · Evento',
-      saude:         visible + ' publicação' + (visible !== 1 ? 'ões' : '') + ' · Saúde' };
+      saude:         visible + ' publicação' + (visible !== 1 ? 'ões' : '') + ' · Saúde',
+      filantropia:   visible + ' publicação' + (visible !== 1 ? 'ões' : '') + ' · Filantropia' };
     countEl.textContent = labels[cat] || (visible + ' publicações');
   }
 }
@@ -3432,6 +3433,7 @@ function showSuccess(btn) {
         <button class="news-filter-btn active" onclick="filterNews('todos')">Todos</button>
         <button class="news-filter-btn" onclick="filterNews('institucional')">Institucional</button>
         <button class="news-filter-btn" onclick="filterNews('parceria')">Parceria</button>
+        <button class="news-filter-btn" onclick="filterNews('filantropia')">Filantropia</button>
         <button class="news-filter-btn" onclick="filterNews('evento')">Evento</button>
         <button class="news-filter-btn" onclick="filterNews('saude')">Saúde</button>
       </div>
@@ -3443,7 +3445,7 @@ function showSuccess(btn) {
       <span class="tag" data-i18n="newsPage.tag">Todas as Notícias</span>
       <div class="divider"></div>
       <h2><span data-i18n="newsPage.h2">Histórico de</span> <span class="text-crimson" data-i18n="newsPage.h2crimson">Publicações</span></h2>
-      <p class="news-page-count" data-i18n="newsPage.count">11 publicações · de Dez 2025 a Mar 2026</p>
+      <p class="news-page-count" data-i18n="newsPage.count">12 publicações · de Dez 2025 a Mar 2026</p>
     </div>
 
     <div class="noticias-grid">
@@ -3463,6 +3465,18 @@ function showSuccess(btn) {
       </article>
 
 
+
+      <article class="noticia" data-cat="filantropia">
+        <a href="#" onclick="showArticle('art0'); return false;" class="noticia-thumb">
+          <img src="images/noticias/profis1.jpg" alt="Reforma do PROFIS Joinville" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Filantropia</span><span class="n-date">22 Mar 2026</span></div>
+          <h3>Reforma do PROFIS em Joinville se aproxima com apoio do Salah Shriners</h3>
+          <p>Visita técnica alinha o planejamento para o início da reforma do Centro de Convivência, com recursos do Paddle Solidário e doações de parceiros locais.</p>
+          <button onclick="showArticle('art0')" class="n-link"><span data-i18n="noticias.lerMais">Ler mais</span> <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
 
       <article class="noticia" data-cat="institucional">
         <a href="#" onclick="showArticle('art1'); return false;" class="noticia-thumb">
@@ -3488,24 +3502,24 @@ function showSuccess(btn) {
         </div>
       </article>
 
-      <article class="noticia" data-cat="parceria">
+      <article class="noticia" data-cat="filantropia">
         <a href="#" onclick="showArticle('art3'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_4079d65e79ea4741b1afe3359422a642~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_4079d65e79ea4741b1afe3359422a642~mv2.jpg" alt="Parceria Uniplac tratamento" loading="lazy">
         </a>
         <div class="noticia-body">
-          <div class="noticia-meta"><span class="n-cat" data-i18n="noticias.art2.cat">Parceria</span><span class="n-date">21 Fev 2026</span></div>
+          <div class="noticia-meta"><span class="n-cat">Filantropia</span><span class="n-date">21 Fev 2026</span></div>
           <h3 data-i18n="noticias.art3.titulo">Parceria com a Uniplac amplia acesso a tratamento internacional gratuito para crianças da Serra</h3>
           <p data-i18n="noticias.art3.resumo">Convênio formalizado em Lages fortalece a estratégia de ampliar o acesso de crianças catarinenses a tratamentos no exterior.</p>
           <button onclick="showArticle('art3')" class="n-link"><span data-i18n="noticias.lerMais">Ler mais</span> <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
         </div>
       </article>
 
-      <article class="noticia" data-cat="parceria">
+      <article class="noticia" data-cat="filantropia">
         <a href="#" onclick="showArticle('art4'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_ad7b5d91de8e4e1997e37a2212060919~mv2.jpg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_ad7b5d91de8e4e1997e37a2212060919~mv2.jpg" alt="Parceria Uniplac Lages" loading="lazy">
         </a>
         <div class="noticia-body">
-          <div class="noticia-meta"><span class="n-cat" data-i18n="noticias.art2.cat">Parceria</span><span class="n-date">19 Fev 2026</span></div>
+          <div class="noticia-meta"><span class="n-cat">Filantropia</span><span class="n-date">19 Fev 2026</span></div>
           <h3 data-i18n="noticias.art4.titulo">Salah Shriners e Uniplac firmam parceria em Lages para tratamento internacional gratuito</h3>
           <p data-i18n="noticias.art4.resumo">Convênio voltado a casos de queimaduras graves, deformidades ortopédicas, lesões na coluna e fissura labiopalatina.</p>
           <button onclick="showArticle('art4')" class="n-link"><span data-i18n="noticias.lerMais">Ler mais</span> <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
@@ -3560,12 +3574,12 @@ function showSuccess(btn) {
         </div>
       </article>
 
-      <article class="noticia" data-cat="parceria">
+      <article class="noticia" data-cat="filantropia">
         <a href="#" onclick="showArticle('art9'); return false;" class="noticia-thumb">
           <img src="https://static.wixstatic.com/media/b93cef_21f69c97569a4e8e88d1da392df112c8~mv2.jpeg/v1/fill/w_600,h_380,fp_0.50_0.50,q_90,enc_avif,quality_auto/b93cef_21f69c97569a4e8e88d1da392df112c8~mv2.jpeg" alt="Peixada do Gui parceria" loading="lazy">
         </a>
         <div class="noticia-body">
-          <div class="noticia-meta"><span class="n-cat" data-i18n="noticias.art2.cat">Parceria</span><span class="n-date">19 Dez 2025</span></div>
+          <div class="noticia-meta"><span class="n-cat">Filantropia</span><span class="n-date">19 Dez 2025</span></div>
           <h3 data-i18n="noticias.art9.titulo">Parceria entre Peixada do Gui e Salah Shriners é renovada para 2026</h3>
           <p data-i18n="noticias.art9.resumo">Renovação confirmada após visita ao HIJG, onde foram acompanhados os recursos doados em 2025 em benefício das crianças.</p>
           <button onclick="showArticle('art9')" class="n-link"><span data-i18n="noticias.lerMais">Ler mais</span> <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
@@ -3746,7 +3760,7 @@ const I18N = {
     'newsPage.tag': 'Todas as Notícias',
     'newsPage.h2': 'Histórico de',
     'newsPage.h2crimson': 'Publicações',
-    'newsPage.count': '11 publicações · de Dez 2025 a Mar 2026',
+    'newsPage.count': '12 publicações · de Dez 2025 a Mar 2026',
     'noticias.cat.evento': 'Evento',
     'noticias.cat.saude': 'Saúde',
     'noticias.art3.cat': 'Parceria',
