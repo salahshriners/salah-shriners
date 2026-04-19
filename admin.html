@@ -1703,6 +1703,7 @@ function injectArticle(html, newData, excerpt) {
    SUBSTITUIR ARTIGO EXISTENTE (EDIÇÃO)
 ===================================================== */
 function replaceArticle(html, id, newData, excerpt) {
+  newData.id = id; /* garante que buildFeaturedCard/buildNewsCard usem o ID correto */
   /* 1 — Substituir JSON no array ARTICLES */
   const objInfo = extractArticleObj(html, id);
   if (!objInfo) throw new Error(`Artigo ${id} não encontrado no HTML.`);
