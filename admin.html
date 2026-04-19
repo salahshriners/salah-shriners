@@ -2106,7 +2106,8 @@ async function editArticle(id) {
       <img src="${SITE_URL}/${data.cover}" alt="Capa atual"
            style="max-width:100%;max-height:160px;border-radius:8px;margin-top:8px;object-fit:cover;"
            onerror="this.style.display='none'">
-      <br><span style="color:#888;font-size:.78rem">Selecione um arquivo acima para substituir a capa</span>`;
+      <br><button onclick="loadExistingCoverForEdit()" style="margin-top:8px;padding:5px 12px;background:#8b1a1a;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:.82rem;">✏️ Editar capa atual</button>
+      <span style="color:#888;font-size:.78rem;margin-left:8px;">ou selecione um arquivo acima para substituir</span>`;
   }
 
   // Mostrar fotos adicionais existentes
@@ -2469,13 +2470,28 @@ function editorTouchStart(e) {
   editorMousedown({ clientX: t.clientX, clientY: t.clientY });
 }
 function editorTouchMove(e) {
-  e.preventDefault();
-  const t = e.touches[0];
-  editorMousemove({ clientX: t.clientX, clientY: t.clientY });
-}
-function editorTouchEnd(e) {
-  const t = e.changedTouches[0];
-  editorMouseup({ clientX: t.clientX, clientY: t.clientY });
+  e.preventD/* Carrega a capa de um artigo existente para edição no editor de fotos */
+async function loadExistingCoverForEdit() {
+  if (!existingCoverPath) return;
+  const url = existingCoverPath.startsWith('http')
+    ? existingCoverPath
+    : `${SITE_URL}/${existingCoverPath}`;
+  try {
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const blob = await resp.blob();
+    const fileName = existingCoverPath.split('/').pop() || 'capa.jpg';
+    const file = new File([blob], fileName, { type: blob.type || 'image/jpeg' });
+    const previewUrl = URL.createObjectURL(blob);
+    document.getElementById('cover-preview').src = previewUrl;
+    document.getElementById('cover-info').textContent = `${fileName} (capa atual carregada para edição)`;
+    document.getElementById('cover-preview-wrap').style.display = 'block';
+    document.getElementById('existing-cover-info').style.display = 'none';
+    coverFile = file;
+    openPhotoEditor('cover');
+  } catch (err) {
+    alert('Não foi possível carregar a capa para edição.\n\nDica: baixe a imagem, edite externamente e faça upload da versão editada.');
+  }
 }
 
 async function applyPhotoEditor() {
@@ -2486,7 +2502,7 @@ async function applyPhotoEditor() {
   let ctx;
 
   if (editorCropRect && editorCropRect.w > 10 && editorCropRect.h > 10) {
-    // Mapear rect do canvas para coordenadas da imagem original
+    // ── Modo recorte: mapear rect do canvas → coordenadas da imagem ──
     const drawW = img.width  * editorScale;
     const drawH = img.height * editorScale;
     const drawX = (canvas.width  - drawW) / 2 + editorOffsetX;
@@ -2512,33 +2528,59 @@ async function applyPhotoEditor() {
     ctx.drawImage(img, cx, cy, cw, ch, 0, 0, cw, ch);
 
   } else {
-    // Saída na resolução original da imagem.
-    // NÃO usar editorScale aqui — ele representa apenas o zoom de exibição no
-    // canvas de preview (max 720px), não a resolução de saída desejada.
-    // O compressImage chamado no upload vai limitar ao maxWidth se necessário.
-    out.width  = img.width;
-    out.height = img.height;
+    // ── Modo mover/zoom: exportar região visível no canvas (o que se vê = o que se salva) ──
+    const drawW = img.width  * editorScale;
+    const drawH = img.height * editorScale;
+    const drawX = (canvas.width  - drawW) / 2 + editorOffsetX;
+    const drawY = (canvas.height - drawH) / 2 + editorOffsetY;
+
+    const visX = Math.round(Math.max(0, -drawX / editorScale));
+    const visY = Math.round(Math.max(0, -drawY / editorScale));
+    const visW = Math.round(Math.min(img.width  - visX, canvas.width  / editorScale));
+    const visH = Math.round(Math.min(img.height - visY, canvas.height / editorScale));
+
+    out.width  = Math.max(1, visW);
+    out.height = Math.max(1, visH);
     ctx = out.getContext('2d');
-    ctx.drawImage(img, 0, 0, out.width, out.height);
+    ctx.drawImage(img, visX, visY, visW, visH, 0, 0, out.width, out.height);
   }
 
-  out.toBlob(blob => {
-    const isCover  = (editorPhotoIdx === 'cover');
-    const origFile = editorOrigFile || (isCover ? coverFile : photosFiles[editorPhotoIdx]);
-    const fileName = origFile ? origFile.name : (isCover ? 'capa-editada.jpg' : 'foto-editada.jpg');
-    const newFile  = new File([blob], fileName, { type: 'image/jpeg' });
+  // Converter canvas → File com tratamento de erro
+  let blobResult;
+  try {
+    blobResult = await new Promise((resolve, reject) => {
+      out.toBlob(blob => {
+        if (blob) resolve(blob);
+        else reject(new Error('toBlob retornou null — possível problema de CORS ou canvas inválido'));
+      }, 'image/jpeg', 0.92);
+    });
+  } catch (err) {
+    alert('Erro ao processar a imagem: ' + err.message + '\n\nTente fazer o upload de uma imagem diferente.');
+    return;
+  }
 
-    if (isCover) {
-      // Atualizar foto de capa
-      coverFile = newFile;
-      const url = URL.createObjectURL(blob);
-      document.getElementById('cover-preview').src = url;
-      document.getElementById('cover-info').textContent =
-        `${fileName} — ${(blob.size / 1024).toFixed(0)} KB (editada)`;
-    } else {
-      // Atualizar thumbnail nas fotos adicionais
-      photosFiles[editorPhotoIdx] = newFile;
-      const url  = URL.createObjectURL(blob);
+  const isCover  = (editorPhotoIdx === 'cover');
+  const origFile = editorOrigFile || (isCover ? coverFile : photosFiles[editorPhotoIdx]);
+  const fileName = origFile ? origFile.name : (isCover ? 'capa-editada.jpg' : 'foto-editada.jpg');
+  const newFile  = new File([blobResult], fileName, { type: 'image/jpeg' });
+
+  if (isCover) {
+    coverFile = newFile;
+    const url = URL.createObjectURL(blobResult);
+    document.getElementById('cover-preview').src = url;
+    document.getElementById('cover-preview-wrap').style.display = 'block';
+    document.getElementById('existing-cover-info').style.display = 'none';
+    document.getElementById('cover-info').textContent =
+      `${fileName} — ${(blobResult.size / 1024).toFixed(0)} KB (editada)`;
+  } else {
+    photosFiles[editorPhotoIdx] = newFile;
+    const url  = URL.createObjectURL(blobResult);
+    const wrap = document.querySelector(`.thumb-wrap[data-idx="${editorPhotoIdx}"]`);
+    if (wrap) wrap.querySelector('img').src = url;
+  }
+
+  closePhotoEditor();
+}URL.createObjectURL(blob);
       const wrap = document.querySelector(`.thumb-wrap[data-idx="${editorPhotoIdx}"]`);
       if (wrap) wrap.querySelector('img').src = url;
     }
