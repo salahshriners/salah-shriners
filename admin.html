@@ -1631,7 +1631,7 @@ function buildFeaturedCard(data, delay, excerpt) {
 }
 
 function buildNewsCard(data, excerpt) {
-  return `\n      <article class="noticia">
+  return `\n      <article class="noticia" data-cat="${data.cat.toLowerCase()}">
         <a href="#" onclick="showArticle('${data.id}'); return false;" class="noticia-thumb">
           <img src="${data.cover}" alt="${hesc(data.title)}" loading="lazy">
         </a>
@@ -1664,10 +1664,13 @@ function injectArticle(html, newData, excerpt) {
   html = html.replace('const ARTICLES = [', `const ARTICLES = [\n${articleJson},`);
 
   /* 2 — Atualizar grid destaque (d1, d2, d3) */
-  const art0 = extractArticleJsonData(html, 'art0');
-  const art1 = extractArticleJsonData(html, 'art1');
-  const exc0 = extractCardExcerpt(html, 'd1');
-  const exc1 = extractCardExcerpt(html, 'd2');
+  /* Usa os IDs atualmente em destaque para fazer o shift correto: novo→d1, d1→d2, d2→d3 */
+  const curD1Id = extractFeaturedArticleId(html, 'd1');
+  const curD2Id = extractFeaturedArticleId(html, 'd2');
+  const artD1   = curD1Id ? extractArticleJsonData(html, curD1Id) : null;
+  const artD2   = curD2Id ? extractArticleJsonData(html, curD2Id) : null;
+  const excD1   = extractCardExcerpt(html, 'd1');
+  const excD2   = extractCardExcerpt(html, 'd2');
 
   const d1Start = html.indexOf('<article class="noticia reveal d1">');
   const d1End   = html.indexOf('</article>', d1Start) + '</article>'.length;
@@ -1675,11 +1678,11 @@ function injectArticle(html, newData, excerpt) {
 
   const d2Start = html.indexOf('<article class="noticia reveal d2">');
   const d2End   = html.indexOf('</article>', d2Start) + '</article>'.length;
-  if (art0) html = html.slice(0, d2Start) + buildFeaturedCard(art0, 'd2', exc0) + html.slice(d2End);
+  if (artD1) html = html.slice(0, d2Start) + buildFeaturedCard(artD1, 'd2', excD1) + html.slice(d2End);
 
   const d3Start = html.indexOf('<article class="noticia reveal d3">');
   const d3End   = html.indexOf('</article>', d3Start) + '</article>'.length;
-  if (art1) html = html.slice(0, d3Start) + buildFeaturedCard(art1, 'd3', exc1) + html.slice(d3End);
+  if (artD2) html = html.slice(0, d3Start) + buildFeaturedCard(artD2, 'd3', excD2) + html.slice(d3End);
 
   /* 3 — Inserir card no topo do grid completo */
   const firstGrid  = html.indexOf('<div class="noticias-grid">');
