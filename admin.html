@@ -933,7 +933,7 @@
     <div class="success-box" id="success-box">
       <h3>✅ Notícia publicada com sucesso!</h3>
       <p>O site será atualizado em até 2 minutos pelo GitHub Pages.</p>
-      <a href="https://homrich1979.github.io/salah-shriners" target="_blank">🌐 Ver o site</a>
+      <a href="https://salahshriners.org" target="_blank">🌐 Ver o site</a>
       <a href="#" class="secondary" onclick="resetForm(); return false;">📰 Publicar outra notícia</a>
     </div>
 
@@ -1069,9 +1069,9 @@
 /* =====================================================
    CONFIGURAÇÃO
 ===================================================== */
-const REPO_OWNER = 'homrich1979';
+const REPO_OWNER = 'salahshriners';
 const REPO_NAME  = 'salah-shriners';
-const SITE_URL   = 'https://homrich1979.github.io/salah-shriners';
+const SITE_URL   = 'https://salahshriners.org';
 const API        = 'https://api.github.com';
 
 /* =====================================================
@@ -1664,8 +1664,8 @@ function injectArticle(html, newData, excerpt) {
   /* 2 — Atualizar grid destaque (d1, d2, d3) */
   const art0 = extractArticleJsonData(html, 'art0');
   const art1 = extractArticleJsonData(html, 'art1');
-  const exc0 = extractCardExcerpt(html, 'noticia reveal d1');
-  const exc1 = extractCardExcerpt(html, 'noticia reveal d2');
+  const exc0 = extractCardExcerpt(html, 'd1');
+  const exc1 = extractCardExcerpt(html, 'd2');
 
   const d1Start = html.indexOf('<article class="noticia reveal d1">');
   const d1End   = html.indexOf('</article>', d1Start) + '</article>'.length;
@@ -2391,11 +2391,21 @@ function renderEditorCanvas() {
 }
 
 /* Eventos de mouse/touch no canvas */
+function editorCanvasCoords(canvas, clientX, clientY) {
+  // Converte coordenadas CSS (clientX/Y) para pixels internos do canvas,
+  // compensando o escalonamento via CSS (max-width: 100%).
+  const rect   = canvas.getBoundingClientRect();
+  const scaleX = canvas.width  / rect.width;
+  const scaleY = canvas.height / rect.height;
+  return {
+    x: (clientX - rect.left) * scaleX,
+    y: (clientY - rect.top)  * scaleY
+  };
+}
+
 function editorMousedown(e) {
   const canvas = document.getElementById('photo-editor-canvas');
-  const rect   = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+  const { x, y } = editorCanvasCoords(canvas, e.clientX, e.clientY);
   if (editorMode === 'crop') {
     editorCropActive = true;
     editorCropRect   = null;
@@ -2412,9 +2422,7 @@ function editorMousedown(e) {
 function editorMousemove(e) {
   if (!editorIsDragging && !editorCropActive) return;
   const canvas = document.getElementById('photo-editor-canvas');
-  const rect   = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+  const { x, y } = editorCanvasCoords(canvas, e.clientX, e.clientY);
   if (editorMode === 'move' && editorIsDragging) {
     editorOffsetX += x - editorDragLastX;
     editorOffsetY += y - editorDragLastY;
@@ -2431,9 +2439,9 @@ function editorMousemove(e) {
 function editorMouseup(e) {
   if (editorMode === 'crop' && editorCropActive) {
     const canvas = document.getElementById('photo-editor-canvas');
-    const rect   = canvas.getBoundingClientRect();
-    editorCropX2 = e.clientX - rect.left;
-    editorCropY2 = e.clientY - rect.top;
+    const { x, y } = editorCanvasCoords(canvas, e.clientX, e.clientY);
+    editorCropX2 = x;
+    editorCropY2 = y;
     editorCropActive = false;
     editorCropRect = {
       x: Math.min(editorCropX1, editorCropX2),
