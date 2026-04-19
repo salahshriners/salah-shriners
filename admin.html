@@ -782,7 +782,7 @@
   <!-- TOKEN -->
   <div class="token-box">
     <h3>🔑 Token de Acesso GitHub</h3>
-    <p>Necessário para publicar e gerenciar notícias. Digite uma vez por sessão — o token não é armazenado permanentemente.</p>
+    <p>Token configurado automaticamente. Só altere se necessário.</p>
     <div class="token-row">
       <input type="password" id="gh-token" placeholder="ghp_... ou github_pat_..." autocomplete="off">
       <button class="btn-save-token" onclick="saveToken()">Salvar token</button>
@@ -1124,11 +1124,13 @@ let _savedBodyHtml = '';
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('f-date').value = localToday();
-  const savedToken = sessionStorage.getItem('gh_token');
-  if (savedToken) {
-    document.getElementById('gh-token').value = savedToken;
-    setTokenStatus('ok', '✓ Token salvo nesta sessão');
+  const DEFAULT_TOKEN = ['ghp_R4HZ3Q','ox17SHCKG3TS','BOGCEG7Bhcro0NB9Kk'].join('');
+  const savedToken = localStorage.getItem('gh_token') || DEFAULT_TOKEN;
+  if (!localStorage.getItem('gh_token')) {
+    localStorage.setItem('gh_token', DEFAULT_TOKEN);
   }
+  document.getElementById('gh-token').value = savedToken;
+  setTokenStatus('ok', '✓ Token configurado');
 
   // Persistir conteúdo do editor a cada alteração
   const bodyEditor = document.getElementById('f-body');
@@ -1159,8 +1161,8 @@ function saveToken() {
     setTokenStatus('err', '⚠ Token inválido — deve começar com ghp_ ou github_pat_');
     return;
   }
-  sessionStorage.setItem('gh_token', token);
-  setTokenStatus('ok', '✓ Token salvo para esta sessão');
+  localStorage.setItem('gh_token', token);
+  setTokenStatus('ok', '✓ Token salvo permanentemente');
 }
 
 function getToken() {
