@@ -2551,7 +2551,30 @@ footer {
       
       
       
+      
       <article class="noticia reveal d1">
+        <a href="#" onclick="showArticle('art13'); return false;" class="noticia-thumb">
+          <img src="images/noticias/20260419_capa_photo_2026_04_16_2.jpg" alt="Salah Shriners lança novo site com estrutura moderna e navegação simplificada" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Institucional</span><span class="n-date">17 Abr 2026</span></div>
+          <h3>Salah Shriners lança novo site com estrutura moderna e navegação simplificada</h3>
+          <p>O Salah Shriners colocou no ar seu novo site institucional, marcando um avanço importante na forma de apresentar a causa e fortalecer sua presença digital.</p>
+          <button onclick="showArticle('art13')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      <article class="noticia reveal d2">
         <a href="#" onclick="showArticle('art12'); return false;" class="noticia-thumb">
           <img src="images/noticias/20260419_capa_photo_2026_04_16_2.jpg" alt="Salah Shriners articula proposta de parceria com Unisul e Junior Achievement para desenvolver soluções para seus desafios." loading="lazy">
         </a>
@@ -2571,7 +2594,7 @@ footer {
       
       
       
-      <article class="noticia reveal d2">
+      <article class="noticia reveal d3">
         <a href="#" onclick="showArticle('art11'); return false;" class="noticia-thumb">
           <img src="images/noticias/profis1.jpg" alt="Reforma do PROFIS em Joinville se aproxima com apoio do Salah Shriners" loading="lazy">
         </a>
@@ -2583,23 +2606,6 @@ footer {
         </div>
       </article>
 
-
-
-
-      
-      
-      
-      <article class="noticia reveal d3">
-        <a href="#" onclick="showArticle('art10'); return false;" class="noticia-thumb">
-          <img src="images/noticias/posse1.jpg" alt="Salah Shriners empossa gestão 2026 e realiza seminário institucional" loading="lazy">
-        </a>
-        <div class="noticia-body">
-          <div class="noticia-meta"><span class="n-cat">Institucional</span><span class="n-date">11 Mar 2026</span></div>
-          <h3>Salah Shriners empossa gestão 2026 e realiza seminário institucional</h3>
-          <p></p>
-          <button onclick="showArticle('art10')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
-        </div>
-      </article>
 
 
 
@@ -3088,6 +3094,23 @@ function showFormError(btn, msg) {
 
 const ARTICLES = [
   {
+    "id": "art13",
+    "title": "Salah Shriners lança novo site com estrutura moderna e navegação simplificada",
+    "cat": "Institucional",
+    "date": "17 Abr 2026",
+    "cover": "images/noticias/20260419_capa_photo_2026_04_16_2.jpg",
+    "body": [
+      "A iniciativa buscou alinhar a comunicação da instituição aos padrões internacionais do Shriners International, adaptando-os à realidade e aos hábitos do público brasileiro.",
+      "De acordo com o primeiro vice-presidente e responsável pela repaginação, Leopoldo Homrich, o “Leo”, a principal inovação está na estrutura adotada: um modelo OnePage, em que todas as informações estão organizadas em blocos dentro de uma única página. Com isso, o visitante acessa o conteúdo completo apenas rolando a tela, sem a necessidade de navegar por diferentes abas, tornando a experiência mais fluida, objetiva e intuitiva”, explica.",
+      "Além do novo formato, o site foi desenvolvido com foco em clareza e funcionalidade. A proposta é facilitar o entendimento sobre a atuação do Salah Shriners, seus projetos e formas de participação, reforçando o compromisso da instituição com uma comunicação mais direta e acessível. Outro avanço é a ampliação do alcance internacional, o site conta com versões em inglês e espanhol, acompanhando o caráter global da organização.",
+      "<u><b>Resgate de conhecimento</b></u>",
+      "O desenvolvimento do projeto também resgata uma história relevante nos bastidores. Leo retomou conhecimentos de programação adquiridos ainda na universidade.“Com o apoio das novas tecnologias, especialmente ferramentas baseadas em inteligência artificial, foi possível garantir mais segurança, modernizar a estrutura e utilizar uma linguagem de programação mais leve e eficiente”, detalha.",
+      "O resultado foi celebrado pelo presidente do Salah Shriners, Mário Corrêa.“Esse site traduz o momento que estamos vivendo. Precisávamos de uma comunicação mais direta e alinhada com a dimensão da nossa causa. Hoje, quem acessar entenderá com facilidade quem somos e, principalmente, o impacto do nosso trabalho.”",
+      "Acesse: <b>salahshriners.org</b>"
+    ],
+    "photos": []
+  },
+  {
     "id": "art12",
     "title": "Salah Shriners articula proposta de parceria com Unisul e Junior Achievement para desenvolver soluções para seus desafios.",
     "cat": "Parceria",
@@ -3475,6 +3498,18 @@ function showSuccess(btn) {
     </div>
 
     <div class="noticias-grid">
+      <article class="noticia" data-cat="institucional">
+        <a href="#" onclick="showArticle('art13'); return false;" class="noticia-thumb">
+          <img src="images/noticias/20260419_capa_photo_2026_04_16_2.jpg" alt="Salah Shriners lança novo site com estrutura moderna e navegação simplificada" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Institucional</span><span class="n-date">17 Abr 2026</span></div>
+          <h3>Salah Shriners lança novo site com estrutura moderna e navegação simplificada</h3>
+          <p>O Salah Shriners colocou no ar seu novo site institucional, marcando um avanço importante na forma de apresentar a causa e fortalecer sua presença digital.</p>
+          <button onclick="showArticle('art13')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
       <article class="noticia" data-cat="parceria">
         <a href="#" onclick="showArticle('art12'); return false;" class="noticia-thumb">
           <img src="images/noticias/20260419_capa_photo_2026_04_16_2.jpg" alt="Salah Shriners articula proposta de parceria com Unisul e Junior Achievement para desenvolver soluções para seus desafios." loading="lazy">
