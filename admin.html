@@ -2470,7 +2470,16 @@ function editorTouchStart(e) {
   editorMousedown({ clientX: t.clientX, clientY: t.clientY });
 }
 function editorTouchMove(e) {
-  e.preventD/* Carrega a capa de um artigo existente para edição no editor de fotos */
+  e.preventDefault();
+  const t = e.touches[0];
+  editorMousemove({ clientX: t.clientX, clientY: t.clientY });
+}
+function editorTouchEnd(e) {
+  const t = e.changedTouches[0];
+  editorMouseup({ clientX: t.clientX, clientY: t.clientY });
+}
+
+/* Carrega a capa de um artigo existente para edição no editor de fotos */
 async function loadExistingCoverForEdit() {
   if (!existingCoverPath) return;
   const url = existingCoverPath.startsWith('http')
@@ -2580,15 +2589,7 @@ async function applyPhotoEditor() {
   }
 
   closePhotoEditor();
-}URL.createObjectURL(blob);
-      const wrap = document.querySelector(`.thumb-wrap[data-idx="${editorPhotoIdx}"]`);
-      if (wrap) wrap.querySelector('img').src = url;
-    }
-
-    closePhotoEditor();
-  }, 'image/jpeg', 0.92);
 }
-
 // Fechar editor clicando fora
 document.addEventListener('click', (e) => {
   if (e.target.id === 'photo-editor-modal') closePhotoEditor();
