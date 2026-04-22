@@ -2554,7 +2554,36 @@ footer {
       
       
       
+      
       <article class="noticia reveal d1">
+        <a href="#" onclick="showArticle('art15'); return false;" class="noticia-thumb">
+          <img src="images/noticias/20260422113016_capa_entreveiro_do_elia.png" alt="Entrevero do Elias destina parte da arrecadação ao Salah Shriners em edição de maio" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Evento</span><span class="n-date">22 Abr 2026</span></div>
+          <h3>Entrevero do Elias destina parte da arrecadação ao Salah Shriners em edição de maio</h3>
+          <p>A 4ª Edição do Entrevero do Elias, marcada para o dia 16 de maio, na Associação Catarinense de Medicina (ACM), em Florianópolis, terá um significado especial: parte da arrecadação será destinada ao Salah Shriners.</p>
+          <button onclick="showArticle('art15')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
+
+
+
+
+
+
+
+
+      
+      
+      
+      
+      
+      
+      
+      
+      <article class="noticia reveal d2">
         <a href="#" onclick="showArticle('art14'); return false;" class="noticia-thumb">
           <img src="images/noticias/20260422112015_capa_whatsapp_image_202.jpg" alt="Parceria entre Salah Shriners e Rotary reforça atendimento a crianças vítimas de queimaduras" loading="lazy">
         </a>
@@ -2579,8 +2608,7 @@ footer {
       
       
       
-      
-      <article class="noticia reveal d2">
+      <article class="noticia reveal d3">
         <a href="#" onclick="showArticle('art13'); return false;" class="noticia-thumb">
           <img src="images/noticias/20260419020325_capa_photo_2026_04_16_2.jpg" alt="Salah Shriners lança novo site com estrutura moderna e navegação simplificada" loading="lazy">
         </a>
@@ -2592,28 +2620,6 @@ footer {
         </div>
       </article>
 
-
-
-
-
-
-
-      
-      
-      
-      
-      
-      <article class="noticia reveal d3">
-        <a href="#" onclick="showArticle('art12'); return false;" class="noticia-thumb">
-          <img src="images/noticias/20260419020635_capa_20260419020151_cap.jpg" alt="Salah Shriners articula proposta de parceria com Unisul e Junior Achievement para desenvolver soluções para seus desafios." loading="lazy">
-        </a>
-        <div class="noticia-body">
-          <div class="noticia-meta"><span class="n-cat">Parceria</span><span class="n-date">13 Abr 2026</span></div>
-          <h3>Salah Shriners articula proposta de parceria com Unisul e Junior Achievement para desenvolver soluções para seus desafios.</h3>
-          <p>Um desafio prático com jovens e a ampliação de ações na área da saúde infantil em Santa Catarina estão entre os principais encaminhamentos de uma proposta de parceria em desenvolvimento.</p>
-          <button onclick="showArticle('art12')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
-        </div>
-      </article>
 
 
 
@@ -3104,6 +3110,21 @@ function showFormError(btn, msg) {
 
 const ARTICLES = [
   {
+    "id": "art15",
+    "title": "Entrevero do Elias destina parte da arrecadação ao Salah Shriners em edição de maio",
+    "cat": "Evento",
+    "date": "22 Abr 2026",
+    "cover": "images/noticias/20260422113016_capa_entreveiro_do_elia.png",
+    "body": [
+      "A 4ª Edição do Entrevero do Elias, marcada para o dia 16 de maio, na Associação Catarinense de Medicina (ACM), em Florianópolis, terá um significado especial: parte da arrecadação será destinada ao Salah Shriners. A iniciativa associa a experiência gastronômica e cultural à filantropia, ampliando o propósito do encontro que, ao longo das edições, foi ganhando estrutura e engajamento.",
+      "O idealizador é o nobre Elias Balansin, lageano radicado na capital há 22 anos. O prato que dá nome ao evento tem raízes na tradição serrana: preparado no disco de arado, o entrevero é uma mistura de carnes, pinhão e legumes. \"Trabalho sempre com proteínas e carnes de qualidade, inclusive carne frescal. O resultado é uma delícia\", conta Elias.",
+      "A história do evento começa na pandemia, quando Elias passou a comercializar marmita como forma de manter a renda. Com o fim do isolamento, a ideia se transformou: o que era venda virou celebração. \"Eu sempre fiz isso com meus amigos de futebol, todo ano, sempre em maio ou junho, que é a época do pinhão. Era um dos encontros que mais reunia gente.\" O crescimento foi orgânico, construído com parceiros próximos, músicos, irmãos de Loja e amigos de longa data.",
+      "Para o Presidente Mário Corrêa, do Salah Shriners, receber esse gesto é motivo de orgulho. \"Os recursos arrecadados chegarão diretamente às famílias catarinenses que dependem do nosso suporte logístico e dos encaminhamentos para tratamento médico especializado. É assim que construímos nossa missão: com a generosidade de quem, como Elias, enxerga na beneficência uma oportunidade de servir\", conclui.",
+      "Acompanhe novas informações sobre o Entrevero do Elias: https://www.instagram.com/entreverodoelias?igsh=MTcxYm55aWM2eWo4bA=="
+    ],
+    "photos": ["images/noticias/20260422113018_foto1_whatsapp_image_202.jpg"]
+  },
+  {
     "id": "art14",
     "title": "Parceria entre Salah Shriners e Rotary reforça atendimento a crianças vítimas de queimaduras",
     "cat": "Parceria",
@@ -3521,6 +3542,18 @@ function showSuccess(btn) {
     </div>
 
     <div class="noticias-grid">
+      <article class="noticia" data-cat="evento">
+        <a href="#" onclick="showArticle('art15'); return false;" class="noticia-thumb">
+          <img src="images/noticias/20260422113016_capa_entreveiro_do_elia.png" alt="Entrevero do Elias destina parte da arrecadação ao Salah Shriners em edição de maio" loading="lazy">
+        </a>
+        <div class="noticia-body">
+          <div class="noticia-meta"><span class="n-cat">Evento</span><span class="n-date">22 Abr 2026</span></div>
+          <h3>Entrevero do Elias destina parte da arrecadação ao Salah Shriners em edição de maio</h3>
+          <p>A 4ª Edição do Entrevero do Elias, marcada para o dia 16 de maio, na Associação Catarinense de Medicina (ACM), em Florianópolis, terá um significado especial: parte da arrecadação será destinada ao Salah Shriners.</p>
+          <button onclick="showArticle('art15')" class="n-link">Ler mais <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+        </div>
+      </article>
+
       <article class="noticia" data-cat="parceria">
         <a href="#" onclick="showArticle('art14'); return false;" class="noticia-thumb">
           <img src="images/noticias/20260422112015_capa_whatsapp_image_202.jpg" alt="Parceria entre Salah Shriners e Rotary reforça atendimento a crianças vítimas de queimaduras" loading="lazy">
