@@ -1790,6 +1790,7 @@ footer {
 .article-overlay {
   position: fixed; inset: 0;
   background: #fff;
+  overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   z-index: 4000;
@@ -1831,10 +1832,14 @@ footer {
   font-size: 2rem; color: var(--text);
   line-height: 1.35; margin-bottom: 2rem;
   border-bottom: 2px solid var(--gold); padding-bottom: 1.5rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 .article-body-text p {
   font-size: 1rem; line-height: 1.85;
   color: #333; margin-bottom: 1.5rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 .article-gallery {
   display: grid;
