@@ -5631,6 +5631,7 @@ if ('serviceWorker' in navigator) {
   border-radius: 4px;
   user-select: none;
   -webkit-user-drag: none;
+  cursor: zoom-out;
 }
 .lightbox-close, .lightbox-nav {
   position: absolute;
@@ -5757,7 +5758,7 @@ if ('serviceWorker' in navigator) {
     var lb = document.getElementById('lightbox');
     if (!lb) return;
     lb.addEventListener('click', function(e) {
-      if (e.target === lb) window.closeLightbox();
+      if (e.target === lb || e.target.id === 'lightbox-img') window.closeLightbox();
     });
 
     // Swipe no mobile
