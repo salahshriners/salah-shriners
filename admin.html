@@ -2630,5 +2630,150 @@ function resetForm() {
 }
 </script>
 
+<script>
+(function() {
+  var TARGET_LANGS = ['en', 'es', 'fr', 'de'];
+  var SEP = '\n\u25C6\u25C6\u25C6\n';
+  var MONTHS_PT = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  var MONTHS = {
+    pt: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+    en: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    es: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+    fr: ['Jan','F\u00e9v','Mar','Avr','Mai','Juin','Juil','Ao\u00fb','Sep','Oct','Nov','D\u00e9c'],
+    de: ['Jan','Feb','M\u00e4r','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez']
+  };
+  function translateDate(ptDate, lang) {
+    var m = String(ptDate || '').match(/^(\d{1,2})\s+(\S+)\s+(\d{4})$/);
+    if (!m) return ptDate;
+    var d = m[1], abbr = m[2].toLowerCase().substring(0,3), y = m[3];
+    var i = MONTHS_PT.indexOf(abbr);
+    if (i < 0) return ptDate;
+    var mon = MONTHS[lang][i];
+    if (lang === 'en') return mon + ' ' + d + ', ' + y;
+    if (lang === 'de') return d + '. ' + mon + ' ' + y;
+    return d + ' ' + mon + ' ' + y;
+  }
+  async function translateText(text, tl) {
+    if (!text || !text.trim()) return text;
+    try {
+      var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=pt&tl=' + tl + '&dt=t&q=' + encodeURIComponent(text);
+      var r = await fetch(url);
+      if (!r.ok) throw new Error('HTTP');
+      var j = await r.json();
+      return j[0].map(function(x){ return x[0]; }).join('');
+    } catch (e) {
+      try {
+        var langCode = tl === 'en' ? 'en-US' : tl === 'es' ? 'es-ES' : tl === 'fr' ? 'fr-FR' : 'de-DE';
+        var url2 = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=pt-BR|' + langCode + '&de=secretario@salahshriners.org';
+        var r2 = await fetch(url2);
+        var j2 = await r2.json();
+        return (j2.responseData && j2.responseData.translatedText) || text;
+      } catch (ee) { return text; }
+    }
+  }
+  async function translateParagraphs(paragraphs, tl) {
+    if (!paragraphs || paragraphs.length === 0) return [];
+    var joined = paragraphs.join(SEP);
+    var out = await translateText(joined, tl);
+    return out.split(/\s*\u25C6\u25C6\u25C6\s*/);
+  }
+  async function generateML(ptValue, kind) {
+    var result = { pt: ptValue };
+    if (kind === 'paragraphs') {
+      await Promise.all(TARGET_LANGS.map(async function(l) {
+        result[l] = await translateParagraphs(ptValue, l);
+      }));
+    } else if (kind === 'date') {
+      TARGET_LANGS.forEach(function(l) { result[l] = translateDate(ptValue, l); });
+    } else {
+      await Promise.all(TARGET_LANGS.map(async function(l) {
+        result[l] = await translateText(ptValue, l);
+      }));
+    }
+    return result;
+  }
+  function showIndicator(show, msg) {
+    var el = document.getElementById('__tr-indicator');
+    if (!el && show) {
+      el = document.createElement('div');
+      el.id = '__tr-indicator';
+      el.style.cssText = 'position:fixed;top:24px;right:24px;background:#6d0f14;color:#fff;padding:14px 22px;border-radius:8px;font-weight:600;z-index:99999;box-shadow:0 6px 20px rgba(0,0,0,0.3);font-family:system-ui,sans-serif;font-size:14px;';
+      document.body.appendChild(el);
+    }
+    if (el) {
+      el.textContent = msg || 'Traduzindo...';
+      el.style.display = show ? 'block' : 'none';
+    }
+  }
+  function esc(s) { return String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n'); }
+  function mlToJson(obj) {
+    if (typeof obj === 'string') obj = { pt: obj };
+    return '{ ' + Object.keys(obj).map(function(k) { return '"' + k + '": "' + esc(obj[k]) + '"'; }).join(', ') + ' }';
+  }
+  function bodyMlToJson(obj) {
+    if (Array.isArray(obj)) obj = { pt: obj };
+    return '{\n' + Object.keys(obj).map(function(k) {
+      var arr = obj[k] || [];
+      return '      "' + k + '": [\n' + arr.map(function(p) { return '        "' + esc(p) + '"'; }).join(',\n') + '\n      ]';
+    }).join(',\n') + '\n    }';
+  }
+  function buildArticleJsonML(id, titleML, catML, dateML, cover, bodyML, photos, summaryML) {
+    var photoLines = (photos || []).map(function(p) { return '"' + p + '"'; }).join(', ');
+    return '  {\n' +
+      '    "id": "' + id + '",\n' +
+      '    "title": ' + mlToJson(titleML) + ',\n' +
+      '    "cat": ' + mlToJson(catML) + ',\n' +
+      '    "date": ' + mlToJson(dateML) + ',\n' +
+      '    "cover": "' + cover + '",\n' +
+      (summaryML ? '    "summary": ' + mlToJson(summaryML) + ',\n' : '') +
+      '    "body": ' + bodyMlToJson(bodyML) + ',\n' +
+      '    "photos": [' + photoLines + ']\n' +
+      '  }';
+  }
+  var __originalPublish = window.publishArticle;
+  window.publishArticle = async function() {
+    var titleEl = document.getElementById('f-title');
+    if (!titleEl || !titleEl.value.trim()) {
+      return __originalPublish.apply(this, arguments);
+    }
+    try {
+      showIndicator(true, 'Traduzindo para EN / ES / FR / DE...');
+      var titlePt = titleEl.value.trim();
+      var catEl = document.getElementById('f-cat');
+      var catPt = catEl ? catEl.value : '';
+      var dateEl = document.getElementById('f-date');
+      var datePt = typeof formatDate === 'function' ? formatDate(dateEl.value) : dateEl.value;
+      var paragraphsPt = typeof getParagraphs === 'function' ? getParagraphs() : [];
+      var excerptEl = document.getElementById('f-excerpt');
+      var summaryPt = excerptEl ? excerptEl.value.trim() : ((paragraphsPt[0] || '').substring(0, 200));
+
+      var results = await Promise.all([
+        generateML(titlePt, 'text'),
+        generateML(catPt, 'text'),
+        generateML(datePt, 'date'),
+        generateML(paragraphsPt, 'paragraphs'),
+        generateML(summaryPt, 'text')
+      ]);
+      var titleML = results[0], catML = results[1], dateML = results[2], bodyML = results[3], summaryML = results[4];
+
+      var prevBuild = window.buildArticleJson;
+      window.buildArticleJson = function(id, title, cat, dateStr, cover, paragraphs, photos) {
+        return buildArticleJsonML(id, titleML, catML, dateML, cover, bodyML, photos, summaryML);
+      };
+      showIndicator(true, 'Publicando...');
+      var result = await __originalPublish.apply(this, arguments);
+      window.buildArticleJson = prevBuild;
+      showIndicator(false);
+      return result;
+    } catch (err) {
+      showIndicator(false);
+      console.error('[Tradução] Erro:', err);
+      alert('Falha na tradução automática:\n' + err.message + '\n\nA notícia será publicada apenas em português.');
+      return __originalPublish.apply(this, arguments);
+    }
+  };
+  console.log('[Salah Shriners] Tradução automática PT->EN/ES/FR/DE ativa');
+})();
+</script>
 </body>
 </html>
