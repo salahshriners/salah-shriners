@@ -1835,6 +1835,16 @@ footer {
   overflow-wrap: anywhere;
   word-break: break-word;
 }
+.article-body-text a, a.article-link {
+  color: var(--crimson);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  transition: opacity 0.15s ease;
+}
+.article-body-text a:hover, a.article-link:hover { opacity: 0.7; }
 .article-body-text p {
   font-size: 1rem; line-height: 1.85;
   color: #333; margin-bottom: 1.5rem;
@@ -4200,7 +4210,7 @@ function showArticle(id, pushState) {
   document.getElementById('art-cat').textContent   = pick(art.cat, L);
   document.getElementById('art-date').textContent  = pick(art.date, L);
   document.getElementById('art-title').textContent = titleT;
-  document.getElementById('art-body').innerHTML = pickB(art, L).map(p => '<p>' + p + '</p>').join('');
+  document.getElementById('art-body').innerHTML = pickB(art, L).map(p => '<p>' + (window.__linkify ? window.__linkify(p) : p) + '</p>').join('');
   window.__currentArticleId = id;
   const gal = document.getElementById('art-gallery');
   gal.innerHTML = art.photos.map(s => {
@@ -5815,6 +5825,30 @@ if ('serviceWorker' in navigator) {
   window.__activeLang = activeLang;
   window.__pickLang = pickLang;
   window.__pickBody = pickBody;
+
+  // --- Linkify: transforma URLs e e-mails em <a> clicáveis ---
+  function linkify(text) {
+    if (text == null) return '';
+    // Escape HTML primeiro
+    var esc = String(text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+    // URLs (http/https e www.)
+    esc = esc.replace(/\b(https?:\/\/[^\s<]+|www\.[^\s<]+)/g, function(match) {
+      var clean = match, trail = '';
+      while (/[.,;:!?)\]]$/.test(clean)) { trail = clean.slice(-1) + trail; clean = clean.slice(0, -1); }
+      var href = clean.match(/^https?:\/\//) ? clean : 'https://' + clean;
+      return '<a href="' + href + '" target="_blank" rel="noopener noreferrer" class="article-link">' + clean + '</a>' + trail;
+    });
+    // E-mails
+    esc = esc.replace(/\b([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})\b/g, function(m) {
+      return '<a href="mailto:' + m + '" class="article-link">' + m + '</a>';
+    });
+    return esc;
+  }
+  window.__linkify = linkify;
 
   // Aplica o idioma ativo nos cards de notícias (home e Sala de Imprensa)
   function applyNewsListLang() {
