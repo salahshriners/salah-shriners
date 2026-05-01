@@ -2775,5 +2775,181 @@ function resetForm() {
   console.log('[Salah Shriners] Tradução automática PT->EN/ES/FR/DE ativa');
 })();
 </script>
+
+<!-- ===================== AVISO DE TOKEN EXPIRADO ===================== -->
+<style>
+#__token-expired-modal {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 100000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+#__token-expired-modal.show { display: flex; }
+#__token-expired-modal .__tem-card {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 540px;
+  width: 100%;
+  padding: 28px 26px 22px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+}
+#__token-expired-modal h2 {
+  margin: 0 0 12px;
+  color: #6d0f14;
+  font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#__token-expired-modal p {
+  margin: 0 0 14px;
+  color: #333;
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+#__token-expired-modal ol {
+  margin: 0 0 16px 18px; padding: 0;
+  color: #333;
+  line-height: 1.7;
+  font-size: 0.92rem;
+}
+#__token-expired-modal a {
+  color: #6d0f14;
+  text-decoration: underline;
+  font-weight: 600;
+}
+#__token-expired-modal input {
+  width: 100%;
+  padding: 11px 13px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  outline: none;
+}
+#__token-expired-modal input:focus { border-color: #6d0f14; }
+#__token-expired-modal .__tem-actions {
+  display: flex; gap: 10px; justify-content: flex-end;
+  margin-top: 8px;
+}
+#__token-expired-modal button {
+  padding: 11px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+#__token-expired-modal .__tem-save {
+  background: #6d0f14; color: #fff;
+}
+#__token-expired-modal .__tem-save:hover { background: #8a1219; }
+#__token-expired-modal .__tem-cancel {
+  background: #eee; color: #333;
+}
+#__token-expired-modal .__tem-cancel:hover { background: #ddd; }
+#__token-expired-modal .__tem-msg {
+  font-size: 0.85rem;
+  margin-top: 8px;
+  min-height: 18px;
+}
+#__token-expired-modal .__tem-msg.err { color: #c0392b; }
+#__token-expired-modal .__tem-msg.ok { color: #27ae60; }
+</style>
+
+<div id="__token-expired-modal" role="dialog" aria-modal="true" aria-labelledby="__tem-title">
+  <div class="__tem-card">
+    <h2 id="__tem-title">⚠️ Token GitHub expirado</h2>
+    <p>Não foi possível publicar a notícia porque o token de acesso ao GitHub está inválido ou expirou.</p>
+    <p><strong>Como resolver (1 minuto):</strong></p>
+    <ol>
+      <li>Peça ao Leopoldo o novo token, ou gere um em <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">github.com/settings/tokens</a> (escopo <code>repo</code>).</li>
+      <li>Cole o token no campo abaixo e clique em <strong>Salvar</strong>.</li>
+      <li>Tente publicar a notícia novamente.</li>
+    </ol>
+    <input type="password" id="__tem-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" autocomplete="off" />
+    <div class="__tem-msg" id="__tem-msg"></div>
+    <div class="__tem-actions">
+      <button class="__tem-cancel" type="button" onclick="document.getElementById('__token-expired-modal').classList.remove('show');">Fechar</button>
+      <button class="__tem-save" type="button" id="__tem-save-btn">Salvar token</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  function showTokenExpiredModal() {
+    var m = document.getElementById('__token-expired-modal');
+    if (!m) return;
+    var input = document.getElementById('__tem-input');
+    var msg = document.getElementById('__tem-msg');
+    if (input) input.value = '';
+    if (msg) { msg.textContent = ''; msg.className = '__tem-msg'; }
+    m.classList.add('show');
+    setTimeout(function() { if (input) input.focus(); }, 100);
+  }
+  window.__showTokenExpiredModal = showTokenExpiredModal;
+
+  // Botão Salvar
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('__tem-save-btn');
+    if (btn) {
+      btn.addEventListener('click', async function() {
+        var input = document.getElementById('__tem-input');
+        var msg = document.getElementById('__tem-msg');
+        var token = (input.value || '').trim();
+        if (!token.match(/^(ghp_|github_pat_)/)) {
+          msg.textContent = 'Token deve começar com ghp_ ou github_pat_';
+          msg.className = '__tem-msg err';
+          return;
+        }
+        msg.textContent = 'Validando...';
+        msg.className = '__tem-msg';
+        try {
+          var r = await fetch('https://api.github.com/user', { headers: { 'Authorization': 'token ' + token } });
+          if (!r.ok) throw new Error('Token rejeitado pelo GitHub (HTTP ' + r.status + ')');
+          var u = await r.json();
+          localStorage.setItem('gh_token', token);
+          msg.textContent = '✓ Token salvo (usuário: ' + u.login + '). Você pode fechar e tentar publicar de novo.';
+          msg.className = '__tem-msg ok';
+          // Atualizar status do token na UI principal se houver
+          if (typeof setTokenStatus === 'function') setTokenStatus('ok', '✓ Token salvo permanentemente');
+        } catch (e) {
+          msg.textContent = e.message || 'Falha ao validar token';
+          msg.className = '__tem-msg err';
+        }
+      });
+    }
+  });
+
+  // Interceptar fetch para api.github.com — quando 401/403, abrir modal
+  var originalFetch = window.fetch;
+  window.fetch = function(url, opts) {
+    var res = originalFetch.apply(this, arguments);
+    var u = typeof url === 'string' ? url : (url && url.url) || '';
+    if (u.indexOf('api.github.com') >= 0) {
+      res.then(function(r) {
+        if (r && (r.status === 401 || r.status === 403)) {
+          // Verificar se é problema de auth (não rate limit)
+          var auth = (opts && opts.headers && (opts.headers.Authorization || opts.headers.authorization)) || '';
+          if (auth) showTokenExpiredModal();
+        }
+      }).catch(function() {});
+    }
+    return res;
+  };
+
+  console.log('[Salah Shriners] Detector de token expirado ativo');
+})();
+</script>
+<!-- ===================== /AVISO DE TOKEN EXPIRADO ===================== -->
 </body>
 </html>
