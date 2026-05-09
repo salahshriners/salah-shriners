@@ -1138,6 +1138,21 @@ document.addEventListener('DOMContentLoaded', () => {
     bodyEditor.addEventListener('input', function() {
       _savedBodyHtml = this.innerHTML;
     });
+    // Sanitiza colagens (ex: paste do Wix) — remove <font>, <span style>, etc.
+    bodyEditor.addEventListener('paste', function(e) {
+      const cd = e.clipboardData || window.clipboardData;
+      if (!cd) return;
+      const html = cd.getData('text/html');
+      const text = cd.getData('text/plain');
+      e.preventDefault();
+      if (html) {
+        const cleaned = sanitizeParagraphHtml(html);
+        document.execCommand('insertHTML', false, cleaned);
+      } else if (text) {
+        document.execCommand('insertText', false, text);
+      }
+      _savedBodyHtml = bodyEditor.innerHTML;
+    });
   }
 });
 
@@ -1188,6 +1203,37 @@ function updateCharCount(el, countId, max) {
 /* =====================================================
    TEXTO DO ARTIGO — textarea única, sem limite de caracteres
 ===================================================== */
+function sanitizeParagraphHtml(html) {
+  if (!html) return '';
+  // Tags permitidas: formatação intencional do toolbar + links + quebra de linha
+  const ALLOWED_TAGS = new Set(['STRONG','B','EM','I','U','S','MARK','A','BR']);
+  const ALLOWED_ATTRS = { A: new Set(['href','target','rel']) };
+  const wrap = document.createElement('div');
+  wrap.innerHTML = html;
+  function clean(node) {
+    Array.from(node.childNodes).forEach(child => {
+      if (child.nodeType === Node.ELEMENT_NODE) {
+        clean(child);
+        if (!ALLOWED_TAGS.has(child.tagName)) {
+          // unwrap: tira a tag mas preserva o conteúdo
+          while (child.firstChild) node.insertBefore(child.firstChild, child);
+          node.removeChild(child);
+        } else {
+          // tira atributos não-permitidos (style, color, font-size etc)
+          const allowed = ALLOWED_ATTRS[child.tagName] || new Set();
+          Array.from(child.attributes).forEach(a => {
+            if (!allowed.has(a.name.toLowerCase())) child.removeAttribute(a.name);
+          });
+        }
+      } else if (child.nodeType === Node.COMMENT_NODE) {
+        node.removeChild(child);
+      }
+    });
+  }
+  clean(wrap);
+  return wrap.innerHTML.replace(/\s+/g, ' ').trim();
+}
+
 function getParagraphs() {
   const editor = document.getElementById('f-body');
   if (!editor) return [];
@@ -1213,7 +1259,7 @@ function getParagraphs() {
     } else if (node.nodeType === Node.ELEMENT_NODE) {
       const visibleText = node.textContent.trim();
       if (!visibleText) return;
-      paras.push(node.innerHTML.trim());
+      paras.push(sanitizeParagraphHtml(node.innerHTML));
     }
   });
 
