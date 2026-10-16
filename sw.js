@@ -1,5 +1,5 @@
 // Salah Shriners — Service Worker v1.0
-const CACHE_NAME = 'salah-shriners-v1';
+const CACHE_NAME = 'salah-shriners-v2';
 const OFFLINE_URL = '/';
 
 const ASSETS_TO_CACHE = [
@@ -32,6 +32,14 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   if (event.request.method !== 'GET') return;
   if (url.origin !== location.origin) return;
+
+  // Páginas dinâmicas (site e painel admin): sempre da rede, nunca de cache antigo.
+  if (url.pathname === '/' || url.pathname === '/index.html' || url.pathname === '/admin.html') {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-store' }).catch(() => caches.match(event.request).then(r => r || caches.match(OFFLINE_URL)))
+    );
+    return;
+  }
 
   if (event.request.mode === 'navigate') {
     event.respondWith(
